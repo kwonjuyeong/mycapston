@@ -3,9 +3,9 @@
     <string name="main_page">Main page</string>
     <string name="imageb1">TODO</string>
     <string name="category">Category</string>
-    <string name="desc">Desc</string>
     <string name="title">Title</string>
     <string name="todo">TODO</string>
-    <string name="kakao_app_key">3da70c39cd53659cbfbf903ffd33273b</string>
 
+    <!--카카오 native Key-->
+    <string name="kakao_app_key">3da70c39cd53659cbfbf903ffd33273b</string>
 </resources>

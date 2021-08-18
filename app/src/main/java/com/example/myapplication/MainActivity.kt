@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity() {
             }
             else if (tokenInfo != null){
                 Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, main::class.java)
+                val intent = Intent(this, Main_Home::class.java)
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
             }
         }
 
-        //회원가입 페이지지
+        //회원가입 페이지
         mButton.setOnClickListener {
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             }
             else if (token != null) {
                 Toast.makeText(this,"로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, main::class.java)
+                val intent = Intent(this, Main_Home::class.java)
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
             }
         }
