@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
+
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="10dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="검색어를 입력하시오" />
 
     <TextView
         android:layout_width="match_parent"
@@ -37,29 +54,7 @@
             android:hint="아이디 입력"/>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:gravity="end"
-            android:text="비밀번호"
-            android:layout_marginRight="30dp"/>
-
-        <EditText
-            android:id="@+id/edit_pw"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:hint="비밀번호 입력"/>
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/login_btn"
@@ -88,3 +83,5 @@
         />
 
 </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

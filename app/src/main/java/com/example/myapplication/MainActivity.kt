@@ -18,7 +18,6 @@ import com.kakao.sdk.user.UserApiClient
 
 
 class MainActivity : AppCompatActivity() {
-    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         mButton.setOnClickListener {
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
-            
+
             // 해쉬키
             val keyHash = Utility.getKeyHash(this)
             Log.d("Hash",keyHash)
