@@ -20,19 +20,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        recyclerView.layoutManager = GridLayoutManager(applicationContext,4)
+        recyclerView.layoutManager = GridLayoutManager(applicationContext, 4)
         photoAdapter = PhotoAdapter(applicationContext)
         recyclerView.adapter = photoAdapter
 
 
-
-        dataList.add(DataModel("치킨","마싯겠당",R.drawable.chiken))
-        dataList.add(DataModel("피자","히히",R.drawable.mama))
-        dataList.add(DataModel("중식","호호",R.drawable.mama))
-        dataList.add(DataModel("한식","하하",R.drawable.rice))
-        dataList.add(DataModel("양식","뭐먹징",R.drawable.mama))
-        dataList.add(DataModel("Title","Desc",R.drawable.mama))
-        dataList.add(DataModel("Title","Desc",R.drawable.mama))
+        dataList.add(DataModel("치킨", R.drawable.chiken))
+        dataList.add(DataModel("피자", R.drawable.pizza))
+        dataList.add(DataModel("중식", R.drawable.jjajang))
+        dataList.add(DataModel("한식", R.drawable.rice))
+        dataList.add(DataModel("양식", R.drawable.steak))
+        dataList.add(DataModel("커피", R.drawable.coffee))
+        dataList.add(DataModel("돈까스", R.drawable.gas))
+        dataList.add(DataModel("일식", R.drawable.sushi))
 
 
         photoAdapter.setDataList(dataList)
