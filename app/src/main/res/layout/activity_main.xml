@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="메인 액티비티"
+        android:text="@string/mainact"
         android:textSize="30sp"
         android:gravity="center"/>
 
@@ -26,15 +26,17 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3"
             android:gravity="end"
-            android:text="아이디"
-            android:layout_marginRight="30dp"/>
+            android:text="@string/loginid"
+            android:layout_marginEnd="30dp"/>
 
         <EditText
             android:id="@+id/edit_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".7"
-            android:hint="아이디 입력"/>
+            android:autofillHints=""
+            android:hint="@string/loginid1"
+            android:inputType="text" />
 
     </LinearLayout>
     <LinearLayout
@@ -49,15 +51,17 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3"
             android:gravity="end"
-            android:text="비밀번호"
-            android:layout_marginRight="30dp"/>
+            android:text="@string/loginpass"
+            android:layout_marginEnd="30dp"/>
 
         <EditText
             android:id="@+id/edit_pw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".7"
-            android:hint="비밀번호 입력"/>
+            android:autofillHints=""
+            android:hint="@string/loginpass1"
+            android:inputType="text" />
 
     </LinearLayout>
 
@@ -67,13 +71,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="로 그 인" />
+        android:text="@string/loginbutton" />
 
     <Button
         android:id="@+id/mButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="회원가입" />
+        android:text="@string/gotoaccept" />
 
     <ImageButton
         android:id="@+id/kakao_login_button"
@@ -85,6 +89,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="40dp"
-        />
+        android:contentDescription="@string/kakaologinB" />
 
 </LinearLayout>

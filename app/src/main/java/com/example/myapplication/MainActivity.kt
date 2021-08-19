@@ -1,26 +1,32 @@
 package com.example.myapplication
 
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause.*
-import com.kakao.sdk.*
 import kotlinx.android.synthetic.main.activity_main.*
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.kakao.sdk.*
+import androidx.annotation.RequiresApi
+import com.google.firebase.database.*
+import android.content.pm.PackageManager
+
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         // 로그인이 됐다면 카카오 자동 로그인(로그인 유지)
         UserApiClient.instance.accessTokenInfo{ tokenInfo, error ->

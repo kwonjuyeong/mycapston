@@ -8,4 +8,21 @@
 
     <!--카카오 native Key-->
     <string name="kakao_app_key">3da70c39cd53659cbfbf903ffd33273b</string>
+    <string name="telnum">전화번호</string>
+    <string name="userid">아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="passwordaccept">비밀번호 확인</string>
+    <string name="makeidB">회원가입</string>
+    <string name="loginid">아이디</string>
+    <string name="loginid1">아이디 입력</string>
+    <string name="loginpass">비밀번호</string>
+    <string name="loginbutton">로 그 인</string>
+    <string name="gotoaccept">회원가입</string>
+    <string name="loginpass1">비밀번호 입력</string>
+    <string name="kakaologinB">TODO</string>
+    <string name="mainact">메인 액티비티</string>
+    <string name="text">TextView</string>
+    <string name="textview">TextView</string>
+    <string name="send">Send</string>
+    <string name="text1">TEXT를 입력하세요</string>
 </resources>

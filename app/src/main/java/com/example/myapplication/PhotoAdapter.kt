@@ -11,23 +11,19 @@ import java.util.Collections.emptyList
 
 class PhotoAdapter(var context: Context) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
 
-    var dataList = emptyList<DataModel>()
+    private var dataList = emptyList<DataModel>()
 
     internal fun setDataList(dataList: List<DataModel>) {
         this.dataList = dataList
     }
 
-    // Provide a direct reference to each of the views with data items
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var image: ImageView
         var title: TextView
-        //var desc: TextView
 
         init {
             image = itemView.findViewById(R.id.image)
             title = itemView.findViewById(R.id.title)
-            //desc = itemView.findViewById(R.id.desc)
         }
 
     }
@@ -48,8 +44,6 @@ class PhotoAdapter(var context: Context) : RecyclerView.Adapter<PhotoAdapter.Vie
 
         // Set item views based on your views and data model
         holder.title.text = data.title
-        //holder.desc.text = data.desc
-
         holder.image.setImageResource(data.image)
     }
 

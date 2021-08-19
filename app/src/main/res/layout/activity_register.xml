@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="256dp"
         android:ems="10"
-        android:hint="전화번호"
+        android:hint="@string/telnum"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/edit_id"
@@ -25,12 +26,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="312dp"
         android:ems="10"
-        android:hint="아이디"
+        android:hint="@string/userid"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/edit_pw"
@@ -38,12 +40,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="비밀번호"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_id" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_id"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/edit_pw_re"
@@ -51,12 +54,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="비밀번호 확인"
+        android:hint="@string/passwordaccept"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_pw" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/btn_register"
@@ -64,8 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="160dp"
-        android:layout_marginRight="160dp"
-        android:text="회원가입"
+        android:text="@string/makeidB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_pw_re" />
 
