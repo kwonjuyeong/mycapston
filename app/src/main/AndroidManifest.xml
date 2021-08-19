@@ -13,12 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".MyPage"
+            android:exported="true" />
+        <activity
             android:name=".Register"
             android:exported="true" />
         <activity
-        android:name=".image"
+            android:name=".image"
             android:exported="true" />
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

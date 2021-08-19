@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         })
         login_btn.setOnClickListener({
-            val intent = Intent(this, image::class.java)
+            val intent = Intent(this, MyPage::class.java)
             startActivity(intent)
         })
 
