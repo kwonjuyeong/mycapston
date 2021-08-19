@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="imageview1">안녕하세요</string>
+    <string name="main_page">Main page</string>
+    <string name="imageb1">TODO</string>
+    <string name="category">Category</string>
+    <string name="title">Title</string>
+    <string name="todo">TODO</string>
+
+    <!--카카오 native Key-->
+    <string name="kakao_app_key">3da70c39cd53659cbfbf903ffd33273b</string>
 </resources>
