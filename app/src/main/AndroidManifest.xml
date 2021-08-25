@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
         <activity
-            android:name=".Test"
+            android:name=".List_item"
             android:exported="true" />
         <activity
             android:name=".MyPage"
