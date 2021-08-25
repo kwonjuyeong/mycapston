@@ -48,6 +48,8 @@ dependencies {
     //layout 사용
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
 
     //junit 사용
     testImplementation 'junit:junit:4.13.2'
