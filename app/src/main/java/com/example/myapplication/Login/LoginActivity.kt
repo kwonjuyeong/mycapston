@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.Login
+import com.facebook.login.LoginBehavior
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
@@ -39,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
     // Firebase 인증 객체 생성
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
-    private lateinit var callbackManager : CallbackManager
+    private var callbackManager: CallbackManager = CallbackManager.Factory.create()
     val GOOGLE_REQUEST_CODE = 99
     private val TAG = "LoginActivity"
 
@@ -77,8 +78,8 @@ class LoginActivity : AppCompatActivity() {
         */
         // Google 로그인 환경설정
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString((R.string.default_web_client_id)))
-            .build()
+                .requestIdToken(getString((R.string.default_web_client_id)))
+                .build()
 
         googleSignInclient = GoogleSignIn.getClient(this, gso)
         database = Firebase.database.reference
@@ -93,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
             google_signIn()
         }
         facebookSignInBtn.setOnClickListener{
-            facebookLogin()
+            facebook_login()
         }
 
         // 로그인이 됐다면 카카오 자동 로그인(로그인 유지)
@@ -118,7 +119,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     error.toString() == AuthErrorCause.InvalidGrant.toString() -> {
                         Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT)
-                            .show()
+                                .show()
                     }
                     error.toString() == AuthErrorCause.InvalidRequest.toString() -> {
                         Toast.makeText(this, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
@@ -128,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     error.toString() == AuthErrorCause.Misconfigured.toString() -> {
                         Toast.makeText(this, "설정이 올바르지 않음(android key hash", Toast.LENGTH_SHORT)
-                            .show()
+                                .show()
                     }
                     error.toString() == AuthErrorCause.ServerError.toString() -> {
                         Toast.makeText(this, "서버 내부 에러", Toast.LENGTH_SHORT).show()
@@ -158,15 +159,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //자동 로그인
-  /*>override fun onStart() {
-        super.onStart()
-        var currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
-*/
+    /*>override fun onStart() {
+          super.onStart()
+          var currentUser = auth.currentUser
+          if (currentUser != null) {
+              val intent = Intent(this, MainActivity::class.java)
+              startActivity(intent)
+          }
+      }
+  */
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
         if (login_id.isEmpty())
@@ -203,19 +204,52 @@ class LoginActivity : AppCompatActivity() {
         val signInIntent = googleSignInclient.signInIntent
         startActivityForResult(signInIntent, 100)
     }
+    // 페이스북 로그인
+    fun facebook_login(){
+
+        LoginManager.getInstance().loginBehavior = LoginBehavior.WEB_VIEW_ONLY
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","email"))
+        LoginManager.getInstance().registerCallback(callbackManager,object : FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?){
+                FirebaseAuthWithFacebook(result)
+            }
+            override  fun onCancel(){
+
+            }
+            override  fun onError(error:FacebookException?){
+
+            }
+        })
+    }
+    fun FirebaseAuthWithFacebook(result: LoginResult?){
+        val credential = FacebookAuthProvider.getCredential(result?.accessToken?.token!!)
+        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+            task -> if(task.isSuccessful){
+            facebook_sign()
+        }
+        }
+    }
+    //페이스북 로그인 처리
+    fun facebook_sign(){
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if(currentUser != null){
+            startActivity(Intent(this,MainActivity::class.java))
+            this.finish()
+        }
+    }
 
     // 일반 로그인
 
     fun loginrUser(login_id: String, login_pw: String) {
         auth.signInWithEmailAndPassword(login_id, login_pw)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "로그인 성공입니다.", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,MainActivity::class.java)
-                    startActivity(intent)
-                } else
-                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-            }
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "로그인 성공입니다.", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this,MainActivity::class.java)
+                        startActivity(intent)
+                    } else
+                        Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+                }
     }
 
     //회원가입
@@ -224,77 +258,37 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "email 혹은 페스워드를 반드시 입력하세요,", Toast.LENGTH_SHORT).show()
         } else {
             auth.createUserWithEmailAndPassword(login_id, login_pw)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "환영합니다", Toast.LENGTH_SHORT).show()
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "환영합니다", Toast.LENGTH_SHORT).show()
 
-                        // 회원가입이 성공하면 firestore email 및 uid 저장
-                        val userInfoDTO = UserinfoDTO()
-                        var uemail = FirebaseAuth.getInstance().currentUser!!.email
-                        var uid = FirebaseAuth.getInstance().currentUser!!.uid
+                            // 회원가입이 성공하면 firestore email 및 uid 저장
+                            val userInfoDTO = UserinfoDTO()
+                            val uemail = FirebaseAuth.getInstance().currentUser!!.email
+                            val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-                        userInfoDTO.userEmail = uemail.toString()
-                        userInfoDTO.userId = uid
-                        userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
+                            userInfoDTO.userEmail = uemail.toString()
+                            userInfoDTO.userId = uid
+                            userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
 
-                       // database.child("userid").child(uid).setValue(userInfoDTO)
-                        //파이어스토어
-                      // FirebaseFirestore.getInstance().collection("userid").document("uid")
-                         //.set(userInfoDTO)
-                        FirebaseFirestore.getInstance().collection("userid").document(uid)
-                            .set(userInfoDTO)
+                            // database.child("userid").child(uid).setValue(userInfoDTO)
+                            //파이어스토어
+                            // FirebaseFirestore.getInstance().collection("userid").document("uid")
+                            //.set(userInfoDTO)
+                            FirebaseFirestore.getInstance().collection("userid").document(uid)
+                                    .set(userInfoDTO)
 
-                    } else {
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
-                        //입력필드 초기화
-                        login_Id?.setText("")
-                        login_Pw?.setText("")
-                        login_Id.requestFocus()
+                        } else {
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                            //입력필드 초기화
+                            login_Id?.setText("")
+                            login_Pw?.setText("")
+                            login_Id.requestFocus()
+                        }
                     }
-                }
 
         }
     }
-    private fun loginSuccess(){
-        val intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun facebookLogin(){
-        LoginManager.getInstance()
-                .logInWithReadPermissions(this, listOf("public_profile", "email"))
-        LoginManager.getInstance()
-                .registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
-                    override fun onSuccess(result: LoginResult?) {
-                        handleFBToken(result?.accessToken)
-                    }
-
-                    override fun onCancel() {}
-                    override fun onError(error: FacebookException?) {
-                    }
-                })
-    }
-
-    private fun handleFBToken(token : AccessToken?){
-        var credential = FacebookAuthProvider.getCredential(token?.token!!)
-        auth?.signInWithCredential(credential)
-                ?.addOnCompleteListener(this){task ->
-                    if(task.isSuccessful){
-                        Log.d(TAG,"로그인 성공")
-                        val user = auth!!.currentUser
-                        loginSuccess(user)
-                    }else{
-                        Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    }
-                }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callbackManager?.onActivityResult(requestCode, resultCode, data)
-    }
 
 }
-
