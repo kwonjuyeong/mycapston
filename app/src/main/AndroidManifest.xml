@@ -14,13 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".Main.Activity.MainActivity"
             android:exported="true" />
         <!-- 화면 전환 할때 추가해줘야함 -->
         <activity
             android:name=".Register"
             android:exported="true" />
-        <activity android:name=".Main.Activity.MainActivity">
+        <activity
+            android:name=".Login.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

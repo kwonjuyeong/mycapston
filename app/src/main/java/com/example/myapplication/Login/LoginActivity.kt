@@ -14,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
@@ -22,6 +23,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -134,14 +138,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //자동 로그인
-    override fun onStart() {
+   /*override fun onStart() {
         super.onStart()
         var currentUser = auth.currentUser
         if (currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-    }
+    }*/
 
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
@@ -187,6 +191,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "로그인 성공입니다.", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this,MainActivity::class.java)
                     startActivity(intent)
                 } else
                     Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
@@ -212,10 +217,13 @@ class LoginActivity : AppCompatActivity() {
                         userInfoDTO.userId = uid
                         userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
 
-                        database.child("userid").child(uid).setValue(userInfoDTO)
+                       // database.child("userid").child(uid).setValue(userInfoDTO)
                         //파이어스토어
-//                        FirebaseFirestore.getInstance().collection("userid").document("uid")
-//                            .set(userInfoDTO)
+                      // FirebaseFirestore.getInstance().collection("userid").document("uid")
+                         //.set(userInfoDTO)
+                        FirebaseFirestore.getInstance().collection("userid").document(uid)
+                            .set(userInfoDTO)
+
                     } else {
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
                         Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
