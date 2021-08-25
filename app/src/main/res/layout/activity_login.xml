@@ -14,7 +14,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/login_viewPager"
             android:layout_width="match_parent"
-            android:layout_height="300dp"></androidx.viewpager.widget.ViewPager>
+            android:layout_height="200dp"></androidx.viewpager.widget.ViewPager>
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,16 +93,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="115dp"
+        android:layout_height="140dp"
         android:layout_margin="20dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signin_googleButton"
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
             android:background="@drawable/btn_google_signin_dark_focus_mdpi"
             android:text="Google 에서 로그인"
             android:textColor="#FFFFFF"
@@ -110,14 +111,25 @@
 
         <ImageButton
             android:id="@+id/kakao_login_button"
-            android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="400dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
             android:background="@android:color/transparent"
             android:src="@drawable/kakao_login_medium_wide"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebookSignInBtn"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:text="@string/facebookloginb"
+            tools:text="facebook에서 로그인" />
 
 
     </LinearLayout>

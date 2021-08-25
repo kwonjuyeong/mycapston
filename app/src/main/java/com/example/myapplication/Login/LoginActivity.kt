@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.myapplication.Login
 
 import android.content.Intent
@@ -8,6 +10,7 @@ import android.widget.Toast
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Activity.MainActivity
 import com.example.myapplication.R
+import com.facebook.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,8 +26,12 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
-import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.Login
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
+import com.kakao.sdk.common.util.Utility
 
 
 class LoginActivity : AppCompatActivity() {
@@ -32,15 +39,25 @@ class LoginActivity : AppCompatActivity() {
     // Firebase 인증 객체 생성
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var callbackManager : CallbackManager
+    val GOOGLE_REQUEST_CODE = 99
     private val TAG = "LoginActivity"
+
 
     lateinit var login_id: String
     lateinit var login_pw: String
 
+
     private lateinit var googleSignInclient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
         super.onCreate(savedInstanceState)
+        //facebook SDK 앱 활성화 지원 도구 호출
+        FacebookSdk.sdkInitialize(applicationContext);
+        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_login)
 
         // 파이어베이스 인증 객체 선언
@@ -74,6 +91,9 @@ class LoginActivity : AppCompatActivity() {
         }
         signin_googleButton.setOnClickListener {
             google_signIn()
+        }
+        facebookSignInBtn.setOnClickListener{
+            facebookLogin()
         }
 
         // 로그인이 됐다면 카카오 자동 로그인(로그인 유지)
@@ -138,15 +158,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //자동 로그인
-   /*override fun onStart() {
+  /*>override fun onStart() {
         super.onStart()
         var currentUser = auth.currentUser
         if (currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-    }*/
-
+    }
+*/
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
         if (login_id.isEmpty())
@@ -236,5 +256,45 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+    private fun loginSuccess(){
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun facebookLogin(){
+        LoginManager.getInstance()
+                .logInWithReadPermissions(this, listOf("public_profile", "email"))
+        LoginManager.getInstance()
+                .registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+                    override fun onSuccess(result: LoginResult?) {
+                        handleFBToken(result?.accessToken)
+                    }
+
+                    override fun onCancel() {}
+                    override fun onError(error: FacebookException?) {
+                    }
+                })
+    }
+
+    private fun handleFBToken(token : AccessToken?){
+        var credential = FacebookAuthProvider.getCredential(token?.token!!)
+        auth?.signInWithCredential(credential)
+                ?.addOnCompleteListener(this){task ->
+                    if(task.isSuccessful){
+                        Log.d(TAG,"로그인 성공")
+                        val user = auth!!.currentUser
+                        loginSuccess(user)
+                    }else{
+                        Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    }
+                }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager?.onActivityResult(requestCode, resultCode, data)
+    }
+
 }
 

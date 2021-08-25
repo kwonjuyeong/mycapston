@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.myapplication.Main.Activity
 
 import androidx.appcompat.app.AppCompatActivity
@@ -9,14 +11,21 @@ import com.example.myapplication.Main.Activity.DataModel
 import com.example.myapplication.Main.Activity.PhotoAdapter
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.activity_main.*
-
+import android.util.Log
+import android.util.Base64
+import android.content.pm.PackageManager
+import androidx.annotation.RequiresApi
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var  photoAdapter: PhotoAdapter
     private var dataList = mutableListOf<DataModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         recyclerView.layoutManager = GridLayoutManager(applicationContext, 4)
         photoAdapter = PhotoAdapter(applicationContext)
         recyclerView.adapter = photoAdapter
