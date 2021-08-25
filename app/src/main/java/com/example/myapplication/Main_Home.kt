@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class Main_Home : AppCompatActivity() {
-    private lateinit var  photoAdapter: PhotoAdapter
+    private lateinit var photoAdapter: PhotoAdapter
     private var dataList = mutableListOf<DataModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
