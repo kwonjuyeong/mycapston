@@ -6,102 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".Main.Activity.MainActivity">
 
-        <SearchView
-            android:id="@+id/search_view"
-            android:layout_width="276dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="14dp"
-            app:iconifiedByDefault="false"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:queryHint="검색어를 입력하시오" />
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above = "@+id/bottomNavi"
+        android:layout_alignParentTop = "true"
+        android:layout_marginBottom="60dp"
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="81dp"
-            android:layout_height="26dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginBottom="9dp"
-            android:text="@string/category"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-            app:layout_constraintStart_toStartOf="@+id/relativeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/search_view" />
+        />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="153dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="52dp"
-            android:layout_marginBottom="41dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/search_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/main_page"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="350dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="29dp"
-            android:layout_marginEnd="29dp"
-            android:layout_marginBottom="345dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavi"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="72dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frame_container"
         android:background="#FFF"
         app:itemIconTint="#000000"
         app:itemTextColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_container"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_menu" />
-
-<!--    <FrameLayout-->
-<!--        android:id="@+id/main_frame"-->
-<!--        android:layout_width="409dp"-->
-<!--        android:layout_height="684dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/bottomNavi"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--    </FrameLayout>-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
