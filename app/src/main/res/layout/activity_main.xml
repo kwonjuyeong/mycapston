@@ -1,90 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/fried"
-    tools:context=".MainActivity">
+    tools:context=".Main.Activity.MainActivity">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above = "@+id/bottomNavi"
+        android:layout_alignParentTop = "true"
+        android:layout_marginBottom="60dp"
+
+        />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="메인 액티비티"
-        android:textSize="30sp"
-        android:gravity="center"/>
+        android:layout_below="@+id/frame_container"
+        android:background="#FFF"
+        app:itemIconTint="#000000"
+        app:itemTextColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_container"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_menu" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:gravity="end"
-            android:text="아이디"
-            android:layout_marginRight="30dp"/>
-
-        <EditText
-            android:id="@+id/edit_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:hint="아이디 입력"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:gravity="end"
-            android:text="비밀번호"
-            android:layout_marginRight="30dp"/>
-
-        <EditText
-            android:id="@+id/edit_pw"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:hint="비밀번호 입력"/>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="425dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="로 그 인" />
-
-    <Button
-        android:id="@+id/mButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="회원가입" />
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/rv_profile"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
