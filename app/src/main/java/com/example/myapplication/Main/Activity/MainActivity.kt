@@ -2,6 +2,8 @@ package com.example.myapplication.Main.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +11,7 @@ import com.example.myapplication.Main.Activity.DataModel
 import com.example.myapplication.Main.Activity.PhotoAdapter
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.activity_main.*
+import com.kakao.sdk.common.util.Utility
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +36,9 @@ class MainActivity : AppCompatActivity() {
 
 
         photoAdapter.setDataList(dataList)
+
+
+
 
     }
 }
