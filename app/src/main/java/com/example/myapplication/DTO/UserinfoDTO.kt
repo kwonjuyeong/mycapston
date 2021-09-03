@@ -4,4 +4,5 @@ data class UserinfoDTO (
     var userEmail : String? = null,
     var userId : String? = null,
     var signUpdate : String? = null,
+    var phoneN : String? = null
 )
