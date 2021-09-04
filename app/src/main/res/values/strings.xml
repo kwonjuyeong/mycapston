@@ -15,4 +15,7 @@
     <string name="facebook_app_id">267484831855506</string>
     <string name="fb_login_protocol_scheme">fb267484831855506</string>
     <string name="facebookloginb">facebook</string>
+    <string name="togethertext">함께</string>
+    <string name="password">Password</string>
+    <string name="loginbtn">로그인</string>
 </resources>
