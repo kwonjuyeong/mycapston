@@ -1,5 +1,6 @@
 package com.example.myapplication.Login
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +37,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
 
     // Firebase 인증 객체 생성
@@ -55,8 +57,8 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         //facebook SDK 앱 활성화 지원 도구 호출
-        FacebookSdk.sdkInitialize(applicationContext);
-        AppEventsLogger.activateApp(this);
+        FacebookSdk.sdkInitialize(applicationContext)
+        AppEventsLogger.activateApp(this)
         setContentView(R.layout.activity_login)
 
         // 파이어베이스 인증 객체 선언
@@ -161,7 +163,7 @@ class LoginActivity : AppCompatActivity() {
     // 구글 로그인
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        callbackManager?.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
 //        if (requestCode == GOOGLE_LOGIN_CODE && resultCode == Activity.RESULT_OK)
         if (requestCode == GOOGLE_LOGIN_CODE) {
 //            val result = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -170,6 +172,7 @@ class LoginActivity : AppCompatActivity() {
                 // result.isSuccessful이 문제
 
                 val account = task.getResult(ApiException::class.java)
+                Toast.makeText(this, "구글1", Toast.LENGTH_SHORT).show()
                 firebaseAuthWithGoogle(account.idToken!!)
 
 //                if (result.isSuccessful) {
@@ -187,7 +190,7 @@ class LoginActivity : AppCompatActivity() {
 //    자동 로그인
     override fun onStart() {
         super.onStart()
-        var currentUser = auth.currentUser
+        val currentUser = auth.currentUser
         if (currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -251,20 +254,19 @@ class LoginActivity : AppCompatActivity() {
             })
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun FirebaseAuthWithFacebook(token: AccessToken?) {
         val credential = FacebookAuthProvider.getCredential(token?.token!!)
-        auth?.signInWithCredential(credential)?.addOnCompleteListener { task ->
+        auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val userInfoDTO = UserinfoDTO()
                 val uemail = FirebaseAuth.getInstance().currentUser!!.email
                 val uid = FirebaseAuth.getInstance().currentUser!!.uid
-                val phonenumber = FirebaseAuth.getInstance().currentUser!!.phoneNumber
                 userInfoDTO.userEmail = uemail.toString()
                 userInfoDTO.userId = uid
                 userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
-                userInfoDTO.phoneN = phonenumber.toString()
                 FirebaseFirestore.getInstance().collection("userid").document(uid)
-                    .set(userInfoDTO)
+                        .set(userInfoDTO)
                 facebook_sign()
             }
         }
@@ -274,24 +276,25 @@ class LoginActivity : AppCompatActivity() {
     fun facebook_sign() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
-            startActivity(Intent(this, Add_LoginActivity::class.java))
+            startActivity(Intent(this, Add_UserInfo::class.java))
             this.finish()
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun firebaseAuthWithGoogle(idToken: String) {
+        Toast.makeText(this, "구글3", Toast.LENGTH_SHORT).show()
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Toast.makeText(this, "구글4", Toast.LENGTH_SHORT).show()
                     val userInfoDTO = UserinfoDTO()
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
-                    val phonenumber =FirebaseAuth.getInstance().currentUser
                     userInfoDTO.userEmail = uemail.toString()
                     userInfoDTO.userId = uid
                     userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
-
                     FirebaseFirestore.getInstance().collection("userid").document(uid)
                         .set(userInfoDTO)
                     google_signIn()
@@ -331,6 +334,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     // 구글 로그인 인증
+    @SuppressLint("SimpleDateFormat")
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
@@ -366,6 +370,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //회원가입
+    @SuppressLint("SimpleDateFormat")
     fun createUser(login_id: String, login_pw: String) {
         if (login_Id.text.toString().length == 0 || login_Pw.text.toString().length == 0) {
             Toast.makeText(this, "email 혹은 페스워드를 반드시 입력하세요,", Toast.LENGTH_SHORT).show()

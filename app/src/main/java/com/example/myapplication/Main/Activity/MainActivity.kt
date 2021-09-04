@@ -21,6 +21,7 @@ import com.kakao.sdk.common.util.Utility
 import kotlinx.android.synthetic.main.frag_home.*
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity(){
         dataList.add(DataModel("돈까스", R.drawable.gas))
         dataList.add(DataModel("일식", R.drawable.sushi))
 
+
         photoAdapter.setDataList(dataList)
 */
 //bottomNavi.setOnNavigationItemSelectedListener(this)
@@ -87,5 +89,4 @@ class MainActivity : AppCompatActivity(){
         }
         true
     }
-
 }
