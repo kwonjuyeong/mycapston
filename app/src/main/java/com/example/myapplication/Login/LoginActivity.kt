@@ -276,7 +276,7 @@ class LoginActivity : AppCompatActivity() {
     fun facebook_sign() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
-            startActivity(Intent(this, Add_UserInfo::class.java))
+            startActivity(Intent(this, Add_LoginActivity::class.java))
             this.finish()
         }
     }

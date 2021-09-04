@@ -20,6 +20,8 @@ class MapFragment : Fragment(){
             return MapFragment()
         }
     }
+
+
     // 메모리에 적제 되었을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
