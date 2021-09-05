@@ -16,6 +16,8 @@ import com.example.myapplication.Main.Fragment.MapFragment
 import com.example.myapplication.Main.Fragment.SettingFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import com.kakao.sdk.common.util.Utility
 import kotlinx.android.synthetic.main.frag_home.*
@@ -35,6 +37,8 @@ class MainActivity : AppCompatActivity(){
     companion object {
         const val TAG: String = "로그"
     }
+
+    val user = Firebase.auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
