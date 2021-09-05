@@ -29,6 +29,8 @@ class ChatAdapter(val currentUser: String, val itemList: ArrayList<ChatLayout>):
         holder.time.text = itemList[position].time
     }
 
+
+
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val card: CardView = itemView.findViewById(R.id.chat_card_view)
         val nickname: TextView = itemView.findViewById(R.id.chat_tv_nickname)

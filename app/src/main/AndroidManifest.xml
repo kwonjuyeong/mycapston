@@ -79,8 +79,9 @@
             android:name=".image"
             android:exported="true" />
         <activity
-            android:name=".Main.Activity.MainChatActivity"
+            android:name=".ChatMainActivity"
             android:exported="true" />
+
     </application>
 
 </manifest>

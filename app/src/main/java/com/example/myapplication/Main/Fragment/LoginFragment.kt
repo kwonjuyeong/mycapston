@@ -1,22 +1,20 @@
 package com.example.myapplication.Main.Fragment
-import android.content.Context
+
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import com.example.myapplication.Main.Activity.ChatActivity
-import com.example.myapplication.R
-import com.example.myapplication.databinding.FragLoginBinding
+import com.example.myapplication.ChatMainActivity
+import com.example.myapplication.databinding.FragmentLoginBinding
 
 class LoginFragment: Fragment() {
-    private var _binding: FragLoginBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // 닉네임이 공백일 경우 버튼 비활성화
@@ -30,7 +28,7 @@ class LoginFragment: Fragment() {
             val bundle = Bundle()
             bundle.putString("nickname", nickname)
             // ChatFragment로 이동
-            (activity as ChatActivity).replaceFragment(bundle)
+            (activity as ChatMainActivity).replaceFragment(bundle)
         }
 
         return view

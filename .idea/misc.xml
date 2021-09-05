@@ -17,6 +17,7 @@
         <entry key="..\:/mycapston/app/src/main/res/layout/activity_category_main.xml" value="0.15059982862039417" />
         <entry key="..\:/mycapston/app/src/main/res/layout/activity_change_information.xml" value="0.22" />
         <entry key="..\:/mycapston/app/src/main/res/layout/activity_chat.xml" value="0.20108695652173914" />
+        <entry key="..\:/mycapston/app/src/main/res/layout/activity_chat_main.xml" value="0.1723684210526316" />
         <entry key="..\:/mycapston/app/src/main/res/layout/activity_chatmain.xml" value="0.30833333333333335" />
         <entry key="..\:/mycapston/app/src/main/res/layout/activity_extra_information.xml" value="0.22" />
         <entry key="..\:/mycapston/app/src/main/res/layout/activity_image.xml" value="0.23324275362318841" />
@@ -38,11 +39,12 @@
         <entry key="..\:/mycapston/app/src/main/res/layout/button_listener.xml" value="0.2046875" />
         <entry key="..\:/mycapston/app/src/main/res/layout/button_test.xml" value="0.16" />
         <entry key="..\:/mycapston/app/src/main/res/layout/chat_layout.xml" value="0.1570175438596491" />
-        <entry key="..\:/mycapston/app/src/main/res/layout/frag_chat.xml" value="0.14130434782608695" />
+        <entry key="..\:/mycapston/app/src/main/res/layout/frag_chat.xml" value="0.17" />
         <entry key="..\:/mycapston/app/src/main/res/layout/frag_home.xml" value="0.14130434782608695" />
         <entry key="..\:/mycapston/app/src/main/res/layout/frag_login.xml" value="0.30833333333333335" />
         <entry key="..\:/mycapston/app/src/main/res/layout/frag_map.xml" value="0.14130434782608695" />
         <entry key="..\:/mycapston/app/src/main/res/layout/frag_setting.xml" value="0.14130434782608695" />
+        <entry key="..\:/mycapston/app/src/main/res/layout/fragment_chat.xml" value="0.1723684210526316" />
         <entry key="..\:/mycapston/app/src/main/res/layout/fragment_login.xml" value="0.30833333333333335" />
         <entry key="..\:/mycapston/app/src/main/res/layout/image.xml" value="0.22" />
         <entry key="..\:/mycapston/app/src/main/res/layout/list_item.xml" value="0.33" />
