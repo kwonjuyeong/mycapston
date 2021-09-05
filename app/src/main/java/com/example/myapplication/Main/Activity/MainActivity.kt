@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity(){
     private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
 
-    //private lateinit var photoAdapter: PhotoAdapter //1
-    //private var dataList = mutableListOf<DataModel>()   //2
-
     companion object {
         const val TAG: String = "로그"
     }
@@ -43,24 +40,7 @@ class MainActivity : AppCompatActivity(){
 
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
-        /*
-        recyclerView.layoutManager = GridLayoutManager(applicationContext, 4)
-        photoAdapter = PhotoAdapter(applicationContext)
-        recyclerView.adapter = photoAdapter
 
-
-        dataList.add(DataModel("치킨", R.drawable.chiken))
-        dataList.add(DataModel("피자", R.drawable.pizza))
-        dataList.add(DataModel("중식", R.drawable.jjajang))
-        dataList.add(DataModel("한식", R.drawable.rice))
-        dataList.add(DataModel("양식", R.drawable.steak))
-        dataList.add(DataModel("커피", R.drawable.coffee))
-        dataList.add(DataModel("돈까스", R.drawable.gas))
-        dataList.add(DataModel("일식", R.drawable.sushi))
-
-        photoAdapter.setDataList(dataList)
-*/
-//bottomNavi.setOnNavigationItemSelectedListener(this)
     }
 
     //바텀 네비게이션 아이템 클릭 리스너

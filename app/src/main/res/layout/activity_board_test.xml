@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".Main.Board.BoardTest">
+
+
+    <LinearLayout
+        android:id="@+id/board_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="5dp"
+            android:background="#CEE5D0"
+            android:text="완료" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/board_layout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="제목"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/board_context"
+        android:layout_width="match_parent"
+        android:layout_height="191dp"
+        android:layout_below="@+id/title_text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:hint="내용을 입력하세요"
+        android:text="" />
+
+
+    <ImageView
+        android:id="@+id/layout_imageUrlWrite"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/board_context"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/imgaeExplain"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/board_context"
+        android:layout_marginTop="62dp"
+
+        android:layout_toRightOf="@id/layout_imageUrlWrite"
+        android:hint="설명을 넣을 수 있어요"
+        android:text="" />
+
+
+
+
+        <!--하단 뷰-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/upload_BoardImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/ic_baseline_photo_camera_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+</RelativeLayout>

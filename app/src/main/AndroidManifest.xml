@@ -3,7 +3,9 @@
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 사용 권한 설정 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 갤러리 사용 권한 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".DTO.GlobalApplication"
@@ -14,8 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".Main.Board.BoardTest"
+            android:exported="true" />
+        <activity
             android:name=".Intro"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,11 +33,9 @@
         <activity
             android:name=".Main.Activity.MainActivity"
             android:exported="true" /> <!-- 화면 전환 할때 추가해줘야함 -->
-
         <activity
             android:name=".Login.LoginActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

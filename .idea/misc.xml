@@ -19,7 +19,8 @@
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/drawable/layout_round.xml" value="0.382051282051282" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/drawable/side_nav_bar.xml" value="0.234375" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/activity_add_login.xml" value="0.17134831460674158" />
-        <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/activity_intro.xml" value="0.67" />
+        <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/activity_board_test.xml" value="0.25" />
+        <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/activity_intro.xml" value="0.5" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/activity_main2.xml" value="0.1" />
@@ -40,6 +41,7 @@
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/fragment_test.xml" value="0.33" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/login_main.xml" value="0.22" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/nav_header_main_page.xml" value="0.1879432624113475" />
+        <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/test.xml" value="0.25" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/layout/view_item_layout.xml" value="0.33" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/menu/activity_main_drawer.xml" value="0.3034013605442177" />
         <entry key="..\:/Users/program/AndroidStudioProjects/mycapston/app/src/main/res/menu/bottom_menu.xml" value="0.18584070796460178" />

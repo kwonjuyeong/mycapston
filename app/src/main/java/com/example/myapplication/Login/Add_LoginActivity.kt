@@ -5,9 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.myapplication.DTO.Add_UserInfo
+import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Activity.MainActivity
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
@@ -18,13 +19,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Add_LoginActivity : AppCompatActivity() {
+
     private lateinit var auth : FirebaseAuth
     var PICK_IMAGE_FROM_ALBUM = 1
     var photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
     var storage : FirebaseStorage? = null
     var firestore: FirebaseFirestore? = null
 
-    var photoUri : Uri? = null
+    private var photoUri : Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_login)
@@ -64,7 +66,6 @@ class Add_LoginActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == PICK_IMAGE_FROM_ALBUM){
-            println(data?.data)
             photoUri = data?.data
             upload_image.setImageURI(photoUri)
         }else{
@@ -73,10 +74,10 @@ class Add_LoginActivity : AppCompatActivity() {
     }
     fun contentUpload(){
         //ProgressBar <<< 효과 넣을지 말지? 살짝 구시대적 ui
-        val timeStamp = SimpleDateFormat("yyyMMdd_HHmmss").format(Date())
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName = "JPEG_"+timeStamp+"_.png"
         // images/(imageFilename) 위치를 가리키는 참조 변수-> 를 putFile로 storage서버에 업로드
-        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
+        val storageRef = storage?.reference?.child("Profiles")?.child(imageFileName)
         // storageRef?.putFile()의 반환값은 StorageTask
         storageRef?.putFile(photoUri!!)?.addOnSuccessListener { taskSnapshot ->
 
@@ -85,15 +86,21 @@ class Add_LoginActivity : AppCompatActivity() {
 
             //firebase Strage 서버에 저장된 파일 다운로드 URL 가져옴
             storageRef.downloadUrl.addOnSuccessListener { uri ->
-                val userinfoDTO = Add_UserInfo()
+                val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-                userinfoDTO.uid = auth?.currentUser?.uid
-                userinfoDTO.userId = auth?.currentUser?.email
-                userinfoDTO.photoUrl = uri.toString()
-                userinfoDTO.explain = photo_explain.text.toString()
-                userinfoDTO.timestamp = System.currentTimeMillis().toString()
+                val UR = uri.toString()
+                val profile_timestamp = System.currentTimeMillis()
+                /*
+                userinfoDTO.UID = uid
+                userinfoDTO.userEmail = auth?.currentUser?.email
+                userinfoDTO.ProfileUrl = uri.toString()
+                userinfoDTO.Profile_timestamp = System.currentTimeMillis()
+                */
+                firestore?.collection("userid")?.document(uid)?.update(mapOf(
+                    "profileUrl" to UR,
+                    "profile_timestamp" to profile_timestamp
+                ))
 
-                firestore?.collection("image")?.document()?.set(userinfoDTO)
                 setResult(RESULT_OK)
                 finish()
 

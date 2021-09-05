@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.myapplication.DTO.Add_UserInfo
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Activity.MainActivity
 import com.example.myapplication.R
@@ -185,14 +184,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 //    자동 로그인
-    override fun onStart() {
-        super.onStart()
-        var currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        var currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
 
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
@@ -260,9 +259,8 @@ class LoginActivity : AppCompatActivity() {
                 val uid = FirebaseAuth.getInstance().currentUser!!.uid
                 val phonenumber = FirebaseAuth.getInstance().currentUser!!.phoneNumber
                 userInfoDTO.userEmail = uemail.toString()
-                userInfoDTO.userId = uid
+                userInfoDTO.UID = uid
                 userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
-                userInfoDTO.phoneN = phonenumber.toString()
                 FirebaseFirestore.getInstance().collection("userid").document(uid)
                     .set(userInfoDTO)
                 facebook_sign()
@@ -289,7 +287,7 @@ class LoginActivity : AppCompatActivity() {
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
                     val phonenumber =FirebaseAuth.getInstance().currentUser
                     userInfoDTO.userEmail = uemail.toString()
-                    userInfoDTO.userId = uid
+                    userInfoDTO.UID = uid
                     userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
 
                     FirebaseFirestore.getInstance().collection("userid").document(uid)
@@ -340,7 +338,7 @@ class LoginActivity : AppCompatActivity() {
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
                     userInfoDTO.userEmail = uemail.toString()
-                    userInfoDTO.userId = uid
+                    userInfoDTO.UID = uid
                     userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
                     FirebaseFirestore.getInstance().collection("userid").document(uid)
                         .set(userInfoDTO)
@@ -367,6 +365,8 @@ class LoginActivity : AppCompatActivity() {
 
     //회원가입
     fun createUser(login_id: String, login_pw: String) {
+        val timeStamp = SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Date())
+        val imageFileName = "JPEG_"+timeStamp+"_.png"
         if (login_Id.text.toString().length == 0 || login_Pw.text.toString().length == 0) {
             Toast.makeText(this, "email 혹은 페스워드를 반드시 입력하세요,", Toast.LENGTH_SHORT).show()
         } else {
@@ -378,11 +378,14 @@ class LoginActivity : AppCompatActivity() {
                         // 회원가입이 성공하면 firestore email 및 uid 저장
                         val userInfoDTO = UserinfoDTO()
                         val uemail = FirebaseAuth.getInstance().currentUser!!.email
+                        val uPW = login_Pw.text.toString()
                         val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
                         userInfoDTO.userEmail = uemail.toString()
-                        userInfoDTO.userId = uid
-                        userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
+                        userInfoDTO.UID = uid
+                        userInfoDTO.userPassword = uPW
+                        userInfoDTO.signUpdate = timeStamp
+
 
                         // database.child("userid").child(uid).setValue(userInfoDTO)
                         //파이어스토어
