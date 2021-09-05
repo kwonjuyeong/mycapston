@@ -3,7 +3,6 @@ package com.example.myapplication.Main.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,11 +34,16 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d(TAG, "MainActivity - onCreate: called")
+
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
 
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
+        /*
+        recyclerView.layoutManager = GridLayoutManager(applicationContext, 4)
+        photoAdapter = PhotoAdapter(applicationContext)
+        recyclerView.adapter = photoAdapter
+        */
 
     }
 
