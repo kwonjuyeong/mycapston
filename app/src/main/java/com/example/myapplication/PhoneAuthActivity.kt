@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_phone_auth.*
 import javax.xml.datatype.DatatypeConstants.SECONDS
+import com.example.myapplication.DTO.UserinfoDTO
 
 class PhoneAuthActivity: AppCompatActivity() {
 
@@ -27,7 +28,6 @@ class PhoneAuthActivity: AppCompatActivity() {
 
         val sendVerificationCodeButton: Button = findViewById(R.id.sendVerificationCodeButton)
         val phoneNumberInput: EditText = findViewById(R.id.phoneNumberInput)
-
        sendVerificationCodeButton.setOnClickListener {
             val phoneNumber = "+82" + phoneNumberInput.text.toString()
             sendVerificationCode(phoneNumber)
