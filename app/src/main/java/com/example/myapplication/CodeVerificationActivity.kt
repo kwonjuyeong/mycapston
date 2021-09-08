@@ -1,10 +1,12 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.myapplication.Main.Activity.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
@@ -39,6 +41,8 @@ class CodeVerificationActivity : AppCompatActivity() {
         mAuth!!.signInWithCredential(credentials).addOnCompleteListener{
             if(it.isSuccessful){
                 //send user to profile
+                val intent = Intent(this@CodeVerificationActivity, MainActivity::class.java)
+                startActivity(intent)
             }
             else{
                 //show error
