@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import android.widget.ImageView
 import android.widget.TextView
@@ -46,3 +46,4 @@ fun TextView.setOnNextBackground(isCompleted: Boolean) {
 
 
 }
+ */

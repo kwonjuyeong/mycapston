@@ -10,7 +10,7 @@ import com.example.myapplication.let.BaseActivity
 import com.example.myapplication.databinding.ActivitySignInBinding
 import com.example.myapplication.let.UserInfo
 import com.example.myapplication.Main.Activity.MainActivity
-import com.example.myapplication.let.SignUpActivity
+import com.example.myapplication.let.com.example.myapplication.let.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

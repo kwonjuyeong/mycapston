@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import android.util.Log
 import androidx.annotation.MainThread
@@ -41,4 +41,4 @@ open class SingleLiveEvent<T> : MutableLiveData<T>() {
     companion object {
         private val TAG = "SingleLiveEvent"
     }
-}
+}*/

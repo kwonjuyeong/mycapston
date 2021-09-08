@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.myapplication.DTO.Add_UserInfo
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Activity.MainActivity
+import com.example.myapplication.PhoneAuthActivity
 import com.example.myapplication.R
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
@@ -263,7 +264,7 @@ class LoginActivity : AppCompatActivity() {
                 val uemail = FirebaseAuth.getInstance().currentUser!!.email
                 val uid = FirebaseAuth.getInstance().currentUser!!.uid
                 userInfoDTO.userEmail = uemail.toString()
-                userInfoDTO.userId = uid
+                userInfoDTO.UID = uid
                 userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
                 FirebaseFirestore.getInstance().collection("userid").document(uid)
                         .set(userInfoDTO)
@@ -293,7 +294,7 @@ class LoginActivity : AppCompatActivity() {
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
                     userInfoDTO.userEmail = uemail.toString()
-                    userInfoDTO.userId = uid
+                    userInfoDTO.UID = uid
                     userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
                     FirebaseFirestore.getInstance().collection("userid").document(uid)
                         .set(userInfoDTO)
@@ -344,7 +345,7 @@ class LoginActivity : AppCompatActivity() {
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
                     userInfoDTO.userEmail = uemail.toString()
-                    userInfoDTO.userId = uid
+                    userInfoDTO.UID= uid
                     userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
                     FirebaseFirestore.getInstance().collection("userid").document(uid)
                         .set(userInfoDTO)
@@ -386,7 +387,7 @@ class LoginActivity : AppCompatActivity() {
                         val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
                         userInfoDTO.userEmail = uemail.toString()
-                        userInfoDTO.userId = uid
+                        userInfoDTO.UID = uid
                         userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
 
                         // database.child("userid").child(uid).setValue(userInfoDTO)
@@ -395,7 +396,8 @@ class LoginActivity : AppCompatActivity() {
                         //.set(userInfoDTO)
                         FirebaseFirestore.getInstance().collection("userid").document(uid)
                             .set(userInfoDTO)
-                        val intent = Intent(this, Add_LoginActivity::class.java)
+                       // val intent = Intent(this, Add_LoginActivity::class.java)
+                        val intent = Intent(this, PhoneAuthActivity::class.java)
                         startActivity(intent)
                         finish()
 

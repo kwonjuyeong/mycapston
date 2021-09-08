@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -35,4 +35,4 @@ class PhoneAuthViewModel @Inject constructor() : BaseViewModel() {
         _authComplete.call()
     }
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -49,4 +49,4 @@ class SignUpViewModel @Inject constructor() : BaseViewModel() {
     }
 
 
-}
+}*/

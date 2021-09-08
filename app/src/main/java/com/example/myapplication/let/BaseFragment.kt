@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,3 +38,4 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 }
 
+*/

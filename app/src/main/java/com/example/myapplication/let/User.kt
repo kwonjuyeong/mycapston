@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import com.google.gson.annotations.SerializedName
 
@@ -21,4 +21,4 @@ data class User(
     val industry: String,
     @SerializedName("location_name")
     val locationName: String
-)
+)*/

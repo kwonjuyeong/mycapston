@@ -1,14 +1,14 @@
-/*package com.example.myapplication.let
+/*package com.example.myapplication.let.com.example.myapplication.let
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Observer
 import com.example.myapplication.R
 import com.example.myapplication.let.BaseActivity
 import com.example.myapplication.databinding.ActivitySignUpBinding
 import com.example.myapplication.let.PhoneAuthActivity
+import com.example.myapplication.let.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

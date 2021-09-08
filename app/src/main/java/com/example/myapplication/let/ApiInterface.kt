@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import com.example.myapplication.let.LoginRes
 import com.example.myapplication.let.SignUpRes
@@ -73,4 +73,4 @@ interface ApiInterface {
                 .create(ApiInterface::class.java)
         }
     }
-}
+}*/

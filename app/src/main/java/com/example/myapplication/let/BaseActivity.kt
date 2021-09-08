@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import android.os.Bundle
 import android.widget.Toast
@@ -27,4 +27,4 @@ abstract class BaseActivity<B : ViewDataBinding>(
         super.onDestroy()
         compositeDisposable.clear()
     }
-}
+}*/

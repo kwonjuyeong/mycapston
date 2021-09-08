@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import com.example.myapplication.let.ApiInterface
 import com.example.myapplication.let.LoginReq
@@ -16,3 +16,4 @@ class SignInRepositoryImpl @Inject constructor(private val apiInterface: ApiInte
 interface SignInRepository {
     fun requestLogin(loginReq: LoginReq): Single<LoginRes>
 }
+*/

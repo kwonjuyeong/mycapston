@@ -3,14 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context = ".PhoneAuthActivity">
-<!--
-    <data>
 
-        <variable
-            name="vm"
-            type="com.example.myapplication.let.PhoneAuthViewModel" />
-    </data>
--->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
-            android:text="휴대폰 인증"
+            android:text="인증번호가 전송되었습니다"
             android:textColor="@color/medium_dark_gray"
             android:textSize="21dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="32dp"
-            android:text="본인 확인 및 중복 가입을 방지하기 위한 절차입니다.\n휴대폰 번호를 입력해주세요."
+            android:text="인증번호를 입력해주세요."
             android:textColor="@color/medium_dark_gray"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +98,7 @@
             android:layout_height="32dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/bg_btn_solid_dark_gray_333333_radius_8dp"
-            android:text="@string/sendVerificationCodeButton"
+            android:text="재전송"
             android:textColor="@color/white"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="@id/phoneNumberInput"
@@ -125,7 +118,7 @@
             app:layout_constraintTop_toBottomOf="@id/phoneNumberInput" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/phone_num_area"
+            android:id="@+id/codeInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
@@ -140,7 +133,7 @@
             app:layout_constraintTop_toBottomOf="@+id/phone_auth_tv_auth_num" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/verify_btn"
+            android:id="@+id/auth_btn"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="20dp"

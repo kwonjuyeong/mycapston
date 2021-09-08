@@ -3,10 +3,10 @@ plugins {
     id 'kotlin-android'
     id'kotlin-android-extensions'
     id 'com.google.gms.google-services' // Google Services plugin
-
+/*
     id 'dagger.hilt.android.plugin'
     id "androidx.navigation.safeargs"
-    id 'kotlin-kapt'
+    id 'kotlin-kapt'*/
 }
 
 android {
@@ -60,6 +60,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     //junit 사용
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -100,6 +102,8 @@ dependencies {
     //face login
     implementation 'com.facebook.android:facebook-login:4.42.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.42.0'
+
+/*
     //여기 안되면 지우기
     implementation 'com.google.dagger:hilt-android:<VERSION>'
     kapt 'com.google.dagger:hilt-android-compiler:<VERSION>'
@@ -135,7 +139,9 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+*/
 }
 
 apply plugin: 'com.google.gms.google-services'

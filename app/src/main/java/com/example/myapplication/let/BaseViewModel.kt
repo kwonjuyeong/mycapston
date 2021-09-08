@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -40,4 +40,4 @@ abstract class BaseViewModel : ViewModel() {
     fun onBackClick() {
         _backClick.call()
     }
-}
+}*/

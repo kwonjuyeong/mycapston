@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import androidx.lifecycle.LiveData
 import com.example.myapplication.let.BaseViewModel
@@ -16,4 +16,4 @@ class SignUpCompleteViewModel @Inject constructor() : BaseViewModel() {
     fun goLogin() {
         _goLogin.call()
     }
-}
+}*/

@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -72,4 +72,4 @@ class UserInfoViewModel @Inject constructor(private val repository: UserInfoRepo
     }
 
 
-}
+}*/

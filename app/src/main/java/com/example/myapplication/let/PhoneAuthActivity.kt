@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 
 import android.content.Intent
@@ -199,4 +199,4 @@ class PhoneAuthActivity : BaseActivity<ActivityPhoneAuthBinding>(R.layout.activi
             }
     }
 
-}
+}*/

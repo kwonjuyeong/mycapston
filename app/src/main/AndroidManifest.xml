@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".CodeVerificationActivity"></activity>
         <activity
             android:name=".Intro"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,13 +27,14 @@
             android:name=".Login.Add_LoginActivity"
             android:exported="true" />
         <activity
+            android:name=".PhoneAuthActivity"
+            android:exported="true" />
+        <activity
             android:name=".Main.Activity.MainActivity"
             android:exported="true" /> <!-- 화면 전환 할때 추가해줘야함 -->
-
         <activity
             android:name=".Login.LoginActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

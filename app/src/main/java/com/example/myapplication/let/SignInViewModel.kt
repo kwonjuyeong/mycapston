@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -49,4 +49,4 @@ class SignInViewModel @Inject constructor(private val repository: SignInReposito
                 _loginResult.value = false
             }).addTo(compositeDisposable)
     }
-}
+}*/

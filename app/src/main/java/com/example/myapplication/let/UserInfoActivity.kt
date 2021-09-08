@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import android.content.Intent
 import android.os.Bundle
@@ -76,5 +76,4 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>(R.layout.activity
 
 
         }
-    }
-}
+    }*/

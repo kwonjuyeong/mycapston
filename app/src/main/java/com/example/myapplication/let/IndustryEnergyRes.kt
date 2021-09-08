@@ -1,4 +1,4 @@
-package com.example.myapplication.let
+/*package com.example.myapplication.let
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,4 +7,4 @@ data class IndustryEnergyRes(
     val mediaUrl: String,
     @SerializedName("result")
     val result: List<List<String>>
-)
+)*/
