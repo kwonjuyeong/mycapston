@@ -20,4 +20,5 @@
     <string name="loginbtn">로그인</string>
     <string name="sendVerificationCodeButton">인증하기</string>
     <string name="phoneNumberInput">01012345678</string>
+    <string name="add_login_text">회원가입</string>
 </resources>

@@ -1,58 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Login.Add_LoginActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/add_info_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp">
-        <TextView
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text=" application name"
-            />
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp"
+            tools:context=".Login.Add_LoginActivity">
 
-    </androidx.appcompat.widget.Toolbar>
-    <LinearLayout
-        android:id="@+id/toolbar_Division"
-        android:layout_below="@+id/add_info_toolbar"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"></LinearLayout>
+           <!-- <ProgressBar
+                android:id="@+id/add_login_pgbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/upload_image"
-        android:src="@drawable/ic_baseline_account_circle_24"
-        android:layout_below="@id/toolbar_Division"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editText"
-        android:layout_below="@id/toolbar_Division"
-        android:layout_toRightOf="@id/upload_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
-        <EditText
-            android:id="@+id/photo_explain"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="image description"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/add_login_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20.83dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back" />
 
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/editText"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="-2dp"
-        android:layout_toRightOf="@id/upload_image"
-        android:text="photo upload" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phone_auth_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_login_text"
+                android:textColor="@color/medium_dark_gray"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/add_login_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/add_login_cancel" />
 
-</RelativeLayout>
+            <View
+                android:id="@+id/phone_auth_view_top"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/little_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_login_cancel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_login_main_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:text="회원 정보"
+                android:textColor="@color/medium_dark_gray"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_auth_view_top" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_login_content_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:text="회원정보를 입력해주세요! 감사합니다."
+                android:textColor="@color/strong_dark_gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/add_login_main_text"
+                app:layout_constraintTop_toBottomOf="@id/add_login_main_text" />
+
+            <LinearLayout
+                android:id="@+id/add_login_img_set"
+                android:layout_width="match_parent"
+                android:layout_height="101dp"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="-20dp"
+                tools:layout_editor_absoluteY="177dp"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/upload_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:layout_gravity="center"
+                    android:contentDescription="TODO">
+                    </ImageView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/photo_explain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="image description"
+                        android:layout_gravity="center"
+                        android:importantForAutofill="no"></EditText>
+
+                    <Button
+                        android:id="@+id/upload"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="-2dp"
+                        android:text="photo upload"></Button>
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_login_name_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="43dp"
+                android:text="이름"
+                android:textColor="@color/medium_dark_gray"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_login_img_set" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/add_login_edit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:focusable="true"
+                android:hint="이름을 입력해주세요."
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/add_login_name_text"
+                app:layout_constraintTop_toBottomOf="@id/add_login_name_text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_login_nickname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="56dp"
+                android:text="별명"
+                android:textColor="@color/medium_dark_gray"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_login_edit" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/add_login_nickname_edit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:focusable="true"
+                android:hint="닉네임 입력해주세요!"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/add_login_nickname"
+                app:layout_constraintTop_toBottomOf="@id/add_login_nickname" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_login_sex_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="56dp"
+                android:text="성별"
+                android:textColor="@color/medium_dark_gray"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_login_nickname_edit" />
+
+            <RadioGroup
+                android:id="@+id/add_login_sex_input_set"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toEndOf="@+id/add_login_sex_text"
+                app:layout_constraintTop_toBottomOf="@id/add_login_sex_text"
+                tools:ignore="MissingConstraints">
+
+                <RadioButton
+                    android:id="@+id/add_login_male_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="남성" />
+
+                <RadioButton
+                    android:id="@+id/add_login_female_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="여성" />
+
+            </RadioGroup>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_login_save_btn"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_btn_solid_dark_gray_333333_radius_8dp"
+                android:text="가입 완료"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_login_sex_input_set" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
