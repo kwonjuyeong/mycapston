@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".CodeVerificationActivity"></activity>
         <activity
             android:name=".Main.Board.BoardTest"
             android:exported="true" />
@@ -29,6 +30,9 @@
         </activity>
         <activity
             android:name=".Login.Add_LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PhoneAuthActivity"
             android:exported="true" />
         <activity
             android:name=".Main.Activity.MainActivity"

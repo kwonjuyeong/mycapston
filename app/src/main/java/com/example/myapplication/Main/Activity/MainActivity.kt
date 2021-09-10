@@ -3,12 +3,7 @@ package com.example.myapplication.Main.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Main.Activity.DataModel
-import com.example.myapplication.Main.Activity.PhotoAdapter
+import android.view.MenuItem
 import com.example.myapplication.Main.Fragment.ChatFragment
 import com.example.myapplication.Main.Fragment.HomeFragment
 import com.example.myapplication.Main.Fragment.MapFragment
@@ -20,6 +15,7 @@ import com.kakao.sdk.common.util.Utility
 import kotlinx.android.synthetic.main.frag_home.*
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
@@ -27,23 +23,24 @@ class MainActivity : AppCompatActivity(){
     private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
 
+    //private lateinit var photoAdapter: PhotoAdapter //1
+    //private var dataList = mutableListOf<DataModel>()   //2
+
     companion object {
         const val TAG: String = "로그"
     }
 
+    val user = Firebase.auth.currentUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.d(TAG, "MainActivity - onCreate: called")
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
 
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
-        /*
-        recyclerView.layoutManager = GridLayoutManager(applicationContext, 4)
-        photoAdapter = PhotoAdapter(applicationContext)
-        recyclerView.adapter = photoAdapter
-        */
+
 
     }
 

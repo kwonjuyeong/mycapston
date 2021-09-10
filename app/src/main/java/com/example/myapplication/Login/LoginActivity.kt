@@ -1,6 +1,6 @@
 package com.example.myapplication.Login
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,13 +28,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
 
     // Firebase 인증 객체 생성
@@ -54,8 +53,8 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         //facebook SDK 앱 활성화 지원 도구 호출
-        FacebookSdk.sdkInitialize(applicationContext);
-        AppEventsLogger.activateApp(this);
+        FacebookSdk.sdkInitialize(applicationContext)
+        AppEventsLogger.activateApp(this)
         setContentView(R.layout.activity_login)
 
         // 파이어베이스 인증 객체 선언
@@ -160,7 +159,7 @@ class LoginActivity : AppCompatActivity() {
     // 구글 로그인
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        callbackManager?.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
 //        if (requestCode == GOOGLE_LOGIN_CODE && resultCode == Activity.RESULT_OK)
         if (requestCode == GOOGLE_LOGIN_CODE) {
 //            val result = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -184,14 +183,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 //    자동 로그인
-//    override fun onStart() {
-//        super.onStart()
-//        var currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
+    override fun onStart() {
+        super.onStart()
+        var currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
@@ -250,19 +249,19 @@ class LoginActivity : AppCompatActivity() {
             })
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun FirebaseAuthWithFacebook(token: AccessToken?) {
         val credential = FacebookAuthProvider.getCredential(token?.token!!)
-        auth?.signInWithCredential(credential)?.addOnCompleteListener { task ->
+        auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val userInfoDTO = UserinfoDTO()
                 val uemail = FirebaseAuth.getInstance().currentUser!!.email
                 val uid = FirebaseAuth.getInstance().currentUser!!.uid
-                val phonenumber = FirebaseAuth.getInstance().currentUser!!.phoneNumber
                 userInfoDTO.userEmail = uemail.toString()
                 userInfoDTO.UID = uid
                 userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
                 FirebaseFirestore.getInstance().collection("userid").document(uid)
-                    .set(userInfoDTO)
+                        .set(userInfoDTO)
                 facebook_sign()
             }
         }
@@ -277,6 +276,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
@@ -285,11 +285,9 @@ class LoginActivity : AppCompatActivity() {
                     val userInfoDTO = UserinfoDTO()
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
-                    val phonenumber =FirebaseAuth.getInstance().currentUser
                     userInfoDTO.userEmail = uemail.toString()
                     userInfoDTO.UID = uid
                     userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
-
                     FirebaseFirestore.getInstance().collection("userid").document(uid)
                         .set(userInfoDTO)
                     google_signIn()
@@ -329,6 +327,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     // 구글 로그인 인증
+    @SuppressLint("SimpleDateFormat")
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
@@ -338,7 +337,7 @@ class LoginActivity : AppCompatActivity() {
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
                     userInfoDTO.userEmail = uemail.toString()
-                    userInfoDTO.UID = uid
+                    userInfoDTO.UID= uid
                     userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
                     FirebaseFirestore.getInstance().collection("userid").document(uid)
                         .set(userInfoDTO)
@@ -364,9 +363,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //회원가입
+    @SuppressLint("SimpleDateFormat")
     fun createUser(login_id: String, login_pw: String) {
-        val timeStamp = SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Date())
-        val imageFileName = "JPEG_"+timeStamp+"_.png"
         if (login_Id.text.toString().length == 0 || login_Pw.text.toString().length == 0) {
             Toast.makeText(this, "email 혹은 페스워드를 반드시 입력하세요,", Toast.LENGTH_SHORT).show()
         } else {
@@ -378,14 +376,12 @@ class LoginActivity : AppCompatActivity() {
                         // 회원가입이 성공하면 firestore email 및 uid 저장
                         val userInfoDTO = UserinfoDTO()
                         val uemail = FirebaseAuth.getInstance().currentUser!!.email
-                        val uPW = login_Pw.text.toString()
                         val uid = FirebaseAuth.getInstance().currentUser!!.uid
+
 
                         userInfoDTO.userEmail = uemail.toString()
                         userInfoDTO.UID = uid
-                        userInfoDTO.userPassword = uPW
-                        userInfoDTO.signUpdate = timeStamp
-
+                        userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
 
                         // database.child("userid").child(uid).setValue(userInfoDTO)
                         //파이어스토어
@@ -393,6 +389,7 @@ class LoginActivity : AppCompatActivity() {
                         //.set(userInfoDTO)
                         FirebaseFirestore.getInstance().collection("userid").document(uid)
                             .set(userInfoDTO)
+
                         val intent = Intent(this, Add_LoginActivity::class.java)
                         startActivity(intent)
                         finish()
