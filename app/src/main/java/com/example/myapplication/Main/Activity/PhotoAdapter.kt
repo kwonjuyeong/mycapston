@@ -32,25 +32,19 @@ class PhotoAdapter(var context: Context) : RecyclerView.Adapter<PhotoAdapter.Vie
         }
 
     }
-
     // Usually involves inflating a layout from XML and returning the holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         // Inflate the custom layout
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_item_layout, parent, false)
         return ViewHolder(view)
     }
-
     // Involves populating data into the item through holder
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         // Get the data model based on position
         val data = dataList[position]
-
         // Set item views based on your views and data model
         holder.title.text = data.title
         //holder.desc.text = data.desc
-
         holder.image.setImageResource(data.image)
     }
 

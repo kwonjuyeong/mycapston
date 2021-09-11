@@ -1,3 +1,5 @@
+package com.example.myapplication.Main.Fragment
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.ChatAdapter
 import com.example.myapplication.ChatLayout
+import com.example.myapplication.Main.Fragment.HomeFragment
 import com.example.myapplication.databinding.FragmentChatBinding
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentChange
@@ -19,6 +22,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ChatFragment: Fragment() {
+    companion object {
+        const val TAG: String = "로그"
+        // 외부 호출시 메모리에 적제된 HomeFragment를 불러올수 있게함
+        fun newInstance(): ChatFragment {
+            return ChatFragment()
+        }
+    }
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
     private lateinit var currentUser: String            // 현재 닉네임
@@ -26,6 +36,8 @@ class ChatFragment: Fragment() {
     private lateinit var registration: ListenerRegistration    // 문서 수신
     private val chatList = arrayListOf<ChatLayout>()    // 리사이클러 뷰 목록
     private lateinit var adapter: ChatAdapter   // 리사이클러 뷰 어댑터
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

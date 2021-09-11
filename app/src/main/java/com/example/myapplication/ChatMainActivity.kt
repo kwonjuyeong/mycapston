@@ -1,9 +1,9 @@
 package com.example.myapplication
 
-import ChatFragment
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-
+import com.example.myapplication.Main.Fragment.ChatFragment
 import com.example.myapplication.Main.Fragment.LoginFragment
 import com.example.myapplication.databinding.ActivityMainBinding
 

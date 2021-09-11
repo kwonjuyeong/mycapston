@@ -183,14 +183,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 //    자동 로그인
-    override fun onStart() {
-        super.onStart()
-        var currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        var currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
 
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {

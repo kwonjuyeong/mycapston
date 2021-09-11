@@ -1,8 +1,8 @@
 package com.example.myapplication.Main.Fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.Main.Activity.DataModel
 import com.example.myapplication.Main.Activity.PhotoAdapter
+import com.example.myapplication.Main.Board.BoardPost
 import com.example.myapplication.R
-import com.google.api.LogDescriptor
 import kotlinx.android.synthetic.main.frag_home.*
+import kotlinx.android.synthetic.main.frag_home.view.*
 
 
 // 호출시 HomeFragment.newInstance() 를 이용해서 외부에서 호출
 class HomeFragment : Fragment() {
     companion object {
         const val TAG: String = "로그"
-
         // 외부 호출시 메모리에 적제된 HomeFragment를 불러올수 있게함
         fun newInstance(): HomeFragment {
             return HomeFragment()
@@ -32,7 +32,9 @@ class HomeFragment : Fragment() {
     // 메모리에 적제 되었을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
+
 
     // Activity 안에 Fragment가 들어가게 되는데, onAttach가 Fragment와 Activity에 붙게됨(의존)
     // 프레그먼트를 안고 있는 액티비티에 붙었을 때
@@ -42,17 +44,23 @@ class HomeFragment : Fragment() {
 
     // 뷰가 생성되었을때
     // 프레그먼트와 레이아웃을 연결시켜주는 부분
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?
     ): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.frag_home, container, false)
         //  inflater 레이아웃과 frag를 연결해줌
 
+        view.btn_board.setOnClickListener {
+            GoBorad()
+        }
+
 
         return view
+    }
+    fun GoBorad(){
+        var intent = Intent(requireActivity(), BoardPost::class.java)
+        startActivity(intent)
+
     }
 
 
@@ -72,8 +80,6 @@ class HomeFragment : Fragment() {
         dataList.add(DataModel("일식", R.drawable.sushi))
 
         photoAdapter.setDataList(dataList)
-
-
 
     }
 }
