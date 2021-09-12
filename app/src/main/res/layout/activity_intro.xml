@@ -9,7 +9,7 @@
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/imageFilterView"
         android:layout_width="250dp"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:src="@drawable/intro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
