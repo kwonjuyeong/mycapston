@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main.Board.Detail.BoardDetail">
+
+    <RelativeLayout
+        android:id="@+id/boardCheck_top"
+        android:layout_width="match_parent"
+        android:background="#ff9424"
+        android:layout_height="50dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/add_login_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20.83dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/boardCheck_center"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/boardCheck_top">
+
+        <!--        <androidx.fragment.app.FragmentContainerView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginLeft="15dp"-->
+        <!--            android:layout_marginTop="15dp"-->
+        <!--            android:layout_marginRight="15dp"-->
+        <!--            android:layout_marginBottom="15dp">-->
+        <!--        </androidx.fragment.app.FragmentContainerView>-->
+        <ImageView
+            android:id="@+id/boardCheck_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/boradCheck_nickname"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/boardCheck_profile"
+            android:hint="nickname" />
+
+        <TextView
+            android:id="@+id/boradCheck_title"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/boradCheck_nickname"
+            android:hint="date" />
+
+        <TextView
+            android:id="@+id/boradCheck_date"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/boradCheck_nickname"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/boardCheck_profile"
+            android:hint="nickname" />
+
+
+        <TextView
+            android:id="@+id/boardCheck_contents"
+            android:layout_width="378dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/boardCheck_profile"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="게시글 텍스트 부분" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/boardCheck_image_layout"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_below="@+id/boardCheck_center"
+        android:layout_marginTop="1dp">
+
+
+        <ImageView
+            android:id="@+id/boardCheck_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/chat" />
+
+        <TextView
+            android:id="@+id/board_explain"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/boardCheck_image"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@+id/boardCheck_image"
+            android:hint="사진 설명" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/BoardCheck_like"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/boardCheck_image_layout"
+        android:layout_marginLeft="15dp"
+
+        android:src="@drawable/favorite_border" />
+
+    <ImageView
+        android:id="@+id/BoardCheck_commend"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/boardCheck_image_layout"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/BoardCheck_like"
+        android:src="@drawable/chat" />
+
+</RelativeLayout>
