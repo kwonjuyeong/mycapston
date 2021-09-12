@@ -14,22 +14,38 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/login_viewPager"
             android:layout_width="match_parent"
-            android:layout_height="200dp"></androidx.viewpager.widget.ViewPager>
+            android:layout_height="200dp"
+            ></androidx.viewpager.widget.ViewPager>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="160dp"
             android:layout_gravity="center"
-            android:text="@string/togethertext"
-            android:textColor="@color/little_blue"
-            android:textSize="100dp"
-            android:textStyle="bold" />
+            android:background="@drawable/round_btn"
+            android:gravity="center"
+            android:text="함께"
+            android:textColor="#ffffff"
+            android:textSize="80dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/jalnan"
+            />
     </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/login_introduce_text"
+        android:layout_width="370dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/jalnan"
+        android:text="함께와 같이 먹을 준비 되셨나요?\n로그인 해주세요!"
+        android:textColor="@color/strong_dark_gray"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/login_viewPager" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,21 +53,26 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/login_introduce_text"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/jalnan"
             android:text="ID" />
 
         <EditText
             android:id="@+id/login_Id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jalnan"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/jalnan"
             android:text="@string/password" />
 
         <EditText
@@ -59,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:fontFamily="@font/jalnan"
             android:autofillHints="" />
     </LinearLayout>
 
@@ -67,13 +89,17 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/login_Pw">
 
         <Button
             android:id="@+id/bt_login"
-            android:layout_width="180dp"
+            android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:text="@string/loginbtn"
+            android:background="@drawable/signiture_btn"
+            android:textColor="@color/medium_dark_gray"
+            android:fontFamily="@font/jalnan"
             android:theme="@style/ButtonStyle" />
 
         <View
@@ -83,10 +109,13 @@
 
         <Button
             android:id="@+id/bt_signup"
-            android:layout_width="193dp"
+            android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="회원가입"
+            android:textColor="@color/medium_dark_gray"
+            android:background="@drawable/signiture_btn"
+            android:fontFamily="@font/jalnan"
             android:theme="@style/ButtonStyle"
 
             />
@@ -97,20 +126,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/facebookSignInBtn"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="0dp"
-            android:background="@drawable/facebook_login"
-            android:text="Facebook에서 로그인"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
         <Button
             android:id="@+id/kakao_login_button"
             android:layout_width="match_parent"
@@ -120,8 +137,21 @@
             android:layout_marginBottom="0dp"
             android:background="@drawable/kakao_login_large_wide"
             android:text="Kakao에서 로그인"
-            android:textColor="#3A1D1D"
-            android:textStyle="bold" />
+            android:fontFamily="@font/jalnan"
+            android:textColor="#3A1D1D" />
+        <Button
+            android:id="@+id/facebookSignInBtn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/facebook_login"
+            android:text="Facebook에서 로그인"
+            android:fontFamily="@font/jalnan"
+            android:textColor="#FFFFFF" />
+
+
 
         <Button
             android:id="@+id/signin_googleButton"
@@ -132,8 +162,9 @@
             android:layout_marginBottom="0dp"
             android:background="@drawable/google_login"
             android:text="Google 에서 로그인"
+            android:fontFamily="@font/jalnan"
             android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+             />
 
 
     </LinearLayout>
