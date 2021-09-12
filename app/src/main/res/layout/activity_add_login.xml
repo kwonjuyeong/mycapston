@@ -40,6 +40,7 @@
                 android:text="@string/add_login_text"
                 android:textColor="@color/medium_dark_gray"
                 android:textSize="16dp"
+                android:fontFamily="@font/jalnan"
                 app:layout_constraintBottom_toBottomOf="@id/add_login_cancel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +64,8 @@
                 android:layout_marginTop="40dp"
                 android:text="회원 정보"
                 android:textColor="@color/medium_dark_gray"
+
+                android:fontFamily="@font/jalnan"
                 android:textSize="21sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/phone_auth_view_top" />
@@ -74,6 +77,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:text="회원정보를 입력해주세요! 감사합니다."
+                android:fontFamily="@font/jalnan"
                 android:textColor="@color/strong_dark_gray"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,6 +115,7 @@
                         android:layout_gravity="center"
                         android:hint="image description"
                         android:importantForAutofill="no"
+                        android:fontFamily="@font/jalnan"
                         android:textSize="16dp"></EditText>
 
                     <Button
@@ -121,6 +126,7 @@
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="-2dp"
                         android:background="@drawable/signiture_btn"
+                        android:fontFamily="@font/jalnan"
                         android:text="photo upload"></Button>
                 </LinearLayout>
             </LinearLayout>
@@ -132,6 +138,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="43dp"
                 android:text="이름"
+                android:fontFamily="@font/jalnan"
                 android:textColor="@color/medium_dark_gray"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -145,6 +152,7 @@
                 android:layout_marginEnd="20dp"
                 android:focusable="true"
                 android:hint="이름을 입력해주세요."
+                android:fontFamily="@font/jalnan"
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/add_login_name_text"
@@ -152,13 +160,14 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/add_login_nickname"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="56dp"
                 android:text="별명"
                 android:textColor="@color/medium_dark_gray"
                 android:textSize="15dp"
+                android:fontFamily="@font/jalnan"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/add_login_edit" />
 
@@ -171,6 +180,7 @@
                 android:focusable="true"
                 android:hint="닉네임을 입력해주세요."
                 android:textSize="16dp"
+                android:fontFamily="@font/jalnan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/add_login_nickname"
                 app:layout_constraintTop_toBottomOf="@id/add_login_nickname" />
@@ -182,6 +192,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="56dp"
                 android:text="성별"
+                android:fontFamily="@font/jalnan"
                 android:textColor="@color/medium_dark_gray"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -202,12 +213,14 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:fontFamily="@font/jalnan"
                     android:text="남성" />
 
                 <RadioButton
                     android:id="@+id/add_login_female_btn"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/jalnan"
                     android:layout_gravity="left"
                     android:text="여성" />
 
@@ -221,6 +234,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/signiture_btn"
                 android:text="가입 완료"
+                android:fontFamily="@font/jalnan"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="16dp"
