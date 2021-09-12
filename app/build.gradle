@@ -92,6 +92,9 @@ dependencies {
     //face login
     implementation 'com.facebook.android:facebook-login:[8.1)'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //로티 애니메이션
+    implementation "com.airbnb.android:lottie:4.1.0"
 }
 
 apply plugin: 'com.google.gms.google-services'

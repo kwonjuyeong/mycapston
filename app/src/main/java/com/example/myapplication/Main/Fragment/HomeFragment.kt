@@ -1,11 +1,14 @@
 package com.example.myapplication.Main.Fragment
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.Main.Activity.DataModel
@@ -13,6 +16,8 @@ import com.example.myapplication.Main.Activity.PhotoAdapter
 import com.example.myapplication.R
 import com.google.api.LogDescriptor
 import kotlinx.android.synthetic.main.frag_home.*
+
+
 
 
 // 호출시 HomeFragment.newInstance() 를 이용해서 외부에서 호출
@@ -58,6 +63,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        fun startActivity(activity: Activity) {
+            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)//위 아래 애니메이션코드
+        }
+
+
+
+
         recyclerView.layoutManager = GridLayoutManager( requireContext(), 4)
         photoAdapter = PhotoAdapter( requireContext())
         recyclerView.adapter = photoAdapter

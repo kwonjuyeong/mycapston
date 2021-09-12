@@ -53,7 +53,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
-        super.onCreate(savedInstanceState)
+
+
+
+        super.onCreate(savedInstanceState)   //애니메이션 오른->왼
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)
         //facebook SDK 앱 활성화 지원 도구 호출
         FacebookSdk.sdkInitialize(applicationContext);
         AppEventsLogger.activateApp(this);
