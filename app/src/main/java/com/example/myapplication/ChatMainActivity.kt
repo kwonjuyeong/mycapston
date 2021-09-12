@@ -4,7 +4,7 @@ package com.example.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Main.Fragment.ChatFragment
-import com.example.myapplication.Main.Fragment.LoginFragment
+
 import com.example.myapplication.databinding.ActivityMainBinding
 
 class ChatMainActivity : AppCompatActivity() {
@@ -17,9 +17,9 @@ class ChatMainActivity : AppCompatActivity() {
         setContentView(view)
 
         // 앱 구동시 LoginFragment 표시
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.layout_frame, LoginFragment())
-            .commit()
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.layout_frame, LoginFragment())
+//            .commit()
     }
 
     // ChatFragment로 프래그먼트 교체 (LoginFragment에서 호출할 예정)

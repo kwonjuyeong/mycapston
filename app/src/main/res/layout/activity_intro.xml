@@ -6,11 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".Intro">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="185dp"
-        android:layout_height="135dp"
-        android:text="intro"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="211dp" />
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView"
+        android:layout_width="250dp"
+        android:layout_height="300dp"
+        android:src="@drawable/intro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

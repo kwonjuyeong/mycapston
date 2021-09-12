@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Main.Activity.DataModel
 import com.example.myapplication.Main.Activity.PhotoAdapter
-import com.example.myapplication.Main.Fragment.ChatFragment
-import com.example.myapplication.Main.Fragment.HomeFragment
-import com.example.myapplication.Main.Fragment.MapFragment
-import com.example.myapplication.Main.Fragment.SettingFragment
+import com.example.myapplication.Main.Fragment.*
+import com.example.myapplication.Main.Fragment.BoardFrgment.BoardFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -28,6 +26,7 @@ class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
     private lateinit var mapFragment: ContactUsFragment
+    private lateinit var boardFragment : BoardFragment
     private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
 //    private lateinit var boardFragment: BoardFragment
@@ -46,11 +45,11 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
 
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            1
-        )
+//        ActivityCompat.requestPermissions(
+//            this,
+//            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+//            1
+//        )
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
 
@@ -68,19 +67,17 @@ class MainActivity : AppCompatActivity(){
 
             when (it.itemId) {
                 R.id.action_home -> {
-                    Log.e("main", datalist.toString() )
                     homeFragment = HomeFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, homeFragment).commit()
                 }
                 R.id.action_Map -> {
-                    mapFragment = MapFragment.newInstance()
+                    mapFragment = ContactUsFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, mapFragment).commit()
                 }
                 R.id.action_board -> {
                     // 사진을 가져올 수 있는지 확인 하는 작업
-
                     boardFragment = BoardFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, boardFragment).commit()

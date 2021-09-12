@@ -8,7 +8,6 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 갤러리 사용 권한 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -38,9 +37,9 @@
 
         <!--            android:value="@string/google_maps_key" />-->
 
-        <activity
-            android:name=".Main.Board.BoardDetail"
-            android:exported="true" />
+<!--        <activity-->
+<!--            android:name=".Main.Board.BoardDetail"-->
+<!--            android:exported="true" />-->
         <activity
             android:name=".Main.Board.CheckBoard"
             android:exported="true" />
@@ -53,6 +52,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -99,12 +99,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MyPage"
-            android:exported="true" />
-        <activity
-            android:name=".image"
-            android:exported="true" />
         <activity
             android:name=".ChatMainActivity"
             android:exported="true" />

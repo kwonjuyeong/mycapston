@@ -24,16 +24,20 @@ class BoardFragment : Fragment() {
 
     //private lateinit var boardlistadapter : BoardListAdapter
     private var datalist = mutableListOf<BoardDTO>()
+    private var contentsUid : ArrayList<String> = arrayListOf()
     private var firestore = FirebaseFirestore.getInstance()
 
     private fun getBoarddata() {
 
         firestore.collection("Board").orderBy("timestamp")
-            .addSnapshotListener { querySnapthot, firebaseFirestoreException ->
+            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 datalist.clear()    //   초기화
-                for (snapshot in querySnapthot!!.documents) {
+                contentsUid.clear()
+                if (querySnapshot == null) return@addSnapshotListener
+                for (snapshot in querySnapshot!!.documents) {
                     var item = snapshot.toObject(BoardDTO::class.java)
                     datalist.add(item!!)
+                    contentsUid.add(snapshot.id)
                     board_fagement_recycler_view.adapter!!.notifyDataSetChanged()
                 }
             }
@@ -80,7 +84,7 @@ class BoardFragment : Fragment() {
             activity?.runOnUiThread() {
                 Thread.sleep(500)
                 layoutManager = LinearLayoutManager(requireContext())
-                boardlistadapter = BoardListAdapter(datalist)
+                boardlistadapter = BoardListAdapter(datalist,contentsUid)
 //            boardlistadapter.notifyItemRangeInserted()
                 adapter = boardlistadapter
             }

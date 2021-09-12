@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,7 +29,6 @@ class BoardPost : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
 
-
         //fireStorage 초기화
         storage = FirebaseStorage.getInstance()
         //fireStore Database
@@ -44,6 +44,7 @@ class BoardPost : AppCompatActivity() {
         }
         btn_write.setOnClickListener {
             boardUpload()
+            startActivity(Intent(this, BoardDetail::class.java))
         }
     }
 
@@ -91,9 +92,8 @@ class BoardPost : AppCompatActivity() {
             FirebaseFirestore.getInstance().collection("Board").document()
                 .set(boardDTO)
             setResult(RESULT_OK)
+
             finish()
         }
-
-
     }
 }

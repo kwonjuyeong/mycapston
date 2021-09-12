@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.myapplication.DTO.Add_UserInfo
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Activity.MainActivity
 //import com.example.myapplication.PhoneAuthActivity
@@ -55,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)
         super.onCreate(savedInstanceState)
         //facebook SDK 앱 활성화 지원 도구 호출
         FacebookSdk.sdkInitialize(applicationContext)

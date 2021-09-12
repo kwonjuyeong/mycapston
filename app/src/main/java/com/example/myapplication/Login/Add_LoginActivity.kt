@@ -1,8 +1,11 @@
 package com.example.myapplication.Login
 
-import android.app.PendingIntent
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.media.Image
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_add_login.*
+import kotlinx.android.synthetic.main.view_item_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,11 +46,6 @@ class Add_LoginActivity : AppCompatActivity() {
         // ACTION_GET_CONTENT : YOU CAN CHOOSE SOMETHING BASED ON MIME type
         // or ACTION_PICK
 
-
-//        var photoPickerInetet = Intent(Intent.ACTION_GET_CONTENT)
-//        photoPickerInetet.type = "image/*"
-//        startActivityForResult(photoPickerInetet,PICK_IMAGE_FROM_ALBUM)
-
         //이미지 업로드 이벤트 처리
         upload.setOnClickListener{
 
@@ -67,8 +66,9 @@ class Add_LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+//        photoUri = Uri.parse("android.resource://com.example.myapplication/ic_baseline_account_circle_24")
         if(requestCode == PICK_IMAGE_FROM_ALBUM){
-            photoUri = data?.data
+            photoUri = data?.data!!
             upload_image.setImageURI(photoUri)
         }else{
             finish()
@@ -82,17 +82,12 @@ class Add_LoginActivity : AppCompatActivity() {
         val storageRef = storage?.reference?.child("Profiles")?.child(imageFileName)
         // storageRef?.putFile()의 반환값은 StorageTask
         storageRef?.putFile(photoUri!!)?.addOnSuccessListener { taskSnapshot ->
-
-            // 확인 Toast, 올라가면 지워야함
-            Toast.makeText(this,"업로드 성공",Toast.LENGTH_SHORT).show()
-
             //firebase Strage 서버에 저장된 파일 다운로드 URL 가져옴
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 var uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-                // 버튼 위에 있는 x텍스트 업로드 추가해야함
                 var UR = uri.toString()
-                var NM = nick_name.text.toString()
+                var NM = add_login_nickname_edit.text.toString()
                 var profile_timestamp = System.currentTimeMillis()
 
                 firestore?.collection("userid")?.document(uid)?.update(mapOf(
@@ -102,7 +97,6 @@ class Add_LoginActivity : AppCompatActivity() {
                 ))
                 setResult(RESULT_OK)
                 finish()
-
             }
         }
             ?.addOnFailureListener({

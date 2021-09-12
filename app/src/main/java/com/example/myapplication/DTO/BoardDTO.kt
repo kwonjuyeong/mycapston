@@ -1,8 +1,8 @@
 package com.example.myapplication.DTO
 
 data class BoardDTO(
-    var uid : String? =null,
     var contents : String? = null,
+    var uid : String? =null,
     var postTitle : String? = null,
     var Writed_date : String? = null,
     var imageUrlWrite : String? = null,

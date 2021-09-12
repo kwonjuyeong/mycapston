@@ -10,6 +10,7 @@ class Intro : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
+
         val thread = Thread(Runnable {
             Thread.sleep(1000)
             val intent = Intent(this, LoginActivity::class.java)
