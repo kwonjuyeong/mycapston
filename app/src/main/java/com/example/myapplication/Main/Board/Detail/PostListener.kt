@@ -4,4 +4,5 @@ import com.example.myapplication.DTO.BoardDTO
 
 interface PostListener {
     fun loadPage(noti : BoardDTO)
+    fun getData(listener: PostListener, chooseUid : String)
 }

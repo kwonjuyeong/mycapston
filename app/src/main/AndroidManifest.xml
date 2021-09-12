@@ -37,11 +37,8 @@
 
         <!--            android:value="@string/google_maps_key" />-->
 
-<!--        <activity-->
-<!--            android:name=".Main.Board.BoardDetail"-->
-<!--            android:exported="true" />-->
         <activity
-            android:name=".Main.Board.CheckBoard"
+            android:name=".Main.Board.Detail.BoardDetail"
             android:exported="true" />
         <activity
             android:name=".Main.Board.BoardPost"
