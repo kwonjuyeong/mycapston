@@ -21,6 +21,5 @@
     <string name="sendVerificationCodeButton">인증하기</string>
     <string name="phoneNumberInput">01012345678</string>
     <string name="add_login_text">회원가입</string>
-    <string name="title_activity_delete">delete</string>
-    <string name="title_activity_delete2">delete2</string>
+    <string name="title_activity_google_maps">Map</string>
 </resources>

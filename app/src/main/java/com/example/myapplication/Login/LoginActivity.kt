@@ -1,13 +1,16 @@
 package com.example.myapplication.Login
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.myapplication.DTO.Add_UserInfo
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Activity.MainActivity
+//import com.example.myapplication.PhoneAuthActivity
 import com.example.myapplication.R
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
@@ -28,8 +31,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -168,6 +173,7 @@ class LoginActivity : AppCompatActivity() {
                 // result.isSuccessful이 문제
 
                 val account = task.getResult(ApiException::class.java)
+                Toast.makeText(this, "구글1", Toast.LENGTH_SHORT).show()
                 firebaseAuthWithGoogle(account.idToken!!)
 
 //                if (result.isSuccessful) {
@@ -181,17 +187,17 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
+/*
 //    자동 로그인
-//    override fun onStart() {
-//        super.onStart()
-//        var currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
-
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
+*/
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
         if (login_id.isEmpty())
@@ -278,10 +284,12 @@ class LoginActivity : AppCompatActivity() {
 
     @SuppressLint("SimpleDateFormat")
     private fun firebaseAuthWithGoogle(idToken: String) {
+        Toast.makeText(this, "구글3", Toast.LENGTH_SHORT).show()
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Toast.makeText(this, "구글4", Toast.LENGTH_SHORT).show()
                     val userInfoDTO = UserinfoDTO()
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -391,6 +399,8 @@ class LoginActivity : AppCompatActivity() {
                             .set(userInfoDTO)
 
                         val intent = Intent(this, Add_LoginActivity::class.java)
+                        //휴대폰 인증 페이지
+                        // val intent = Intent(this, PhoneAuthActivity::class.java)
                         startActivity(intent)
                         finish()
 

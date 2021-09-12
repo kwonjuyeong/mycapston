@@ -5,10 +5,13 @@ import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.app.ActivityCompat
-import com.example.myapplication.DTO.BoardDTO
-import com.example.myapplication.Main.Fragment.*
-import com.example.myapplication.Main.Fragment.BoardFrgment.BoardFragment
+import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Main.Activity.DataModel
+import com.example.myapplication.Main.Activity.PhotoAdapter
 import com.example.myapplication.Main.Fragment.ChatFragment
 import com.example.myapplication.Main.Fragment.HomeFragment
 import com.example.myapplication.Main.Fragment.MapFragment
@@ -24,13 +27,15 @@ import com.google.firebase.firestore.FirebaseFirestore as FirebaseFirestore
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
-    private lateinit var mapFragment: MapFragment
+    private lateinit var mapFragment: ContactUsFragment
     private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
-    private lateinit var boardFragment: BoardFragment
-    private var datalist = mutableListOf<BoardDTO>()
-    var bundle = Bundle()
+//    private lateinit var boardFragment: BoardFragment
+//    private var datalist = mutableListOf<BoardDTO>()
+//    var bundle = Bundle()
 
+    //private lateinit var photoAdapter: PhotoAdapter //1
+    //private var dataList = mutableListOf<DataModel>()   //2
 
     companion object {
         const val TAG: String = "로그"

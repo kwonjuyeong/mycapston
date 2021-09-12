@@ -8,6 +8,7 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 갤러리 사용 권한 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -33,12 +34,9 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+        android:value="AIzaSyAV6anFUmlCUpyoJe6W7vcdacxiNnR6lVA"/>
 
-        <activity
-            android:name=".Login.delete2"
-            android:exported="true"
-            android:label="@string/title_activity_delete2" />
+        <!--            android:value="@string/google_maps_key" />-->
 
         <activity
             android:name=".Main.Board.BoardDetail"
@@ -55,13 +53,15 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Login.Add_LoginActivity"
             android:exported="true" />
+       <!-- <activity
+            android:name=".PhoneAuthActivity"
+            android:exported="true" />-->
         <activity
             android:name=".Main.Activity.MainActivity"
             android:exported="true" />
@@ -71,10 +71,8 @@
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data
                     android:host="oauth"
                     android:scheme="kakao3da70c39cd53659cbfbf903ffd33273b" />

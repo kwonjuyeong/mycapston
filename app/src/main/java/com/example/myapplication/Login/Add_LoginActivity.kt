@@ -1,11 +1,12 @@
 package com.example.myapplication.Login
 
-import android.Manifest
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -13,14 +14,12 @@ import com.example.myapplication.Main.Activity.MainActivity
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_add_login.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class Add_LoginActivity : AppCompatActivity() {
-
     private lateinit var auth : FirebaseAuth
     var PICK_IMAGE_FROM_ALBUM = 1
     var photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
@@ -43,8 +42,13 @@ class Add_LoginActivity : AppCompatActivity() {
         // ACTION_GET_CONTENT : YOU CAN CHOOSE SOMETHING BASED ON MIME type
         // or ACTION_PICK
 
+
+//        var photoPickerInetet = Intent(Intent.ACTION_GET_CONTENT)
+//        photoPickerInetet.type = "image/*"
+//        startActivityForResult(photoPickerInetet,PICK_IMAGE_FROM_ALBUM)
+
         //이미지 업로드 이벤트 처리
-        upload_image.setOnClickListener{
+        upload.setOnClickListener{
 
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
             photoPickerIntent.type = "image/*"
@@ -74,7 +78,6 @@ class Add_LoginActivity : AppCompatActivity() {
         //ProgressBar <<< 효과 넣을지 말지? 살짝 구시대적 ui
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName = "JPEG_"+timeStamp+"_.png"
-        val Ref = firestore?.collection("userid")
         // images/(imageFilename) 위치를 가리키는 참조 변수-> 를 putFile로 storage서버에 업로드
         val storageRef = storage?.reference?.child("Profiles")?.child(imageFileName)
         // storageRef?.putFile()의 반환값은 StorageTask
@@ -87,6 +90,7 @@ class Add_LoginActivity : AppCompatActivity() {
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 var uid = FirebaseAuth.getInstance().currentUser!!.uid
 
+                // 버튼 위에 있는 x텍스트 업로드 추가해야함
                 var UR = uri.toString()
                 var NM = nick_name.text.toString()
                 var profile_timestamp = System.currentTimeMillis()
@@ -98,6 +102,7 @@ class Add_LoginActivity : AppCompatActivity() {
                 ))
                 setResult(RESULT_OK)
                 finish()
+
             }
         }
             ?.addOnFailureListener({
