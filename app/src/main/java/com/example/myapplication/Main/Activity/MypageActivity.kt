@@ -1,22 +1,23 @@
-package com.example.myapplication
+package com.example.myapplication.Main.Activity
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.Login.LoginActivity
+import com.example.myapplication.R
+import kotlinx.android.synthetic.main.activity_new_mypage.*
 
-class Intro : AppCompatActivity() {
+class MypageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
+        setContentView(R.layout.activity_new_mypage)
 
-
-        val thread = Thread(Runnable {
-            Thread.sleep(3000)
+        button_logout.setOnClickListener({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
-        }).start()
+        })
+
+
+
     }
-}
+    }

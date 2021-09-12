@@ -24,6 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:queryHint="검색어를 입력하시오">
 
+
     </SearchView>
 
     <LinearLayout
@@ -45,41 +46,8 @@
             android:text="@string/main_page"
             android:textAlignment="center"
             android:textSize="20sp" />
-
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout10"
-        android:layout_width="0dp"
-        android:layout_height="0dp" 
-        android:layout_marginBottom="601dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_board"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="56dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:src="@tools:sample/avatars" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout11"
-        android:layout_width="0dp"
-        android:layout_height="380dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -96,6 +64,47 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#FFFF0000" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="200dp"
+            android:background="#FFFF0000" />
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout15"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view">
+
+
+        <TextView
+            android:id="@+id/recommend_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:text="~님 오늘은 치킨각!"
+            android:textColor="#F44336"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
             android:layout_height="match_parent"
             android:layout_marginRight="15dp" />
 

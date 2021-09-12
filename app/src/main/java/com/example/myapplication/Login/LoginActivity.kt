@@ -172,7 +172,6 @@ class LoginActivity : AppCompatActivity() {
                 // result.isSuccessful이 문제
 
                 val account = task.getResult(ApiException::class.java)
-                Toast.makeText(this, "구글1", Toast.LENGTH_SHORT).show()
                 firebaseAuthWithGoogle(account.idToken!!)
 
 //                if (result.isSuccessful) {
@@ -283,12 +282,10 @@ class LoginActivity : AppCompatActivity() {
 
     @SuppressLint("SimpleDateFormat")
     private fun firebaseAuthWithGoogle(idToken: String) {
-        Toast.makeText(this, "구글3", Toast.LENGTH_SHORT).show()
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "구글4", Toast.LENGTH_SHORT).show()
                     val userInfoDTO = UserinfoDTO()
                     val uemail = FirebaseAuth.getInstance().currentUser!!.email
                     val uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -396,7 +393,6 @@ class LoginActivity : AppCompatActivity() {
                         //.set(userInfoDTO)
                         FirebaseFirestore.getInstance().collection("userid").document(uid)
                             .set(userInfoDTO)
-
                         val intent = Intent(this, Add_LoginActivity::class.java)
                         //휴대폰 인증 페이지
                         // val intent = Intent(this, PhoneAuthActivity::class.java)
