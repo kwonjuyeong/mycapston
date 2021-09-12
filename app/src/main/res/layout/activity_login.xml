@@ -41,7 +41,7 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:fontFamily="@font/jalnan"
-        android:text="함께와 같이 먹을 준비 되셨나요?\n로그인 해주세요!"
+        android:text="''함께''와 같이 먹을 준비 되셨나요?\n로그인 해주세요!"
         android:textColor="@color/strong_dark_gray"
         android:textSize="16dp"
         android:textStyle="bold"
@@ -85,12 +85,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/login_btn_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/login_Pw">
+        app:layout_constraintBottom_toBottomOf="@id/login_Pw"
+        tools:ignore="InvalidId">
 
         <Button
             android:id="@+id/bt_login"
@@ -112,25 +114,26 @@
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="회원가입"
-            android:textColor="@color/medium_dark_gray"
             android:background="@drawable/signiture_btn"
             android:fontFamily="@font/jalnan"
+            android:text="회원가입"
+            android:textColor="@color/medium_dark_gray"
             android:theme="@style/ButtonStyle"
 
             />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="354dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_width="400dp"
+        android:layout_height="190dp"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/login_btn_layout"
         android:orientation="vertical">
         <Button
             android:id="@+id/kakao_login_button"
-            android:layout_width="match_parent"
+            android:layout_width="380dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
@@ -141,7 +144,7 @@
             android:textColor="#3A1D1D" />
         <Button
             android:id="@+id/facebookSignInBtn"
-            android:layout_width="match_parent"
+            android:layout_width="380dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
@@ -155,7 +158,7 @@
 
         <Button
             android:id="@+id/signin_googleButton"
-            android:layout_width="match_parent"
+            android:layout_width="380dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
