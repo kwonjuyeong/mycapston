@@ -1,6 +1,7 @@
 package com.example.myapplication.Main.Activity
 
 
+import ChatFragment
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity(){
                         .replace(R.id.frame_container, boardFragment).commit()
                 }
                 R.id.action_chat -> {
-                    chatFragment = ChatFragment.newInstance()
+//                    chatFragment = ChatFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, chatFragment).commit()
                 }
