@@ -1,14 +1,13 @@
 package com.example.myapplication.Login
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.myapplication.DTO.Add_UserInfo
 import com.example.myapplication.DTO.UserinfoDTO
+import com.example.myapplication.Main.Fragment.MapFragment
 import com.example.myapplication.Main.Activity.MainActivity
 //import com.example.myapplication.PhoneAuthActivity
 import com.example.myapplication.R
@@ -31,10 +30,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -363,7 +360,8 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "로그인 성공입니다.", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
+                    //val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, MapFragment::class.java)
                     startActivity(intent)
                 } else
                     Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
@@ -401,7 +399,7 @@ class LoginActivity : AppCompatActivity() {
                         FirebaseFirestore.getInstance().collection("userid").document(uid)
                             .set(userInfoDTO)
 
-                        val intent = Intent(this, Add_LoginActivity::class.java)
+                        val intent = Intent(this, MainActivity::class.java)
                         //휴대폰 인증 페이지
                         // val intent = Intent(this, PhoneAuthActivity::class.java)
                         startActivity(intent)

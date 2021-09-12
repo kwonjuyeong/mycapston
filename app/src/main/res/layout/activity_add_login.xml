@@ -64,7 +64,6 @@
                 android:layout_marginTop="40dp"
                 android:text="회원 정보"
                 android:textColor="@color/medium_dark_gray"
-
                 android:fontFamily="@font/jalnan"
                 android:textSize="21sp"
                 app:layout_constraintStart_toStartOf="parent"

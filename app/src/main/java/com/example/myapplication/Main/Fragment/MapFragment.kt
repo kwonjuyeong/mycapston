@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
-import com.google.api.LogDescriptor
 
 // 호출시 HomeFragment.newInstance() 를 이용해서 외부에서 호출
 class MapFragment : Fragment(){
@@ -16,7 +15,7 @@ class MapFragment : Fragment(){
         const val TAG : String ="로그"
 
         // 외부 호출시 메모리에 적제된 HomeFragment를 불러올수 있게함
-        fun newInstance() : MapFragment{
+        fun newInstance() : MapFragment {
             return MapFragment()
         }
     }

@@ -50,7 +50,7 @@ class Add_LoginActivity : AppCompatActivity() {
 
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
             photoPickerIntent.type = "image/*"
-            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+           // startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
         }
         upload.setOnClickListener{
             contentUpload()
@@ -78,7 +78,7 @@ class Add_LoginActivity : AppCompatActivity() {
         // images/(imageFilename) 위치를 가리키는 참조 변수-> 를 putFile로 storage서버에 업로드
         val storageRef = storage?.reference?.child("images")?.child(imageFileName)
         // storageRef?.putFile()의 반환값은 StorageTask
-        storageRef?.putFile(photoUri!!)?.addOnSuccessListener { taskSnapshot ->
+        storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
 
             // 확인 Toast, 올라가면 지워야함
             Toast.makeText(this,"업로드 성공",Toast.LENGTH_SHORT).show()
@@ -87,6 +87,9 @@ class Add_LoginActivity : AppCompatActivity() {
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 val userinfoDTO = Add_UserInfo()
 
+
+                userinfoDTO.nickname = add_login_nickname_edit.toString()
+                userinfoDTO.name = add_login_name_text.toString()
                 userinfoDTO.uid = auth?.currentUser?.uid
                 userinfoDTO.userId = auth?.currentUser?.email
                 userinfoDTO.photoUrl = uri.toString()

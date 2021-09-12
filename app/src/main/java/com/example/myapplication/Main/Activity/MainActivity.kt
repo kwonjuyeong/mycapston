@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Main.Activity.DataModel
 import com.example.myapplication.Main.Activity.PhotoAdapter
-import com.example.myapplication.Main.Fragment.ChatFragment
-import com.example.myapplication.Main.Fragment.HomeFragment
-import com.example.myapplication.Main.Fragment.MapFragment
-import com.example.myapplication.Main.Fragment.SettingFragment
+import com.example.myapplication.Main.Fragment.*
+import com.example.myapplication.Main.Fragment.MapFragment.Companion.newInstance
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
@@ -27,7 +25,7 @@ import kotlinx.android.synthetic.main.frag_home.*
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
-    private lateinit var mapFragment: MapFragment
+    private lateinit var mapFragment: ContactUsFragment
     private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
 
@@ -79,7 +77,8 @@ class MainActivity : AppCompatActivity(){
                 supportFragmentManager.beginTransaction().replace(R.id.frame_container, homeFragment).commit()
             }
             R.id.action_Map -> {
-                mapFragment= MapFragment.newInstance()
+               //mapFragment= MapFragment.newInstance()
+                mapFragment= ContactUsFragment.newInstance()
                 supportFragmentManager.beginTransaction().replace(R.id.frame_container, mapFragment).commit()
             }
             R.id.action_chat -> {
