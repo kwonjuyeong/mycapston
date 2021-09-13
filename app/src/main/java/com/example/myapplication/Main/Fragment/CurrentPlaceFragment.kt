@@ -13,21 +13,26 @@ import com.example.myapplication.R
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+
 import com.google.android.gms.maps.model.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CurrentPlaceFragment : AppCompatActivity(), OnMapReadyCallback {
+class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
 
     companion object {
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
@@ -59,8 +64,8 @@ class CurrentPlaceFragment : AppCompatActivity(), OnMapReadyCallback {
             mCurrentLocatiion = it.getParcelable(KEY_LOCATION)
             mCameraPosition = it.getParcelable(KEY_CAMERA_POSITION)
         }
-        setContentView(R.layout.activity_now_my_place)
-        mContext = this@CurrentPlaceFragment
+
+        mContext = requireContext()
 
         locationRequest = LocationRequest()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) // 정확도를 최우선적으로 고려
@@ -70,11 +75,21 @@ class CurrentPlaceFragment : AppCompatActivity(), OnMapReadyCallback {
         builder.addLocationRequest(locationRequest)
 
         // Construct a FusedLocationProviderClient.
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext)
 
-        // Build the map.
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.realtime_map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        // Build the map. - Fragment에서는 필요없음
+        //val mapFragment =findFragmentById(R.id.realtime_map) as SupportMapFragment
+        //mapFragment.getMapAsync(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        var main_view = inflater.inflate(R.layout.activity_now_my_place,container,false)
+
+        return main_view
     }
 
     /**
@@ -132,14 +147,14 @@ class CurrentPlaceFragment : AppCompatActivity(), OnMapReadyCallback {
         // 위치 정보와 지역으로부터 주소 문자열을 구한다.
         var addressList: List<Address>?
         val geocoder =
-            Geocoder(this, Locale.getDefault())
+            Geocoder(mContext, Locale.getDefault())
 
         // 지오코더를 이용하여 주소 리스트를 구한다.
         addressList = try {
             geocoder.getFromLocation(latlng.latitude, latlng.longitude, 1)
         } catch (e: IOException) {
             Toast.makeText(
-                this,
+                mContext,
                 "위치로부터 주소를 인식할 수 없습니다. 네트워크가 연결되어 있는지 확인해 주세요.",
                 Toast.LENGTH_SHORT
             ).show()
@@ -232,13 +247,12 @@ class CurrentPlaceFragment : AppCompatActivity(), OnMapReadyCallback {
 
     private val locationPermission: Unit
         private get() {
-            if (ContextCompat.checkSelfPermission(this.applicationContext,
+            if (ContextCompat.checkSelfPermission(mContext.applicationContext,
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
             ) {
                 mLocationPermissionGranted = true
             } else {
-                ActivityCompat.requestPermissions(
-                    this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
                 )
             }
@@ -249,7 +263,6 @@ class CurrentPlaceFragment : AppCompatActivity(), OnMapReadyCallback {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         mLocationPermissionGranted = false
         when (requestCode) {
             PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
@@ -294,6 +307,4 @@ class CurrentPlaceFragment : AppCompatActivity(), OnMapReadyCallback {
             Log.d(TAG, "onDestroy : removeLocationUpdates")
         }
     }
-
-
 }
