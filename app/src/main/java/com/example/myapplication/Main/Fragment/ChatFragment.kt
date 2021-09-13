@@ -1,3 +1,5 @@
+/*package com.example.myapplication.Main.Fragment
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -123,3 +125,4 @@ class ChatFragment: Fragment() {
 }
 
 
+*/

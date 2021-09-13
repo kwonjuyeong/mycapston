@@ -1,7 +1,7 @@
 package com.example.myapplication.Main.Activity
 
 
-import ChatFragment
+//import com.example.myapplication.Main.Fragment.ChatFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.Main.Fragment.*
@@ -15,10 +15,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
-    private lateinit var mapFragment: ContactUsFragment
+    private lateinit var currentplacefragmet: CurrentPlaceFragment
     //private lateinit var mapFragment: CurrentPlaceFragment
     private lateinit var boardFragment : BoardFragment
-    private lateinit var chatFragment: ChatFragment
+    //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
 //    private lateinit var boardFragment: BoardFragment
 //    private var datalist = mutableListOf<BoardDTO>()
@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity(){
                         .replace(R.id.frame_container, homeFragment).commit()
                 }
                 R.id.action_Map -> {
-                    mapFragment = ContactUsFragment.newInstance()
+                    currentplacefragmet = CurrentPlaceFragment.newInstance()
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, mapFragment).commit()
+                        .replace(R.id.frame_container, currentplacefragmet).commit()
                 }
                 /*
                 R.id.action_Map -> {
@@ -79,11 +79,11 @@ class MainActivity : AppCompatActivity(){
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, boardFragment).commit()
                 }
-                R.id.action_chat -> {
+               /* R.id.action_chat -> {
 //                    chatFragment = ChatFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, chatFragment).commit()
-                }
+                }*/
                 R.id.action_setting -> {
                     settingFragment = SettingFragment.newInstance()
                     supportFragmentManager.beginTransaction()

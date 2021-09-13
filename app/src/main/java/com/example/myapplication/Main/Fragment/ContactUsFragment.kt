@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Fragment
+/*package com.example.myapplication.Main.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -73,4 +73,4 @@ class ContactUsFragment : Fragment(), OnMapReadyCallback {
         mView.onDestroy()
         super.onDestroy()
     }
-}
+}*/
