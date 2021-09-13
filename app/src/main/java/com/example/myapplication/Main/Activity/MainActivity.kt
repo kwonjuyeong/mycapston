@@ -2,24 +2,13 @@ package com.example.myapplication.Main.Activity
 
 
 import ChatFragment
-import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Main.Activity.DataModel
-import com.example.myapplication.Main.Activity.PhotoAdapter
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFrgment.BoardFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
-import com.google.firebase.firestore.FirebaseFirestore as FirebaseFirestore
 
 
 @Suppress("DEPRECATION")
@@ -27,6 +16,7 @@ class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
     private lateinit var mapFragment: ContactUsFragment
+    //private lateinit var mapFragment: CurrentPlaceFragment
     private lateinit var boardFragment : BoardFragment
     private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
@@ -77,6 +67,12 @@ class MainActivity : AppCompatActivity(){
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, mapFragment).commit()
                 }
+                /*
+                R.id.action_Map -> {
+                    mapFragment = CurrentPlaceFragment.newInstance()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, mapFragment).commit()
+                }*/
                 R.id.action_board -> {
                     // 사진을 가져올 수 있는지 확인 하는 작업
                     boardFragment = BoardFragment.newInstance()

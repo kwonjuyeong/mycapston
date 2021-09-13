@@ -55,7 +55,7 @@ class Add_LoginActivity : AppCompatActivity() {
         }
         upload_sign.setOnClickListener{
             if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                contentUpload()
+                //contentUpload()
                 var intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -74,7 +74,7 @@ class Add_LoginActivity : AppCompatActivity() {
             finish()
         }
     }
-    fun contentUpload(){
+    /*fun contentUpload(){
         //ProgressBar <<< 효과 넣을지 말지? 살짝 구시대적 ui
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName = "JPEG_"+timeStamp+"_.png"
@@ -104,5 +104,5 @@ class Add_LoginActivity : AppCompatActivity() {
             })
 
 
-    }
+    }*/
 }

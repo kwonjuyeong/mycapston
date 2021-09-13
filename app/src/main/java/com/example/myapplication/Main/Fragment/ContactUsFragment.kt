@@ -18,7 +18,6 @@ class ContactUsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mView: MapView
 
     companion object {
-        const val TAG: String = "로그"
         fun newInstance(): ContactUsFragment {
             return ContactUsFragment()
         }
