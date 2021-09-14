@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.frag_map.*
 import kotlinx.android.synthetic.main.fragment_chat.*
 import java.util.ArrayList
 
@@ -23,8 +24,7 @@ import java.util.ArrayList
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
-    private lateinit var currentplacefragmet: CurrentPlaceFragment
-    //private lateinit var mapFragment: CurrentPlaceFragment
+    private lateinit var mapFragment: CurrentPlaceFragment
     private lateinit var boardFragment : BoardFragment
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
@@ -56,10 +56,6 @@ class MainActivity : AppCompatActivity(){
     }
     private fun showActionSnackbar(){
         val actionSnackbar = Snackbar.make(constraintLayout, "설정에서 권한을 허가해주세요.", LENGTH_INDEFINITE)
-
-        actionSnackbar.setTextColor(resources.getColor(android.R.color.holo_orange_light, theme))
-        actionSnackbar.setActionTextColor(resources.getColor(android.R.color.holo_blue_bright, theme))
-        actionSnackbar.setBackgroundTint(resources.getColor(android.R.color.holo_red_dark, theme))
 
         actionSnackbar.setAction("확인") {
             Toast.makeText(this@MainActivity, "확인 누름!", Toast.LENGTH_LONG).show()
@@ -96,6 +92,8 @@ class MainActivity : AppCompatActivity(){
     private val onBottomNavItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener {
 
+            tedPermission()
+
             when (it.itemId) {
                 R.id.action_home -> {
                     homeFragment = HomeFragment.newInstance()
@@ -103,19 +101,12 @@ class MainActivity : AppCompatActivity(){
                         .replace(R.id.frame_container, homeFragment).commit()
                 }
                 R.id.action_Map -> {
-                    currentplacefragmet = CurrentPlaceFragment.newInstance()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, currentplacefragmet).commit()
-                }
-                /*
-                R.id.action_Map -> {
                     mapFragment = CurrentPlaceFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, mapFragment).commit()
-                }*/
+                }
                 R.id.action_board -> {
                     // 사진을 가져올 수 있는지 확인 하는 작업
-                    tedPermission()
                     boardFragment = BoardFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, boardFragment).commit()

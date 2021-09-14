@@ -1,6 +1,7 @@
 package com.example.myapplication.Main.Board
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -40,6 +41,7 @@ class BoardPost : AppCompatActivity() {
         getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
@@ -65,9 +67,10 @@ class BoardPost : AppCompatActivity() {
         //현재위치 받아오기
         val locationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
-                location?.let {
+                location.let {
                     val position = LatLng(it.latitude, it.longitude)
                     Log.e("lat and long", "${position.latitude} and ${position.longitude}")
+                    getAddress(position)
                 }
             }
 
@@ -90,7 +93,6 @@ class BoardPost : AppCompatActivity() {
         val address =
             geoCoder.getFromLocation(position.latitude, position.longitude, 1).first()
                 .getAddressLine(0)
-
         Log.e("Address", address)
     }
 
@@ -104,29 +106,6 @@ class BoardPost : AppCompatActivity() {
             finish()
         }
     }
-
-    //위치값 받아오기
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
