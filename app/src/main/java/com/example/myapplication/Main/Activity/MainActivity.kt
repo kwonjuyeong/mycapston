@@ -2,13 +2,17 @@ package com.example.myapplication.Main.Activity
 
 
 //import com.example.myapplication.Main.Fragment.ChatFragment
+import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFrgment.BoardFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.ArrayList
 
 
 @Suppress("DEPRECATION")
@@ -46,6 +50,28 @@ class MainActivity : AppCompatActivity(){
 
 
     }
+
+    //사용자에게 위치정보를 받아와도 되냐고 물어보기
+    fun tedPermission() {
+        val permissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {}
+            override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
+                //makeSnackbar("설정에서 권한을 허가 해주세요.")
+                finish()
+            }
+        }
+        TedPermission.with(this)
+            .setPermissionListener(permissionListener)
+            .setRationaleMessage("서비스 사용을 위해서 몇가지 권한이 필요합니다.")
+            .setDeniedMessage("[설정] > [권한] 에서 권한을 설정할 수 있습니다.")
+            .setPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .check()
+    }
+
+
 
     override fun onResume() {
         super.onResume()
