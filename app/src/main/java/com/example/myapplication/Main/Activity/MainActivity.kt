@@ -5,13 +5,17 @@ package com.example.myapplication.Main.Activity
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFrgment.BoardFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
+import com.google.android.material.snackbar.Snackbar
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_chat.*
 import java.util.ArrayList
 
 
@@ -50,12 +54,25 @@ class MainActivity : AppCompatActivity(){
 
 
     }
+    private fun showActionSnackbar(){
+        val actionSnackbar = Snackbar.make(constraintLayout, "설정에서 권한을 허가해주세요.", LENGTH_INDEFINITE)
+
+        actionSnackbar.setTextColor(resources.getColor(android.R.color.holo_orange_light, theme))
+        actionSnackbar.setActionTextColor(resources.getColor(android.R.color.holo_blue_bright, theme))
+        actionSnackbar.setBackgroundTint(resources.getColor(android.R.color.holo_red_dark, theme))
+
+        actionSnackbar.setAction("확인") {
+            Toast.makeText(this@MainActivity, "확인 누름!", Toast.LENGTH_LONG).show()
+        }
+        actionSnackbar.show()
+    }
 
     //사용자에게 위치정보를 받아와도 되냐고 물어보기
     fun tedPermission() {
         val permissionListener = object : PermissionListener {
             override fun onPermissionGranted() {}
             override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
+                showActionSnackbar()
                 //makeSnackbar("설정에서 권한을 허가 해주세요.")
                 finish()
             }
@@ -66,12 +83,9 @@ class MainActivity : AppCompatActivity(){
             .setDeniedMessage("[설정] > [권한] 에서 권한을 설정할 수 있습니다.")
             .setPermissions(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
+                Manifest.permission.ACCESS_COARSE_LOCATION)
             .check()
     }
-
-
 
     override fun onResume() {
         super.onResume()
@@ -101,6 +115,7 @@ class MainActivity : AppCompatActivity(){
                 }*/
                 R.id.action_board -> {
                     // 사진을 가져올 수 있는지 확인 하는 작업
+                    tedPermission()
                     boardFragment = BoardFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, boardFragment).commit()

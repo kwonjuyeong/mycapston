@@ -76,13 +76,12 @@ class BoardPost : AppCompatActivity() {
             override fun onProviderDisabled(provider: String) {}
         }
         //여기 Permission 체크하는 부분 추가해야함.
-        /*
         locationManager.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
             10000,
             1f,
             locationListener
-        )*/
+        )
     }
 
     //geoCoder 사용해 현재 위치 가져온 후 Log로 출력하는 함수.
