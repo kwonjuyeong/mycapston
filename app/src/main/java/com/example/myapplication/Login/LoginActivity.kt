@@ -1,5 +1,6 @@
 package com.example.myapplication.Login
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.util.Utility
@@ -350,6 +353,26 @@ class LoginActivity : AppCompatActivity() {
                 else
                     Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    //사용자에게 위치정보를 받아와도 되냐고 물어보기
+    fun tedPermission() {
+        val permissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {}
+            override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
+                //makeSnackbar("설정에서 권한을 허가 해주세요.")
+                finish()
+            }
+        }
+        TedPermission.with(this)
+            .setPermissionListener(permissionListener)
+            .setRationaleMessage("서비스 사용을 위해서 몇가지 권한이 필요합니다.")
+            .setDeniedMessage("[설정] > [권한] 에서 권한을 설정할 수 있습니다.")
+            .setPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .check()
     }
 
 
