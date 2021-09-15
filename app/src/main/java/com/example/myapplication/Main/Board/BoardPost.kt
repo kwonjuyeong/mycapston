@@ -13,9 +13,13 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
+import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.R
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
@@ -58,6 +62,7 @@ class BoardPost : AppCompatActivity() {
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
             photoPickerIntent.type = "image/*"
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+            hide_layout.visibility = View.VISIBLE
         }
         btn_write.setOnClickListener {
             boardUpload()
@@ -107,9 +112,6 @@ class BoardPost : AppCompatActivity() {
         }
     }
 
-
-
-
     fun boardUpload() {
         val timeStamp = SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Date())
         val imageFileName = "JPEG_" + timeStamp + "_Board.png"
@@ -144,7 +146,7 @@ class BoardPost : AppCompatActivity() {
             FirebaseFirestore.getInstance().collection("Board").document()
                 .set(boardDTO)
             setResult(RESULT_OK)
-
+            val intent = Intent(this,BoardFragment::class.java )
             finish()
         }
     }

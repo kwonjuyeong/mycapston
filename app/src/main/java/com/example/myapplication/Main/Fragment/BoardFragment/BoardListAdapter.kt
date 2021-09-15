@@ -35,7 +35,7 @@ class BoardListAdapter(private val boarddtos: MutableList<BoardDTO>, private val
         holder.title.text = currentitem.postTitle
         holder.Contents.text = currentitem.contents
         holder.boarddate.text = currentitem.Writed_date
-        if(currentitem.ProfileUrl == "null") {
+        if(currentitem.ProfileUrl.toString() == "null") {
             holder.profile.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
         }else{
             Glide.with(holder.itemView.context).load(currentitem.ProfileUrl).into(holder.profile)

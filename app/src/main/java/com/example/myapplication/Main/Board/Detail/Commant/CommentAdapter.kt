@@ -43,7 +43,10 @@ class CommentAdapter(var boarduid : String): RecyclerView.Adapter<CommentAdapter
         var data = commentdto[position]
         holder.nickname.text = data.userNickname
         holder.comment.text = data.comment
-        Glide.with(holder.itemView.context).load(data.userprofile).into(holder.profile)
+        if(data.userprofile.toString() != "null")
+            Glide.with(holder.itemView.context).load(data.userprofile).into(holder.profile)
+        else
+            holder.profile.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
     }
     override fun getItemCount() = commentdto.size
 

@@ -49,17 +49,6 @@ class BoardFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    // Activity 안에 Fragment가 들어가게 되는데, onAttach가 Fragment와 Activity에 붙게됨(의존)
-    // 프레그먼트를 안고 있는 액티비티에 붙었을 때
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     // 뷰가 생성되었을때
     // 프레그먼트와 레이아웃을 연결시켜주는 부분
     override fun onCreateView(

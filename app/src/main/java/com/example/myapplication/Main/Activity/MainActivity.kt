@@ -13,8 +13,8 @@ import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
+//import com.gun0912.tedpermission.PermissionListener
+//import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.frag_map.*
 import kotlinx.android.synthetic.main.fragment_chat.*
@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity(){
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
 //    private lateinit var boardFragment: BoardFragment
+//    private var datalist = mutableListOf<BoardDTO>()
+//    var bundle = Bundle()
 
     //private lateinit var photoAdapter: PhotoAdapter //1
     //private var dataList = mutableListOf<DataModel>()   //2
@@ -53,34 +55,6 @@ class MainActivity : AppCompatActivity(){
 
 
     }
-    private fun showActionSnackbar(){
-        val actionSnackbar = Snackbar.make(constraintLayout, "설정에서 권한을 허가해주세요.", LENGTH_INDEFINITE)
-
-        actionSnackbar.setAction("확인") {
-            Toast.makeText(this@MainActivity, "확인 누름!", Toast.LENGTH_LONG).show()
-        }
-        actionSnackbar.show()
-    }
-
-    //사용자에게 위치정보를 받아와도 되냐고 물어보기
-    fun tedPermission() {
-        val permissionListener = object : PermissionListener {
-            override fun onPermissionGranted() {}
-            override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
-                showActionSnackbar()
-                //makeSnackbar("설정에서 권한을 허가 해주세요.")
-                finish()
-            }
-        }
-        TedPermission.with(this)
-            .setPermissionListener(permissionListener)
-            .setRationaleMessage("서비스 사용을 위해서 몇가지 권한이 필요합니다.")
-            .setDeniedMessage("[설정] > [권한] 에서 권한을 설정할 수 있습니다.")
-            .setPermissions(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-            .check()
-    }
 
     override fun onResume() {
         super.onResume()
@@ -90,8 +64,6 @@ class MainActivity : AppCompatActivity(){
 
     private val onBottomNavItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener {
-
-            tedPermission()
 
             when (it.itemId) {
                 R.id.action_home -> {

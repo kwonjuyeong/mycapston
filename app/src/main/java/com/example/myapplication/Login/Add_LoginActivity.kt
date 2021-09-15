@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.myapplication.Main.Activity.MainActivity
+import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -21,12 +22,6 @@ import kotlinx.android.synthetic.main.activity_add_login.*
 import kotlinx.android.synthetic.main.view_item_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import android.R
-
-import android.graphics.Bitmap
-import android.widget.ImageView
-import java.io.InputStream
-
 
 class Add_LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -84,17 +79,25 @@ class Add_LoginActivity : AppCompatActivity() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 //        photoUri = Uri.parse("android.resource://com.example.myapplication/ic_baseline_account_circle_24")
         if (requestCode == PICK_IMAGE_FROM_ALBUM) {
-            photoUri = data?.data!!
-            upload_image.setImageURI(photoUri)
+            onPause()
+            if(resultCode == RESULT_OK) {
+                photoUri = data?.data!!
+                upload_image.setImageURI(photoUri)
+            }
+            else{
+                onResume()
+            }
         } else {
             finish()
         }
     }
-
     //좋은 코드는 아니지만 간소화 하는 방법을... 모색
     fun contentUpload(){
         //ProgressBar <<< 효과 넣을지 말지? 살짝 구시대적 ui
@@ -106,8 +109,6 @@ class Add_LoginActivity : AppCompatActivity() {
         val name = add_login_edit.text.toString()
 
         if (photoUri != null) {
-            photoUri =
-                Uri.parse("android.resource://com.example.myapplication/drawable/ic_baseline_account_circle_signiture")
             // images/(imageFilename) 위치를 가리키는 참조 변수-> 를 putFile로 storage서버에 업로드
             val storageRef = storage?.reference?.child("Profiles")?.child(imageFileName)
             // storageRef?.putFile()의 반환값은 StorageTask
