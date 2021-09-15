@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Fragment.BoardFrgment
+package com.example.myapplication.Main.Fragment.BoardFragment
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -35,14 +35,17 @@ class BoardListAdapter(private val boarddtos: MutableList<BoardDTO>, private val
         holder.title.text = currentitem.postTitle
         holder.Contents.text = currentitem.contents
         holder.boarddate.text = currentitem.Writed_date
-        Glide.with(holder.itemView.context).load(currentitem.ProfileUrl).into(holder.profile)
+        if(currentitem.ProfileUrl == "null") {
+            holder.profile.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
+        }else{
+            Glide.with(holder.itemView.context).load(currentitem.ProfileUrl).into(holder.profile)
+        }
         Glide.with(holder.itemView.context).load(currentitem.imageUrlWrite).into(holder.boardimage)
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BoardDetail::class.java)
             intent.putExtra("contentsUid",currentUid)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
-
         }
     }
 

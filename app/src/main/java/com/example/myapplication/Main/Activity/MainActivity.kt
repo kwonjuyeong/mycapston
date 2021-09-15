@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.myapplication.Main.Fragment.*
-import com.example.myapplication.Main.Fragment.BoardFrgment.BoardFragment
+import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
+import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
@@ -29,8 +30,6 @@ class MainActivity : AppCompatActivity(){
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
 //    private lateinit var boardFragment: BoardFragment
-//    private var datalist = mutableListOf<BoardDTO>()
-//    var bundle = Bundle()
 
     //private lateinit var photoAdapter: PhotoAdapter //1
     //private var dataList = mutableListOf<DataModel>()   //2

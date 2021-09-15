@@ -136,4 +136,5 @@
         android:layout_toRightOf="@+id/BoardCheck_like"
         android:src="@drawable/chat" />
 
+
 </RelativeLayout>

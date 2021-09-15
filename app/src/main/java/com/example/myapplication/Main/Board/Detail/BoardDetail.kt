@@ -1,17 +1,18 @@
 package com.example.myapplication.Main.Board.Detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.Main.Board.Detail.Comment.BoardComment
 import com.example.myapplication.R
 import com.google.firebase.firestore.FirebaseFirestore
-
-import kotlinx.android.synthetic.main.frag_board.*
-import kotlin.math.log
+import kotlinx.android.synthetic.main.activity_board_detail.*
 
 
 class BoardDetail : AppCompatActivity(), PostListener {
@@ -30,17 +31,19 @@ class BoardDetail : AppCompatActivity(), PostListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_detail)
 //        getData(this, chooseUid,)
-
         val chooseUid = intent.getStringExtra("contentsUid")!!
-        Log.e("여기야 여기!!!", chooseUid.toString())
-
         getData(this, chooseUid)
+
+        BoardCheck_commend.setOnClickListener{
+            val intent = Intent(this, BoardComment::class.java)
+            intent.putExtra("commentUid", chooseUid)
+            ContextCompat.startActivity(this, intent,null)
+        }
 
     }
 
 
     override fun loadPage(noti: BoardDTO) {
-        Log.e("loadPage", noti.toString() )
         val nickname: TextView = findViewById(R.id.boradCheck_nickname)
         val profile: ImageView = findViewById(R.id.boardCheck_profile)
         val title: TextView = findViewById(R.id.boradCheck_title)
@@ -54,6 +57,8 @@ class BoardDetail : AppCompatActivity(), PostListener {
             Glide.with(this).load(noti.imageUrlWrite).into(boardimage)
             // 여기 레이아웃 set
             expain.text = noti.imageWriteExplain.toString()
+        }else{
+            boardimage.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
         }
         contents.text = noti.contents.toString()
         date.text = noti.Writed_date.toString()
@@ -63,11 +68,9 @@ class BoardDetail : AppCompatActivity(), PostListener {
 
     override fun getData(listener: PostListener, chooseUid: String) {
         val callback = listener
-        Log.e("data", chooseUid)
         firestore.collection("Board").document(chooseUid).get()
             .addOnSuccessListener { task ->
                 boarddto = task?.toObject(BoardDTO::class.java)!!
-                Log.e("running", boarddto.toString())
                 callback.loadPage(boarddto)
             }
 

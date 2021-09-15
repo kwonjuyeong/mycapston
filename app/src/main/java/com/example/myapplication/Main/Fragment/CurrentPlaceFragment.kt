@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.*
@@ -26,7 +27,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-
 import com.google.android.gms.maps.model.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -76,10 +76,9 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext)
-
-        // Build the map. - Fragment에서는 필요없음
-        //val mapFragment =findFragmentById(R.id.realtime_map) as SupportMapFragment
-        //mapFragment.getMapAsync(this)
+        // Build the map.
+       // val mapFragment = supportFragmentManager.findFragmentById(R.id.realtime_map) as SupportMapFragment
+       // mapFragment.getMapAsync(this)
     }
 
     override fun onCreateView(
@@ -263,6 +262,7 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         mLocationPermissionGranted = false
         when (requestCode) {
             PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
@@ -307,4 +307,6 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
             Log.d(TAG, "onDestroy : removeLocationUpdates")
         }
     }
+
+
 }

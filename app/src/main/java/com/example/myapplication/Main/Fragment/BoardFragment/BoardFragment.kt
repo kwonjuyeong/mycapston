@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Fragment.BoardFrgment
+package com.example.myapplication.Main.Fragment.BoardFragment
 
 import android.content.Context
 import android.os.Bundle
@@ -80,13 +80,13 @@ class BoardFragment : Fragment() {
         //val thread :Thread? = null
         board_fagement_recycler_view.apply {
             var boardlistadapter: BoardListAdapter
-            activity?.runOnUiThread() {
-                Thread.sleep(500)
+            //activity?.runOnUiThread() {
+              //  Thread.sleep(500)
                 layoutManager = LinearLayoutManager(requireContext())
                 boardlistadapter = BoardListAdapter(datalist,contentsUid)
 //            boardlistadapter.notifyItemRangeInserted()
                 adapter = boardlistadapter
-            }
+            //}
         }
     }
 }

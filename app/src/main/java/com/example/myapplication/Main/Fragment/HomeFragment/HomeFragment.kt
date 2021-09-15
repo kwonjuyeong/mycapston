@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Fragment
+package com.example.myapplication.Main.Fragment.HomeFragment
 
 import android.app.Activity
 import android.content.Context
@@ -7,12 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.Main.Activity.DataModel
-import com.example.myapplication.Main.Activity.PhotoAdapter
 import com.example.myapplication.Main.Board.BoardPost
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.frag_home.*
@@ -30,6 +26,7 @@ class HomeFragment : Fragment() {
             return HomeFragment()
         }
     }
+
 
     private lateinit var photoAdapter: PhotoAdapter
     private var dataList = mutableListOf<DataModel>()
