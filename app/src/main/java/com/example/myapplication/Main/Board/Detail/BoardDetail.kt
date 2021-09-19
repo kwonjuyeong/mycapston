@@ -4,9 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.Main.Board.Detail.Comment.BoardComment
@@ -99,6 +101,7 @@ class BoardDetail : AppCompatActivity(), PostListener {
             Glide.with(this).load(noti.imageUrlWrite).into(boardimage)
             // 여기 레이아웃 set
             expain.text = noti.imageWriteExplain.toString()
+            boardCheck_image_layout.visibility = View.VISIBLE
         }else{
             boardimage.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
         }
@@ -118,4 +121,5 @@ class BoardDetail : AppCompatActivity(), PostListener {
             }
 
     }
+
 }

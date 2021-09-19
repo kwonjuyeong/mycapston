@@ -39,6 +39,8 @@ class BoardPost : AppCompatActivity() {
     var storage: FirebaseStorage? = null
     private var photoUri: Uri? = null
     private var uid: String? = null
+    private var NM: String? = null
+    private var profile: String? = null
 
     //위치 서비스 이용 선언
     private val locationManager by lazy {
@@ -57,6 +59,18 @@ class BoardPost : AppCompatActivity() {
         //firebase Auth
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser!!.uid
+
+
+        firestore?.collection("userid")?.get()?.addOnCompleteListener{
+            if (it.isSuccessful) {
+                for (document in it.result!!) {
+                    NM = document.data.getValue("nickname").toString()
+                    profile = document.data.getValue("profileUrl").toString()
+                    break
+                }
+            }else{
+            }
+        }
 
         upload_BoardImage.setOnClickListener {
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
@@ -115,39 +129,38 @@ class BoardPost : AppCompatActivity() {
     fun boardUpload() {
         val timeStamp = SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Date())
         val imageFileName = "JPEG_" + timeStamp + "_Board.png"
-        var NM: String? =null
-        var profile : String? =null
-        firestore?.collection("userid")?.get()?.addOnCompleteListener{
-            if(it.isSuccessful){
-                for(document in it.result!!){
-                    NM = document.data.getValue("nickname").toString()
-                    profile = document.data.getValue("profileUrl").toString()
-                    break
-                }
-            }
-        }
         val storageRef = storage?.reference?.child("Board")?.child(imageFileName)
         // promise 방식
-        storageRef?.putFile(photoUri!!)?.continueWithTask { task : com.google.android.gms.tasks.Task<UploadTask.TaskSnapshot> ->
-            return@continueWithTask storageRef.downloadUrl
-        }?.addOnSuccessListener { uri ->
-            val boardDTO = BoardDTO()
-            boardDTO.contents = board_context.text.toString()
-            boardDTO.postTitle = title_text.text.toString()
-            boardDTO.Writed_date = timeStamp
-            boardDTO.imageWriteExplain = imgaeExplain.text.toString()
-            boardDTO.imageUrlWrite = uri.toString()
-            boardDTO.ProfileUrl = profile
-            // System.currentTimeMillis() : 올린 시간을 mm/sec으로 변환
-            boardDTO.timestamp = System.currentTimeMillis()
-            boardDTO.nickname = NM
-            boardDTO.uid = auth?.currentUser?.uid
+        val boardDTO = BoardDTO()
+        boardDTO.contents = board_context.text.toString()
+        boardDTO.postTitle = title_text.text.toString()
+        boardDTO.Writed_date = timeStamp
+        boardDTO.imageWriteExplain = imgaeExplain.text.toString()
+        boardDTO.ProfileUrl = profile
+        // System.currentTimeMillis() : 올린 시간을 mm/sec으로 변환
+        boardDTO.timestamp = System.currentTimeMillis()
+        boardDTO.nickname = NM
+        boardDTO.uid = auth.currentUser?.uid
+        if (photoUri != null) {
+            storageRef?.putFile(photoUri!!)
+                ?.continueWithTask { task: com.google.android.gms.tasks.Task<UploadTask.TaskSnapshot> ->
+                    return@continueWithTask storageRef.downloadUrl
+                }?.addOnSuccessListener { uri ->
+                    boardDTO.imageUrlWrite = uri.toString()
 
+                    FirebaseFirestore.getInstance().collection("Board").document()
+                        .set(boardDTO)
+                    setResult(RESULT_OK)
+
+                }
+        } else {
             FirebaseFirestore.getInstance().collection("Board").document()
                 .set(boardDTO)
             setResult(RESULT_OK)
-            val intent = Intent(this,BoardFragment::class.java )
-            finish()
         }
+//        val intent = Intent(this, Main::class.java)
+
+        //startActivity(intent)
+        finish()
     }
 }

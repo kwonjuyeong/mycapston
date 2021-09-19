@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -20,7 +21,6 @@ class BoardListAdapter(private val boarddtos: MutableList<BoardDTO>, private val
         val Contents : TextView = itemView.findViewById(R.id.boarlist_content)
         val boarddate : TextView = itemView.findViewById(R.id.boardlist_date)
         val boardimage : ImageView = itemView.findViewById(R.id.boardlist_image)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CTViewholder {

@@ -5,9 +5,14 @@ package com.example.myapplication.Main.Activity
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
+import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,12 +34,13 @@ class MainActivity : AppCompatActivity(){
     private lateinit var boardFragment : BoardFragment
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
-//    private lateinit var boardFragment: BoardFragment
-//    private var datalist = mutableListOf<BoardDTO>()
-//    var bundle = Bundle()
+    private var repo = Repo.StaticFunction.getInstance()
 
-    //private lateinit var photoAdapter: PhotoAdapter //1
-    //private var dataList = mutableListOf<DataModel>()   //2
+    init {
+        // board List initial For boardFragment
+        repo.getboarddata()
+        repo.getboardUid()
+    }
 
     companion object {
         const val TAG: String = "로그"
@@ -43,8 +49,8 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
+        //권한 설
 //        ActivityCompat.requestPermissions(
 //            this,
 //            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
@@ -56,10 +62,16 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG, "onPause: ", )
+    }   
 
+    override fun onRestart() {
+        super.onRestart()
+        Log.e(TAG, "onRestart: ", )   
     }
+
     //바텀 네비게이션 아이템 클릭 리스너
 
     private val onBottomNavItemSelectedListener =
@@ -95,6 +107,4 @@ class MainActivity : AppCompatActivity(){
             }
             true
         }
-
-
 }
