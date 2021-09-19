@@ -121,6 +121,12 @@ dependencies {
 
 //로티 애니메이션
     implementation "com.airbnb.android:lottie:4.1.0"
+
+    //권한 사용자에게 물어보기
+    implementation 'gun0912.ted:tedpermission:2.2.0'
+
+    // swap refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 /*
     //여기 안되면 지우기
     implementation 'com.google.dagger:hilt-android:<VERSION>'

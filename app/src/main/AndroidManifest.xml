@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -23,14 +24,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ChangeCustomer"
-            android:exported="true" />
+            android:exported="true" /><!--setting frag의 고객센터페이지 -->
         <activity
             android:name=".ChangeInformationLaw"
-            android:exported="true" />
+            android:exported="true" /><!--setting frag의 개인정보페이지 -->
         <activity
             android:name=".ChangeInformation"
-            android:exported="true" />
+            android:exported="true" /><!--setting frag의 정보변경패아자 -->
 
+        <activity
+            android:name=".Main.Board.Detail.Comment.BoardComment"
+            android:exported="true" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,7 +45,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAV6anFUmlCUpyoJe6W7vcdacxiNnR6lVA" /> <!-- android:value="@string/google_maps_key" /> -->
+        android:value="AIzaSyAV6anFUmlCUpyoJe6W7vcdacxiNnR6lVA"/>
+
+        <!--            android:value="@string/google_maps_key" />-->
+
         <activity
             android:name=".Main.Board.Detail.BoardDetail"
             android:exported="true" />
@@ -51,7 +58,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Intro"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,11 +68,9 @@
         <activity
             android:name=".Login.Add_LoginActivity"
             android:exported="true" />
-        <!--
- <activity
+       <!-- <activity
             android:name=".PhoneAuthActivity"
-            android:exported="true" />
-        -->
+            android:exported="true" />-->
         <activity
             android:name=".Main.Activity.MainActivity"
             android:exported="true" />
@@ -75,10 +80,8 @@
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data
                     android:host="oauth"
                     android:scheme="kakao3da70c39cd53659cbfbf903ffd33273b" />

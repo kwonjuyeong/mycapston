@@ -1,41 +1,46 @@
 package com.example.myapplication.Main.Activity
 
 
-import ChatFragment
+//import com.example.myapplication.Main.Fragment.ChatFragment
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Main.Activity.DataModel
-import com.example.myapplication.Main.Activity.PhotoAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.myapplication.Main.Fragment.*
-import com.example.myapplication.Main.Fragment.BoardFrgment.BoardFragment
+import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
+import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
+import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
+import com.google.android.material.snackbar.Snackbar
+//import com.gun0912.tedpermission.PermissionListener
+//import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
-import com.google.firebase.firestore.FirebaseFirestore as FirebaseFirestore
+import kotlinx.android.synthetic.main.frag_map.*
+import kotlinx.android.synthetic.main.fragment_chat.*
+import java.util.ArrayList
 
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
-    private lateinit var mapFragment: ContactUsFragment
+    private lateinit var mapFragment: CurrentPlaceFragment
     private lateinit var boardFragment : BoardFragment
-    private lateinit var chatFragment: ChatFragment
+    //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
-//    private lateinit var boardFragment: BoardFragment
-//    private var datalist = mutableListOf<BoardDTO>()
-//    var bundle = Bundle()
+    private var repo = Repo.StaticFunction.getInstance()
 
-    //private lateinit var photoAdapter: PhotoAdapter //1
-    //private var dataList = mutableListOf<DataModel>()   //2
+    init {
+        // board List initial For boardFragment
+        repo.getboarddata()
+        repo.getboardUid()
+    }
 
     companion object {
         const val TAG: String = "로그"
@@ -44,8 +49,8 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
+        //권한 설
 //        ActivityCompat.requestPermissions(
 //            this,
 //            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
@@ -57,10 +62,16 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG, "onPause: ", )
+    }   
 
+    override fun onRestart() {
+        super.onRestart()
+        Log.e(TAG, "onRestart: ", )   
     }
+
     //바텀 네비게이션 아이템 클릭 리스너
 
     private val onBottomNavItemSelectedListener =
@@ -73,7 +84,7 @@ class MainActivity : AppCompatActivity(){
                         .replace(R.id.frame_container, homeFragment).commit()
                 }
                 R.id.action_Map -> {
-                    mapFragment = ContactUsFragment.newInstance()
+                    mapFragment = CurrentPlaceFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, mapFragment).commit()
                 }
@@ -83,11 +94,11 @@ class MainActivity : AppCompatActivity(){
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, boardFragment).commit()
                 }
-                R.id.action_chat -> {
+               /* R.id.action_chat -> {
 //                    chatFragment = ChatFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, chatFragment).commit()
-                }
+                }*/
                 R.id.action_setting -> {
                     settingFragment = SettingFragment.newInstance()
                     supportFragmentManager.beginTransaction()
@@ -96,6 +107,4 @@ class MainActivity : AppCompatActivity(){
             }
             true
         }
-
-
 }

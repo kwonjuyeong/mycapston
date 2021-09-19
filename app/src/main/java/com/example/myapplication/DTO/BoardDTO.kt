@@ -11,13 +11,13 @@ data class BoardDTO(
     var tag : String? = null,
     var nickname : String? = null,
     var ProfileUrl : String? = null,
+    var likeCount : Int = 0,
     var like: MutableMap<String, Boolean> = HashMap()
 ) {
     data class Comment(
-        var uid: String? = null,
+        var UID: String? = null,
         var userNickname: String? = null,
         var userprofile : String? = null,
         var comment: String? = null,
-        var timestamp: Long? = null
-    )
+        var timestamp: Long? = null)
 }

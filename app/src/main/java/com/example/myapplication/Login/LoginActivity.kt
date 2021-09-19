@@ -1,5 +1,6 @@
 package com.example.myapplication.Login
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+//import com.gun0912.tedpermission.PermissionListener
+//import com.gun0912.tedpermission.TedPermission
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.util.Utility
@@ -185,17 +188,16 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-/*
+
 //    자동 로그인
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
-*/
+//    override fun onStart() {
+//        super.onStart()
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
         if (login_id.isEmpty())
@@ -351,7 +353,6 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_SHORT).show()
             }
     }
-
 
     // 일반 로그인
     fun loginrUser(login_id: String, login_pw: String) {

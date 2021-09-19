@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Activity
+package com.example.myapplication.Main.Fragment.HomeFragment
 
 data class DataModel
     (var title : String,
