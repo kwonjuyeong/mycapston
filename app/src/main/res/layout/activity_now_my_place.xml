@@ -41,7 +41,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/hohohohohohoho"
+                android:id="@+id/hoho_hoho"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentRight="true"
@@ -54,6 +54,14 @@
             android:id="@+id/realtime_map"
             android:layout_width="match_parent"
             android:layout_height="600dp" />
+
+        <Button
+            android:id="@+id/recent_button"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:background="@color/little_dark_gray"
+            android:layout_height="wrap_content"
+            android:text="현재위치 최신화" />
         <!--
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
