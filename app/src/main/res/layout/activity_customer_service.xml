@@ -15,6 +15,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/back_button1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_back_signiture" />
     </LinearLayout>
 
     <LinearLayout
@@ -164,4 +169,5 @@
             </TableRow>
         </TableLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
