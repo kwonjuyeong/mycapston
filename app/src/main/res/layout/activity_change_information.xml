@@ -55,13 +55,13 @@
             android:id="@+id/textView12"
             android:layout_width="140dp"
             android:layout_height="match_parent"
-            android:text="별명변경" />
+            android:text="내용을 입력하세요" />
 
         <EditText
             android:id="@+id/textView11"
             android:layout_width="228dp"
             android:layout_height="match_parent"
-            android:text="별명을 입력해주세요" />
+            android:hint="내용을 입력하세요" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,7 +84,7 @@
             android:id="@+id/textView14"
             android:layout_width="229dp"
             android:layout_height="match_parent"
-            android:text="변경할 주소 입력" />
+            android:hint="내용을 입력하세요" />
     </LinearLayout>
 
     <LinearLayout
@@ -107,7 +107,7 @@
             android:id="@+id/textView16"
             android:layout_width="230dp"
             android:layout_height="match_parent"
-            android:text="뱐걍할 비밀번호 입력" />
+            android:hint="내용을 입력하세요" />
     </LinearLayout>
 
     <LinearLayout
@@ -130,7 +130,7 @@
             android:id="@+id/textView3"
             android:layout_width="223dp"
             android:layout_height="86dp"
-            android:text="상태를 입력해 주세요!!" />
+            android:hint="내용을 입력하세요" />
     </LinearLayout>
 
     <TextView

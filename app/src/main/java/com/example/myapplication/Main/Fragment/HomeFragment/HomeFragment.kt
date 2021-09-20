@@ -71,6 +71,7 @@ class HomeFragment : Fragment() {
 
         fun startActivity(activity: Activity) {
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)//위 아래 애니메이션코드
+
         }
 
 

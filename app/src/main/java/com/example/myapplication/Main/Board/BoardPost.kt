@@ -14,10 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.R
@@ -29,6 +31,8 @@ import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_login.*
 import com.google.android.gms.tasks.*
 import kotlinx.android.synthetic.main.activity_board_post.*
+import kotlinx.android.synthetic.main.activity_board_post.sv_root
+import kotlinx.android.synthetic.main.activity_login.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,6 +45,7 @@ class BoardPost : AppCompatActivity() {
     private var uid: String? = null
     private var NM: String? = null
     private var profile: String? = null
+    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
 
     //위치 서비스 이용 선언
     private val locationManager by lazy {
@@ -51,6 +56,17 @@ class BoardPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
+
+        keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
+            onShowKeyboard = { keyboardHeight ->
+                sv_root.run {
+                    smoothScrollTo(scrollX, scrollY + keyboardHeight)
+                }
+            })  //키보드 움직이기
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+
+
 
         //fireStorage 초기화
         storage = FirebaseStorage.getInstance()

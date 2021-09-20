@@ -13,12 +13,14 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Activity.MainActivity
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_add_login.*
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.view_item_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,9 +33,14 @@ class Add_LoginActivity : AppCompatActivity() {
     private var firestore: FirebaseFirestore? = null
     private var gender: String? = null
     private var photoUri: Uri? = null
+    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.myapplication.R.layout.activity_add_login)
+
+
+
+
         ActivityCompat.requestPermissions(
             this,
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),

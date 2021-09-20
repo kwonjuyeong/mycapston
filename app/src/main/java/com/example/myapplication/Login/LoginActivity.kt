@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.myapplication.DTO.UserinfoDTO
+import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Activity.MainActivity
 //import com.example.myapplication.PhoneAuthActivity
 import com.example.myapplication.R
@@ -54,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var login_pw: String
 
     private lateinit var googleSignInclient: GoogleSignInClient
-
+    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
     override fun onCreate(savedInstanceState: Bundle?) {
 
         overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
@@ -63,6 +64,14 @@ class LoginActivity : AppCompatActivity() {
         FacebookSdk.sdkInitialize(applicationContext)
         AppEventsLogger.activateApp(this)
         setContentView(R.layout.activity_login)
+
+//키보드 움직이기
+        keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
+            onShowKeyboard = { keyboardHeight ->
+                sv_root.run {
+                    smoothScrollTo(scrollX, scrollY + keyboardHeight)
+                }
+            })  //키보드 움직이기
 
         // 파이어베이스 인증 객체 선언
         auth = FirebaseAuth.getInstance()

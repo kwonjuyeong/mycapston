@@ -78,6 +78,8 @@ class BoardFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             boardlistadapter = BoardListAdapter(datalist, contentsUid)
             adapter = boardlistadapter
+
+
         }
     }
 

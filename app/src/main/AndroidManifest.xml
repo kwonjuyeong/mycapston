@@ -55,7 +55,9 @@
         <activity
             android:name=".Main.Board.BoardPost"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustResize|adjustPan"
+
+             />
         <activity
             android:name=".Intro"
             android:exported="true" >
