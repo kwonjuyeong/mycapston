@@ -19,7 +19,6 @@ class BoardListViewmodel : ViewModel() {
         return repo.getboardUid()
     }
     fun getListdata(): LiveData<BoardDTO>{
-        Log.e("불러오는 횟", count++.toString())
         return repo.getListdata()
     }
     fun getlistuid(): LiveData<String>{

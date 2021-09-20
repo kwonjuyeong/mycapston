@@ -20,6 +20,7 @@ import androidx.core.view.isVisible
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
+import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.R
@@ -46,6 +47,7 @@ class BoardPost : AppCompatActivity() {
     private var NM: String? = null
     private var profile: String? = null
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
+
 
     //위치 서비스 이용 선언
     private val locationManager by lazy {
@@ -77,16 +79,28 @@ class BoardPost : AppCompatActivity() {
         uid = auth.currentUser!!.uid
 
 
-        firestore?.collection("userid")?.get()?.addOnCompleteListener{
-            if (it.isSuccessful) {
-                for (document in it.result!!) {
-                    NM = document.data.getValue("nickname").toString()
-                    profile = document.data.getValue("profileUrl").toString()
-                    break
-                }
-            }else{
+        firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
+            if(it != null){
+                NM = it["nickname"].toString()
+                profile = it["profileUrl"].toString()
+                Log.e("postA", it["nickname"].toString())
+                Log.e("postB", it["profileUrl"].toString())
+
             }
         }
+        // 이런방법도 있음
+//        firestore?.collection("userid")?.get()?.addOnCompleteListener {
+//            if (it.isSuccessful) {
+//                for (document in it.result!!) {
+//                    NM = document.data.getValue("nickname").toString()
+//                    profile = document.data.getValue("profileUrl").toString()
+//                    break
+//                }
+//            }
+//        }
+
+        Log.e("post1", NM.toString())
+        Log.e("post2", profile.toString())
 
         upload_BoardImage.setOnClickListener {
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
@@ -96,23 +110,24 @@ class BoardPost : AppCompatActivity() {
         }
         btn_write.setOnClickListener {
             boardUpload()
-            //startActivity(Intent(this, BoardDetail::class.java))
+
         }
+    }
 
         //현재위치 받아오기
-        val locationListener = object : LocationListener {
-            override fun onLocationChanged(location: Location) {
-                location.let {
-                    val position = LatLng(it.latitude, it.longitude)
-                    Log.e("lat and long", "${position.latitude} and ${position.longitude}")
-                    getAddress(position)
-                }
-            }
-
-            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
-            override fun onProviderEnabled(provider: String) {}
-            override fun onProviderDisabled(provider: String) {}
-        }
+//        val locationListener = object : LocationListener {
+//            override fun onLocationChanged(location: Location) {
+//                location.let {
+//                    val position = LatLng(it.latitude, it.longitude)
+//                    Log.e("lat and long", "${position.latitude} and ${position.longitude}")
+//                    getAddress(position)
+//                }
+//            }
+//
+//            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+//            override fun onProviderEnabled(provider: String) {}
+//            override fun onProviderDisabled(provider: String) {}
+//        }
         //여기 Permission 체크하는 부분 추가해야함.
 //        locationManager.requestLocationUpdates(
 //            LocationManager.GPS_PROVIDER,
@@ -120,7 +135,7 @@ class BoardPost : AppCompatActivity() {
 //            1f,
 //            locationListener
 //        )
-    }
+
 
     //geoCoder 사용해 현재 위치 가져온 후 Log로 출력하는 함수.
     private fun getAddress(position: LatLng) {
@@ -130,6 +145,7 @@ class BoardPost : AppCompatActivity() {
                 .getAddressLine(0)
         Log.e("Address", address)
     }
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -167,6 +183,8 @@ class BoardPost : AppCompatActivity() {
                     FirebaseFirestore.getInstance().collection("Board").document()
                         .set(boardDTO)
                     setResult(RESULT_OK)
+                    Log.e("post1", NM.toString())
+                    Log.e("post2", profile.toString())
 
                 }
         } else {

@@ -89,6 +89,8 @@ class MainActivity : AppCompatActivity(){
                         .replace(R.id.frame_container, mapFragment).commit()
                 }
                 R.id.action_board -> {
+                    //repo.getboarddata()
+                    //repo.getboardUid()
                     // 사진을 가져올 수 있는지 확인 하는 작업
                     boardFragment = BoardFragment.newInstance()
                     supportFragmentManager.beginTransaction()

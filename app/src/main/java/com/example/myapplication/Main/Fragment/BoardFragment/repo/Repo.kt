@@ -48,7 +48,7 @@ class Repo {
 //                for (snapshot in querySnapshot!!.documents) {
 //                    var item = snapshot.toObject(BoardDTO::class.java)
 //                    listdata.add(item!!)
-        Log.e("listdata ", listdata.size.toString() )
+        Log.e("Repo listdata ", listdata.size.toString() )
         return listdata
     }
 
@@ -64,31 +64,31 @@ class Repo {
     }
 
     fun getListdata(): LiveData<BoardDTO> {
-
-        if (livedata == null)
-            livedata = MutableLiveData<BoardDTO>()    // 객체 생
-
+        //listdata.clear()
+        livedata = MutableLiveData<BoardDTO>()    // 객체 생
+        if (listdata != null)
+            listdata.clear()
         firestore.collection("Board").orderBy("timestamp",Query.Direction.DESCENDING)
             .addSnapshotListener() { querySnapshot, firebaseFirestoreException ->
                 if (querySnapshot == null) return@addSnapshotListener
                 for (snapshot in querySnapshot!!.documents) {
                     var item = snapshot.toObject(BoardDTO::class.java)
                     livedata!!.postValue(item!!)
-                    Log.e("livedata", livedata.toString() )
                 }
             }
         return livedata!!
     }
 
     fun getlistuid(): LiveData<String> {
-        if (liveboarduid == null)
-            liveboarduid = MutableLiveData<String>()
+        //contentsuid.clear()
+        if(contentsuid != null)
+            contentsuid.clear()
+        liveboarduid = MutableLiveData<String>()
         firestore.collection("Board").orderBy("timestamp",Query.Direction.DESCENDING)
             .addSnapshotListener() { querySnapshot, firebaseFirestoreException ->
                 if (querySnapshot == null) return@addSnapshotListener
                 for (snapshot in querySnapshot!!.documents) {
                     liveboarduid!!.postValue(snapshot.id)
-
                 }
             }
         return liveboarduid!!
