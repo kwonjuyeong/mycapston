@@ -158,6 +158,7 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getCityName(lat: Double, long: Double): String {
+        //!!!
         //var countryName = ""
         var cityName: String = ""
         var doName: String = ""
