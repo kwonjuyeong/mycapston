@@ -31,28 +31,43 @@
             android:textSize="20dp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/comment_recyclerView"
+    <LinearLayout
+        android:id="@+id/comment_center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/commant_page_top"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="40dp"
-        tools:listitem="@layout/list_comment" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
+
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/sv_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/commant_page_top"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="40dp"
+                tools:listitem="@layout/list_comment" />
+        </ScrollView>
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_comment_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_below="@+id/comment_center"
         android:layout_alignParentRight="true"
-        android:text="SEND"
-        android:layout_below="@+id/comment_recyclerView"/>
+        android:layout_margin="10dp"
+        android:text="SEND" />
 
     <EditText
         android:id="@+id/comment_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/comment_recyclerView"
+        android:layout_below="@+id/comment_center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"

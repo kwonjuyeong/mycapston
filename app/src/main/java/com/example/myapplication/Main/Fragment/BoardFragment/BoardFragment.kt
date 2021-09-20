@@ -19,7 +19,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.frag_board.*
 
 
-// 호출시 HomeFragment.newInstance() 를 이용해서 외부에서 호출
 class BoardFragment : Fragment() {
     companion object {
         const val BoardTAG: String = "BoardList"

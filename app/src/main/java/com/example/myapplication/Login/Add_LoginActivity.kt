@@ -18,6 +18,8 @@ import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_add_login.*
 import kotlinx.android.synthetic.main.view_item_layout.view.*
 import java.text.SimpleDateFormat
@@ -51,7 +53,7 @@ class Add_LoginActivity : AppCompatActivity() {
         // or ACTION_PICK
 
         //라디오 버튼 값 설정
-       add_login_sex_input_set.setOnCheckedChangeListener { _, checked ->
+        add_login_sex_input_set.setOnCheckedChangeListener { _, checked ->
             when (checked) {
                 com.example.myapplication.R.id.add_login_male_btn -> gender = "남"
                 com.example.myapplication.R.id.add_login_female_btn -> gender = "여"
@@ -59,9 +61,9 @@ class Add_LoginActivity : AppCompatActivity() {
         }
         //이미지 업로드 이벤트 처리
         upload.setOnClickListener {
-
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
             photoPickerIntent.type = "image/*"
+            photoPickerIntent.putExtra("crop", true)
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
         }
         upload_sign.setOnClickListener {
@@ -79,30 +81,45 @@ class Add_LoginActivity : AppCompatActivity() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 //        photoUri = Uri.parse("android.resource://com.example.myapplication/ic_baseline_account_circle_24")
-        if (requestCode == PICK_IMAGE_FROM_ALBUM) {
-            onPause()
-            if(resultCode == RESULT_OK) {
-                photoUri = data?.data!!
+        when (requestCode) {
+            PICK_IMAGE_FROM_ALBUM -> {
+                data?.data?.let { uri ->
+                    cropImage(uri) //이미지를 선택하면 여기가 실행됨
+                }
+                photoUri = data?.data
                 upload_image.setImageURI(photoUri)
             }
-            else{
-                onResume()
+            CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
+                //그후, 이곳으로 들어와 RESULT_OK 상태라면 이미지 Uri를 결과 Uri로 저장!
+                val result = CropImage.getActivityResult(data)
+                if (resultCode == RESULT_OK) {
+                    result.uri?.let {
+                        upload_image.setImageBitmap(result.bitmap)
+                        upload_image.setImageURI(result.uri)
+                        photoUri = result.uri
+
+                    }
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    val error = result.error
+                    Toast.makeText(this@Add_LoginActivity, error.message, Toast.LENGTH_SHORT).show()
+                }
             }
-        } else {
-            finish()
+            else -> {
+                finish()
+            }
         }
+
     }
+
+    //upload_image
     //좋은 코드는 아니지만 간소화 하는 방법을... 모색
-    fun contentUpload(){
+    fun contentUpload() {
         //ProgressBar <<< 효과 넣을지 말지? 살짝 구시대적 ui
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName = "JPEG_"+timeStamp+"_.png"
+        val imageFileName = "JPEG_" + timeStamp + "_.png"
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val NM = add_login_nickname_edit.text.toString()
         val profile_timestamp = System.currentTimeMillis()
@@ -129,7 +146,7 @@ class Add_LoginActivity : AppCompatActivity() {
                     finish()
                 }
             }
-        }else{
+        } else {
             firestore?.collection("userid")?.document(uid)?.update(
                 mapOf(
                     "nickname" to NM,
@@ -144,4 +161,12 @@ class Add_LoginActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun cropImage(uri: Uri?) {
+        CropImage.activity(uri).setGuidelines(CropImageView.Guidelines.ON)
+            .setCropShape(CropImageView.CropShape.RECTANGLE)
+            //사각형 모양으로 자른다
+            .start(this)
+    }
 }
+

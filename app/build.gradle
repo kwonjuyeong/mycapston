@@ -127,6 +127,9 @@ dependencies {
 
     // swap refresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    //crop image
+    implementation "com.theartofdev.edmodo:android-image-cropper:2.8.0"
 /*
     //여기 안되면 지우기
     implementation 'com.google.dagger:hilt-android:<VERSION>'

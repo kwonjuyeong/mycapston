@@ -1,29 +1,17 @@
 package com.example.myapplication.Main.Activity
 
 
-//import com.example.myapplication.Main.Fragment.ChatFragment
-import android.Manifest
+//import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
-import com.google.android.material.snackbar.Snackbar
-//import com.gun0912.tedpermission.PermissionListener
-//import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.frag_map.*
-import kotlinx.android.synthetic.main.fragment_chat.*
-import java.util.ArrayList
 
 
 @Suppress("DEPRECATION")

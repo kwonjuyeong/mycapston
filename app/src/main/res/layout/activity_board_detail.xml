@@ -145,10 +145,20 @@
         android:layout_below="@+id/BoardCheck_commend"
         android:layout_marginLeft="10dp" />
     <TextView
+        android:id="@+id/comment_count"
         android:layout_width="60dp"
         android:layout_height="15dp"
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/board_likeCount"/>
+
+    <Button
+        android:id="@+id/open_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/comment_count"
+        android:background="#999"
+        android:text="같이 먹쟈~~"
+        android:textSize="20dp"/>
 
 
 </RelativeLayout>
