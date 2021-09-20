@@ -41,9 +41,6 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
 
 
-
-
-
     companion object {
         const val TAG: String = "로그"
 
@@ -80,6 +77,7 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
             LocationServices.getFusedLocationProviderClient(requireActivity())
         client = LocationServices.getFusedLocationProviderClient(requireActivity())
         return main_view
+
     }
 
 
@@ -89,12 +87,12 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        hoho_hoho.setOnClickListener {
             RequestPermission()
             getLastLocation()
-            onMapReady(googleMap)
-        }
+            //onMapReady(googleMap)
+
     }
+
     fun CheckPermission(): Boolean {
         //this function will return a boolean
         //true: if we have permission
@@ -160,14 +158,20 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getCityName(lat: Double, long: Double): String {
+        //var countryName = ""
         var cityName: String = ""
-        var countryName = ""
+        var doName: String = ""
+        var jibunName:String = ""
+
         var geoCoder = Geocoder(requireContext(), Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)
 
+        //countryName = Adress.get(0).countryName
         cityName = Adress.get(0).locality
-        countryName = Adress.get(0).countryName
-        Log.d("Debug:", "Your City: " + cityName + " ; your Country " + countryName)
+        doName = Adress.get(0).thoroughfare
+        jibunName = Adress.get(0).featureName
+
+        Toast.makeText(context, cityName+" "+doName+" "+jibunName , Toast.LENGTH_LONG).show()
         return cityName
     }
 
@@ -188,11 +192,9 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var lastLocation: Location = locationResult.lastLocation
-            Log.d("Debug:", "your last last location: " + lastLocation.longitude.toString())
             Log.e("위도 경", "You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(lastLocation.latitude, lastLocation.longitude
                 )
             )
-
         }
     }
 
@@ -208,7 +210,6 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
 
@@ -217,7 +218,8 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
                 var myLocation =
                     location?.let { com.google.android.gms.maps.model.LatLng(it.latitude,it.longitude) }
 
-               //초기 값 설정(주변 위치로 나옴)
+                //googleMap.animateCamera(CameraUpdateFactory.newLatLng(myLocation))
+                //googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
                 googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
                 val marker = MarkerOptions()
@@ -228,12 +230,14 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
 
                 //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
                 recent_button.setOnClickListener {
+                    //googleMap.animateCamera(CameraUpdateFactory.newLatLng(myLocation))
+                    //googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
                     googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
                     val marker = MarkerOptions()
                         .position(myLocation)
                         .title("현재 위치")
-                        .snippet("입니다.")
+                        .snippet(location?.let { it1 -> getCityName(it1.latitude,it1.longitude) } +"입니다.")
                     googleMap?.addMarker(marker)
                 }
             }
@@ -281,10 +285,6 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     }
 
 }
-
-//    private fun location() {
-//        LocationManager locationManager = (LocationManager) getActivity()
-//    }
 
 
 
