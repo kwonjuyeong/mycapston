@@ -17,22 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/back_buttons"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_back_signiture"
-            android:text="" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/add_login_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="21dp"
+            android:layout_height="19dp"
             android:layout_marginStart="20.83dp"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
+            app:srcCompat="@drawable/ic_back_signiture" />
 
         <View
             android:layout_width="0dp"
@@ -51,10 +45,10 @@
 
     <LinearLayout
         android:id="@+id/board_center"
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="630dp"
         android:layout_below="@+id/board_layout"
+        android:layout_weight="1"
         android:orientation="vertical">
 
 

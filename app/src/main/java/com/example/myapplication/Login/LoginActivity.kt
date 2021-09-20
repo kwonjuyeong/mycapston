@@ -26,8 +26,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 //import com.gun0912.tedpermission.PermissionListener
@@ -46,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
 
     // Firebase 인증 객체 생성
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
     private var callbackManager: CallbackManager = CallbackManager.Factory.create()
     val GOOGLE_LOGIN_CODE = 9001
     private val TAG = "LoginActivity"
@@ -96,7 +93,6 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         googleSignInclient = GoogleSignIn.getClient(this, gso)
-        database = Firebase.database.reference // 쓸지 말지 아직 미정
 
         bt_login.setOnClickListener {
             signIn()
@@ -199,14 +195,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 //    자동 로그인
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
         if (login_id.isEmpty())

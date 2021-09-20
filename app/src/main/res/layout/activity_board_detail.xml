@@ -158,7 +158,7 @@
         android:layout_below="@+id/comment_count"
         android:background="#999"
         android:text="같이 먹쟈~~"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
 
 </RelativeLayout>

@@ -74,9 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-
             android:name=".Login.Add_LoginActivity"
-            android:theme="@style/Base.Theme.AppCompat"
             android:exported="true" />
        <!-- <activity
             android:name=".PhoneAuthActivity"
@@ -120,10 +118,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ChatMainActivity"
-            android:exported="true" />
-
     </application>
 
 </manifest>

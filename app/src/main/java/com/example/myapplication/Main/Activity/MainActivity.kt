@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(){
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
-    private lateinit var mapFragment: CurrentPlaceFragment
+    private lateinit var mapFragment: MapFragment
     private lateinit var boardFragment : BoardFragment
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(){
                         .replace(R.id.frame_container, homeFragment).commit()
                 }
                 R.id.action_Map -> {
-                    mapFragment = CurrentPlaceFragment.newInstance()
+                    mapFragment = MapFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, mapFragment).commit()
                 }
