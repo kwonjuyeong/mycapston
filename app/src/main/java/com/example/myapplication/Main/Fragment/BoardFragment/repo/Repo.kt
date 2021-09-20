@@ -27,7 +27,6 @@ class Repo {
         }
     }
     init {
-        Log.e("repo init", "repo init" )
         listdata.clear()
         contentsuid.clear()
         firestore.collection("Board").orderBy("timestamp", Query.Direction.DESCENDING)
@@ -65,7 +64,6 @@ class Repo {
     }
 
     fun getListdata(): LiveData<BoardDTO> {
-    Log.e("ㅇㄴㄹㅁㅇㄴㄹㅁㄹㅁㅇㄹ", "변경됨ㅃㅉㅃㅉㅃㅉㅃㅉㅃㅉ" )
         //listdata.clear()
         livedata = MutableLiveData<BoardDTO>()    // 객체 생
         if (listdata != null)
@@ -76,7 +74,6 @@ class Repo {
                 for (snapshot in querySnapshot!!.documents) {
                     var item = snapshot.toObject(BoardDTO::class.java)
                     livedata!!.postValue(item!!)
-                    Log.e("livedata", livedata.toString() )
                 }
             }
         return livedata!!

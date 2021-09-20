@@ -36,7 +36,6 @@ class BoardFragment : Fragment() {
     private var boardListAdapter = BoardListAdapter(datalist, contentsUid)
 
     init {
-        Log.e("fragment", "생성" )
         repo = Repo.StaticFunction.getInstance()
     }
 
@@ -86,7 +85,6 @@ class BoardFragment : Fragment() {
         super.onDestroyView()
         boardListViewmodel.getListdata().observe (viewLifecycleOwner, Observer{
             datalist.add(it)
-            Log.e("프래그먼트", "과연1" )
             boardListAdapter!!.notifyDataSetChanged()
         })
         boardListViewmodel.getlistuid().observe (viewLifecycleOwner, Observer{
