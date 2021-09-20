@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sv_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Main.Board.Detail.Comment.BoardComment">
@@ -35,6 +35,7 @@
             android:textSize="20dp" />
     </androidx.appcompat.widget.Toolbar>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comment_recyclerView"
         android:layout_width="match_parent"
@@ -43,14 +44,19 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
         tools:listitem="@layout/list_comment" />
+
     <Button
         android:id="@+id/btn_comment_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_below="@+id/comment_recyclerView"
         android:layout_alignParentRight="true"
-        android:text="SEND"
-        android:layout_below="@+id/comment_recyclerView"/>
+        android:background="#ff9424"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="SEND" />
 
     <EditText
         android:id="@+id/comment_text"
@@ -61,7 +67,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_toLeftOf="@id/btn_comment_send" />
+        android:layout_toLeftOf="@id/btn_comment_send"
+        android:background="@drawable/magnitude_circle"
+        android:drawableLeft="@android:drawable/btn_star" />
 
 </RelativeLayout>
 </ScrollView>

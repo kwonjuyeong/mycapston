@@ -19,6 +19,8 @@ import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_add_login.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.view_item_layout.view.*
@@ -34,6 +36,7 @@ class Add_LoginActivity : AppCompatActivity() {
     private var gender: String? = null
     private var photoUri: Uri? = null
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.myapplication.R.layout.activity_add_login)
@@ -70,6 +73,14 @@ class Add_LoginActivity : AppCompatActivity() {
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
             photoPickerIntent.type = "image/*"
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+
+
+
+
+
+
+
+
         }
         upload_sign.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
