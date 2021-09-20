@@ -35,18 +35,18 @@ class MapFragment : Fragment(){
     }
     // 뷰가 생성되었을때
     // 프레그먼트와 레이아웃을 연결시켜주는 부분
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
-        Log.d(TAG, "onCreateView: called")
-        //  inflater 레이아웃과 frag를 연결해줌
-        val view = inflater.inflate(R.layout.frag_map, container, false)
-
-        return  view
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        //return super.onCreateView(inflater, container, savedInstanceState)
+//        Log.d(TAG, "onCreateView: called")
+//        //  inflater 레이아웃과 frag를 연결해줌
+//        val view = inflater.inflate(R.layout.frag_map, container, false)
+//
+//        return  view
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

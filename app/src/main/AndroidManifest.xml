@@ -23,6 +23,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name=".Main.Fragment.ChatFragment.Chatting.Chatting"
+            android:exported="true" />
         <activity
             android:name=".ChangeCustomer"
             android:exported="true" /><!--setting frag의 고객센터페이지 -->
@@ -69,6 +74,7 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name=".Login.Add_LoginActivity"
             android:theme="@style/Base.Theme.AppCompat"
             android:exported="true" />
@@ -84,8 +90,10 @@
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="oauth"
                     android:scheme="kakao3da70c39cd53659cbfbf903ffd33273b" />
