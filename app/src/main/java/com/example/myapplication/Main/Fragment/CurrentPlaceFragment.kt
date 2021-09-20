@@ -35,12 +35,14 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     private var client: FusedLocationProviderClient? = null
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
+    private var aaaa : Double? = null
+    private var bbbb : Double? = null
     val PERMISSION_ID = 1010
     private lateinit var mView: MapView
     private lateinit var googleMap: GoogleMap
 
-    var lnt :Double = 0.0
-    var lot :Double = 0.0
+    var lnt : Double = 0.0   //위
+    var lot : Double = 0.0   //경도
 
     companion object {
         const val TAG: String = "로그"
@@ -72,11 +74,11 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
-        client = LocationServices.getFusedLocationProviderClient(requireActivity())
+        //client = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+
         return main_view
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -131,10 +133,11 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
             if (isLocationEnabled()) {
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
                     var location: Location? = task.result
-
                     if (location == null) {
                         NewLocationData()
                     } else {
+                        this@CurrentPlaceFragment.lot = location.longitude
+                        this@CurrentPlaceFragment.lnt = location.latitude
                         Log.d("Debug:", "Your Location:" + location.longitude)
                         Log.e(
                             "씨",
@@ -186,7 +189,6 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
             Log.e("위도 경", "You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(lastLocation.latitude, lastLocation.longitude
                 )
             )
-
         }
     }
 
@@ -206,7 +208,7 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
 
-
+        getLastLocation()
         val myLocation = com.google.android.gms.maps.model.LatLng(lnt, lot)
         //왜 0.0, 0.0이 뜨는거지?
         Log.e("sex","${lnt} ${lot}")

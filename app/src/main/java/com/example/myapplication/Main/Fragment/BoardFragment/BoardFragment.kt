@@ -36,6 +36,7 @@ class BoardFragment : Fragment() {
     private var boardListAdapter = BoardListAdapter(datalist, contentsUid)
 
     init {
+        Log.e("fragment", "생성" )
         repo = Repo.StaticFunction.getInstance()
     }
 
