@@ -21,7 +21,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,6 +40,7 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mView: MapView
     private lateinit var googleMap: GoogleMap
 
+
     companion object {
         const val TAG: String = "로그"
 
@@ -49,16 +49,16 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
             return CurrentPlaceFragment()
         }
     }
-    init {
 
 
-    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
-        getLastLocation()
+
         //RequestPermission()
     }
 
@@ -79,13 +79,16 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
         return main_view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        hoho_hoho.setOnClickListener {
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
             RequestPermission()
             getLastLocation()
-        }
+            //onMapReady(googleMap)
+
     }
 
     fun CheckPermission(): Boolean {
@@ -107,7 +110,6 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
 
     fun RequestPermission() {
         //this function will allows us to tell the user to requesut the necessary permsiion if they are not garented
-        Log.e("1번", "1")
         ActivityCompat.requestPermissions(
             requireActivity(),
             arrayOf(
@@ -132,17 +134,14 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
             if (isLocationEnabled()) {
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
                     var location: Location? = task.result
+
                     if (location == null) {
                         NewLocationData()
                     } else {
                         Log.d("Debug:", "Your Location:" + location.longitude)
                         Log.e(
                             "씨",
-                            "You Current Location is : Long: " + location.longitude + " , Lat: " + location.latitude + "\n" + getCityName(
-                                location.latitude,
-                                location.longitude
-                            )
-                        )
+                            "You Current Location is : Long: " + location.longitude + " , Lat: " + location.latitude + "\n" + getCityName(location.latitude, location.longitude))
                     }
                 }
             } else {
@@ -152,20 +151,25 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        } else {
-
         }
     }
 
     private fun getCityName(lat: Double, long: Double): String {
-        var cityName: String = ""
+        //!!!
+        //var countryName = ""
         var countryName = ""
+        var doName: String = ""
+        var jibunName:String = ""
+
         var geoCoder = Geocoder(requireContext(), Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)
 
+        //countryName = Adress.get(0).countryName
         cityName = Adress.get(0).locality
-        countryName = Adress.get(0).countryName
-        Log.e("Debug:", "Your City: " + cityName + " ; your Country " + countryName)
+        doName = Adress.get(0).thoroughfare
+        jibunName = Adress.get(0).featureName
+
+        Toast.makeText(context, cityName+" "+doName+" "+jibunName , Toast.LENGTH_LONG).show()
         return cityName
     }
 
@@ -186,13 +190,10 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var lastLocation: Location = locationResult.lastLocation
-            Log.e("Debug:", "your last last location: " + lastLocation.longitude.toString())
-            Log.e(
-                "위도 경",
-                "You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(
-                    lastLocation.latitude, lastLocation.longitude
+            Log.e("위도 경", "You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(lastLocation.latitude, lastLocation.longitude
                 )
             )
+
         }
     }
 
@@ -203,28 +204,21 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
     ) {
         if (requestCode == PERMISSION_ID) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.e("Debug:", "You have the Permission")
+                Log.d("Debug:", "You have the Permission")
             }
         }
     }
-
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
 
         fusedLocationProviderClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
+            .addOnSuccessListener { location : Location? ->
                 var myLocation =
-                    location?.let {
-                        com.google.android.gms.maps.model.LatLng(
-                            it.latitude,
-                            it.longitude
-                        )
-                    }
-                Log.e("확인", myLocation?.latitude.toString() )
-                Log.e("확인", myLocation?.longitude.toString() )
+                    location?.let { com.google.android.gms.maps.model.LatLng(it.latitude,it.longitude) }
 
-                //초기 값 설정(주변 위치로 나옴)
+                //googleMap.animateCamera(CameraUpdateFactory.newLatLng(myLocation))
+                //googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
                 googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
                 val marker = MarkerOptions()
@@ -235,16 +229,19 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
 
                 //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
                 recent_button.setOnClickListener {
+                    //googleMap.animateCamera(CameraUpdateFactory.newLatLng(myLocation))
+                    //googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
                     googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
                     val marker = MarkerOptions()
                         .position(myLocation)
                         .title("현재 위치")
-                        .snippet("입니다.")
+                        .snippet(location?.let { it1 -> getCityName(it1.latitude,it1.longitude) } +"입니다.")
                     googleMap?.addMarker(marker)
                 }
             }
     }
+
     override fun onStart() {
         super.onStart()
         mView.onStart()
@@ -269,51 +266,8 @@ class CurrentPlaceFragment : Fragment(), OnMapReadyCallback {
         mView.onDestroy()
         super.onDestroy()
     }
-}
-/*
-val myLocation = com.google.android.gms.maps.model.LatLng(lnt, lot)
-//왜 0.0, 0.0이 뜨는거지?
-Log.e("sex","${lnt} ${lot}")
-
-recent_button.setOnClickListener {
-    googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
-    googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
-    val marker = MarkerOptions()
-    .position(myLocation)
-    .title("현재 위치")
-    .snippet(getCityName(lnt, lot)+"입니다.")
-    googleMap?.addMarker(marker)
-}
-}
-
-override fun onStart() {
-super.onStart()
-mView.onStart()
-}
-override fun onStop() {
-super.onStop()
-mView.onStop()
-}
-override fun onResume() {
-super.onResume()
-mView.onResume()
-}
-override fun onPause() {
-super.onPause()
-mView.onPause()
-}
-override fun onLowMemory() {
-super.onLowMemory()
-mView.onLowMemory()
-}
-override fun onDestroy() {
-mView.onDestroy()
-super.onDestroy()
-}
 
 }
 
-//    private fun location() {
-//        LocationManager locationManager = (LocationManager) getActivity()
-//    }
-*/
+
+
