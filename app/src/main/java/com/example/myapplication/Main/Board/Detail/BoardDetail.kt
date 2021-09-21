@@ -3,15 +3,13 @@ package com.example.myapplication.Main.Board.Detail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
-import com.example.myapplication.Main.Board.Detail.Comment.BoardComment
+import com.example.myapplication.Main.Board.Detail.Comment.BoardChat
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,10 +43,10 @@ class BoardDetail : AppCompatActivity(), PostListener {
         }
         BoardCheck_commend.setOnClickListener{
             intent.putExtra("chooseUid", chooseUid)
-            startActivity(Intent(this,BoardComment::class.java))
+            startActivity(Intent(this,BoardChat::class.java))
         }
         BoardCheck_commend.setOnClickListener{
-            val intent = Intent(this, BoardComment::class.java)
+            val intent = Intent(this, BoardChat::class.java)
             intent.putExtra("commentUid", chooseUid)
             ContextCompat.startActivity(this, intent,null)
         }

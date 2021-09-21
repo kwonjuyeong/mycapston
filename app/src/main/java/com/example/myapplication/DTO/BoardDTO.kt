@@ -12,12 +12,17 @@ data class BoardDTO(
     var nickname : String? = null,
     var ProfileUrl : String? = null,
     var likeCount : Int = 0,
+    var latitude : Double? = null,
+    var longitude : Double? = null,
     var like: MutableMap<String, Boolean> = HashMap()
+
 ) {
-    data class Comment(
+    data class Chat(
+        var OwnerUid : String? = null,
         var UID: String? = null,
         var userNickname: String? = null,
         var userprofile : String? = null,
-        var comment: String? = null,
+        var message: String? = null,
+        var readUser : Map<String,Object>? = null,
         var timestamp: Long? = null)
 }

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Main.Fragment.ChatFragment.Chatting.Chatting">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
@@ -34,26 +36,24 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
-            android:hint="내용 입력 (128자 제한)"
             android:inputType="textMultiLine"
-            android:maxLength="128"
             android:scrollHorizontally="false"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_send"
+            app:layout_constraintEnd_toStartOf="@+id/btn_chat_send"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_send"
+            android:id="@+id/btn_chat_send"
             style="@android:style/Widget.Material.Light.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="입력"
             android:enabled="false"
+            android:text="입력"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

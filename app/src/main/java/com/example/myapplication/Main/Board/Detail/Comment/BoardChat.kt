@@ -2,7 +2,6 @@ package com.example.myapplication.Main.Board.Detail.Comment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.DTO.UserinfoDTO
@@ -12,14 +11,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_board_comment.*
 import kotlinx.android.synthetic.main.activity_board_comment.sv_root
-import kotlinx.android.synthetic.main.activity_login.*
 
-class BoardComment : AppCompatActivity(), CommentListener{
-    private var Commentdto = BoardDTO.Comment()
+class BoardChat : AppCompatActivity(), ChatListener{
+    private var Commentdto = BoardDTO.Chat()
     private var firestore =FirebaseFirestore.getInstance()
     private var currentDTO = UserinfoDTO()
     private val uid = FirebaseAuth.getInstance().currentUser?.uid
-    private var Comment = BoardDTO.Comment()
+    private var Chats = BoardDTO.Chat()
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,19 +39,20 @@ class BoardComment : AppCompatActivity(), CommentListener{
             }
         }
         comment_recyclerView.apply {
-            var commentAdapter : CommentAdapter
+            var chatAdapter : ChatAdapter
             layoutManager = LinearLayoutManager(context)
-            commentAdapter = CommentAdapter(commentUid)
-            adapter = commentAdapter
+            chatAdapter = ChatAdapter(commentUid)
+            adapter = chatAdapter
         }
         btn_comment_send?.setOnClickListener{
-            Comment.UID = uid
-            Comment.comment = comment_text.text.toString()
-            Comment.userprofile = currentDTO.ProfileUrl
-            Comment.userNickname = currentDTO.nickname
-            Comment.timestamp = System.currentTimeMillis()
+            Chats.OwnerUid = currentDTO.UID
+            Chats.UID = uid
+            Chats.message = comment_text.text.toString()
+            Chats.userprofile = currentDTO.ProfileUrl
+            Chats.userNickname = currentDTO.nickname
+            Chats.timestamp = System.currentTimeMillis()
 
-            FirebaseFirestore.getInstance().collection("Board").document(commentUid).collection("Comments").document().set(Comment)
+            FirebaseFirestore.getInstance().collection("Board").document(commentUid).collection("Chat").document().set(Chats)
             comment_text.setText("")
         }
     }
@@ -62,9 +61,9 @@ class BoardComment : AppCompatActivity(), CommentListener{
 
     }
 
-    override fun getComment(listener: CommentListener,comment_info : MutableList<BoardDTO.Comment>, commentUid : String) {
+    override fun getComment(listener: ChatListener, comment_info : MutableList<BoardDTO.Chat>, commentUid : String) {
         val callback = listener
-        FirebaseFirestore.getInstance().collection("Board").document(commentUid).collection("Comments").document()
+        FirebaseFirestore.getInstance().collection("Board").document(commentUid).collection("Chat").document()
 
         callback.loadView()
     }

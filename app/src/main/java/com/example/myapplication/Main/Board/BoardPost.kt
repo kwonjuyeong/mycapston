@@ -2,6 +2,7 @@ package com.example.myapplication.Main.Board
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,6 +13,7 @@ import android.location.LocationManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -24,6 +26,7 @@ import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.R
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -46,13 +49,11 @@ class BoardPost : AppCompatActivity() {
     private var uid: String? = null
     private var NM: String? = null
     private var profile: String? = null
+    private var longitude: Double? = null
+    private var latitude: Double? = null
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
 
-
-    //위치 서비스 이용 선언
-    private val locationManager by lazy {
-        getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    }
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,10 +67,6 @@ class BoardPost : AppCompatActivity() {
                 }
             })  //키보드 움직이기
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-
-
-
         //fireStorage 초기화
         storage = FirebaseStorage.getInstance()
         //fireStore Database
@@ -77,31 +74,23 @@ class BoardPost : AppCompatActivity() {
         //firebase Auth
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser!!.uid
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+        fusedLocationProviderClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                latitude = location!!.latitude
+                longitude = location!!.longitude
+            }.addOnFailureListener {
+            }
 
 
         firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
-            if(it != null){
+            if (it != null) {
                 NM = it["nickname"].toString()
                 profile = it["profileUrl"].toString()
-                Log.e("postA", it["nickname"].toString())
-                Log.e("postB", it["profileUrl"].toString())
 
             }
         }
-        // 이런방법도 있음
-//        firestore?.collection("userid")?.get()?.addOnCompleteListener {
-//            if (it.isSuccessful) {
-//                for (document in it.result!!) {
-//                    NM = document.data.getValue("nickname").toString()
-//                    profile = document.data.getValue("profileUrl").toString()
-//                    break
-//                }
-//            }
-//        }
-
-        Log.e("post1", NM.toString())
-        Log.e("post2", profile.toString())
-
         upload_BoardImage.setOnClickListener {
             val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
             photoPickerIntent.type = "image/*"
@@ -114,28 +103,6 @@ class BoardPost : AppCompatActivity() {
         }
     }
 
-        //현재위치 받아오기
-//        val locationListener = object : LocationListener {
-//            override fun onLocationChanged(location: Location) {
-//                location.let {
-//                    val position = LatLng(it.latitude, it.longitude)
-//                    Log.e("lat and long", "${position.latitude} and ${position.longitude}")
-//                    getAddress(position)
-//                }
-//            }
-//
-//            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
-//            override fun onProviderEnabled(provider: String) {}
-//            override fun onProviderDisabled(provider: String) {}
-//        }
-        //여기 Permission 체크하는 부분 추가해야함.
-//        locationManager.requestLocationUpdates(
-//            LocationManager.GPS_PROVIDER,
-//            10000,
-//            1f,
-//            locationListener
-//        )
-
 
     //geoCoder 사용해 현재 위치 가져온 후 Log로 출력하는 함수.
     private fun getAddress(position: LatLng) {
@@ -145,7 +112,6 @@ class BoardPost : AppCompatActivity() {
                 .getAddressLine(0)
         Log.e("Address", address)
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -158,12 +124,19 @@ class BoardPost : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     fun boardUpload() {
         val timeStamp = SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Date())
         val imageFileName = "JPEG_" + timeStamp + "_Board.png"
         val storageRef = storage?.reference?.child("Board")?.child(imageFileName)
         // promise 방식
         val boardDTO = BoardDTO()
+        Log.e("위치 확인 latitude", latitude.toString())
+        Log.e("위치 확인 longitude", longitude.toString())
         boardDTO.contents = board_context.text.toString()
         boardDTO.postTitle = title_text.text.toString()
         boardDTO.Writed_date = timeStamp
@@ -173,6 +146,8 @@ class BoardPost : AppCompatActivity() {
         boardDTO.timestamp = System.currentTimeMillis()
         boardDTO.nickname = NM
         boardDTO.uid = auth.currentUser?.uid
+        boardDTO.longitude = longitude
+        boardDTO.latitude = latitude
         if (photoUri != null) {
             storageRef?.putFile(photoUri!!)
                 ?.continueWithTask { task: com.google.android.gms.tasks.Task<UploadTask.TaskSnapshot> ->

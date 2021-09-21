@@ -152,14 +152,20 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getCityName(lat: Double, long: Double): String {
+        //var countryName = ""
         var cityName: String = ""
-        var countryName = ""
+        var doName: String = ""
+        var jibunName:String = ""
+
         var geoCoder = Geocoder(requireContext(), Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)
 
+        //countryName = Adress.get(0).countryName
         cityName = Adress.get(0).locality
-        countryName = Adress.get(0).countryName
-        Log.e("Debug:", "Your City: " + cityName + " ; your Country " + countryName)
+        doName = Adress.get(0).thoroughfare
+        jibunName = Adress.get(0).featureName
+
+        Toast.makeText(context, cityName+" "+doName+" "+jibunName , Toast.LENGTH_LONG).show()
         return cityName
     }
 

@@ -13,8 +13,8 @@ import com.example.myapplication.R
 import com.google.firebase.firestore.FirebaseFirestore
 
 @SuppressLint("NotifyDataSetChanged")
-class CommentAdapter(var boarduid : String): RecyclerView.Adapter<CommentAdapter.CommentHolder>(){
-    private val commentdto  : MutableList<BoardDTO.Comment> = arrayListOf()
+class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.CommentHolder>(){
+    private val commentdto  : MutableList<BoardDTO.Chat> = arrayListOf()
     init {
         FirebaseFirestore.getInstance().collection("Board").document(boarduid).collection("Comments").orderBy("timestamp")
             .addSnapshotListener { value, error ->
@@ -22,7 +22,7 @@ class CommentAdapter(var boarduid : String): RecyclerView.Adapter<CommentAdapter
                 if(value == null) return@addSnapshotListener
 
                 for(snapshot in value.documents!! ){
-                    commentdto.add(snapshot.toObject(BoardDTO.Comment::class.java)!!)
+                    commentdto.add(snapshot.toObject(BoardDTO.Chat::class.java)!!)
                 }
                 notifyDataSetChanged()
             }
@@ -34,7 +34,7 @@ class CommentAdapter(var boarduid : String): RecyclerView.Adapter<CommentAdapter
         var comment : TextView = itemView.findViewById(R.id.comment_context)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentAdapter.CommentHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapter.CommentHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_comment,parent,false)
         return CommentHolder(itemView)
     }
@@ -42,7 +42,7 @@ class CommentAdapter(var boarduid : String): RecyclerView.Adapter<CommentAdapter
     override fun onBindViewHolder(holder: CommentHolder, position: Int) {
         var data = commentdto[position]
         holder.nickname.text = data.userNickname
-        holder.comment.text = data.comment
+        holder.comment.text = data.message
         if(data.userprofile.toString() != "null")
             Glide.with(holder.itemView.context).load(data.userprofile).into(holder.profile)
         else
