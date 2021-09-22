@@ -74,13 +74,6 @@ class Add_LoginActivity : AppCompatActivity() {
             photoPickerIntent.putExtra("crop", true)
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
 
-
-
-
-
-
-
-
         }
         upload_sign.setOnClickListener {
             if (ContextCompat.checkSelfPermission(

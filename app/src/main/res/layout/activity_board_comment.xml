@@ -8,7 +8,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main.Board.Detail.Comment.BoardChat">
+    tools:context=".Main.Board.Detail.Chat.BoardChat">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/commant_page_top"
@@ -43,7 +43,7 @@
         android:layout_below="@+id/commant_page_top"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
-        tools:listitem="@layout/list_comment" />
+        tools:listitem="@layout/chat_list" />
 
     <Button
         android:id="@+id/btn_comment_send"

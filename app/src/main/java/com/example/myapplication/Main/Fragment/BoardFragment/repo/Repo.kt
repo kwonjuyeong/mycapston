@@ -17,7 +17,6 @@ class Repo {
     private var listdata = mutableListOf<BoardDTO>()
     private var contentsuid = arrayListOf<String>()
 
-
     object StaticFunction {
         private var instance: Repo? = null
         fun getInstance(): Repo {
@@ -40,6 +39,10 @@ class Repo {
             }
 
     }
+
+
+
+
 
     fun getboarddata(): MutableList<BoardDTO> {
 //        firestore.collection("Board").orderBy("timestamp")

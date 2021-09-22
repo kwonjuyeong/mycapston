@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Board.Detail.Comment
+package com.example.myapplication.Main.Board.Detail.Chat
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.CommentHolder>(){
     private val commentdto  : MutableList<BoardDTO.Chat> = arrayListOf()
     init {
-        FirebaseFirestore.getInstance().collection("Board").document(boarduid).collection("Comments").orderBy("timestamp")
+        FirebaseFirestore.getInstance().collection("Chat").document(boarduid).collection("Messages").orderBy("timestamp")
             .addSnapshotListener { value, error ->
                 commentdto.clear()
                 if(value == null) return@addSnapshotListener
@@ -35,7 +35,7 @@ class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.Comme
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapter.CommentHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_comment,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.chat_list,parent,false)
         return CommentHolder(itemView)
     }
 

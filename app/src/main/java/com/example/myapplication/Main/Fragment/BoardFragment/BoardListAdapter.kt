@@ -1,5 +1,6 @@
 package com.example.myapplication.Main.Fragment.BoardFragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,7 @@ class BoardListAdapter(private val boarddtos: MutableList<BoardDTO>, private val
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BoardDetail::class.java)
             intent.putExtra("contentsUid",currentUid)
+            intent.putExtra("owneruid",currentitem.uid )
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
@@ -52,6 +54,7 @@ class BoardListAdapter(private val boarddtos: MutableList<BoardDTO>, private val
 
     override fun getItemCount() = boarddtos.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addItems(items: List<BoardDTO>) {
         this.boarddtos.addAll(items)
         notifyDataSetChanged()

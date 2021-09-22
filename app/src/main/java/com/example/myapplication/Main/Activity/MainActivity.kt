@@ -4,11 +4,12 @@ package com.example.myapplication.Main.Activity
 //import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
+import com.example.myapplication.Main.Fragment.MapFragment.MapFragment
+import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,18 +48,10 @@ class MainActivity : AppCompatActivity(){
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
 
-
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.e(TAG, "onPause: ", )
-    }   
 
-    override fun onRestart() {
-        super.onRestart()
-        Log.e(TAG, "onRestart: ", )   
-    }
+
 
     //바텀 네비게이션 아이템 클릭 리스너
 

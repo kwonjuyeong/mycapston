@@ -39,7 +39,7 @@
             android:exported="true" /><!--setting frag의 정보변경패아자 -->
 
         <activity
-            android:name=".Main.Board.Detail.Comment.BoardChat"
+            android:name=".Main.Board.Detail.Chat.BoardChat"
             android:exported="true" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

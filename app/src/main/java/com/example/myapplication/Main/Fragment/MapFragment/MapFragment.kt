@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Fragment
+package com.example.myapplication.Main.Fragment.MapFragment
 
 
 import android.Manifest
@@ -36,6 +36,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mView: MapView
     private lateinit var googleMap: GoogleMap
 
+
     companion object {
         const val TAG: String = "로그"
 
@@ -54,7 +55,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         getLastLocation()
-        //RequestPermission()
+
     }
 
     override fun onCreateView(

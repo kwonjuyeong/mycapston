@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
+import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
 import com.example.myapplication.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.frag_board.*
@@ -42,6 +43,7 @@ class BoardFragment : Fragment() {
     // 메모리에 적제 되었을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
     }

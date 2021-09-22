@@ -3,13 +3,15 @@ package com.example.myapplication.Main.Board.Detail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
-import com.example.myapplication.Main.Board.Detail.Comment.BoardChat
+import com.example.myapplication.DTO.MessageDTO
+import com.example.myapplication.Main.Board.Detail.Chat.BoardChat
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,16 +21,11 @@ import kotlinx.android.synthetic.main.activity_board_detail.*
 class BoardDetail : AppCompatActivity(), PostListener {
     private var boarddto = BoardDTO()
     private var firestore = FirebaseFirestore.getInstance()
+    private var messageDTO = MessageDTO()
+    private var lastmessage = MessageDTO.lastMessage()
     val chooseUid: String? = null
     var uid : String? =null
 
-    //    private val nickname : TextView = findViewById(R.id.boradCheck_nickname)
-//    private val profile : ImageView = findViewById(R.id.boardCheck_profile)
-//    private val title : TextView = findViewById(R.id.boradCheck_title)
-//    private val date : TextView = findViewById(R.id.boradCheck_date)
-//    private val contents : TextView = findViewById(R.id.boardCheck_contents)
-//    private val expain : TextView = findViewById(R.id.board_explain)
-//    private val boardimage : ImageView = findViewById(R.id.boardCheck_image)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_detail)
@@ -41,23 +38,38 @@ class BoardDetail : AppCompatActivity(), PostListener {
             likeupdate()
 
         }
+        //1번
+//        BoardCheck_commend.setOnClickListener{
+//            intent.putExtra("chooseUid", chooseUid)
+//            startActivity(Intent(this,BoardChat::class.java))
+//        }
+        //2번
         BoardCheck_commend.setOnClickListener{
-            intent.putExtra("chooseUid", chooseUid)
-            startActivity(Intent(this,BoardChat::class.java))
-        }
-        BoardCheck_commend.setOnClickListener{
+            createChatting()
             val intent = Intent(this, BoardChat::class.java)
             intent.putExtra("commentUid", chooseUid)
             ContextCompat.startActivity(this, intent,null)
+
         }
 //        if(boarddto.like.containsKey(uid)){
 //            // 좋아요 클릭한 경우
 //            BoardCheck_like.setImageResource(R.drawable.favorite)
-//        }else{
+    //        }else{
 //            //좋아요 클릭하지 않은 경우
 //            BoardCheck_like.setImageResource(R.drawable.favorite_border)
 //        }
 
+    }
+    private fun createChatting(){
+        val chooseUid = intent.getStringExtra("contentsUid")!!
+        val owneruid = intent.getStringExtra("owneruid")!!
+        Log.e("boardDetail's boarduid", chooseUid)
+        Log.e("boardDetail's owneruid", owneruid)
+        messageDTO.boardUid = chooseUid
+        messageDTO.OwnerUid = owneruid
+        firestore.collection("Chat").document(chooseUid!!).set(messageDTO)
+        val DoRName = chooseUid + "_last"
+        firestore.collection("Chat").document(chooseUid!!).collection("LastMessage").document(DoRName).set(lastmessage)
     }
 
     fun likeupdate(){

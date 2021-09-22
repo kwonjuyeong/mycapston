@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/layout/activity_phone_auth.xml" value="0.21829710144927536" />
         <entry key="app/src/main/res/layout/board_list_item.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/chat_layout.xml" value="0.1802536231884058" />
+        <entry key="app/src/main/res/layout/chat_list.xml" value="0.2" />
         <entry key="app/src/main/res/layout/frag_board.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/frag_chat.xml" value="0.335" />
         <entry key="app/src/main/res/layout/frag_home.xml" value="0.20208333333333334" />

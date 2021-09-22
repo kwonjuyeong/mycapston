@@ -18,7 +18,6 @@ data class BoardDTO(
 
 ) {
     data class Chat(
-        var OwnerUid : String? = null,
         var UID: String? = null,
         var userNickname: String? = null,
         var userprofile : String? = null,

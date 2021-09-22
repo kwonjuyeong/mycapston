@@ -124,10 +124,7 @@ class BoardPost : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
 
-    }
 
     fun boardUpload() {
         val timeStamp = SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Date())
@@ -135,8 +132,6 @@ class BoardPost : AppCompatActivity() {
         val storageRef = storage?.reference?.child("Board")?.child(imageFileName)
         // promise 방식
         val boardDTO = BoardDTO()
-        Log.e("위치 확인 latitude", latitude.toString())
-        Log.e("위치 확인 longitude", longitude.toString())
         boardDTO.contents = board_context.text.toString()
         boardDTO.postTitle = title_text.text.toString()
         boardDTO.Writed_date = timeStamp
@@ -158,8 +153,6 @@ class BoardPost : AppCompatActivity() {
                     FirebaseFirestore.getInstance().collection("Board").document()
                         .set(boardDTO)
                     setResult(RESULT_OK)
-                    Log.e("post1", NM.toString())
-                    Log.e("post2", profile.toString())
 
                 }
         } else {
