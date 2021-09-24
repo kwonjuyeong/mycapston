@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
+import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity(){
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
     private var repo = Repo.StaticFunction.getInstance()
-
+    private var maprepo = MapRepo.StaticFunction.getInstance()
     init {
         // board List initial For boardFragment
         repo.getboarddata()
@@ -47,6 +48,8 @@ class MainActivity : AppCompatActivity(){
 //        )
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
+
+        maprepo.LoadLocation()
 
     }
 
