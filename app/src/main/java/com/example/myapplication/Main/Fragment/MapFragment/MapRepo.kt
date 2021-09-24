@@ -5,21 +5,22 @@ import com.example.myapplication.DTO.BoardDTO
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MapRepo {
-    private var savedLocation = arrayListOf<String>()
+    private var savedLocation = mutableListOf<String>()
     private var firestore = FirebaseFirestore.getInstance()
-    private var log = ArrayList<Double>()
-    private var lat = ArrayList<Double>()
-    private var mapImage = arrayListOf<String>()
+    private var log = mutableListOf<Double>()
+    private var lat = mutableListOf<Double>()
+    private var photoUrl = mutableListOf<String>()
 
     object StaticFunction {
         private var instance: MapRepo? = null
+
+
         fun getInstance(): MapRepo {
             if (instance == null)
                 instance = MapRepo()
             return instance!!
         }
     }
-
     // 메인에서 실행
     fun LoadLocation() {
         firestore.collection("Board").orderBy("timestamp")
@@ -29,13 +30,12 @@ class MapRepo {
                     savedLocation.add(snapshot.id)
                 }
                 getLocations(savedLocation)
-                getImageUrl(savedLocation)
+                getImage(savedLocation)
             }
     }
 
-    //
-    fun getLocations(boardDTOId: ArrayList<String>) {
-        for (i in boardDTOId) {
+    fun getLocations(aaa: MutableList<String>) {
+        for (i in aaa) {
             firestore.collection("Board").document(i).get()?.addOnSuccessListener {
                 if (it != null) {
                     log.add(it["longitude"] as Double)
@@ -44,25 +44,38 @@ class MapRepo {
             }
         }
     }
-    fun getImageUrl(boardDTOId: ArrayList<String>){
-        for (i in boardDTOId){
-            firestore.collection("Board").document(i).get().addOnSuccessListener {
-                mapImage.add(it["imageUrlWrite"] as String)
+
+
+
+
+
+        fun getImage(boardDTOId: MutableList<String>){
+            for (i in boardDTOId){
+                firestore.collection("Board").document(i).get().addOnSuccessListener {
+
+                    if (it != null) {
+                        photoUrl.add(it["profileUrl"] as String)
+                    }
+                }
             }
         }
-    }
-    fun returnImageUrl() : ArrayList<String>{
-        return mapImage
+
+
+
+    fun returnImage() : MutableList<String>{
+        return photoUrl
     }
 
+
     //위도 경도 리턴띠
-    fun returnLongitude(): ArrayList<Double> {
+    fun returnLongitude(): MutableList<Double> {
         return log
     }
 
-    fun returnLatitude(): ArrayList<Double> {
+    fun returnLatitude(): MutableList<Double> {
         return lat
     }
+
 
 
 }

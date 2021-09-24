@@ -8,7 +8,7 @@ import android.util.Log
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
-import com.example.myapplication.Main.Fragment.ChatFragment.ChatRepo
+import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(){
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
     private var repo = Repo.StaticFunction.getInstance()
+    private var maprepo = MapRepo.StaticFunction.getInstance()
     private var chatRepo = ChatRepo.StaticFunction.getInstance()
 
     init {
@@ -67,6 +68,8 @@ class MainActivity : AppCompatActivity(){
     override fun onResume() {
         super.onResume()
         Log.e("메인 엑티비티 실행 현황", "onResume: 데이터 확인할때 확인 작업", )
+
+        maprepo.LoadLocation()
 
     }
 
