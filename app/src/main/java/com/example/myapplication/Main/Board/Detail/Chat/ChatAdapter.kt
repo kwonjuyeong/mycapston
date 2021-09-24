@@ -27,7 +27,6 @@ class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.Comme
                 notifyDataSetChanged()
             }
     }
-
     class CommentHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         var profile : ImageView = itemView.findViewById(R.id.commet_profile)
         var nickname : TextView = itemView.findViewById(R.id.commet_nickname)

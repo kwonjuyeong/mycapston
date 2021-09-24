@@ -5,6 +5,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Geocoder
 import android.location.Location
 
@@ -35,6 +36,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     val PERMISSION_ID = 1010
     private lateinit var mView: MapView
     private lateinit var googleMap: GoogleMap
+    private var bitmapList = mutableListOf<Bitmap>()
 
 
     companion object {

@@ -1,9 +1,9 @@
 package com.example.myapplication.Main.Board.Detail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -29,14 +29,11 @@ class BoardDetail : AppCompatActivity(), PostListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_detail)
-//        getData(this, chooseUid,)
-
+        createChatting()
         val chooseUid = intent.getStringExtra("contentsUid")!!
-
         getData(this, chooseUid)
         BoardCheck_like.setOnClickListener{
             likeupdate()
-
         }
         //1번
 //        BoardCheck_commend.setOnClickListener{
@@ -45,7 +42,7 @@ class BoardDetail : AppCompatActivity(), PostListener {
 //        }
         //2번
         BoardCheck_commend.setOnClickListener{
-            createChatting()
+
             val intent = Intent(this, BoardChat::class.java)
             intent.putExtra("commentUid", chooseUid)
             ContextCompat.startActivity(this, intent,null)
@@ -63,21 +60,35 @@ class BoardDetail : AppCompatActivity(), PostListener {
     private fun createChatting(){
         val chooseUid = intent.getStringExtra("contentsUid")!!
         val owneruid = intent.getStringExtra("owneruid")!!
-        Log.e("boardDetail's boarduid", chooseUid)
-        Log.e("boardDetail's owneruid", owneruid)
         messageDTO.boardUid = chooseUid
         messageDTO.OwnerUid = owneruid
-        firestore.collection("Chat").document(chooseUid!!).set(messageDTO)
+        firestore.collection("Chat").document(chooseUid).set(messageDTO)
         val DoRName = chooseUid + "_last"
-        firestore.collection("Chat").document(chooseUid!!).collection("LastMessage").document(DoRName).set(lastmessage)
+        firestore.collection("Chat").document(chooseUid).collection("LastMessage").document(DoRName).set(lastmessage)
+    }
+    private fun joinChat(){ // 유저 체크
+        val chooseUid = intent.getStringExtra("contentsUid")!!
+        val ownerUid = intent.getStringExtra("owneruid")!!
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val Ref = firestore.collection("Chat").document(chooseUid)
+        if(ownerUid != uid){
+            firestore.runTransaction { transition ->
+                val messageDTO = transition.get(Ref).toObject(MessageDTO::class.java)
+                if(!messageDTO!!.UserCheck.containsKey(uid)){
+                    messageDTO.UserCheck[uid] = true
+                    transition.set(Ref,messageDTO)
+                }
+            }
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     fun likeupdate(){
         val chooseUid = intent.getStringExtra("contentsUid")!!
-        var DoR = firestore.collection("Board").document(chooseUid!!)
+        val DoR = firestore.collection("Board").document(chooseUid)
         firestore.runTransaction { transition ->
-            var uid = FirebaseAuth.getInstance().currentUser!!.uid
-            var boardDTO = transition.get(DoR).toObject(BoardDTO::class.java)
+            val uid = FirebaseAuth.getInstance().currentUser!!.uid
+            val boardDTO = transition.get(DoR).toObject(BoardDTO::class.java)
 
             // 좋아요 버튼이 클릭되었을때, 취소하는 이벤트
             if(boardDTO!!.like.containsKey(uid)) {
@@ -96,6 +107,7 @@ class BoardDetail : AppCompatActivity(), PostListener {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun loadPage(noti: BoardDTO) {
         val nickname: TextView = findViewById(R.id.boradCheck_nickname)
         val profile: ImageView = findViewById(R.id.boardCheck_profile)
@@ -131,5 +143,6 @@ class BoardDetail : AppCompatActivity(), PostListener {
             }
 
     }
+
 
 }

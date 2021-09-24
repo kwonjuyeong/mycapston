@@ -4,9 +4,11 @@ package com.example.myapplication.Main.Activity
 //import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
+import com.example.myapplication.Main.Fragment.ChatFragment.ChatRepo
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity(){
     //private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
     private var repo = Repo.StaticFunction.getInstance()
+    private var chatRepo = ChatRepo.StaticFunction.getInstance()
 
     init {
         // board List initial For boardFragment
@@ -45,8 +48,25 @@ class MainActivity : AppCompatActivity(){
 //            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
 //            1
 //        )
+        Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업" )
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
+        chatRepo.CheckChattingRoom()
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("메인 엑티비티 실행 현황", "onPause: TODO : 데이터 확인할때 확인작업", )
+    }
+    override fun onRestart() {
+        super.onRestart()
+        Log.e("메인 엑티비티 실행 현황", "onRestart: 데이터 확인할때 확인 작업", )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("메인 엑티비티 실행 현황", "onResume: 데이터 확인할때 확인 작업", )
 
     }
 

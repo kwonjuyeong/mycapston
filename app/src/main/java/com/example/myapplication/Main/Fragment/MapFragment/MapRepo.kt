@@ -1,6 +1,7 @@
 package com.example.myapplication.Main.Fragment.MapFragment
 
 import android.util.Log
+import com.example.myapplication.DTO.BoardDTO
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MapRepo {
@@ -8,6 +9,7 @@ class MapRepo {
     private var firestore = FirebaseFirestore.getInstance()
     private var log = ArrayList<Double>()
     private var lat = ArrayList<Double>()
+    private var mapImage = arrayListOf<String>()
 
     object StaticFunction {
         private var instance: MapRepo? = null
@@ -27,12 +29,13 @@ class MapRepo {
                     savedLocation.add(snapshot.id)
                 }
                 getLocations(savedLocation)
+                getImageUrl(savedLocation)
             }
     }
 
     //
-    fun getLocations(aaa: ArrayList<String>) {
-        for (i in aaa) {
+    fun getLocations(boardDTOId: ArrayList<String>) {
+        for (i in boardDTOId) {
             firestore.collection("Board").document(i).get()?.addOnSuccessListener {
                 if (it != null) {
                     log.add(it["longitude"] as Double)
@@ -40,6 +43,16 @@ class MapRepo {
                 }
             }
         }
+    }
+    fun getImageUrl(boardDTOId: ArrayList<String>){
+        for (i in boardDTOId){
+            firestore.collection("Board").document(i).get().addOnSuccessListener {
+                mapImage.add(it["imageUrlWrite"] as String)
+            }
+        }
+    }
+    fun returnImageUrl() : ArrayList<String>{
+        return mapImage
     }
 
     //위도 경도 리턴띠

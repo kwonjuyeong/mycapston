@@ -16,10 +16,17 @@
         android:layout_height="wrap_content"
         android:layout_margin="7.5dp"
         android:textStyle="bold"
-        tools:text="유저 아이디" />
+        tools:text="유저 닉네" />
     <TextView
         android:id="@+id/comment_context"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         tools:text="메세지 입니다" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7.5dp"
+        android:layout_gravity="right"
+        android:text="날짜"/>
 </LinearLayout>

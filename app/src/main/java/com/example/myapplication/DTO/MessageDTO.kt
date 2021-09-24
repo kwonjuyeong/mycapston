@@ -6,6 +6,7 @@ data class MessageDTO (
     var OwnerUid : String? = null
 ) {
     data class lastMessage(
+        var boardChatuid : String? = null,
         var senderuid : String? = null,
         var lastContent : String? = null,
         var time : String? = null,

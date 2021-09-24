@@ -62,14 +62,15 @@ class BoardChat : AppCompatActivity(){
         }
     }
     private fun setLastMessage(){
-        var time = SimpleDateFormat("MM월 dd일").format(Date())
-        var lastchat = comment_text.text.toString()
-        var commentUid = intent.getStringExtra("commentUid")!!
-        var docName = commentUid + "_last"
+        val time = SimpleDateFormat("MM월 dd일").format(Date())
+        val lastchat = comment_text.text.toString()
+        val commentUid = intent.getStringExtra("commentUid")!!
+        val docName = commentUid + "_last"
 
-        var DoR = firestore.collection("Chat").document(commentUid)
+        val DoR = firestore.collection("Chat").document(commentUid)
         DoR.collection("LastMessage").document(docName).update(
             mapOf(
+                "boardChatuid" to commentUid,
                 "senderuid" to uid,
                 "lastContent" to lastchat,
                 "time" to time,
