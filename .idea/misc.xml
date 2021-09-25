@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/gradient.xml" value="0.14722222222222223" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.21296296296296297" />
         <entry key="app/src/main/res/font/font_auto.xml" value="0.20555555555555555" />
         <entry key="app/src/main/res/layout/activity_add_login.xml" value="0.375" />

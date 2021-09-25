@@ -97,29 +97,6 @@ class BoardPost : AppCompatActivity() {
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
             hide_layout.visibility = View.VISIBLE
         }
-                }
-            }
-            // 이런방법도 있음
-//        firestore?.collection("userid")?.get()?.addOnCompleteListener {
-//            if (it.isSuccessful) {
-//                for (document in it.result!!) {
-//                    NM = document.data.getValue("nickname").toString()
-//                    profile = document.data.getValue("profileUrl").toString()
-//                    break
-//                }
-//            }
-//        }
-
-            Log.e("post1", NM.toString())
-            Log.e("post2", profile.toString())
-
-            upload_BoardImage.setOnClickListener {
-                val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
-                photoPickerIntent.type = "image/*"
-                startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
-                hide_layout.visibility = View.VISIBLE
-            }
-
         btn_write.setOnClickListener {
             boardUpload()
 
@@ -146,6 +123,8 @@ class BoardPost : AppCompatActivity() {
             finish()
         }
     }
+
+
 
     fun boardUpload() {
         val timeStamp = SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Date())
