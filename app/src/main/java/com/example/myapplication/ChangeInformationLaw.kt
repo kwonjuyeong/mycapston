@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.activity_infomation_law.*
 class ChangeInformationLaw : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_information)
+        setContentView(R.layout.activity_infomation_law)
+
 
         back_button3.setOnClickListener({
             val intent = Intent(this, SettingFragment::class.java)

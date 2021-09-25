@@ -3,7 +3,12 @@ package com.example.myapplication.Login
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.GnssAntennaInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -40,9 +45,21 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
+import android.view.LayoutInflater
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import kotlinx.coroutines.delay
+
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
+
+
+    //필요한 퍼미션 리스트
+//원하는 퍼미션을 이곳에 추가하면 된다.
+
 
     // Firebase 인증 객체 생성
     private lateinit var auth: FirebaseAuth
@@ -64,6 +81,46 @@ class LoginActivity : AppCompatActivity() {
         FacebookSdk.sdkInitialize(applicationContext)
         AppEventsLogger.activateApp(this)
         setContentView(R.layout.activity_login)
+
+
+
+        val builder = AlertDialog.Builder(this) //아래 builder.show 까지 명령어
+
+        builder.setTitle("타이틀 입니다.")
+
+        builder.setMessage("함께 어플리케이션을 사용하기 위해서는 다음 권한을 얻어야합니다")
+
+        builder.setPositiveButton(
+
+            "선택 1",
+
+            { dialogInterface: DialogInterface?, i: Int ->
+
+
+
+            })
+
+        builder.setNegativeButton(
+
+            "선택 2",
+
+            { dialogInterface: DialogInterface?, i: Int ->
+
+                //원하는 명령어
+
+            })
+
+        builder.setNeutralButton(
+
+            "선택 3",
+
+            { dialogInterface: DialogInterface?, i: Int ->
+
+                //원하는 명령어
+
+            })
+
+        builder.show()
 
 //키보드 움직이기
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,

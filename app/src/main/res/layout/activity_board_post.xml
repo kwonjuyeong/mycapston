@@ -17,22 +17,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/back_buttons"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_back_signiture"
-            android:text="" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/add_login_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/back_board"
+            android:layout_width="21dp"
+            android:layout_height="19dp"
             android:layout_marginStart="20.83dp"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
+            app:srcCompat="@drawable/ic_back_signiture" />
+
 
         <View
             android:layout_width="0dp"
@@ -51,10 +46,10 @@
 
     <LinearLayout
         android:id="@+id/board_center"
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="630dp"
         android:layout_below="@+id/board_layout"
+        android:layout_weight="1"
         android:orientation="vertical">
 
 
@@ -63,7 +58,9 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_below="@+id/board_layout"
+            android:background="@null"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/maru"
             android:layout_marginRight="10dp"
             android:hint="제목" />
 
@@ -72,6 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="191dp"
             android:layout_below="@+id/title_text"
+            android:background="@null"
+            android:fontFamily="@font/maru"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="22dp"
             android:layout_marginRight="10dp"
@@ -81,7 +80,7 @@
             android:id="@+id/hide_layout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/layout_imageUrlWrite"
@@ -97,9 +96,11 @@
                 android:layout_height="60dp"
                 android:layout_below="@id/board_context"
                 android:layout_marginLeft="15dp"
+                android:fontFamily="@font/maru"
                 android:layout_marginTop="62dp"
                 android:layout_toRightOf="@id/layout_imageUrlWrite"
                 android:hint="설명을 넣을 수 있어요"
+                android:background="@null"
                 android:text="" />
         </LinearLayout>
     </LinearLayout>

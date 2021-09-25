@@ -30,6 +30,7 @@
             android:background="@drawable/round_btn"
             android:gravity="center"
             android:text="함께"
+            android:fontFamily="@font/jalnan"
             android:textColor="#ffffff"
             android:textSize="80dp"
             android:textStyle="bold"
@@ -65,21 +66,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/maru"
             android:text="ID" />
 
         <EditText
             android:id="@+id/login_Id"
             android:layout_width="match_parent"
+            android:fontFamily="@font/maru"
             android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/maru"
             android:text="Password" />
 
         <EditText
             android:id="@+id/login_Pw"
             android:layout_width="match_parent"
+            android:fontFamily="@font/maru"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:autofillHints="" />
@@ -101,6 +106,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="@string/loginbtn"
+            android:fontFamily="@font/jalnan"
             android:background="@drawable/signiture_btn"
             android:textColor="@color/medium_dark_gray"
             android:theme="@style/ButtonStyle" />
@@ -116,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="@drawable/signiture_btn"
+            android:fontFamily="@font/jalnan"
             android:text="회원가입"
             android:textColor="@color/medium_dark_gray"
             android:theme="@style/ButtonStyle"

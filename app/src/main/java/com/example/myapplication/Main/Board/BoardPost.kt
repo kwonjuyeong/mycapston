@@ -23,6 +23,7 @@ import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
+import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.R
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
@@ -69,26 +70,31 @@ class BoardPost : AppCompatActivity() {
 
 
 
-
-        //fireStorage 초기화
-        storage = FirebaseStorage.getInstance()
-        //fireStore Database
-        firestore = FirebaseFirestore.getInstance()
-        //firebase Auth
-        auth = FirebaseAuth.getInstance()
-        uid = auth.currentUser!!.uid
+        back_board.setOnClickListener({
+            val intent = Intent(this, HomeFragment::class.java)
+            startActivity(intent)
+        })
 
 
-        firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
-            if(it != null){
-                NM = it["nickname"].toString()
-                profile = it["profileUrl"].toString()
-                Log.e("postA", it["nickname"].toString())
-                Log.e("postB", it["profileUrl"].toString())
+            //fireStorage 초기화
+            storage = FirebaseStorage.getInstance()
+            //fireStore Database
+            firestore = FirebaseFirestore.getInstance()
+            //firebase Auth
+            auth = FirebaseAuth.getInstance()
+            uid = auth.currentUser!!.uid
 
+
+            firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
+                if (it != null) {
+                    NM = it["nickname"].toString()
+                    profile = it["profileUrl"].toString()
+                    Log.e("postA", it["nickname"].toString())
+                    Log.e("postB", it["profileUrl"].toString())
+
+                }
             }
-        }
-        // 이런방법도 있음
+            // 이런방법도 있음
 //        firestore?.collection("userid")?.get()?.addOnCompleteListener {
 //            if (it.isSuccessful) {
 //                for (document in it.result!!) {
@@ -99,15 +105,16 @@ class BoardPost : AppCompatActivity() {
 //            }
 //        }
 
-        Log.e("post1", NM.toString())
-        Log.e("post2", profile.toString())
+            Log.e("post1", NM.toString())
+            Log.e("post2", profile.toString())
 
-        upload_BoardImage.setOnClickListener {
-            val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
-            photoPickerIntent.type = "image/*"
-            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
-            hide_layout.visibility = View.VISIBLE
-        }
+            upload_BoardImage.setOnClickListener {
+                val photoPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
+                photoPickerIntent.type = "image/*"
+                startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+                hide_layout.visibility = View.VISIBLE
+            }
+
         btn_write.setOnClickListener {
             boardUpload()
 

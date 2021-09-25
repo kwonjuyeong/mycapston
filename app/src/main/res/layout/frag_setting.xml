@@ -101,13 +101,15 @@
                 android:background="#ff9424"
                 app:srcCompat="@drawable/chat" />
 
-            <EditText
+            <TextView
                 android:id="@+id/editTextTextPersonName2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="별명" />
+                android:hint=""
+                android:text="안드로이드 개인 처리 방침"
+                android:fontFamily="@font/maru"
+                android:inputType="textPersonName" />
 
         </LinearLayout>
     </LinearLayout>
