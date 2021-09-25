@@ -42,7 +42,7 @@ class BoardDetail : AppCompatActivity(), PostListener {
 //        }
         //2번
         BoardCheck_commend.setOnClickListener{
-
+            joinChat()
             val intent = Intent(this, BoardChat::class.java)
             intent.putExtra("commentUid", chooseUid)
             ContextCompat.startActivity(this, intent,null)

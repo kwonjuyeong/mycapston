@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.21296296296296297" />
+        <entry key="app/src/main/res/font/font_auto.xml" value="0.20555555555555555" />
         <entry key="app/src/main/res/layout/activity_add_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_board_comment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.335" />
@@ -23,7 +25,7 @@
         <entry key="app/src/main/res/layout/activity_new_mypage.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_now_my_place.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_phone_auth.xml" value="0.21829710144927536" />
-        <entry key="app/src/main/res/layout/board_list_item.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/layout/board_list_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/chat_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/chat_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/frag_board.xml" value="0.14361702127659576" />

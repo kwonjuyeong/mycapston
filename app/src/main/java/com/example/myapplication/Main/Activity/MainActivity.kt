@@ -9,6 +9,7 @@ import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
 import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
+import com.example.myapplication.Main.Fragment.ChatFragment.ChatRepo
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
@@ -18,12 +19,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     // MainActivity가 가지고 있는 멤버 변수 선언
     private lateinit var homeFragment: HomeFragment
     private lateinit var mapFragment: MapFragment
-    private lateinit var boardFragment : BoardFragment
-    //private lateinit var chatFragment: ChatFragment
+    private lateinit var boardFragment: BoardFragment
+    private lateinit var chatFragment: ChatFragment
     private lateinit var settingFragment: SettingFragment
     private var repo = Repo.StaticFunction.getInstance()
     private var maprepo = MapRepo.StaticFunction.getInstance()
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(){
         // board List initial For boardFragment
         repo.getboarddata()
         repo.getboardUid()
+        Log.e("MAIM 엑티비티 실행", "init")
     }
 
     companion object {
@@ -71,9 +73,8 @@ class MainActivity : AppCompatActivity(){
 
         maprepo.LoadLocation()
 
+
     }
-
-
 
 
     //바텀 네비게이션 아이템 클릭 리스너
@@ -100,11 +101,11 @@ class MainActivity : AppCompatActivity(){
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, boardFragment).commit()
                 }
-               /* R.id.action_chat -> {
-//                    chatFragment = ChatFragment.newInstance()
+                R.id.action_chat -> {
+                    chatFragment = ChatFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, chatFragment).commit()
-                }*/
+                }
                 R.id.action_setting -> {
                     settingFragment = SettingFragment.newInstance()
                     supportFragmentManager.beginTransaction()

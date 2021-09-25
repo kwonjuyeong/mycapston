@@ -4,12 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.frag_chat.*
 
 class ChatFragment: Fragment(){
+    companion object {
+        const val BoardTAG: String = "BoardList"
+        fun newInstance(): ChatFragment {
+            return ChatFragment()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

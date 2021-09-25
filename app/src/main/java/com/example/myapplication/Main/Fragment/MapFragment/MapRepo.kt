@@ -1,8 +1,13 @@
 package com.example.myapplication.Main.Fragment.MapFragment
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import com.example.myapplication.DTO.BoardDTO
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MapRepo {
     private var savedLocation = mutableListOf<String>()
@@ -10,6 +15,7 @@ class MapRepo {
     private var log = mutableListOf<Double>()
     private var lat = mutableListOf<Double>()
     private var photoUrl = mutableListOf<String>()
+    private var user_Url = mutableListOf<Bitmap>()
 
     object StaticFunction {
         private var instance: MapRepo? = null
@@ -21,6 +27,7 @@ class MapRepo {
             return instance!!
         }
     }
+
     // 메인에서 실행
     fun LoadLocation() {
         firestore.collection("Board").orderBy("timestamp")
@@ -45,24 +52,21 @@ class MapRepo {
         }
     }
 
+    fun getImage(boardDTOId: MutableList<String>) {
+        for (i in boardDTOId) {
+            firestore.collection("Board").document(i).get().addOnSuccessListener {
 
-
-
-
-        fun getImage(boardDTOId: MutableList<String>){
-            for (i in boardDTOId){
-                firestore.collection("Board").document(i).get().addOnSuccessListener {
-
-                    if (it != null) {
-                        photoUrl.add(it["profileUrl"] as String)
-                    }
+                if (it != null) {
+                    photoUrl.add(it["profileUrl"] as String)
                 }
+
+
             }
         }
+    }
 
 
-
-    fun returnImage() : MutableList<String>{
+    fun returnImage(): MutableList<String> {
         return photoUrl
     }
 
@@ -75,7 +79,6 @@ class MapRepo {
     fun returnLatitude(): MutableList<Double> {
         return lat
     }
-
 
 
 }

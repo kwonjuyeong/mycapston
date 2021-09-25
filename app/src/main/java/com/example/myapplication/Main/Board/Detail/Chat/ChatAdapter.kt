@@ -31,6 +31,7 @@ class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.Comme
         var profile : ImageView = itemView.findViewById(R.id.commet_profile)
         var nickname : TextView = itemView.findViewById(R.id.commet_nickname)
         var comment : TextView = itemView.findViewById(R.id.comment_context)
+        var date : TextView = itemView.findViewById(R.id.comment_date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapter.CommentHolder {
@@ -40,6 +41,7 @@ class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.Comme
 
     override fun onBindViewHolder(holder: CommentHolder, position: Int) {
         var data = commentdto[position]
+        holder.date.text = data.date
         holder.nickname.text = data.userNickname
         holder.comment.text = data.message
         if(data.userprofile.toString() != "null")

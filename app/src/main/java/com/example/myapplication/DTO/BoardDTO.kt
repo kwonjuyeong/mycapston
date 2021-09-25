@@ -22,6 +22,7 @@ data class BoardDTO(
         var userNickname: String? = null,
         var userprofile : String? = null,
         var message: String? = null,
+        var date : String? = null,
         var readUser : Map<String,Object>? = null,
         var timestamp: Long? = null)
 }

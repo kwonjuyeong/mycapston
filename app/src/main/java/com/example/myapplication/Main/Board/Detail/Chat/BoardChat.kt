@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.DTO.MessageDTO
@@ -14,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_board_comment.*
 import kotlinx.android.synthetic.main.activity_board_comment.sv_root
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,6 +44,7 @@ class BoardChat : AppCompatActivity(){
         firestore.collection("userid").document(uid!!).get().addOnCompleteListener {
             if(it.isSuccessful){
                 currentDTO = it.result?.toObject(UserinfoDTO::class.java)!!
+                Log.e("값 받아오는거 확인", currentDTO.toString() )
             }
         }
         comment_recyclerView.apply {
@@ -51,17 +55,26 @@ class BoardChat : AppCompatActivity(){
         }
         btn_comment_send?.setOnClickListener{
             // 채팅내용 업로드
-            Chats.UID = uid
-            Chats.message = comment_text.text.toString()
-            Chats.userprofile = currentDTO.ProfileUrl
-            Chats.userNickname = currentDTO.nickname
-            Chats.timestamp = System.currentTimeMillis()
-            firestore.collection("Chat").document(commentUid).collection("Messages").document().set(Chats)
-            setLastMessage()
+            lifecycleScope.launch(Dispatchers.IO) {
+                updateChat()
+                setLastMessage()
+            }
             comment_text.setText("")
         }
     }
-    private fun setLastMessage(){
+    private suspend fun updateChat(){
+        val commentUid = intent.getStringExtra("commentUid")!!
+        Chats.UID = uid
+        Chats.message = comment_text.text.toString()
+        Chats.userprofile = currentDTO.ProfileUrl
+        Log.e("채팅 보낸사람 url", currentDTO.ProfileUrl.toString() )
+        Chats.userNickname = currentDTO.nickname
+        Chats.date = SimpleDateFormat("MM월 dd일").format(Date())
+        Chats.timestamp = System.currentTimeMillis()
+        firestore.collection("Chat").document(commentUid).collection("Messages").document().set(Chats)
+
+    }
+    private suspend fun setLastMessage(){
         val time = SimpleDateFormat("MM월 dd일").format(Date())
         val lastchat = comment_text.text.toString()
         val commentUid = intent.getStringExtra("commentUid")!!

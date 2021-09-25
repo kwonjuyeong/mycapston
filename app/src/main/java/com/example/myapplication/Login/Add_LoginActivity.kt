@@ -1,6 +1,7 @@
 package com.example.myapplication.Login
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -9,6 +10,7 @@ import android.media.Image
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -63,8 +65,8 @@ class Add_LoginActivity : AppCompatActivity() {
         //라디오 버튼 값 설정
         add_login_sex_input_set.setOnCheckedChangeListener { _, checked ->
             when (checked) {
-                com.example.myapplication.R.id.add_login_male_btn -> gender = "남"
-                com.example.myapplication.R.id.add_login_female_btn -> gender = "여"
+                R.id.add_login_male_btn -> gender = "남"
+                R.id.add_login_female_btn -> gender = "여"
             }
         }
         //이미지 업로드 이벤트 처리
@@ -99,17 +101,17 @@ class Add_LoginActivity : AppCompatActivity() {
                     cropImage(uri) //이미지를 선택하면 여기가 실행됨
                 }
                 photoUri = data?.data
+                Log.e("이미지 확인", photoUri.toString())
                 upload_image.setImageURI(photoUri)
             }
             CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
                 //그후, 이곳으로 들어와 RESULT_OK 상태라면 이미지 Uri를 결과 Uri로 저장!
                 val result = CropImage.getActivityResult(data)
-                if (resultCode == RESULT_OK) {
+                if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
                         upload_image.setImageBitmap(result.bitmap)
                         upload_image.setImageURI(result.uri)
                         photoUri = result.uri
-
                     }
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                     val error = result.error
@@ -119,6 +121,7 @@ class Add_LoginActivity : AppCompatActivity() {
             else -> {
                 finish()
             }
+
         }
 
     }

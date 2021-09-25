@@ -16,6 +16,7 @@ class Repo {
     private var firestore = FirebaseFirestore.getInstance()
     private var listdata = mutableListOf<BoardDTO>()
     private var contentsuid = arrayListOf<String>()
+    private var count = 0
 
     object StaticFunction {
         private var instance: Repo? = null
@@ -39,10 +40,6 @@ class Repo {
             }
 
     }
-
-
-
-
 
     fun getboarddata(): MutableList<BoardDTO> {
 //        firestore.collection("Board").orderBy("timestamp")
@@ -68,6 +65,8 @@ class Repo {
 
     fun getListdata(): LiveData<BoardDTO> {
         //listdata.clear()
+        count = listdata.size
+
         livedata = MutableLiveData<BoardDTO>()    // 객체 생
         if (listdata != null)
             listdata.clear()
@@ -76,6 +75,7 @@ class Repo {
                 if (querySnapshot == null) return@addSnapshotListener
                 for (snapshot in querySnapshot!!.documents) {
                     var item = snapshot.toObject(BoardDTO::class.java)
+
                     livedata!!.postValue(item!!)
                 }
             }
@@ -84,7 +84,7 @@ class Repo {
 
     fun getlistuid(): LiveData<String> {
         //contentsuid.clear()
-        if(contentsuid != null)
+        if(contentsuid == null)
             contentsuid.clear()
         liveboarduid = MutableLiveData<String>()
         firestore.collection("Board").orderBy("timestamp",Query.Direction.DESCENDING)

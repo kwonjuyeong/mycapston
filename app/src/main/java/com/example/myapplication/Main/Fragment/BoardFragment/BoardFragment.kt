@@ -1,5 +1,6 @@
 package com.example.myapplication.Main.Fragment.BoardFragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -33,7 +34,7 @@ class BoardFragment : Fragment() {
     private var contentsUid: ArrayList<String> = arrayListOf()
     private var repo : Repo
     private var boardListViewmodel = BoardListViewmodel()
-    private var boardListAdapter = BoardListAdapter(datalist, contentsUid)
+    private lateinit var boardListAdapter : BoardListAdapter
 
     init {
         repo = Repo.StaticFunction.getInstance()
@@ -44,14 +45,24 @@ class BoardFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        Log.e("보드 프레그먼", "onCreate: ", )
 
     }
 
     override fun onDetach() {
         super.onDetach()
+        Log.e("보드 프레그먼", "onDetach: ", )
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.e("보드 프레그먼", "onPause: ", )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("보드 프레그먼", "onResume: ", )
+    }
     // 뷰가 생성되었을때
     // 프레그먼트와 레이아웃을 연결시켜주는 부분
     override fun onCreateView(
@@ -62,7 +73,7 @@ class BoardFragment : Fragment() {
         //return super.onCreateView(inflater, container, savedInstanceState)
         //  inflater 레이아웃과 frag를 연결해줌
         val view = inflater.inflate(R.layout.frag_board, container, false)
-        getBoarddata()
+        //getBoarddata()
 
 
 
@@ -77,23 +88,22 @@ class BoardFragment : Fragment() {
         board_fagement_recycler_view.apply {
             var boardlistadapter: BoardListAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            boardlistadapter = BoardListAdapter(datalist, contentsUid)
+            boardlistadapter = BoardListAdapter()
             adapter = boardlistadapter
-
-
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onDestroyView() {
         super.onDestroyView()
-        boardListViewmodel.getListdata().observe (viewLifecycleOwner, Observer{
-            datalist.add(it)
-            boardListAdapter!!.notifyDataSetChanged()
-        })
-        boardListViewmodel.getlistuid().observe (viewLifecycleOwner, Observer{
-            contentsUid.add(it)
-            boardListAdapter!!.notifyDataSetChanged()
-        })
+//        boardListViewmodel.getListdata().observe (viewLifecycleOwner, Observer{
+//            datalist.add(it)
+//            boardListAdapter.notifyDataSetChanged()
+//        })
+//        boardListViewmodel.getlistuid().observe (viewLifecycleOwner, Observer{
+//            contentsUid.add(it)
+//            boardListAdapter.notifyDataSetChanged()
+//        })
     }
 
     private fun swipeRefresh() {
@@ -103,6 +113,7 @@ class BoardFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun getBoarddata() {
         datalist.clear()
         contentsUid.clear()
@@ -110,11 +121,11 @@ class BoardFragment : Fragment() {
         var uid = repo.getboardUid()
         for (i in data) {
             datalist.add(i)
-            boardListAdapter!!.notifyDataSetChanged()
+            boardListAdapter.notifyDataSetChanged()
         }
         for (j in uid) {
             contentsUid.add(j)
-            boardListAdapter!!.notifyDataSetChanged()
+            boardListAdapter.notifyDataSetChanged()
         }
     }
 }
