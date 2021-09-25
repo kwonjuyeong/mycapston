@@ -15,7 +15,6 @@ class MapRepo {
     private var log = mutableListOf<Double>()
     private var lat = mutableListOf<Double>()
     private var photoUrl = mutableListOf<String>()
-    private var user_Url = mutableListOf<Bitmap>()
 
     object StaticFunction {
         private var instance: MapRepo? = null
@@ -59,8 +58,6 @@ class MapRepo {
                 if (it != null) {
                     photoUrl.add(it["profileUrl"] as String)
                 }
-
-
             }
         }
     }

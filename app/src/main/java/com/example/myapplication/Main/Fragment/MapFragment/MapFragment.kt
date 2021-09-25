@@ -1,12 +1,17 @@
-package com.example.myapplication.Main.Fragment.MapFragment
+ package com.example.myapplication.Main.Fragment.MapFragment
 
 
 import android.Manifest
+import android.R.attr.bitmap
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.icu.number.NumberFormatter.with
+import android.icu.number.NumberRangeFormatter.with
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -18,9 +23,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -33,6 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.okhttp.Dispatcher
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_now_my_place.*
@@ -40,6 +46,15 @@ import kotlinx.android.synthetic.main.custom_marker.*
 import kotlinx.android.synthetic.main.frag_board.*
 import kotlinx.android.synthetic.main.frag_setting.*
 import kotlinx.android.synthetic.main.view_item_layout.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.io.IOException
+import java.lang.reflect.Array.get
+import java.net.URL
+import java.nio.file.Paths.get
 import java.util.*
 
 
@@ -53,6 +68,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     var firestore: FirebaseFirestore? = null
     var storage: FirebaseStorage? = null
     private var maprepo = MapRepo.StaticFunction.getInstance()
+    //private var image: Bitmap? = null
 
     private lateinit var marker12: ImageView
 
@@ -217,7 +233,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    // lifecycleScope - 쓰는 방법을 알아야함.
+    // lifecycleScope(코루틴 쥰나 어려움) 써야됨
      /*fun getBitmap(url: String): Bitmap? {
 
         try {
@@ -234,6 +250,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
    }*/
 
 
+    //이것도 코루틴
     /*
     private suspend fun getBitmap(url: String): Bitmap {
         val loading = ImageLoader(requireContext())
@@ -243,11 +260,40 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         return (result as BitmapDrawable).bitmap
     }*/
 
+/*
+    // type이 안맞음
+    private fun getBitmap(url : String) : Bitmap? {
+
+        var bmp : Bitmap ?=null
+        Picasso.get().load(url).into(object : com.squareup.picasso.Target {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                bmp =  bitmap
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
+
+            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {}
+        })
+        return bmp
+    }
+*/
 
 
+
+/*
+    private fun getBitmapFromURL(src: String) {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            try {
+                val url = URL(src)
+                val bitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                image = Bitmap.createScaledBitmap(bitMap, 100, 100, true)
+            } catch (e: IOException) {
+                // Log exception
+            }
+        }
+    }*/
 
     private fun otherUserMaker(googleMap: GoogleMap) {
-        //다른 사용자들 마커 찍기
         var latitude = mutableListOf<Double>()
         var longitude = mutableListOf<Double>()
         var user_URL = mutableListOf<String>()
@@ -258,33 +304,43 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         for (i in 0 until latitude.size step (1)) {
 
-           var img = Picasso.get().load(user_URL[i]).into(marker12)
+            /*var img = Picasso.get().load(user_URL[i]).into(marker12)
+            val url = URL(user_URL[i])
+            val imageBitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+*/
 
+            var bitmap: Bitmap = Picasso.with(context).load(user_URL[i]).get()
 
-            /*if(user_URL[i] != null) {
-
-                    val makerOptions = MarkerOptions()
-                    makerOptions
-                        .position(LatLng(latitude[i], longitude[i]))
-                        .title("닉네임$i") //카드뷰로 대체
-
-                }else {*/
             val makerOptions = MarkerOptions()
             makerOptions
                 .position(LatLng(latitude[i], longitude[i]))
-                .title("닉네임$i") //카드뷰로 대체
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                .title("")
+                .icon(BitmapDescriptorFactory.fromBitmap((bitmap)))
 
-                //.icon(BitmapDescriptorFactory.fromResource(R.id.markers1))
             googleMap.addMarker(makerOptions)
 
+            /*val makerOptions = MarkerOptions()
+            makerOptions
+                .position(LatLng(latitude[i], longitude[i]))
+                .title()
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))*/
         }
-
     }
 
 
-    @SuppressLint("MissingPermission")
+
     override fun onMapReady(googleMap: GoogleMap) {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            return
+        }
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
@@ -295,7 +351,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 val marker = MarkerOptions()
                     .position(LatLng(37.0, 127.0))
 
-                //otherUserMaker(googleMap)
 
                     //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
                     recent_button.setOnClickListener {
