@@ -14,7 +14,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20.83dp"
-                android:layout_marginTop="15sp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_back" />
@@ -23,11 +23,10 @@
                 android:id="@+id/phone_auth_tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="휴대폰 인증"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/black"
+                android:text="회원가입"
+                android:textColor="@color/very_little_gray"
                 android:fontFamily="@font/jalnan"
-                android:textSize="22sp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@id/phone_auth_tv_cancel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -35,15 +34,13 @@
 
             <View
                 android:id="@+id/phone_auth_view_top"
-                android:layout_width="300dp"
-                android:layout_height="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
                 android:background="#ff9424"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/phone_auth_tv_title" />
-
+                app:layout_constraintTop_toBottomOf="@id/phone_auth_tv_cancel" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/phone_auth_tv_phone_auth"
@@ -66,7 +63,7 @@
                 android:layout_marginEnd="32dp"
                 android:text="본인 확인 및 중복 가입을 방지하기 위한 절차입니다.\n휴대폰 번호를 입력해주세요."
                 android:textColor="@color/medium_dark_gray"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:fontFamily="@font/jalnan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/phone_auth_tv_phone_auth"
@@ -81,7 +78,7 @@
                 android:text="휴대폰 번호"
                 android:fontFamily="@font/jalnan"
                 android:textColor="@color/light_gray"
-                android:textSize="12sp"
+                android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/phone_auth_tv_phone_auth_content" />
 
@@ -93,8 +90,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp"
                 android:hint="@string/phoneNumberInput"
-                android:fontFamily="@font/jalnan"
-                android:textSize="16sp"
+                android:fontFamily="@font/maru"
+                android:textSize="16dp"
                 app:layout_constraintEnd_toStartOf="@id/sendVerificationCodeButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phone_auth_tv_phone_num" />
@@ -107,7 +104,7 @@
                 android:background="@drawable/signiture_btn"
                 android:text="@string/sendVerificationCodeButton"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="12dp"
                 android:fontFamily="@font/jalnan"
                 app:layout_constraintBottom_toBottomOf="@id/phoneNumberInput"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +118,7 @@
                 android:layout_marginTop="55dp"
                 android:text="인증번호"
                 android:textColor="@color/light_gray"
-                android:textSize="12sp"
+                android:textSize="12dp"
                 android:fontFamily="@font/jalnan"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/phoneNumberInput" />
@@ -136,10 +133,10 @@
                 android:hint="숫자 6자리"
                 android:inputType="numberDecimal"
                 android:maxLength="6"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintEnd_toStartOf="@id/sendVerificationCodeButton"
                 app:layout_constraintStart_toStartOf="parent"
-                android:fontFamily="@font/jalnan"
+                android:fontFamily="@font/maru"
                 app:layout_constraintTop_toBottomOf="@+id/phone_auth_tv_auth_num" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -152,7 +149,7 @@
                 android:background="@drawable/signiture_btn"
                 android:text="인증완료"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:fontFamily="@font/jalnan"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

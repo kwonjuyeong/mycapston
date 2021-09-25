@@ -55,11 +55,13 @@
             android:id="@+id/textView12"
             android:layout_width="140dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/jalnan"
             android:text="내용을 입력하세요" />
 
         <EditText
             android:id="@+id/textView11"
             android:layout_width="228dp"
+            android:fontFamily="@font/maru"
             android:layout_height="match_parent"
             android:hint="내용을 입력하세요" />
     </LinearLayout>
@@ -78,12 +80,14 @@
             android:id="@+id/textView13"
             android:layout_width="140dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/jalnan"
             android:text="주소변경" />
 
         <EditText
             android:id="@+id/textView14"
             android:layout_width="229dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/maru"
             android:hint="내용을 입력하세요" />
     </LinearLayout>
 
@@ -101,12 +105,14 @@
             android:id="@+id/textView15"
             android:layout_width="140dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/jalnan"
             android:text="비밀번호변경" />
 
         <EditText
             android:id="@+id/textView16"
             android:layout_width="230dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/maru"
             android:hint="내용을 입력하세요" />
     </LinearLayout>
 
@@ -129,6 +135,7 @@
         <EditText
             android:id="@+id/textView3"
             android:layout_width="223dp"
+            android:fontFamily="@font/maru"
             android:layout_height="86dp"
             android:hint="내용을 입력하세요" />
     </LinearLayout>

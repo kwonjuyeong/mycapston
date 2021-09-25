@@ -38,10 +38,10 @@
             android:id="@+id/main_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:layout_marginTop="5dp"
+            android:text="Main page"
+            android:textColor="@color/little_dark_gray"
+            android:textSize="20dp"
+            android:fontFamily="@font/jalnan"
             app:layout_constraintBottom_toBottomOf="@id/main_page_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,13 +49,13 @@
 
         <View
             android:id="@+id/main_page_view_top"
-            android:layout_width="300dp"
-            android:layout_height="5dp"
-            android:layout_marginTop="5dp"
-            android:background="#ff9424"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_page_title" />
+            app:layout_constraintTop_toBottomOf="@id/main_page_cancel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -198,6 +198,7 @@
             android:layout_height="match_parent"
             android:layout_margin="15dp"
             android:text="~님 오늘은 치킨각!"
+            android:fontFamily="@font/jalnan"
             android:textColor="@color/main"
             android:textSize="20sp" />
     </LinearLayout>

@@ -51,6 +51,7 @@
             android:layout_height="95dp"
             android:layout_weight="1"
             android:background="#C3B9AB"
+            android:fontFamily="@font/jalnan"
             android:text="안녕하세요 함께의 고객센터입니다. 불편하신 점이 있으시 다면 아래로 연락을 해 주시길 바랍니다. " />
 
 
@@ -88,6 +89,7 @@
                     android:layout_width="114dp"
                     android:layout_height="50dp"
                     android:background="#90C9F6"
+                    android:fontFamily="@font/jalnan"
                     android:padding="3dip"
                     android:text="1" />
 
@@ -95,6 +97,7 @@
                     android:layout_width="251dp"
                     android:layout_height="match_parent"
                     android:gravity="left"
+                    android:fontFamily="@font/maru"
                     android:padding="3dip"
                     android:text="2" />
             </TableRow>
@@ -106,12 +109,14 @@
                     android:layout_height="50dp"
                     android:background="#90C9F6"
                     android:padding="3dip"
+                    android:fontFamily="@font/jalnan"
                     android:text="3" />
 
                 <TextView
                     android:layout_width="216dp"
                     android:layout_height="match_parent"
                     android:gravity="left"
+                    android:fontFamily="@font/maru"
                     android:padding="3dip"
                     android:text="4" />
             </TableRow>
@@ -141,12 +146,14 @@
                     android:layout_height="50dp"
                     android:background="#90C9F6"
                     android:padding="3dip"
+                    android:fontFamily="@font/jalnan"
                     android:text="1" />
 
                 <TextView
                     android:layout_width="251dp"
                     android:layout_height="match_parent"
                     android:gravity="left"
+                    android:fontFamily="@font/maru"
                     android:padding="3dip"
                     android:text="2" />
             </TableRow>
@@ -158,11 +165,13 @@
                     android:layout_height="50dp"
                     android:background="#90C9F6"
                     android:padding="3dip"
+                    android:fontFamily="@font/jalnan"
                     android:text="3" />
 
                 <TextView
                     android:layout_width="216dp"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/maru"
                     android:gravity="left"
                     android:padding="3dip"
                     android:text="4" />

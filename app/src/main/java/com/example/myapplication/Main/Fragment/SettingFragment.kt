@@ -63,38 +63,46 @@ class SettingFragment : Fragment(){
         fragmentTransaction.setCustomAnimations(R.anim.horizon_enter, R.anim.none)//위아래 애니메이션(62~63)
 
 
+
+        button_expire.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        button_personal.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, ChangeInformationLaw::class.java)
+                startActivity(intent)
+            }
+        }
+        button_logout.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        button_service.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, ChangeCustomer::class.java)
+                startActivity(intent)
+            }
+        }
+
         button_changeInfo.setOnClickListener {
             activity?.let{
                 val intent = Intent(context, ChangeInformation::class.java)
                 startActivity(intent)
             }
 
-            button_service.setOnClickListener {
-                activity?.let {
-                    val intent = Intent(context, ChangeCustomer::class.java)
-                    startActivity(intent)
-                }
-            }
 
-            button_logout.setOnClickListener {
-                activity?.let {
-                    val intent = Intent(context, LoginActivity::class.java)
-                    startActivity(intent)
-                }
-            }
 
-            button_personal.setOnClickListener {
-                activity?.let {
-                    val intent = Intent(context, ChangeInformationLaw::class.java)
-                    startActivity(intent)
-                }
-            }
-            button_expire.setOnClickListener {
-                activity?.let {
-                    val intent = Intent(context, LoginActivity::class.java)
-                    startActivity(intent)
-                }
-            }
+
+
+
+
 
         }
 
