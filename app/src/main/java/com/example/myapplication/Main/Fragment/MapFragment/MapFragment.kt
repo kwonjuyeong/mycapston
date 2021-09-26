@@ -266,7 +266,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             val connection = url.openConnection() as HttpURLConnection
             connection.doInput = true
             connection.connect()
-           val input = connection.inputStream
+            val input = connection.inputStream
             return BitmapFactory.decodeStream(input)
         }catch (e:IOException){
         }
@@ -312,39 +312,27 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     makerOptions1
                         .position(LatLng(latitude[i], longitude[i]))
                         .title("")
+
                     lifecycleScope.launch(Dispatchers.Main) {
                         googleMap.addMarker(makerOptions1)
                     }
                 }
             }
-
         }
     }
 
 
-
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
 
-            return
-        }
 
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
 
                 //초기 값 설정(주변 위치로 나옴)
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.0, 127.0)))
-                googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
-                val marker = MarkerOptions()
-                    .position(LatLng(37.0, 127.0))
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.3306890, 126.30664)))
+                googleMap.moveCamera(CameraUpdateFactory.zoomTo(17f))
 
 
                     //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
