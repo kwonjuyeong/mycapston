@@ -2,16 +2,11 @@
 
 
 import android.Manifest
-import android.R.attr.bitmap
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -38,23 +33,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.okhttp.Dispatcher
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_now_my_place.*
-import kotlinx.android.synthetic.main.custom_marker.*
-import kotlinx.android.synthetic.main.frag_board.*
-import kotlinx.android.synthetic.main.frag_setting.*
-import kotlinx.android.synthetic.main.view_item_layout.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.lang.reflect.Array.get
+import java.net.HttpURLConnection
 import java.net.URL
-import java.nio.file.Paths.get
 import java.util.*
 
 
@@ -68,7 +52,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     var firestore: FirebaseFirestore? = null
     var storage: FirebaseStorage? = null
     private var maprepo = MapRepo.StaticFunction.getInstance()
-    //private var image: Bitmap? = null
 
     private lateinit var marker12: ImageView
 
@@ -233,22 +216,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    // lifecycleScope(코루틴 쥰나 어려움) 써야됨
-     /*fun getBitmap(url: String): Bitmap? {
-
-        try {
-            val url = URL(url)
-            val connection = url.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
-           val input = connection.inputStream
-           val bitmap = BitmapFactory.decodeStream(input)
-    return bitmap
-        }catch (e:IOException){
-        }
-        return null
-   }*/
-
 
     //이것도 코루틴
     /*
@@ -275,10 +242,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {}
         })
         return bmp
-    }
-*/
-
-
+    }*/
 
 /*
     private fun getBitmapFromURL(src: String) {
@@ -291,7 +255,25 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 // Log exception
             }
         }
-    }*/
+    }
+*/
+
+
+     private fun getBitmap(url: String): Bitmap? {
+
+        try {
+            val url = URL(url)
+            val connection = url.openConnection() as HttpURLConnection
+            connection.doInput = true
+            connection.connect()
+           val input = connection.inputStream
+            return BitmapFactory.decodeStream(input)
+        }catch (e:IOException){
+        }
+        return null
+   }
+
+
 
     private fun otherUserMaker(googleMap: GoogleMap) {
         var latitude = mutableListOf<Double>()
@@ -308,22 +290,34 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             val url = URL(user_URL[i])
             val imageBitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
 */
+            //var bitmap: Bitmap = Picasso.with(context).load(user_URL[i]).get()
 
-            var bitmap: Bitmap = Picasso.with(context).load(user_URL[i]).get()
 
-            val makerOptions = MarkerOptions()
-            makerOptions
-                .position(LatLng(latitude[i], longitude[i]))
-                .title("")
-                .icon(BitmapDescriptorFactory.fromBitmap((bitmap)))
+            lifecycleScope.launch(Dispatchers.IO) {
+                val bitmap1 = getBitmap(user_URL[i])
 
-            googleMap.addMarker(makerOptions)
+                if(bitmap1!=null){
+                val makerOptions = MarkerOptions()
+                makerOptions
+                    .position(LatLng(latitude[i], longitude[i]))
+                    .title("")
+                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
 
-            /*val makerOptions = MarkerOptions()
-            makerOptions
-                .position(LatLng(latitude[i], longitude[i]))
-                .title()
-                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))*/
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        googleMap.addMarker(makerOptions)
+                    }
+                }
+                else{
+                    val makerOptions1 = MarkerOptions()
+                    makerOptions1
+                        .position(LatLng(latitude[i], longitude[i]))
+                        .title("")
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        googleMap.addMarker(makerOptions1)
+                    }
+                }
+            }
+
         }
     }
 
@@ -341,6 +335,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
             return
         }
+
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
