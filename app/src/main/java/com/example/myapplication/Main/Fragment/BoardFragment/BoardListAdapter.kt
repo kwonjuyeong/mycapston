@@ -2,11 +2,9 @@ package com.example.myapplication.Main.Fragment.BoardFragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
-import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
 import com.example.myapplication.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -26,22 +23,25 @@ class BoardListAdapter() : RecyclerView.Adapter<BoardListAdapter.CTViewholder>()
     private var contentsUid = mutableListOf<String>()
 
     init {
+        if (boarddtos.size > 0 && contentsUid.size > 0) {
+            boarddtos.clear()
+            contentsUid.clear()
+        }
         firestore.orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { value, error ->
+                boarddtos.clear()
+                contentsUid.clear()
                 if (value == null) return@addSnapshotListener
-                for (snapshot in value!!.documents) {
-                    var item = snapshot.toObject(BoardDTO::class.java)
+                for (snapshot in value.documents) {
+                    val item = snapshot.toObject(BoardDTO::class.java)
                     boarddtos.add(item!!)
                     contentsUid.add(snapshot.id)
-                    Log.e("내용 확인2", contentsUid.toString() )
-                    Log.e("내용 확인1", boarddtos.toString() )
                 }
-                Log.e("내용 확인3", contentsUid.toString() )
-                Log.e("내용 확인4", boarddtos.toString() )
                 notifyDataSetChanged()
             }
-    }
 
+
+    }
 
     class CTViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val profile: ImageView = itemView.findViewById(R.id.boardlist_profile)
@@ -50,12 +50,8 @@ class BoardListAdapter() : RecyclerView.Adapter<BoardListAdapter.CTViewholder>()
         val boarddate: TextView = itemView.findViewById(R.id.boardlist_date)
         val boardimage: ImageView = itemView.findViewById(R.id.boardlist_image)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CTViewholder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.board_list_item, parent, false)
-//        boarddtos.clear()
-//        contentsUid.clear()
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.board_list_item, parent, false)
         return CTViewholder(itemView)
     }
 
@@ -79,15 +75,10 @@ class BoardListAdapter() : RecyclerView.Adapter<BoardListAdapter.CTViewholder>()
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
-
-
-    override fun getItemCount() = boarddtos.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun addItems(items: List<BoardDTO>) {
-        this.boarddtos.addAll(items)
-        notifyDataSetChanged()
+    override fun getItemCount()= boarddtos.size
+    fun clear(){
+        boarddtos.clear()
+        contentsUid.clear()
     }
-
 }
 

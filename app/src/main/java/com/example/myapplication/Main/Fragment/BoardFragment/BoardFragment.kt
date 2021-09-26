@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
@@ -19,6 +20,7 @@ import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
 import com.example.myapplication.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.frag_board.*
+import kotlinx.coroutines.launch
 
 
 class BoardFragment : Fragment() {
@@ -30,56 +32,23 @@ class BoardFragment : Fragment() {
     }
 
     //private lateinit var boardlistadapter : BoardListAdapter
-    private var datalist = mutableListOf<BoardDTO>()
-    private var contentsUid: ArrayList<String> = arrayListOf()
     private var repo : Repo
-    private var boardListViewmodel = BoardListViewmodel()
-    private lateinit var boardListAdapter : BoardListAdapter
+    private var boardListAdapter = BoardListAdapter()
 
     init {
         repo = Repo.StaticFunction.getInstance()
     }
 
-
-    // 메모리에 적제 되었을때
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Log.e("보드 프레그먼", "onCreate: ", )
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.e("보드 프레그먼", "onDetach: ", )
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.e("보드 프레그먼", "onPause: ", )
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.e("보드 프레그먼", "onResume: ", )
-    }
-    // 뷰가 생성되었을때
-    // 프레그먼트와 레이아웃을 연결시켜주는 부분
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
-        //  inflater 레이아웃과 frag를 연결해줌
         val view = inflater.inflate(R.layout.frag_board, container, false)
-        //getBoarddata()
-
-
-
         return view
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 여기다가 view 구현하는거 정의 하면 됨 딴거 다 쓰잘때기 없음
@@ -90,6 +59,14 @@ class BoardFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             boardlistadapter = BoardListAdapter()
             adapter = boardlistadapter
+            boradSwiprefresh.setOnRefreshListener {
+                //notices.clear() // 리스트를 한 번 비워주고
+                //crawler.activateBot(page) // 리스트에 값을 넣어주고
+                boardListAdapter.clear()
+                boardListAdapter.notifyDataSetChanged() // 새로고침 하고
+                boradSwiprefresh.isRefreshing = false // 새로고침을 완료하면 아이콘을 없앤다.
+
+            }
         }
     }
 
@@ -106,26 +83,4 @@ class BoardFragment : Fragment() {
 //        })
     }
 
-    private fun swipeRefresh() {
-        boradSwiprefresh.setOnRefreshListener {
-            boradSwiprefresh.isRefreshing = false
-            boardListAdapter!!.notifyDataSetChanged()
-        }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun getBoarddata() {
-        datalist.clear()
-        contentsUid.clear()
-        var data = repo.getboarddata()
-        var uid = repo.getboardUid()
-        for (i in data) {
-            datalist.add(i)
-            boardListAdapter.notifyDataSetChanged()
-        }
-        for (j in uid) {
-            contentsUid.add(j)
-            boardListAdapter.notifyDataSetChanged()
-        }
-    }
 }
