@@ -267,7 +267,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             connection.doInput = true
             connection.connect()
             val input = connection.inputStream
-            return BitmapFactory.decodeStream(input)
+            val bitmap = BitmapFactory.decodeStream(input)
+            val image = Bitmap.createScaledBitmap(bitmap, 50, 50, true)
+            return image
         }catch (e:IOException){
         }
         return null
@@ -276,6 +278,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
 
     private fun otherUserMaker(googleMap: GoogleMap) {
+        lifecycleScope.launch(Dispatchers.IO) {
         var latitude = mutableListOf<Double>()
         var longitude = mutableListOf<Double>()
         var user_URL = mutableListOf<String>()
@@ -285,16 +288,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         longitude = maprepo.returnLongitude()
 
         for (i in 0 until latitude.size step (1)) {
-
             /*var img = Picasso.get().load(user_URL[i]).into(marker12)
             val url = URL(user_URL[i])
             val imageBitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
 */
             //var bitmap: Bitmap = Picasso.with(context).load(user_URL[i]).get()
 
-
-            lifecycleScope.launch(Dispatchers.IO) {
                 val bitmap1 = getBitmap(user_URL[i])
+                Log.e("zzzzzzz",bitmap1.toString())
 
                 if(bitmap1!=null){
                 val makerOptions = MarkerOptions()
@@ -324,7 +325,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
-
 
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
