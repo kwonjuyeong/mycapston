@@ -5,8 +5,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.*
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -19,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.graphics.applyCanvas
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
@@ -216,8 +216,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
-    //이것도 코루틴
     /*
     private suspend fun getBitmap(url: String): Bitmap {
         val loading = ImageLoader(requireContext())
@@ -258,7 +256,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 */
 
-
      private fun getBitmap(url: String): Bitmap? {
 
         try {
@@ -268,7 +265,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             connection.connect()
             val input = connection.inputStream
             val bitmap = BitmapFactory.decodeStream(input)
-            val image = Bitmap.createScaledBitmap(bitmap, 50, 50, true)
+            val image = Bitmap.createScaledBitmap(bitmap, 80, 80, true)
             return image
         }catch (e:IOException){
         }
@@ -276,7 +273,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
    }
 
 
-
+    //다른 사용자 마커 찍는 함수 with courutine
     private fun otherUserMaker(googleMap: GoogleMap) {
         lifecycleScope.launch(Dispatchers.IO) {
         var latitude = mutableListOf<Double>()
@@ -296,17 +293,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
                 val bitmap1 = getBitmap(user_URL[i])
 
-                Log.e("zzzzzzz",bitmap1.toString())
-
                 if(bitmap1!=null){
                 val makerOptions = MarkerOptions()
                 makerOptions
                     .position(LatLng(latitude[i], longitude[i]))
-                    .title("")
+                    .title("cityname")
                     .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
 
                     lifecycleScope.launch(Dispatchers.Main) {
                         googleMap.addMarker(makerOptions)
+                        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
                     }
                 }
                 else{
@@ -332,8 +328,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
 
                 //초기 값 설정(주변 위치로 나옴)
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.3306890, 126.30664)))
-                googleMap.moveCamera(CameraUpdateFactory.zoomTo(17f))
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
+                googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
 
 
                     //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
@@ -342,7 +338,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
                         val marker = MarkerOptions()
                             .position(myLocation)
-                            .title("현재 위치")
+                            .title(location?.let { it1 ->
+                                getCityName(location.latitude,
+                                    it1.longitude)
+                            })
                             .snippet("입니다.")
                         googleMap.addMarker(marker)
 
