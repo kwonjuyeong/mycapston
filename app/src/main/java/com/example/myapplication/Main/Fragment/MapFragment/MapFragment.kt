@@ -295,6 +295,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             //var bitmap: Bitmap = Picasso.with(context).load(user_URL[i]).get()
 
                 val bitmap1 = getBitmap(user_URL[i])
+
                 Log.e("zzzzzzz",bitmap1.toString())
 
                 if(bitmap1!=null){
