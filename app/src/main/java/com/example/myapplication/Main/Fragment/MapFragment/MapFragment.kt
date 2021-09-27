@@ -16,7 +16,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.graphics.applyCanvas
 import androidx.fragment.app.Fragment
@@ -29,10 +32,13 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_board_detail.*
+import kotlinx.android.synthetic.main.activity_board_post.*
 import kotlinx.android.synthetic.main.activity_now_my_place.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,8 +58,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     var firestore: FirebaseFirestore? = null
     var storage: FirebaseStorage? = null
     private var maprepo = MapRepo.StaticFunction.getInstance()
-
-    private lateinit var marker12: ImageView
 
 
     companion object {
@@ -89,9 +93,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mView = main_view.findViewById(R.id.realtime_map) as MapView
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
-
-        val sub_view = inflater.inflate(R.layout.custom_marker, container, false)
-        marker12 = sub_view.findViewById(R.id.markers1) as ImageView
+        main_view.findViewById<CardView>(R.id.card_view).visibility = View.GONE
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -279,43 +281,58 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         var latitude = mutableListOf<Double>()
         var longitude = mutableListOf<Double>()
         var user_URL = mutableListOf<String>()
+        var nickname = mutableListOf<String>()
+            var title = mutableListOf<String>()
+            var contents = mutableListOf<String>()
+            //var gender = mutableListOf<String>()
+            var date = mutableListOf<String>()
 
         user_URL = maprepo.returnImage()
         latitude = maprepo.returnLatitude()
         longitude = maprepo.returnLongitude()
+        nickname = maprepo.returnnickname()
+            title = maprepo.returntitle()
+            contents = maprepo.returncontents()
+            //gender = maprepo.returngender()
+            date = maprepo.returndate()
 
         for (i in 0 until latitude.size step (1)) {
-            /*var img = Picasso.get().load(user_URL[i]).into(marker12)
-            val url = URL(user_URL[i])
-            val imageBitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-*/
-            //var bitmap: Bitmap = Picasso.with(context).load(user_URL[i]).get()
 
                 val bitmap1 = getBitmap(user_URL[i])
 
                 if(bitmap1!=null){
-                val makerOptions = MarkerOptions()
-                makerOptions
-                    .position(LatLng(latitude[i], longitude[i]))
-                    .title("cityname")
-                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
-
                     lifecycleScope.launch(Dispatchers.Main) {
-                        googleMap.addMarker(makerOptions)
-                        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+                        val makerOptions = MarkerOptions()
+                        makerOptions
+                            .position(LatLng(latitude[i], longitude[i]))
+                            .title(nickname[i])
+                            .snippet(title[i])
+                            .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
+
+                        val marker : Marker = googleMap.addMarker(makerOptions)!!
+                        marker.tag = date[i] + "/" + contents[i] //+ "/" + gender[i]
+
+
+                        googleMap.setOnMarkerClickListener(object :GoogleMap.OnMarkerClickListener{
+                            override fun onMarkerClick(marker: Marker): Boolean {
+                                card_view.visibility = View.VISIBLE
+                                var arr = marker.tag.toString().split("/")
+                                board_nickname.text = marker.title
+                                board_title.text = marker.snippet
+                                board_time.text = arr[0]
+                                board_contents.text = arr[1]
+                                //board_gender.text = arr[2]
+                                return false
+                            }
+                        })
+                        googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener{
+                            override fun onMapClick(p0: LatLng) {
+                                card_view.visibility = View.GONE
+                            }
+                        })
                     }
                 }
-                else{
-                    val makerOptions1 = MarkerOptions()
-                    makerOptions1
-                        .position(LatLng(latitude[i], longitude[i]))
-                        .title("")
-
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        googleMap.addMarker(makerOptions1)
-                    }
-                }
-            }
+        }
         }
     }
 
