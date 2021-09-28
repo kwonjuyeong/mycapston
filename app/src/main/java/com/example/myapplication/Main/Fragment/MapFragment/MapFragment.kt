@@ -162,7 +162,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getCityName(lat: Double, long: Double): String {
-        //var countryName = ""
         var cityName: String = ""
         var doName: String = ""
         var jibunName: String = ""
@@ -170,14 +169,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         var geoCoder = Geocoder(requireContext(), Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)
 
-        //countryName = Adress.get(0).countryName
         cityName = Adress.get(0).locality
         doName = Adress.get(0).thoroughfare
         jibunName = Adress.get(0).featureName
 
-        Toast.makeText(context, cityName + " " + doName + " " + jibunName, Toast.LENGTH_LONG)
-            .show()
-        return cityName
+        Toast.makeText(context, cityName + " " + doName + " " + jibunName, Toast.LENGTH_LONG).show()
+        return cityName + doName
     }
 
     @SuppressLint("MissingPermission")
@@ -197,12 +194,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var lastLocation: Location = locationResult.lastLocation
-            Log.e(
-                "위도 경",
-                "You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(
-                    lastLocation.latitude, lastLocation.longitude
-                )
-            )
         }
     }
 
@@ -278,19 +269,19 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     //다른 사용자 마커 찍는 함수 with courutine
     private fun otherUserMaker(googleMap: GoogleMap) {
         lifecycleScope.launch(Dispatchers.IO) {
-        var latitude = mutableListOf<Double>()
-        var longitude = mutableListOf<Double>()
-        var user_URL = mutableListOf<String>()
-        var nickname = mutableListOf<String>()
+            var latitude = mutableListOf<Double>()
+            var longitude = mutableListOf<Double>()
+            var user_URL = mutableListOf<String>()
+            var nickname = mutableListOf<String>()
             var title = mutableListOf<String>()
             var contents = mutableListOf<String>()
             //var gender = mutableListOf<String>()
             var date = mutableListOf<String>()
 
-        user_URL = maprepo.returnImage()
-        latitude = maprepo.returnLatitude()
-        longitude = maprepo.returnLongitude()
-        nickname = maprepo.returnnickname()
+            user_URL = maprepo.returnImage()
+            latitude = maprepo.returnLatitude()
+            longitude = maprepo.returnLongitude()
+            nickname = maprepo.returnnickname()
             title = maprepo.returntitle()
             contents = maprepo.returncontents()
             //gender = maprepo.returngender()
@@ -298,9 +289,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         for (i in 0 until latitude.size step (1)) {
 
-                val bitmap1 = getBitmap(user_URL[i])
+            val bitmap1 = getBitmap(user_URL[i])
 
                 if(bitmap1!=null){
+
                     lifecycleScope.launch(Dispatchers.Main) {
                         val makerOptions = MarkerOptions()
                         makerOptions
@@ -309,19 +301,20 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                             .snippet(title[i])
                             .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
 
-                        val marker : Marker = googleMap.addMarker(makerOptions)!!
-                        marker.tag = date[i] + "/" + contents[i] //+ "/" + gender[i]
+                        val marker1 : Marker = googleMap.addMarker(makerOptions)!!
+                        marker1.tag = date[i] + "/" + contents[i] +"/"  //+ "/" + gender[i]
 
 
                         googleMap.setOnMarkerClickListener(object :GoogleMap.OnMarkerClickListener{
-                            override fun onMarkerClick(marker: Marker): Boolean {
+                            override fun onMarkerClick(marker1: Marker): Boolean {
                                 card_view.visibility = View.VISIBLE
-                                var arr = marker.tag.toString().split("/")
-                                board_nickname.text = marker.title
-                                board_title.text = marker.snippet
+                                var arr = marker1.tag.toString().split("/")
+                                board_nickname.text = marker1.title
+                                board_title.text = marker1.snippet
                                 board_time.text = arr[0]
                                 board_contents.text = arr[1]
-                                //board_gender.text = arr[2]
+                                //board_gender.text = arr[4]
+
                                 return false
                             }
                         })
@@ -330,9 +323,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                                 card_view.visibility = View.GONE
                             }
                         })
+
                     }
                 }
-        }
+            }
         }
     }
 
@@ -344,11 +338,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             .addOnSuccessListener { location: Location? ->
                 var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
 
-                //초기 값 설정(주변 위치로 나옴)
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
-                googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
-
-
                     //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
                     recent_button.setOnClickListener {
                         googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
@@ -356,11 +345,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         val marker = MarkerOptions()
                             .position(myLocation)
                             .title(location?.let { it1 ->
-                                getCityName(location.latitude,
+                                getCityName(it1.latitude,
                                     it1.longitude)
                             })
                             .snippet("입니다.")
-                        googleMap.addMarker(marker)
+                    googleMap.addMarker(marker)
+
 
                         otherUserMaker(googleMap)
                     }
