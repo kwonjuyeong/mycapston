@@ -69,8 +69,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
+        RequestPermission()
         getLastLocation()
-        //RequestPermission()
+
 
         storage = FirebaseStorage.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -159,14 +160,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+
     private fun getCityName(lat: Double, long: Double): String {
         //var countryName = ""
         var cityName: String = ""
         var doName: String = ""
         var jibunName: String = ""
 
-        var geoCoder = Geocoder(requireContext(), Locale.getDefault())
-        var Adress = geoCoder.getFromLocation(lat, long, 3)
+        val geoCoder = Geocoder(requireContext(), Locale.getDefault())
+        val Adress = geoCoder.getFromLocation(lat, long, 3)
 
         //countryName = Adress.get(0).countryName
         cityName = Adress.get(0).locality
@@ -175,7 +177,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         Toast.makeText(context, cityName + " " + doName + " " + jibunName, Toast.LENGTH_LONG)
             .show()
-        return cityName
+        return "{$cityName}/${doName}"
     }
 
     @SuppressLint("MissingPermission")

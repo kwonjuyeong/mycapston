@@ -21,7 +21,7 @@ class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatListHolder>()  {
     private var chatRepo = ChatRepo()
     init {
         chatRepo = ChatRepo.StaticFunction.getInstance()
-        lastMessageDTO = chatRepo.returnLastMessageDTO()
+//        lastMessageDTO = chatRepo.returnLastMessageDTO()
         notifyDataSetChanged()
     }
     class ChatListHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
@@ -52,6 +52,4 @@ class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatListHolder>()  {
     }
 
     override fun getItemCount() = lastMessageDTO.size
-
-
 }

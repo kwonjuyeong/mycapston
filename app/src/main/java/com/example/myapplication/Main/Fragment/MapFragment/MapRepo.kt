@@ -15,6 +15,13 @@ class MapRepo {
     private var log = mutableListOf<Double>()
     private var lat = mutableListOf<Double>()
     private var photoUrl = mutableListOf<String>()
+    private var nickname = mutableListOf<String>()
+    private var gender = mutableListOf<String>()
+    private var likecount = mutableListOf<Int>()
+    private var writed_date = mutableListOf<String>()
+    private var title = mutableListOf<String>()
+    private var contents = mutableListOf<String>()
+
 
     object StaticFunction {
         private var instance: MapRepo? = null
@@ -46,6 +53,10 @@ class MapRepo {
                 if (it != null) {
                     log.add(it["longitude"] as Double)
                     lat.add(it["latitude"] as Double)
+                    nickname.add(it["nickname"] as String)
+                    gender.add(it["gender"] as String)
+                    likecount.add(it["likecount"]as Int)
+
                 }
             }
         }
@@ -61,8 +72,6 @@ class MapRepo {
             }
         }
     }
-
-
 /*
     fun getBitmap(url: MutableList<String>) {
         for (i in url) {

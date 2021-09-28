@@ -5,6 +5,7 @@ package com.example.myapplication.Main.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
@@ -16,6 +17,8 @@ import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
 import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @Suppress("DEPRECATION")
@@ -32,8 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     init {
         // board List initial For boardFragment
-        repo.getboarddata()
-        repo.getboardUid()
+
         Log.e("MAIM 엑티비티 실행", "init")
     }
 
@@ -51,29 +53,32 @@ class MainActivity : AppCompatActivity() {
 //            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
 //            1
 //        )
-        Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업" )
+        Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업")
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
-        chatRepo.CheckChattingRoom()
+
     }
 
 
     override fun onPause() {
         super.onPause()
-        Log.e("메인 엑티비티 실행 현황", "onPause: TODO : 데이터 확인할때 확인작업", )
+        Log.e("메인 엑티비티 실행 현황", "onPause: TODO : 데이터 확인할때 확인작업")
     }
+
     override fun onRestart() {
         super.onRestart()
-        Log.e("메인 엑티비티 실행 현황", "onRestart: 데이터 확인할때 확인 작업", )
+        Log.e("메인 엑티비티 실행 현황", "onRestart: 데이터 확인할때 확인 작업")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.e("메인 엑티비티 실행 현황", "onResume: 데이터 확인할때 확인 작업", )
-
-        maprepo.LoadLocation()
-
-
+        Log.e("메인 엑티비티 실행 현황", "onResume: 데이터 확인할때 확인 작업")
+        lifecycleScope.launch(Dispatchers.IO) {
+            repo.getboarddata()
+            repo.getboardUid()
+            maprepo.LoadLocation()
+            chatRepo.CheckChattingRoom()
+        }
     }
 
 

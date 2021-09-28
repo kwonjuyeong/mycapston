@@ -14,7 +14,8 @@ data class BoardDTO(
     var likeCount : Int = 0,
     var latitude : Double? = null, //
     var longitude : Double? = null, //
-    var like: MutableMap<String, Boolean> = HashMap()
+    var like: MutableMap<String, Boolean> = HashMap(),
+    var gender : String? = null
 
 ) {
     data class Chat(
