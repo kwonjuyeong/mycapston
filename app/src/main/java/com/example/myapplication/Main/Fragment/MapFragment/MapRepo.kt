@@ -44,6 +44,12 @@ class MapRepo {
                 }
                 getLocations(savedLocation)
                 getImage(savedLocation)
+                getnickname(savedLocation)
+                getcontent(savedLocation)
+                getdate(savedLocation)
+                gettitle(savedLocation)
+                /*getgender(savedLocation)*/
+
             }
     }
 
@@ -72,26 +78,67 @@ class MapRepo {
             }
         }
     }
-/*
-    fun getBitmap(url: MutableList<String>) {
-        for (i in url) {
-            try {
-                val url = URL(i)
-                val connection = url.openConnection() as HttpURLConnection
-                connection.doInput = true
-                connection.connect()
-                val input = connection.inputStream
-                val bitmap = BitmapFactory.decodeStream(input)
-                user_Url.add(bitmap)
-            } catch (e: IOException) {
+
+    fun getnickname(boardDTOId: MutableList<String>) {
+        for (i in boardDTOId) {
+            firestore.collection("Board").document(i).get().addOnSuccessListener {
+
+                if (it != null) {
+                    nickname.add(it["nickname"] as String)
+                }
             }
         }
-    }*/
+    }
+
+    fun getcontent(boardDTOId: MutableList<String>) {
+        for (i in boardDTOId) {
+            firestore.collection("Board").document(i).get().addOnSuccessListener {
+
+                if (it != null) {
+                    contents.add(it["contents"] as String)
+                }
+            }
+        }
+    }
+
+    fun getdate(boardDTOId: MutableList<String>) {
+        for (i in boardDTOId) {
+            firestore.collection("Board").document(i).get().addOnSuccessListener {
+
+                if (it != null) {
+                    writed_date.add(it["writed_date"] as String)
+                }
+            }
+        }
+    }
+
+    fun gettitle(boardDTOId: MutableList<String>) {
+        for (i in boardDTOId) {
+            firestore.collection("Board").document(i).get().addOnSuccessListener {
+
+                if (it != null) {
+                    title.add(it["postTitle"] as String)
+                }
+            }
+        }
+    }
+
+   /* fun getgender(boardDTOId: MutableList<String>) {
+        for (i in boardDTOId) {
+            firestore.collection("Board").document(i).get().addOnSuccessListener {
+
+                if (it != null) {
+                    gender.add(it["gender"] as String)
+                }
+            }
+        }
+    }
+*/
+
 
     fun returnImage(): MutableList<String> {
         return photoUrl
     }
-
 
     //위도 경도 리턴띠
     fun returnLongitude(): MutableList<Double> {
@@ -100,6 +147,26 @@ class MapRepo {
 
     fun returnLatitude(): MutableList<Double> {
         return lat
+    }
+
+    fun returnnickname(): MutableList<String>{
+        return nickname
+    }
+
+    fun returncontents(): MutableList<String>{
+        return contents
+    }
+
+    fun returndate(): MutableList<String>{
+        return writed_date
+    }
+
+    fun returntitle(): MutableList<String>{
+        return title
+    }
+
+    fun returngender(): MutableList<String>{
+        return gender
     }
 
 
