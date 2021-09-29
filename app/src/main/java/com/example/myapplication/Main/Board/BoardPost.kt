@@ -97,6 +97,7 @@ class BoardPost : AppCompatActivity() {
                     profile = it["profileUrl"].toString()
                     gender = it["gender"].toString()
 
+                }
             }
         }
         upload_BoardImage.setOnClickListener {

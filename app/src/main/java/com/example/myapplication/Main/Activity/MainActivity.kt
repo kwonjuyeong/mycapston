@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             repo.getboarddata()
             repo.getboardUid()
-            maprepo.LoadLocation()
+//            maprepo.LoadLocation()
             chatRepo.CheckChattingRoom()
         }
     }

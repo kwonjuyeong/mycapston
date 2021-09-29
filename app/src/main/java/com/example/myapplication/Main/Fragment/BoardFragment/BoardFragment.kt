@@ -41,83 +41,63 @@ private fun aaaaaaa() : ArrayList<Int>{
 
 class BoardFragment : Fragment() {
     companion object {
-        const val BoardTAG: String = "BoardList"
+        const val TAG : String = "BoardList"
+
         fun newInstance(): BoardFragment {
+
             return BoardFragment()
         }
     }
 
     //private lateinit var boardlistadapter : BoardListAdapter
-    private var datalist = mutableListOf<BoardDTO>()
-    private var contentsUid: ArrayList<String> = arrayListOf()
     private var repo : Repo
-    private var boardListViewmodel = BoardListViewmodel()
-    private lateinit var boardListAdapter : BoardListAdapter
-
+    private var boardListAdapter = BoardListAdapter()
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
+    private lateinit var tabViewPager: ViewPager2
     init {
         repo = Repo.StaticFunction.getInstance()
     }
 
-
-    // 메모리에 적제 되었을때
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Log.e("보드 프레그먼", "onCreate: ", )
-
+    private fun getfoodlList(): ArrayList<Int> {
+        return arrayListOf<Int>(R.drawable.pizza, R.drawable.coffee, R.drawable.rice)
+    }
+    private fun aaaaaaa() : ArrayList<Int>{
+        return arrayListOf<Int>(R.layout.fragment_tab1,R.layout.fragment_tab2)
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        Log.e("보드 프레그먼", "onDetach: ", )
-    }
 
-    override fun onPause() {
-        super.onPause()
-        Log.e("보드 프레그먼", "onPause: ", )
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.e("보드 프레그먼", "onResume: ", )
-    }
-    // 뷰가 생성되었을때
-    // 프레그먼트와 레이아웃을 연결시켜주는 부분
-
-
-
-//    class BoardFragment : Fragment() {
-//
-//
-//
-//        companion object {
-//            fun newInstance(): BoardFragment = BoardFragment()
-//        }
-//
-//        override fun onCreate(savedInstanceState: Bundle?) {
-//            super.onCreate(savedInstanceState)
-//        }
-//
-//        override fun onAttach(context: Context) {
-//            super.onAttach(context)
-//        }
-//    }
-
-
-
-
-        override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
-        //  inflater 레이아웃과 frag를 연결해줌
         val view = inflater.inflate(R.layout.frag_board, container, false)
-        //getBoarddata()
+        tabLayout = view.findViewById(R.id.frameLayout)
+        viewPager = view.findViewById(R.id.viewPager_food)
+//        tabViewPager = view.findViewById(R.id.tabViewpager)
+
+        val adapter = SearchFragViewPagerAdapter(this)
+        viewPager.adapter = adapter
+
+        val tabName = arrayOf("게시글", "최근음식")
+        //슬라이드로 이동했을 때, 탭이 같이 변경되도록
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = tabName[position]
+        }.attach()
+
+        //탭이 선택되었을 때, 뷰페이저가 같이 변경되도록
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewPager.currentItem = tab!!.position
 
 
-
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
         return view
     }
 
@@ -193,26 +173,4 @@ class BoardFragment : Fragment() {
 //        })
     }
 
-    private fun swipeRefresh() {
-        boradSwiprefresh.setOnRefreshListener {
-            boradSwiprefresh.isRefreshing = false
-            boardListAdapter!!.notifyDataSetChanged()
-        }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun getBoarddata() {
-        datalist.clear()
-        contentsUid.clear()
-        var data = repo.getboarddata()
-        var uid = repo.getboardUid()
-        for (i in data) {
-            datalist.add(i)
-            boardListAdapter.notifyDataSetChanged()
-        }
-        for (j in uid) {
-            contentsUid.add(j)
-            boardListAdapter.notifyDataSetChanged()
-        }
-    }
 }
