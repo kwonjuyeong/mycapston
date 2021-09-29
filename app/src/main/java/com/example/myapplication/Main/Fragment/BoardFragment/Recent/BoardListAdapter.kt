@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Fragment.BoardFragment
+package com.example.myapplication.Main.Fragment.BoardFragment.Recent
 
 import android.annotation.SuppressLint
 import android.content.Intent

@@ -1,4 +1,4 @@
-package com.example.myapplication.Main.Fragment.BoardFragment.repo
+package com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,7 +7,6 @@ import com.example.myapplication.DTO.BoardDTO
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.frag_board.*
-import kotlin.concurrent.thread
 
 class Repo {
     // 초기값 백업1

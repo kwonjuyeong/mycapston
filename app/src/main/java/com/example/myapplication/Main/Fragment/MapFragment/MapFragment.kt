@@ -5,8 +5,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.*
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -17,10 +16,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
+import androidx.core.graphics.applyCanvas
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.R
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,10 +33,13 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_board_detail.*
+import kotlinx.android.synthetic.main.activity_board_post.*
 import kotlinx.android.synthetic.main.activity_now_my_place.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,8 +59,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     var firestore: FirebaseFirestore? = null
     var storage: FirebaseStorage? = null
     private var maprepo = MapRepo.StaticFunction.getInstance()
-
-    private lateinit var marker12: ImageView
 
 
     companion object {
@@ -90,9 +95,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mView = main_view.findViewById(R.id.realtime_map) as MapView
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
-
-        val sub_view = inflater.inflate(R.layout.custom_marker, container, false)
-        marker12 = sub_view.findViewById(R.id.markers1) as ImageView
+        main_view.findViewById<CardView>(R.id.card_view).visibility = View.GONE
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -162,7 +165,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
 
     private fun getCityName(lat: Double, long: Double): String {
-        //var countryName = ""
         var cityName: String = ""
         var doName: String = ""
         var jibunName: String = ""
@@ -170,14 +172,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val geoCoder = Geocoder(requireContext(), Locale.getDefault())
         val Adress = geoCoder.getFromLocation(lat, long, 3)
 
-        //countryName = Adress.get(0).countryName
         cityName = Adress.get(0).locality
         doName = Adress.get(0).thoroughfare
         jibunName = Adress.get(0).featureName
 
-        Toast.makeText(context, cityName + " " + doName + " " + jibunName, Toast.LENGTH_LONG)
-            .show()
-        return "{$cityName}/${doName}"
+        Toast.makeText(context, cityName + " " + doName + " " + jibunName, Toast.LENGTH_LONG).show()
+        return cityName + doName
     }
 
     @SuppressLint("MissingPermission")
@@ -197,12 +197,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var lastLocation: Location = locationResult.lastLocation
-            Log.e(
-                "위도 경",
-                "You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude + "\n" + getCityName(
-                    lastLocation.latitude, lastLocation.longitude
-                )
-            )
         }
     }
 
@@ -218,8 +212,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
-    //이것도 코루틴
     /*
     private suspend fun getBitmap(url: String): Bitmap {
         val loading = ImageLoader(requireContext())
@@ -260,7 +252,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 */
 
-
      private fun getBitmap(url: String): Bitmap? {
 
         try {
@@ -269,54 +260,58 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             connection.doInput = true
             connection.connect()
             val input = connection.inputStream
-            return BitmapFactory.decodeStream(input)
+            val bitmap = BitmapFactory.decodeStream(input)
+            val image = Bitmap.createScaledBitmap(bitmap, 80, 80, true)
+            return image
         }catch (e:IOException){
         }
         return null
    }
 
 
-
+    //다른 사용자 마커 찍는 함수 with courutine
     private fun otherUserMaker(googleMap: GoogleMap) {
-        var latitude = mutableListOf<Double>()
-        var longitude = mutableListOf<Double>()
-        var user_URL = mutableListOf<String>()
+        lifecycleScope.launch(Dispatchers.IO) {
+            var mapUserData = mutableListOf<BoardDTO>()
+            mapUserData = maprepo.returnMapdata()
+        for (i in mapUserData) {
 
-        user_URL = maprepo.returnImage()
-        latitude = maprepo.returnLatitude()
-        longitude = maprepo.returnLongitude()
-
-        for (i in 0 until latitude.size step (1)) {
-
-            /*var img = Picasso.get().load(user_URL[i]).into(marker12)
-            val url = URL(user_URL[i])
-            val imageBitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-*/
-            //var bitmap: Bitmap = Picasso.with(context).load(user_URL[i]).get()
-
-
-            lifecycleScope.launch(Dispatchers.IO) {
-                val bitmap1 = getBitmap(user_URL[i])
+            val bitmap1 = getBitmap(i.ProfileUrl.toString())
 
                 if(bitmap1!=null){
-                val makerOptions = MarkerOptions()
-                makerOptions
-                    .position(LatLng(latitude[i], longitude[i]))
-                    .title("")
-                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
 
                     lifecycleScope.launch(Dispatchers.Main) {
-                        googleMap.addMarker(makerOptions)
-                    }
-                }
-                else{
-                    val makerOptions1 = MarkerOptions()
-                    makerOptions1
-                        .position(LatLng(latitude[i], longitude[i]))
-                        .title("")
+                        val makerOptions = MarkerOptions()
+                        makerOptions
+                            .position(LatLng(i.latitude!!, i.longitude!!))
+                            .title(i.nickname)
+                            .snippet(i.postTitle)
+                            .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
 
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        googleMap.addMarker(makerOptions1)
+                        val marker1 : Marker = googleMap.addMarker(makerOptions)!!
+                        marker1.tag = i.Writed_date + "/" + i.contents  //+ "/" + gender[i]
+                        Log.e("확인인암ㄹ어미럼", marker1.tag.toString() )
+
+
+                        googleMap.setOnMarkerClickListener(object :GoogleMap.OnMarkerClickListener{
+                            override fun onMarkerClick(marker1: Marker): Boolean {
+                                card_view.visibility = View.VISIBLE
+                                val arr = marker1.tag.toString().split("/")
+                                board_nickname.text = marker1.title
+                                board_title.text = marker1.snippet
+                                board_time.text = arr[0]
+                                board_contents.text = arr[1]
+                                //board_gender.text = arr[4]
+
+                                return false
+                            }
+                        })
+                        googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener{
+                            override fun onMapClick(p0: LatLng) {
+                                card_view.visibility = View.GONE
+                            }
+                        })
+
                     }
                 }
             }
@@ -327,15 +322,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
 
-
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
-
-                //초기 값 설정(주변 위치로 나옴)
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(37.3306890, 126.30664)))
-                googleMap.moveCamera(CameraUpdateFactory.zoomTo(17f))
-
 
                     //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
                     recent_button.setOnClickListener {
@@ -343,9 +332,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
                         val marker = MarkerOptions()
                             .position(myLocation)
-                            .title("현재 위치")
+                            .title(location?.let { it1 ->
+                                getCityName(it1.latitude,
+                                    it1.longitude)
+                            })
                             .snippet("입니다.")
-                        googleMap.addMarker(marker)
+                    googleMap.addMarker(marker)
+
 
                         otherUserMaker(googleMap)
                     }

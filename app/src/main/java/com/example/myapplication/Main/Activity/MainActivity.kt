@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.Main.Fragment.*
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
-import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
 import com.example.myapplication.Main.Fragment.ChatFragment.ChatRepo
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment

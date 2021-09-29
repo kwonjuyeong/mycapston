@@ -3,7 +3,6 @@ package com.example.myapplication.Main.Fragment.ChatFragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.DTO.MessageDTO
-import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -29,7 +28,7 @@ class ChatRepo {
             .addSnapshotListener { value, error ->
                 if (value == null) return@addSnapshotListener
                 for (document in value.documents) {
-                    var temp = document.toObject(MessageDTO::class.java)
+                    val temp = document.toObject(MessageDTO::class.java)
                     messageDTO.add(temp!!)
                 }
             }
@@ -51,11 +50,11 @@ class ChatRepo {
 
     fun returnLastMessageDTO(): LiveData<MutableList<MessageDTO.lastMessage>> {
         for (i in messageDTO){
-            var docName = i.boardUid + "_last"
+            val docName = i.boardUid + "_last"
             firestore.collection("Chat").document(i.boardUid.toString()).collection("LastMessage")
                 .document(docName).addSnapshotListener { value, error ->
                     if(value == null) return@addSnapshotListener
-                    var item = value.toObject(MessageDTO.lastMessage::class.java)
+                    val item = value.toObject(MessageDTO.lastMessage::class.java)
                     lastMessageDTO.add(item!!)
 
                     liveLastData.value = lastMessageDTO
