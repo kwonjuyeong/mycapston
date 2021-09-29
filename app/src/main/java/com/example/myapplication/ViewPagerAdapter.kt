@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
-class ViewPagerAdapter(foodList: ArrayList<Int>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
-    var item = foodList
+class ViewPagerAdapter(tapList: ArrayList<Int>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
+    var item = tapList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
 

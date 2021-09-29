@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.graphics.applyCanvas
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.R
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -75,7 +76,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             LocationServices.getFusedLocationProviderClient(requireActivity())
         RequestPermission()
         getLastLocation()
-        //RequestPermission()
+
 
         storage = FirebaseStorage.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -271,46 +272,31 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     //다른 사용자 마커 찍는 함수 with courutine
     private fun otherUserMaker(googleMap: GoogleMap) {
         lifecycleScope.launch(Dispatchers.IO) {
-            var latitude = mutableListOf<Double>()
-            var longitude = mutableListOf<Double>()
-            var user_URL = mutableListOf<String>()
-            var nickname = mutableListOf<String>()
-            var title = mutableListOf<String>()
-            var contents = mutableListOf<String>()
-            //var gender = mutableListOf<String>()
-            var date = mutableListOf<String>()
+            var mapUserData = mutableListOf<BoardDTO>()
+            mapUserData = maprepo.returnMapdata()
+        for (i in mapUserData) {
 
-            user_URL = maprepo.returnImage()
-            latitude = maprepo.returnLatitude()
-            longitude = maprepo.returnLongitude()
-            nickname = maprepo.returnnickname()
-            title = maprepo.returntitle()
-            contents = maprepo.returncontents()
-            //gender = maprepo.returngender()
-            date = maprepo.returndate()
-
-        for (i in 0 until latitude.size step (1)) {
-
-            val bitmap1 = getBitmap(user_URL[i])
+            val bitmap1 = getBitmap(i.ProfileUrl.toString())
 
                 if(bitmap1!=null){
 
                     lifecycleScope.launch(Dispatchers.Main) {
                         val makerOptions = MarkerOptions()
                         makerOptions
-                            .position(LatLng(latitude[i], longitude[i]))
-                            .title(nickname[i])
-                            .snippet(title[i])
+                            .position(LatLng(i.latitude!!, i.longitude!!))
+                            .title(i.nickname)
+                            .snippet(i.postTitle)
                             .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
 
                         val marker1 : Marker = googleMap.addMarker(makerOptions)!!
-                        marker1.tag = date[i] + "/" + contents[i] +"/"  //+ "/" + gender[i]
+                        marker1.tag = i.Writed_date + "/" + i.contents  //+ "/" + gender[i]
+                        Log.e("확인인암ㄹ어미럼", marker1.tag.toString() )
 
 
                         googleMap.setOnMarkerClickListener(object :GoogleMap.OnMarkerClickListener{
                             override fun onMarkerClick(marker1: Marker): Boolean {
                                 card_view.visibility = View.VISIBLE
-                                var arr = marker1.tag.toString().split("/")
+                                val arr = marker1.tag.toString().split("/")
                                 board_nickname.text = marker1.title
                                 board_title.text = marker1.snippet
                                 board_time.text = arr[0]

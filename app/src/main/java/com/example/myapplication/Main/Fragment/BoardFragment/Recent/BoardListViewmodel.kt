@@ -1,9 +1,9 @@
-package com.example.myapplication.Main.Fragment.BoardFragment
+package com.example.myapplication.Main.Fragment.BoardFragment.Recent
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.DTO.BoardDTO
-import com.example.myapplication.Main.Fragment.BoardFragment.repo.Repo
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 
 class BoardListViewmodel : ViewModel() {
     private var repo = Repo.StaticFunction.getInstance()
