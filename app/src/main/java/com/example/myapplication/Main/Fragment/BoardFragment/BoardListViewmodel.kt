@@ -1,6 +1,5 @@
 package com.example.myapplication.Main.Fragment.BoardFragment
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.DTO.BoardDTO

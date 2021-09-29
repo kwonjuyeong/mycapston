@@ -11,6 +11,7 @@ data class MessageDTO (
         var lastContent : String? = null,
         var time : String? = null,
         var profileUrl : String? = null,
-        var nickname: String? = null
+        var nickname: String? = null,
+        var timeStamp : Long? = null
     )
 }

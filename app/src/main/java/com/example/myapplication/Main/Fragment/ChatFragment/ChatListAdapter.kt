@@ -1,7 +1,7 @@
 package com.example.myapplication.Main.Fragment.ChatFragment
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,23 +9,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.MessageDTO
-import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
+import com.example.myapplication.Main.Board.Detail.Chat.BoardChat
 import com.example.myapplication.R
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
 
 @SuppressLint("NotifyDataSetChanged")
 class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatListHolder>()  {
-    private var firestore = FirebaseFirestore.getInstance().collection("Chat")
-    private var userUid = FirebaseAuth.getInstance().currentUser!!.uid
     private var lastMessageDTO = mutableListOf<MessageDTO.lastMessage>()
-    private var chatRepo = ChatRepo()
-    init {
-        chatRepo = ChatRepo.StaticFunction.getInstance()
-        lastMessageDTO = chatRepo.returnLastMessageDTO()
-        notifyDataSetChanged()
+    fun setDataChatAapter(data:MutableList<MessageDTO.lastMessage>){
+        lastMessageDTO = data
     }
     class ChatListHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var lastChatProfile : CircleImageView = itemView.findViewById(R.id.last_chat_profile)
@@ -48,9 +42,11 @@ class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatListHolder>()  {
             Glide.with(holder.itemView.context).load(data.profileUrl).into(holder.lastChatProfile)
         else
             holder.lastChatProfile.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
+        holder.itemView.setOnClickListener{
+            val intent = Intent(holder.itemView.context, BoardChat::class.java)
+            intent.putExtra("commentUid",data.boardChatuid)
+        }
     }
 
     override fun getItemCount() = lastMessageDTO.size
-
-
 }

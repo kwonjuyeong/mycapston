@@ -26,6 +26,10 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_add_login.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.view_item_layout.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -83,7 +87,9 @@ class Add_LoginActivity : AppCompatActivity() {
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                contentUpload()
+                CoroutineScope(IO).launch{
+                    contentUpload()
+                }
                 var intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -128,7 +134,7 @@ class Add_LoginActivity : AppCompatActivity() {
 
     //upload_image
     //좋은 코드는 아니지만 간소화 하는 방법을... 모색
-    fun contentUpload() {
+    private suspend fun contentUpload() {
         //ProgressBar <<< 효과 넣을지 말지? 살짝 구시대적 ui
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName = "JPEG_" + timeStamp + "_.png"
@@ -136,7 +142,6 @@ class Add_LoginActivity : AppCompatActivity() {
         val NM = add_login_nickname_edit.text.toString()
         val profile_timestamp = System.currentTimeMillis()
         val name = add_login_edit.text.toString()
-
         if (photoUri != null) {
             // images/(imageFilename) 위치를 가리키는 참조 변수-> 를 putFile로 storage서버에 업로드
             val storageRef = storage?.reference?.child("Profiles")?.child(imageFileName)

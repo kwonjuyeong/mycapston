@@ -10,6 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DTO.BoardDTO
@@ -21,6 +26,7 @@ import com.example.myapplication.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.frag_board.*
+import kotlinx.coroutines.launch
 
 private lateinit var tabLayout: TabLayout
 private lateinit var viewPager: ViewPager2
@@ -36,9 +42,7 @@ private fun aaaaaaa() : ArrayList<Int>{
 class BoardFragment : Fragment() {
     companion object {
         const val BoardTAG: String = "BoardList"
-
         fun newInstance(): BoardFragment {
-
             return BoardFragment()
         }
     }
@@ -49,7 +53,6 @@ class BoardFragment : Fragment() {
     private var repo : Repo
     private var boardListViewmodel = BoardListViewmodel()
     private lateinit var boardListAdapter : BoardListAdapter
-
 
     init {
         repo = Repo.StaticFunction.getInstance()
@@ -114,43 +117,11 @@ class BoardFragment : Fragment() {
         //getBoarddata()
 
 
-            tabLayout = view.findViewById(R.id.frameLayout)
-            viewPager = view.findViewById(R.id.viewPager_food)
-
-
-            val adapter = SearchFragViewPagerAdapter(this)
-            viewPager.adapter = adapter
-
-
-            val tabName = arrayOf("게시글", "최근음식")
-
-            //슬라이드로 이동했을 때, 탭이 같이 변경되도록
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.text = tabName[position]
-            }.attach()
-
-            //탭이 선택되었을 때, 뷰페이저가 같이 변경되도록
-            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    viewPager.currentItem = tab!!.position
-
-
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-
-                }
-
-            })
-
 
         return view
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 여기다가 view 구현하는거 정의 하면 됨 딴거 다 쓰잘때기 없음
@@ -199,6 +170,13 @@ class BoardFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             boardlistadapter = BoardListAdapter()
             adapter = boardlistadapter
+            boradSwiprefresh.setOnRefreshListener {
+                //notices.clear() // 리스트를 한 번 비워주고
+                //crawler.activateBot(page) // 리스트에 값을 넣어주고
+                boardListAdapter.clear()
+                boardListAdapter.notifyDataSetChanged() // 새로고침 하고
+                boradSwiprefresh.isRefreshing = false // 새로고침을 완료하면 아이콘을 없앤다.
+            }
         }
     }
 

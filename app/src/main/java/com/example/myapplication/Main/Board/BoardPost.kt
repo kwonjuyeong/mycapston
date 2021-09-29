@@ -20,6 +20,7 @@ import android.view.WindowManager
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
@@ -40,6 +41,8 @@ import kotlinx.android.synthetic.main.activity_board_post.*
 import kotlinx.android.synthetic.main.activity_board_post.sv_root
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.food_list_item.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,14 +54,12 @@ class BoardPost : AppCompatActivity() {
     private var photoUri: Uri? = null
     private var uid: String? = null
     private var NM: String? = null
+    private var gender: String? = null
     private var profile: String? = null
     private var longitude: Double? = null
     private var latitude: Double? = null
-
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
-
-
 
 
     @SuppressLint("MissingPermission")
@@ -73,17 +74,6 @@ class BoardPost : AppCompatActivity() {
                 }
             })  //키보드 움직이기
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-
-//뷰페이저
-
-//뷰페이저
-
-
-
-
-
-
         //fireStorage 초기화
         storage = FirebaseStorage.getInstance()
         //fireStore Database
@@ -100,11 +90,12 @@ class BoardPost : AppCompatActivity() {
             }.addOnFailureListener {
             }
 
-
-        firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
-            if (it != null) {
-                NM = it["nickname"].toString()
-                profile = it["profileUrl"].toString()
+        lifecycleScope.launch(Dispatchers.IO) {
+            firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
+                if (it != null) {
+                    NM = it["nickname"].toString()
+                    profile = it["profileUrl"].toString()
+                    gender = it["gender"].toString()
 
             }
         }
@@ -115,19 +106,11 @@ class BoardPost : AppCompatActivity() {
             hide_layout.visibility = View.VISIBLE
         }
         btn_write.setOnClickListener {
-            boardUpload()
+            lifecycleScope.launch(Dispatchers.IO) {
+                boardUpload()
+            }
 
         }
-    }
-
-
-    //geoCoder 사용해 현재 위치 가져온 후 Log로 출력하는 함수.
-    private fun getAddress(position: LatLng) {
-        val geoCoder = Geocoder(this@BoardPost, Locale.getDefault())
-        val address =
-            geoCoder.getFromLocation(position.latitude, position.longitude, 1).first()
-                .getAddressLine(0)
-        Log.e("Address", address)
     }
 
 
@@ -142,7 +125,7 @@ class BoardPost : AppCompatActivity() {
     }
 
 
-
+    @SuppressLint("SimpleDateFormat")
     fun boardUpload() {
         val timeStamp = SimpleDateFormat("yyyy.MM.dd_HH:mm").format(Date())
         val imageFileName = "JPEG_" + timeStamp + "_Board.png"
@@ -160,6 +143,7 @@ class BoardPost : AppCompatActivity() {
         boardDTO.uid = auth.currentUser?.uid
         boardDTO.longitude = longitude
         boardDTO.latitude = latitude
+        boardDTO.gender = gender
         if (photoUri != null) {
             storageRef?.putFile(photoUri!!)
                 ?.continueWithTask { task: com.google.android.gms.tasks.Task<UploadTask.TaskSnapshot> ->
