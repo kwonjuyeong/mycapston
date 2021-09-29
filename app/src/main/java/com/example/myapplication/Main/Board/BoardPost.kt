@@ -20,12 +20,14 @@ import android.view.WindowManager
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.app.ActivityCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.R
+import com.example.myapplication.ViewPagerAdapter
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +39,7 @@ import com.google.android.gms.tasks.*
 import kotlinx.android.synthetic.main.activity_board_post.*
 import kotlinx.android.synthetic.main.activity_board_post.sv_root
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.food_list_item.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,8 +54,11 @@ class BoardPost : AppCompatActivity() {
     private var profile: String? = null
     private var longitude: Double? = null
     private var latitude: Double? = null
+
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
+
+
 
 
     @SuppressLint("MissingPermission")
@@ -67,6 +73,17 @@ class BoardPost : AppCompatActivity() {
                 }
             })  //키보드 움직이기
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+
+//뷰페이저
+
+//뷰페이저
+
+
+
+
+
+
         //fireStorage 초기화
         storage = FirebaseStorage.getInstance()
         //fireStore Database
