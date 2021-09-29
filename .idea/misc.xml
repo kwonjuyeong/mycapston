@@ -3,41 +3,68 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/gradient.xml" value="0.14722222222222223" />
-        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.21296296296296297" />
-        <entry key="app/src/main/res/font/font_auto.xml" value="0.20555555555555555" />
-        <entry key="app/src/main/res/layout/activity_add_login.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_board_comment.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.335" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/bg_btn_solid_dark_gray_333333_radius_8dp.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/btn_blue_sex.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/btn_board.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/btn_dark_gray_radius_8dp.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/button_shape10.xml" value="0.18229166666666666" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/button_shape11.xml" value="0.18229166666666666" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/button_shape12.xml" value="0.18229166666666666" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/button_shape13.xml" value="0.18229166666666666" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/button_shape5.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/chatbubble.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/chatmyimage.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/favorite.xml" value="0.18229166666666666" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/favorite_border.xml" value="0.18229166666666666" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/round_btn.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/signiture_btn.xml" value="0.38229166666666664" />
+        <entry key="..\:/mycapston3/app/src/main/res/drawable/signiture_btn_with_nostrike.xml" value="0.22083333333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/font/font_auto.xml" value="0.3963541666666667" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_add_login.xml" value="0.33" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_board_comment.xml" value="0.25" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_board_detail.xml" value="0.33" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_board_post.xml" value="0.22592592592592592" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_change_information.xml" value="0.15579710144927536" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_chat_main.xml" value="0.16197916666666667" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_chatroom.xml" value="0.25" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_chatroomlist.xml" value="0.33" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_chatting.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_code_verification.xml" value="0.21" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_customer_service.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_extra_information.xml" value="0.1490036231884058" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_infomation_law.xml" value="0.17806484295845998" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_intro.xml" value="0.20520833333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_mychat.xml" value="0.5445205479452054" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_mychat2.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_now_my_place.xml" value="0.36614583333333334" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_permission.xml" value="0.5" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_phone_auth.xml" value="0.36614583333333334" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_testlayout.xml" value="0.16197916666666667" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/activity_yourchat.xml" value="0.5" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/board_list_item.xml" value="0.67" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/chat_layout.xml" value="0.33" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/food_list_item.xml" value="0.34193840579710144" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/frag_board.xml" value="0.22" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/frag_chat.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/frag_home.xml" value="0.5" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/frag_setting.xml" value="0.5" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/fragment_blank.xml" value="0.32563405797101447" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/fragment_chat.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/fragment_tab1.xml" value="0.32563405797101447" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/fragment_tab2.xml" value="0.32563405797101447" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/list_comment.xml" value="0.25" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/test.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/test_textview.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/testchat.xml" value="0.25" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/view_item_layout.xml" value="0.16614583333333333" />
+        <entry key="..\:/mycapston3/app/src/main/res/menu/bottom_menu.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.10885416666666667" />
         <entry key="app/src/main/res/layout/activity_board_post.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_change_information.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_chat_main.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_code_verification.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_customer_service.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_extra_information.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_google_maps.xml" value="0.1802536231884058" />
-        <entry key="app/src/main/res/layout/activity_infomation_law.xml" value="0.21829710144927536" />
-        <entry key="app/src/main/res/layout/activity_intro.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_item_my_chat.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_item_your_chat.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_new_mypage.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_now_my_place.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_phone_auth.xml" value="0.21829710144927536" />
-        <entry key="app/src/main/res/layout/board_list_item.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/chat_layout.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/chat_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/frag_board.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/frag_chat.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/frag_home.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/frag_map.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/frag_setting.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.1802536231884058" />
-        <entry key="app/src/main/res/layout/list_comment.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/test.xml" value="0.1802536231884058" />
-        <entry key="app/src/main/res/layout/view_item_layout.xml" value="0.1802536231884058" />
       </map>
     </option>
   </component>
