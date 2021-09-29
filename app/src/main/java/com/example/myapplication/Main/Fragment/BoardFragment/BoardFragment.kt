@@ -65,7 +65,6 @@ class BoardFragment : Fragment() {
                 boardListAdapter.clear()
                 boardListAdapter.notifyDataSetChanged() // 새로고침 하고
                 boradSwiprefresh.isRefreshing = false // 새로고침을 완료하면 아이콘을 없앤다.
-
             }
         }
     }

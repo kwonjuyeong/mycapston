@@ -18,11 +18,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 @SuppressLint("NotifyDataSetChanged")
 class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatListHolder>()  {
     private var lastMessageDTO = mutableListOf<MessageDTO.lastMessage>()
-    private var chatRepo = ChatRepo()
-    init {
-        chatRepo = ChatRepo.StaticFunction.getInstance()
-//        lastMessageDTO = chatRepo.returnLastMessageDTO()
-        notifyDataSetChanged()
+    fun setDataChatAapter(data:MutableList<MessageDTO.lastMessage>){
+        lastMessageDTO = data
     }
     class ChatListHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var lastChatProfile : CircleImageView = itemView.findViewById(R.id.last_chat_profile)
