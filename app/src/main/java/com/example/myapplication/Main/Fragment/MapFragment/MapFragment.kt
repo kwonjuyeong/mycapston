@@ -285,7 +285,7 @@ import java.util.*
 
             val bitmap1 = getBitmap(i.ProfileUrl.toString())
 
-                if(bitmap1!=null){
+                if(i.ProfileUrl!=null){
                     lifecycleScope.launch(Dispatchers.Main) {
 
                         val makerOptions = MarkerOptions()
