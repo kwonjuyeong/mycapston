@@ -2,6 +2,7 @@ package com.example.myapplication.Main.Fragment.ChatFragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatListHolder>()  {
     private var lastMessageDTO = mutableListOf<MessageDTO.lastMessage>()
     fun setDataChatAapter(data:MutableList<MessageDTO.lastMessage>){
         lastMessageDTO = data
+        Log.e("chatadapter", lastMessageDTO.toString() )
     }
     class ChatListHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var lastChatProfile : CircleImageView = itemView.findViewById(R.id.last_chat_profile)
@@ -34,7 +36,7 @@ class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatListHolder>()  {
     }
 
     override fun onBindViewHolder(holder: ChatListHolder, position: Int) {
-        var data = lastMessageDTO[position]
+        val data = lastMessageDTO[position]
         holder.lastChatNickname.text = data.nickname
         holder.lastChatContents.text = data.lastContent
         holder.lastChatTime.text = data.time

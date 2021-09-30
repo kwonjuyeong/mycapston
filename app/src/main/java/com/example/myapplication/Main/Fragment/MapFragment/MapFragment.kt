@@ -24,7 +24,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.myapplication.ChangeCustomer
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.R

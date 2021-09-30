@@ -26,11 +26,11 @@ class BoardChat : AppCompatActivity() {
     private val uid = FirebaseAuth.getInstance().currentUser?.uid
     private var Chats = BoardDTO.Chat()
     private var lastMessage = MessageDTO.lastMessage()
+    private lateinit var chatAdapter: ChatAdapter
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_comment)
-
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
                 sv_root.run {
@@ -46,10 +46,10 @@ class BoardChat : AppCompatActivity() {
                 Log.e("값 받아오는거 확인", currentDTO.toString())
             }
         }
+        chatAdapter = ChatAdapter(commentUid)
         comment_recyclerView.apply {
-            var chatAdapter: ChatAdapter
+
             layoutManager = LinearLayoutManager(context)
-            chatAdapter = ChatAdapter(commentUid)
             adapter = chatAdapter
         }
         btn_comment_send?.setOnClickListener {
@@ -67,7 +67,6 @@ class BoardChat : AppCompatActivity() {
         Chats.UID = uid
         Chats.message = comment_text.text.toString()
         Chats.userprofile = currentDTO.ProfileUrl
-        Log.e("채팅 보낸사람 url", currentDTO.ProfileUrl.toString())
         Chats.userNickname = currentDTO.nickname
         Chats.date = SimpleDateFormat("MM월 dd일").format(Date())
         Chats.timestamp = System.currentTimeMillis()
@@ -97,5 +96,9 @@ class BoardChat : AppCompatActivity() {
         setResult(RESULT_OK)
     }
 
+    override fun onPause() {
+        super.onPause()
+
+    }
 
 }

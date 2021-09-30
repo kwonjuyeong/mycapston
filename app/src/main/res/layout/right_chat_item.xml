@@ -3,36 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="271dp"
-        android:layout_height="82dp"
-        android:layout_marginStart="144dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="right"
-        android:background="@color/little_green"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/chat_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="남" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/chat_contents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/renewmychat"
             android:fontFamily="@font/maru"
             android:maxWidth="200dp"
             android:maxLength="100"
             android:padding="10dp"
-            android:text="구해gdddddddddssssssssssssssssssdddddddddddddd요"
+            android:text=""
              />
+            <TextView
+                android:id="@+id/chat_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="닉네임"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageButton"
+            android:id="@+id/chat_profile"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_baseline_account_circle_signiture"></de.hdodenhof.circleimageview.CircleImageView>

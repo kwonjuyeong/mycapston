@@ -14,12 +14,11 @@ import kotlinx.android.synthetic.main.frag_chat.*
 
 class ChatFragment: Fragment(){
     companion object {
-        const val BoardTAG: String = "BoardList"
         fun newInstance(): ChatFragment {
             return ChatFragment()
         }
     }
-    private lateinit var adapter: ChatListAdapter
+    private var adapter =  ChatListAdapter()
     private val viewModel by lazy{
         ViewModelProvider(this).get(ChatListViewModel::class.java)
     }
@@ -41,9 +40,8 @@ class ChatFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         chat_list_recyclerview.apply {
-            val chatlistAdapter : ChatListAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            chatlistAdapter = ChatListAdapter()
+            val chatlistAdapter : ChatListAdapter = ChatListAdapter()
             adapter = chatlistAdapter
             observeData()
         }

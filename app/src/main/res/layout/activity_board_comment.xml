@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/commant_page_top"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="40dp"
-        tools:listitem="@layout/chat_list" />
+        android:layout_marginBottom="40dp" />
+
 
     <Button
         android:id="@+id/btn_comment_send"

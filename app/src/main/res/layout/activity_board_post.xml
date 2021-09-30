@@ -48,8 +48,6 @@
         </RelativeLayout>
 
 
-
-
         <LinearLayout
             android:id="@+id/board_center"
             android:layout_width="match_parent"
@@ -57,14 +55,15 @@
             android:layout_below="@+id/board_layout"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/board_title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"
                 android:layout_marginTop="30dp"
-                android:text="제목"
                 android:fontFamily="@font/jalnan"
+                android:text="제목"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,21 +73,20 @@
                 android:id="@+id/title_text"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@null"
                 android:layout_marginStart="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:fontFamily="@font/maru"
                 android:layout_marginTop="5dp"
-                android:hint="제목을 입력해주세요." />
+                android:background="@null"
+                android:fontFamily="@font/maru"
+                android:hint="제목을 입력해주세요."
+                app:layout_constraintStart_toStartOf="parent" />
+
             <View
                 android:id="@+id/boardCheck_center"
                 android:layout_width="350dp"
                 android:layout_height="3dp"
-                android:layout_marginStart="20dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
                 android:background="#ff9424" />
-
-
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -97,8 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"
                 android:layout_marginTop="30dp"
-                android:text="내용"
                 android:fontFamily="@font/jalnan"
+                android:text="내용"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@id/boardCheck_center" />
@@ -107,12 +105,12 @@
                 android:id="@+id/board_context"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:background="@null"
                 android:fontFamily="@font/maru"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="20dp"
-                android:hint="내용을 입력해주세요.(500자 내)"
-                android:gravity="top" />
+                android:gravity="top"
+                android:hint="내용을 입력해주세요.(500자 내)" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/post_image"
@@ -130,11 +128,11 @@
                 android:id="@+id/upload_BoardImage"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="-25dp"
                 android:layout_marginStart="360dp"
+                android:layout_marginTop="-25dp"
                 android:src="@drawable/ic_baseline_photo_camera_24"
-                app:layout_constraintStart_toStartOf="post_image"
-                app:layout_constraintTop_toTopOf="board_context" />
+                app:layout_constraintStart_toStartOf="@id/title_text"
+                app:layout_constraintTop_toTopOf="@id/title_text" />
 
             <LinearLayout
                 android:id="@+id/hide_layout"
@@ -146,18 +144,18 @@
                     android:id="@+id/layout_imageUrlWrite"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp" />
 
                 <EditText
                     android:id="@+id/imgaeExplain"
                     android:layout_width="260dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
+                    android:background="@null"
                     android:fontFamily="@font/maru"
                     android:gravity="top"
                     android:hint="설명을 넣을 수 있어요"
-                    android:background="@null"
                     android:text="" />
             </LinearLayout>
 

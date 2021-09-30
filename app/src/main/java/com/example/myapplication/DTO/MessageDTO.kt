@@ -3,7 +3,8 @@ package com.example.myapplication.DTO
 data class MessageDTO (
     var boardUid : String? = null,
     var UserCheck : MutableMap<String,Boolean> = HashMap(),
-    var OwnerUid : String? = null
+    var OwnerUid : String? = null,
+    var currentUID : String? = null
 ) {
     data class lastMessage(
         var boardChatuid : String? = null,

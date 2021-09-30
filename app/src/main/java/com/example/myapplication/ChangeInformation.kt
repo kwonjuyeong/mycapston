@@ -13,12 +13,12 @@ class ChangeInformation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_information)
 
-        back_button2.setOnClickListener({
-            val intent = Intent(this, SettingFragment::class.java)
-            startActivity(intent)
+//        back_button2.setOnClickListener({
+//            val intent = Intent(this, SettingFragment::class.java)
+//            startActivity(intent)
 
 
-        })
+//        })
 
 
     }
