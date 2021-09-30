@@ -3,10 +3,12 @@
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -16,28 +18,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
-import androidx.core.graphics.applyCanvas
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.ChangeCustomer
 import com.example.myapplication.DTO.BoardDTO
-import com.example.myapplication.Main.Board.BoardPost
 import com.example.myapplication.R
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -52,7 +47,7 @@ import java.net.URL
 import java.util.*
 
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+ class MapFragment : Fragment(), OnMapReadyCallback {
     private var client: FusedLocationProviderClient? = null
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     val PERMISSION_ID = 1010
@@ -265,10 +260,19 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             val bitmap = BitmapFactory.decodeStream(input)
             val image = Bitmap.createScaledBitmap(bitmap, 80, 80, true)
             return image
-        }catch (e:IOException){
+        }catch (e: IOException){
         }
         return null
    }
+
+     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
+         return ContextCompat.getDrawable(context, vectorResId)?.run {
+             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+             val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+             draw(Canvas(bitmap))
+             BitmapDescriptorFactory.fromBitmap(bitmap)
+         }
+     }
 
 
     //다른 사용자 마커 찍는 함수 with courutine
@@ -282,7 +286,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             val bitmap1 = getBitmap(i.ProfileUrl.toString())
 
                 if(bitmap1!=null){
-
                     lifecycleScope.launch(Dispatchers.Main) {
 
                         val makerOptions = MarkerOptions()
@@ -292,30 +295,48 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                             .snippet(i.postTitle)
                             .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
 
-                        val marker1 : Marker = googleMap.addMarker(makerOptions)!!
-                        marker1.tag = i.Writed_date + "/" + i.contents  + "/" + i.gender + "/" + i.locationName ////
+                        val marker1: Marker = googleMap.addMarker(makerOptions)!!
+                        marker1.tag =
+                            i.Writed_date + "/" + i.contents + "/" + i.gender + "/" + i.locationName}
+                    }else{
+                    lifecycleScope.launch(Dispatchers.Main) {
 
+                        val makerOptions = MarkerOptions()
+                        makerOptions
+                            .position(LatLng(i.latitude!!, i.longitude!!))
+                            .title(i.nickname)
+                            .snippet(i.postTitle)
+                            .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.noimage))
 
-                        googleMap.setOnMarkerClickListener(object :GoogleMap.OnMarkerClickListener{
+                        val marker1: Marker = googleMap.addMarker(makerOptions)!!
+                        marker1.tag =
+                            i.Writed_date + "/" + i.contents + "/" + i.gender + "/" + i.locationName
+                    }
+                    }
+
+                        googleMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
                             override fun onMarkerClick(marker1: Marker): Boolean {
                                 card_view.visibility = View.VISIBLE
                                 val arr = marker1.tag.toString().split("/")
-                                    board_nickname.text = marker1.title
-                                    board_title.text = marker1.snippet
-                                    board_time.text = arr[0]
-                                    board_contents.text = arr[1]
-                                    board_gender.text = arr[2]
-                                    board_locate.text = arr[3] ////
+                                board_nickname.text = marker1.title
+                                board_title.text = marker1.snippet
+                                board_time.text = arr[0]
+                                board_contents.text = arr[1]
+                                board_gender.text = arr[2]
+                                board_locate.text = arr[3] ////
 
                                 board_move_button.setOnClickListener {
                                     //여기다가 아이디태그 달아서 버튼누르면 화면이동.
-                                    var intent = Intent(requireActivity(), ChangeCustomer::class.java)
-                                        startActivity(intent)
+                                    var intent = Intent(
+                                        requireActivity(),
+                                        ChangeCustomer::class.java
+                                    )
+                                    startActivity(intent)
                                 }
                                 return false
                             }
                         })
-                        googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener{
+                        googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
                             override fun onMapClick(p0: LatLng) {
                                 card_view.visibility = View.GONE
                             }
@@ -324,8 +345,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
             }
-        }
-    }
+
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
