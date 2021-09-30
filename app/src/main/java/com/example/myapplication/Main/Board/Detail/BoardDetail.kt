@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -60,6 +61,7 @@ class BoardDetail : AppCompatActivity(), PostListener {
     private fun createChatting(){
         val chooseUid = intent.getStringExtra("contentsUid")!!
         val owneruid = intent.getStringExtra("owneruid")!!
+        Log.e("넘어오는 값 확인", "${chooseUid}\n${owneruid}" )
         messageDTO.boardUid = chooseUid
         messageDTO.OwnerUid = owneruid
         firestore.collection("Chat").document(chooseUid).set(messageDTO)

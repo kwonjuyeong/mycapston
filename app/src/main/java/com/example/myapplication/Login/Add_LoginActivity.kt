@@ -46,15 +46,6 @@ class Add_LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.myapplication.R.layout.activity_add_login)
-
-
-
-
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            1
-        )
         //fireStorage 초기화
         storage = FirebaseStorage.getInstance()
         //fireStore Database

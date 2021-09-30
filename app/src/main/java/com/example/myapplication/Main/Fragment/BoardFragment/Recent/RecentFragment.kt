@@ -1,5 +1,6 @@
 package com.example.myapplication.Main.Fragment.BoardFragment.Recent
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +19,13 @@ class RecentFragment : Fragment(){
     }
     private var boardListAdapter = BoardListAdapter()
     private var repo : Repo
+    private lateinit var viewPager2: ViewPager2
 
     init {
         repo = Repo.StaticFunction.getInstance()
     }
     private fun getfoodlList(): ArrayList<Int> {
-        return arrayListOf<Int>(R.drawable.pizza, R.drawable.coffee, R.drawable.rice)
+        return arrayListOf<Int>(R.drawable.steak, R.drawable.coffee, R.drawable.sushi)
     }
 
     override fun onCreateView(
@@ -32,14 +34,18 @@ class RecentFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_recent,container,false)
+        viewPager2 = view.findViewById(R.id.viewPager_food)
         return view
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewPager_food.adapter = ViewPagerAdapter(getfoodlList()) // 어댑터 생성
-        viewPager_food.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
+        viewPager2.adapter = ViewPagerAdapter(this, getfoodlList()) // 어댑터 생성
+        viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
+        viewPager2.requestDisallowInterceptTouchEvent(false)
+
 
 
         board_fragement_recycler_view.apply {

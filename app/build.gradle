@@ -48,10 +48,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     //layout 사용
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.30"
     implementation 'androidx.browser:browser:1.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
@@ -98,7 +98,6 @@ dependencies {
     //face login
     implementation 'com.facebook.android:facebook-login:4.42.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.42.0'
-    implementation platform('com.google.firebase:firebase-bom:28.4.0')
 
     //Google Maps
     implementation 'com.google.android.gms:play-services-location:18.0.0'
