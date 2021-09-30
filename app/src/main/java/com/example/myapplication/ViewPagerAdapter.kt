@@ -3,9 +3,10 @@ package com.example.myapplication
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
-class ViewPagerAdapter(tapList: ArrayList<Int>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
+class ViewPagerAdapter(var fragment: Fragment,var tapList: ArrayList<Int>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
     var item = tapList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))

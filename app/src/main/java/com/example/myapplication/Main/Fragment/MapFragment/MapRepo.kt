@@ -12,14 +12,7 @@ import java.net.URL
 class MapRepo {
     private var savedMapdata = mutableListOf<BoardDTO>()
     private var firestore = FirebaseFirestore.getInstance()
-    private var log = mutableListOf<Double>()
-    private var lat = mutableListOf<Double>()
-    private var photoUrl = mutableListOf<String>()
-    private var nickname = mutableListOf<String>()
-    private var gender = mutableListOf<String>()
-    private var writed_date = mutableListOf<String>()
-    private var title = mutableListOf<String>()
-    private var contents = mutableListOf<String>()
+    private var mapIntentUid = mutableListOf<String>()
 
 
     object StaticFunction {
@@ -41,6 +34,7 @@ class MapRepo {
                 for (snapshot in querySnapshot!!.documents) {
                     val item = snapshot.toObject(BoardDTO::class.java)
                     savedMapdata.add(item!!)
+                    mapIntentUid.add(snapshot.id)
                 }
 
                 /*getgender(savedLocation)*/
@@ -49,6 +43,9 @@ class MapRepo {
     }
     fun returnMapdata() : MutableList<BoardDTO>{
         return savedMapdata
+    }
+    fun returnIntentUid() : MutableList<String>{
+        return  mapIntentUid
     }
 //
 //    fun getLocations(aaa: MutableList<String>) {

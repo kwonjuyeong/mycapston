@@ -62,6 +62,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     var firestore: FirebaseFirestore? = null
     var storage: FirebaseStorage? = null
     private var maprepo = MapRepo.StaticFunction.getInstance()
+    private var count = 0
 
 
     companion object {
@@ -275,8 +276,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private fun otherUserMaker(googleMap: GoogleMap) {
         lifecycleScope.launch(Dispatchers.IO) {
             var mapUserData = mutableListOf<BoardDTO>()
+            var intentUID = mutableListOf<String>()
             mapUserData = maprepo.returnMapdata()
-
+            intentUID = maprepo.returnIntentUid()
         for (i in mapUserData) {
 
             val bitmap1 = getBitmap(i.ProfileUrl.toString())
@@ -310,8 +312,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                                 board_move_button.setOnClickListener {
                                     //여기다가 아이디태그 달아서 버튼누르면 화면이동.
                                     var intent = Intent(requireActivity(), ChangeCustomer::class.java)
+                                    intent.putExtra("contentsUid",intentUID[count])
                                         startActivity(intent)
                                 }
+                                count ++
                                 return false
                             }
                         })

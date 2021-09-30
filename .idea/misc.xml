@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_new_mypage.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_now_my_place.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_permission.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/layout/activity_phone_auth.xml" value="0.21829710144927536" />
         <entry key="app/src/main/res/layout/board_list_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/chat_layout.xml" value="0.1" />
@@ -36,7 +37,7 @@
         <entry key="app/src/main/res/layout/frag_chat.xml" value="0.1" />
         <entry key="app/src/main/res/layout/frag_home.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/frag_map.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/frag_setting.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/frag_setting.xml" value="0.1634349030470914" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.1802536231884058" />
         <entry key="app/src/main/res/layout/fragment_mine.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_recent.xml" value="0.20498614958448755" />
