@@ -2,6 +2,7 @@ package com.example.myapplication.Main.Board
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Geocoder
 import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +40,7 @@ class BoardPost : AppCompatActivity() {
     private var profile: String? = null
     private var longitude: Double? = null
     private var latitude: Double? = null
+    private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
 
@@ -68,6 +70,7 @@ class BoardPost : AppCompatActivity() {
             .addOnSuccessListener { location: Location? ->
                 latitude = location!!.latitude
                 longitude = location!!.longitude
+                locationName = getCityName1(latitude!!,longitude!!)////
             }.addOnFailureListener {
             }
 
@@ -93,6 +96,22 @@ class BoardPost : AppCompatActivity() {
             }
 
         }
+    }
+
+////
+    private fun getCityName1(lat: Double, long: Double): String {
+        var cityName: String = ""
+        var doName: String = ""
+
+        val geoCoder = Geocoder(this, Locale.getDefault())
+        val Adress = geoCoder.getFromLocation(lat, long, 3)
+
+        cityName = Adress.get(0).locality
+        doName = Adress.get(0).thoroughfare
+
+
+        //Toast.makeText(context, cityName + " " + doName + " " + jibunName, Toast.LENGTH_LONG).show()
+        return "$cityName, $doName"
     }
 
 
@@ -126,6 +145,8 @@ class BoardPost : AppCompatActivity() {
         boardDTO.longitude = longitude
         boardDTO.latitude = latitude
         boardDTO.gender = gender
+        boardDTO.locationName = locationName////
+
         if (photoUri != null) {
             storageRef?.putFile(photoUri!!)
                 ?.continueWithTask { task: com.google.android.gms.tasks.Task<UploadTask.TaskSnapshot> ->

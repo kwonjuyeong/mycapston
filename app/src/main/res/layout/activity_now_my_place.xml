@@ -223,6 +223,7 @@
                     </LinearLayout>
 
                     <Button
+                        android:id="@+id/board_move_button"
                         android:layout_width="80dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center|right"

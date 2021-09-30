@@ -3,19 +3,20 @@ package com.example.myapplication.DTO
 data class BoardDTO(
     var contents : String? = null,
     var uid : String? =null,
-    var postTitle : String? = null, //
-    var Writed_date : String? = null, //
+    var postTitle : String? = null,
+    var Writed_date : String? = null,
     var imageUrlWrite : String? = null,
-    var timestamp : Long? = null, //
+    var timestamp : Long? = null,
     var imageWriteExplain : String? = null,
     var tag : String? = null,
-    var nickname : String? = null, //
-    var ProfileUrl : String? = null, //
+    var nickname : String? = null,
+    var ProfileUrl : String? = null,
     var likeCount : Int = 0,
-    var latitude : Double? = null, //
-    var longitude : Double? = null, //
+    var latitude : Double? = null,
+    var longitude : Double? = null,
     var like: MutableMap<String, Boolean> = HashMap(),
-    var gender : String? = null
+    var gender : String? = null,
+    var locationName : String? = null ////
 
 ) {
     data class Chat(
