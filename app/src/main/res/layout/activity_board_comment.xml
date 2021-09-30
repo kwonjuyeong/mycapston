@@ -29,9 +29,10 @@
             android:id="@+id/commant_page_title"
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:layout_marginStart="40.01dp"
-            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_gravity ="center"
             android:text="댓글"
+            android:textColor="@color/black"
             android:fontFamily="@font/jalnan"
             android:textSize="20dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -48,7 +49,7 @@
 
     <Button
         android:id="@+id/btn_comment_send"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/comment_recyclerView"
         android:layout_alignParentRight="true"
@@ -56,21 +57,19 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#ff9424"
+        android:background="@drawable/signiture_btn"
         android:text="SEND" />
 
     <EditText
         android:id="@+id/comment_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/comment_recyclerView"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toLeftOf="@id/btn_comment_send"
-        android:background="@drawable/magnitude_circle"
-        android:drawableLeft="@android:drawable/btn_star" />
+        android:layout_toStartOf="@id/btn_comment_send"
+        android:background="@color/little_yellow"
+        android:drawableStart="@android:drawable/btn_star" />
 
 </RelativeLayout>
 </ScrollView>

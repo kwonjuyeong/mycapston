@@ -17,8 +17,10 @@
 
         <Button
             android:id="@+id/back_button1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/ic_back_signiture" />
     </LinearLayout>
 

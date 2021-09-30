@@ -15,10 +15,10 @@
 
         <Button
             android:id="@+id/back_button2"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_back_signiture"
-            android:text="" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/ic_back_signiture" />
 
         <TextView
             android:id="@+id/textView2"
