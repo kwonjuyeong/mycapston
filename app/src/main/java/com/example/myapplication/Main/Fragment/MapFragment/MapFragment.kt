@@ -186,6 +186,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var lastLocation: Location = locationResult.lastLocation
+
         }
     }
 
@@ -221,7 +222,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         return ContextCompat.getDrawable(context, vectorResId)?.run {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
             val bitmap =
-                Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+                Bitmap.createBitmap(80, 80, Bitmap.Config.ARGB_8888)
             draw(Canvas(bitmap))
             BitmapDescriptorFactory.fromBitmap(bitmap)
         }
@@ -238,9 +239,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
             for (i in mapUserData) {
                 val bitmap1 = getBitmap(i.ProfileUrl.toString())
-                Log.e("데이터 값 확인 및 서로 맞는지 확", "otherUserMaker: ${bitmap1}" )
-                Log.e("데이터 값 확인 및 서로 맞는지 확", "otherUserMaker: ${i}")
-                Log.e("데이터 값 확인 및 서로 맞는지 확", "otherUserMaker: ${intentUID[count]}  " )
                 if(bitmap1==null){
                     lifecycleScope.launch(Dispatchers.Main) {
 
@@ -269,7 +267,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         val marker1: Marker = googleMap.addMarker(makerOptions)!!
                         marker1.tag =
                             i.Writed_date + "/" + i.contents + "/" + i.gender + "/" + i.locationName
-                        Log.e("null이 아닐때 ", marker1.tag.toString() )}
+                      }
                 }
                 lifecycleScope.launch(Dispatchers.Main){
                 googleMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
@@ -290,7 +288,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                             var intent = Intent(requireActivity(), BoardDetail::class.java)
                             intent.putExtra("contentsUid", MapIntentUID.text.toString())
                             intent.putExtra("owneruid", ownerUID.text.toString())
-                            Log.e("넘겨지는 ", "${i.uid} \n ${intentUID[count]}" )
                             startActivity(intent)
                         }
                         count++

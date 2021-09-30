@@ -36,12 +36,16 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/main_page_title"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Main page"
-            android:textColor="@color/little_dark_gray"
-            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text = "메인 페이지"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="22sp"
+            android:textStyle="bold"
             android:fontFamily="@font/jalnan"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="@id/main_page_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +53,8 @@
 
         <View
             android:id="@+id/main_page_view_top"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_width="300dp"
+            android:layout_height="5dp"
             android:layout_marginTop="20dp"
             android:background="@color/main"
             app:layout_constraintEnd_toEndOf="parent"
@@ -205,11 +209,11 @@
 
     <Button
         android:id="@+id/btn_board"
-        android:layout_width="50dp"
-        android:layout_height="0dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/btn_board"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/plus1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
