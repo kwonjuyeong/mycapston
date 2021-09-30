@@ -285,20 +285,7 @@ import java.util.*
 
             val bitmap1 = getBitmap(i.ProfileUrl.toString())
 
-                if(i.ProfileUrl!=null){
-                    lifecycleScope.launch(Dispatchers.Main) {
-
-                        val makerOptions = MarkerOptions()
-                        makerOptions
-                            .position(LatLng(i.latitude!!, i.longitude!!))
-                            .title(i.nickname)
-                            .snippet(i.postTitle)
-                            .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
-
-                        val marker1: Marker = googleMap.addMarker(makerOptions)!!
-                        marker1.tag =
-                            i.Writed_date + "/" + i.contents + "/" + i.gender + "/" + i.locationName}
-                    }else{
+                if(bitmap1==null){
                     lifecycleScope.launch(Dispatchers.Main) {
 
                         val makerOptions = MarkerOptions()
@@ -312,6 +299,19 @@ import java.util.*
                         marker1.tag =
                             i.Writed_date + "/" + i.contents + "/" + i.gender + "/" + i.locationName
                     }
+                }else{
+                    lifecycleScope.launch(Dispatchers.Main) {
+
+                        val makerOptions = MarkerOptions()
+                        makerOptions
+                            .position(LatLng(i.latitude!!, i.longitude!!))
+                            .title(i.nickname)
+                            .snippet(i.postTitle)
+                            .icon(BitmapDescriptorFactory.fromBitmap(bitmap1))
+
+                        val marker1: Marker = googleMap.addMarker(makerOptions)!!
+                        marker1.tag =
+                            i.Writed_date + "/" + i.contents + "/" + i.gender + "/" + i.locationName}
                     }
 
                         googleMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
@@ -326,12 +326,6 @@ import java.util.*
                                 board_locate.text = arr[3] ////
 
                                 board_move_button.setOnClickListener {
-                                    //여기다가 아이디태그 달아서 버튼누르면 화면이동.
-                                    var intent = Intent(
-                                        requireActivity(),
-                                        ChangeCustomer::class.java
-                                    )
-                                    startActivity(intent)
                                 }
                                 return false
                             }
@@ -341,7 +335,6 @@ import java.util.*
                                 card_view.visibility = View.GONE
                             }
                         })
-
                     }
                 }
             }
