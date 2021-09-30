@@ -68,54 +68,6 @@ class PermissionActivity : AppCompatActivity() {
             }
         }
     }
-//    private fun makeRequest() {
-//        ActivityCompat.requestPermissions(this,
-//            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-//            RECORD_REQUEST_CODE)
-//    }
-//
-//
-//    override fun onRequestPermissionsResult(requestCode: Int,
-//                                            permissions: Array<String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//
-//        when(requestCode){
-//            RECORD_REQUEST_CODE ->{
-////                if(grantResults.isNotEmpty()
-////                            && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-//
-//
-//                }else{
-//                    getAllPhotos()
-//                }
-//                return
-//            }
-//        }
-//    }
-//
-//
-//
-//    private fun getAllPhotos() {
-//        val cursor = getContentResolver().query(
-//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-//            null,
-//            null,
-//            null,
-//            MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC"
-//        )
-//
-//
-//        if(cursor!=null){
-//            while(cursor.moveToNext()) {
-//                val uri = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
-//                Log.d("MainAcitvity", uri)
-//
-//            }
-//            cursor.close()
-//        }
-//    }
-
 }
 
 
