@@ -1,13 +1,8 @@
 package com.example.myapplication.Main.Fragment.MapFragment
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.util.Log
 import com.example.myapplication.DTO.BoardDTO
 import com.google.firebase.firestore.FirebaseFirestore
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
 
 class MapRepo {
     private var savedMapdata = mutableListOf<BoardDTO>()

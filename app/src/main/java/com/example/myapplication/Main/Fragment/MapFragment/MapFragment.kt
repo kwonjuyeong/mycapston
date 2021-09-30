@@ -74,7 +74,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
-        RequestPermission()
         getLastLocation()
 
 
@@ -121,16 +120,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         return false
     }
 
-    fun RequestPermission() {
-        //this function will allows us to tell the user to requesut the necessary permsiion if they are not garented
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ), PERMISSION_ID
-        )
-    }
 
     fun isLocationEnabled(): Boolean {
         var locationManager =
@@ -211,45 +200,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
-
-    /*
-    private suspend fun getBitmap(url: String): Bitmap {
-        val loading = ImageLoader(requireContext())
-        val request = coil.request.ImageRequest.Builder(requireContext()).data(url).build()
-
-        val result = (loading.execute(request) as SuccessResult).drawable
-        return (result as BitmapDrawable).bitmap
-    }
-
-
-    // type이 안맞음
-    private fun getBitmap(url : String) : Bitmap? {
-
-        var bmp : Bitmap ?=null
-        Picasso.get().load(url).into(object : com.squareup.picasso.Target {
-            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                bmp =  bitmap
-            }
-
-            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
-
-            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {}
-        })
-        return bmp
-    }
-
-    private fun getBitmapFromURL(src: String) {
-        CoroutineScope(Job() + Dispatchers.IO).launch {
-            try {
-                val url = URL(src)
-                val bitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                image = Bitmap.createScaledBitmap(bitMap, 100, 100, true)
-            } catch (e: IOException) {
-                // Log exception
-            }
-        }
-    }
-*/
 
     private fun getBitmap(url: String): Bitmap? {
 
@@ -332,12 +282,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         board_contents.text = arr[1]
                         board_gender.text = arr[2]
                         board_locate.text = arr[3] ////
+                        MapIntentUID.text = intentUID[count]
+                        ownerUID.text = i.uid
 
                         board_move_button.setOnClickListener {
                             //여기다가 아이디태그 달아서 버튼누르면 화면이동.
                             var intent = Intent(requireActivity(), BoardDetail::class.java)
-                            intent.putExtra("contentsUid", intentUID[count])
-                            intent.putExtra("owneruid", i.uid)
+                            intent.putExtra("contentsUid", MapIntentUID.text.toString())
+                            intent.putExtra("owneruid", ownerUID.text.toString())
                             Log.e("넘겨지는 ", "${i.uid} \n ${intentUID[count]}" )
                             startActivity(intent)
                         }
