@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_recent.*
 
 class BoardFragment : Fragment() {
     companion object {
@@ -34,11 +35,13 @@ class BoardFragment : Fragment() {
         val adapter = SearchFragViewPagerAdapter(this)
         viewPager.adapter = adapter
 
+
         val tabName = arrayOf<String>("최근 게시물", "내가 쓴 글")
 
         //슬라이드로 이동했을 때, 탭이 같이 변경되도록
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = tabName[position].toString()
+            viewPager_food?.requestDisallowInterceptTouchEvent(true)
         }.attach()
 
         //탭이 선택되었을 때, 뷰페이저가 같이 변경되도록
@@ -59,8 +62,5 @@ class BoardFragment : Fragment() {
 
         return view
     }
-
-}
-
 
 }

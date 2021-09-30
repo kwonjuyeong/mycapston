@@ -73,6 +73,7 @@
             android:id="@+id/login_Id"
             android:layout_width="match_parent"
             android:fontFamily="@font/maru"
+            android:singleLine="true"
             android:layout_height="wrap_content" />
 
         <TextView
