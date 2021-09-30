@@ -23,7 +23,7 @@ class RecentFragment : Fragment(){
         repo = Repo.StaticFunction.getInstance()
     }
     private fun getfoodlList(): ArrayList<Int> {
-        return arrayListOf<Int>(R.drawable.pizza, R.drawable.coffee, R.drawable.rice)
+        return arrayListOf<Int>(R.drawable.sushi, R.drawable.coffee, R.drawable.steak)
     }
 
     override fun onCreateView(
