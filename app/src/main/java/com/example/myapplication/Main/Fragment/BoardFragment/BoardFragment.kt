@@ -19,6 +19,7 @@ class BoardFragment : Fragment() {
             return BoardFragment()
         }
     }
+
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     override fun onCreateView(
@@ -61,4 +62,3 @@ class BoardFragment : Fragment() {
     }
 
 }
-
