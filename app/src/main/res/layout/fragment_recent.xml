@@ -8,13 +8,8 @@
 
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager_food"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 
@@ -31,7 +26,8 @@
         android:paddingRight="8dp"
         android:paddingBottom="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/viewPager_food"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="NotSibling">
 
         <TextView
             android:id="@+id/textView_current_banner"
@@ -72,7 +68,10 @@
         android:id="@+id/boradSwiprefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager_food">
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_see_all">
+
         <LinearLayout
             android:id="@+id/board_recyclerview_layout"
             android:layout_width="match_parent"
@@ -82,17 +81,28 @@
             app:layout_constraintTop_toBottomOf="@+id/viewPager_food">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/board_fragement_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/board_list_item" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/board_fragement_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/board_list_item" />
         </LinearLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
+    <com.example.myapplication.NestedScrollableHost
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/boradSwiprefresh"
+        app:layout_constraintStart_toStartOf="parent">
 
-
-
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager_food"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.example.myapplication.NestedScrollableHost>
 </androidx.constraintlayout.widget.ConstraintLayout>
