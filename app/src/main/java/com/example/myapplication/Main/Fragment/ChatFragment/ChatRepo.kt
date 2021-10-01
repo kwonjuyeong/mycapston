@@ -58,8 +58,10 @@ class ChatRepo {
                 .document(docName).get().addOnCompleteListener {
                     if (it.isSuccessful) {
                         val item = it.result.toObject(MessageDTO.lastMessage::class.java)
+                        lastMessageDTO.clear()
+                        Log.e("1번 returnLastMessageDTO", item.toString())
                         lastMessageDTO.add(item!!)
-                        Log.e("returnLastMessageDTO", lastMessageDTO.toString())
+                       Log.e("1번 추가호returnLastMessageDTO", lastMessageDTO.toString())
                         liveLastData.value = lastMessageDTO
                     }
                 }

@@ -72,12 +72,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
         Log.e("메인 엑티비티 실행 현황", "onResume: 데이터 확인할때 확인 작업")
         lifecycleScope.launch(Dispatchers.IO) {
+            chatRepo.CheckChattingRoom()
             repo.getboarddata()
             repo.getboardUid()
             maprepo.LoadLocation()
-            chatRepo.CheckChattingRoom()
         }
     }
 

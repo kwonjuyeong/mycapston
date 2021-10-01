@@ -6,19 +6,22 @@
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="280dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:id="@+id/my_chat"
             android:layout_width="220dp"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="right_chat_profile"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@id/right_chat_profile">
+
             <TextView
                 android:id="@+id/chat_contents"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/renewmychat"
                 android:fontFamily="@font/maru"
@@ -26,20 +29,21 @@
                 android:maxLength="100"
                 android:padding="10dp"
                 android:text="" />
+
             <TextView
                 android:id="@+id/chat_date"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:textSize="12sp"
-                android:text="날짜" />
+                android:text="날짜"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/right_chat_profile"
             android:layout_width="55dp"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="5dp"
@@ -53,14 +57,14 @@
 
             <TextView
                 android:id="@+id/chat_nickname"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="12dp"
-                android:text="닉네임" />
+                android:text="이거 왜짤리지?" />
             </LinearLayout>
 
 </RelativeLayout>
