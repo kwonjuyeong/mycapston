@@ -11,10 +11,10 @@ class ViewPagerAdapter(var fragment: Fragment,var tapList: ArrayList<Int>) : Rec
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
 
-    override fun getItemCount(): Int = item.size
+    override fun getItemCount(): Int = Int.MAX_VALUE
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.food.setImageResource(item[position])
+        holder.food.setImageResource(item[position%3])
     }
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
