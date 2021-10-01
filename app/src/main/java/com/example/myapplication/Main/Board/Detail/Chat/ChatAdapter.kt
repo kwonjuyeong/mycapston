@@ -4,17 +4,20 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import de.hdodenhof.circleimageview.CircleImageView
+import org.w3c.dom.Text
 
 @SuppressLint("NotifyDataSetChanged")
-class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.CommentHolder>(){
+class  ChatAdapter(var boarduid : String): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private val commentdto  : MutableList<BoardDTO.Chat> = arrayListOf()
+    private val uid = FirebaseAuth.getInstance().currentUser!!.uid
     init {
         FirebaseFirestore.getInstance().collection("Chat").document(boarduid).collection("Messages").orderBy("timestamp")
             .addSnapshotListener { value, error ->
@@ -27,32 +30,70 @@ class ChatAdapter(var boarduid : String): RecyclerView.Adapter<ChatAdapter.Comme
                 notifyDataSetChanged()
             }
     }
-    class CommentHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        var profile : ImageView = itemView.findViewById(R.id.commet_profile)
-        var nickname : TextView = itemView.findViewById(R.id.commet_nickname)
-        var comment : TextView = itemView.findViewById(R.id.comment_context)
-        var date : TextView = itemView.findViewById(R.id.comment_date)
+
+    override fun getItemViewType(position: Int): Int {
+        if(uid == commentdto[position].UID ){
+            return 0
+        }else{
+            return 1
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapter.CommentHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.chat_list,parent,false)
-        return CommentHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        var view : View?
+        return when(viewType){
+            0 -> {
+                view = LayoutInflater.from(parent.context).inflate(R.layout.right_chat_item,parent,false)
+                MultiViewHolder1(view)
+            }
+            else ->{
+                view = LayoutInflater.from(parent.context).inflate(R.layout.left_chat_item,parent,false)
+                MultiViewHolder2(view)
+            }
+        }
     }
 
-    override fun onBindViewHolder(holder: CommentHolder, position: Int) {
-        var data = commentdto[position]
-        holder.date.text = data.date
-        holder.nickname.text = data.userNickname
-        holder.comment.text = data.message
-        if(data.userprofile.toString() != "null")
-            Glide.with(holder.itemView.context).load(data.userprofile).into(holder.profile)
-        else
-            holder.profile.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(commentdto[position].UID == uid){
+            (holder as MultiViewHolder1).bind(commentdto[position])
+            holder.setIsRecyclable(false)
+        }
+        else{
+            (holder as MultiViewHolder2).bind(commentdto[position])
+            holder.setIsRecyclable(false)
+        }
     }
+
     override fun getItemCount() = commentdto.size
 
-
-
+    inner class MultiViewHolder1(view : View) : RecyclerView.ViewHolder(view){
+        private val nickname: TextView = view.findViewById(R.id.chat_nickname)
+        private val contents : TextView = view.findViewById(R.id.chat_contents)
+        private val date : TextView = view.findViewById(R.id.chat_date)
+        private val profile : CircleImageView = view.findViewById(R.id.chat_profile)
+        fun bind(item : BoardDTO.Chat){
+            nickname.text = item.userNickname
+            contents.text = item.message
+            date.text = item.date
+            if(item.userprofile != null){
+                Glide.with(itemView).load(item.userprofile).into(profile)
+            }
+        }
+    }
+    inner class MultiViewHolder2(view : View) : RecyclerView.ViewHolder(view){
+        private val nickname: TextView = view.findViewById(R.id.chat_nickname)
+        private val contents : TextView = view.findViewById(R.id.chat_contents)
+        private val date : TextView = view.findViewById(R.id.chat_date)
+        private val profile : CircleImageView = view.findViewById(R.id.chat_profile)
+        fun bind(item : BoardDTO.Chat){
+            nickname.text = item.userNickname
+            contents.text = item.message
+            date.text = item.date
+            if(item.userprofile != null){
+                Glide.with(itemView).load(item.userprofile).into(profile)
+            }
+        }
+    }
 }
 
 

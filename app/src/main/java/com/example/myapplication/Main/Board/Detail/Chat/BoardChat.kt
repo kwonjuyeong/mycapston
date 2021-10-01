@@ -1,6 +1,5 @@
 package com.example.myapplication.Main.Board.Detail.Chat
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,8 +12,7 @@ import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_board_comment.*
-import kotlinx.android.synthetic.main.activity_board_comment.sv_root
+import kotlinx.android.synthetic.main.activity_board_chat.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -26,11 +24,11 @@ class BoardChat : AppCompatActivity() {
     private val uid = FirebaseAuth.getInstance().currentUser?.uid
     private var Chats = BoardDTO.Chat()
     private var lastMessage = MessageDTO.lastMessage()
+    private lateinit var chatAdapter: ChatAdapter
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_board_comment)
-
+        setContentView(R.layout.activity_board_chat)
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
                 sv_root.run {
@@ -46,37 +44,33 @@ class BoardChat : AppCompatActivity() {
                 Log.e("값 받아오는거 확인", currentDTO.toString())
             }
         }
+        chatAdapter = ChatAdapter(commentUid)
         comment_recyclerView.apply {
-            var chatAdapter: ChatAdapter
+
             layoutManager = LinearLayoutManager(context)
-            chatAdapter = ChatAdapter(commentUid)
             adapter = chatAdapter
         }
         btn_comment_send?.setOnClickListener {
             // 채팅내용 업로드
-            lifecycleScope.launch(Dispatchers.IO) {
-                updateChat()
-                setLastMessage()
-            }
+            updateChat()
+            setLastMessage()
             comment_text.setText("")
         }
     }
 
-    private suspend fun updateChat() {
+    private fun updateChat() {
         val commentUid = intent.getStringExtra("commentUid")!!
         Chats.UID = uid
         Chats.message = comment_text.text.toString()
         Chats.userprofile = currentDTO.ProfileUrl
-        Log.e("채팅 보낸사람 url", currentDTO.ProfileUrl.toString())
         Chats.userNickname = currentDTO.nickname
         Chats.date = SimpleDateFormat("MM월 dd일").format(Date())
         Chats.timestamp = System.currentTimeMillis()
         firestore.collection("Chat").document(commentUid).collection("Messages").document()
             .set(Chats)
-
     }
 
-    private suspend fun setLastMessage() {
+    private fun setLastMessage() {
         val time = SimpleDateFormat("MM월 dd일").format(Date())
         val lastchat = comment_text.text.toString()
         val commentUid = intent.getStringExtra("commentUid")!!
@@ -97,5 +91,9 @@ class BoardChat : AppCompatActivity() {
         setResult(RESULT_OK)
     }
 
+    override fun onPause() {
+        super.onPause()
+
+    }
 
 }

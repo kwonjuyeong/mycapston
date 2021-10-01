@@ -2,13 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <androidx.constraintlayout.widget.ConstraintLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="50dp"
@@ -26,8 +23,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/add_login_cancel"
-                android:layout_width="21dp"
-                android:layout_height="19dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="20.83dp"
                 android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +37,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_login_text"
                 android:fontFamily="@font/jalnan"
-                android:textColor="@color/medium_dark_gray"
-                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@id/add_login_cancel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +46,8 @@
 
             <View
                 android:id="@+id/phone_auth_view_top"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
+                android:layout_width="300dp"
+                android:layout_height="5dp"
                 android:layout_marginTop="12dp"
                 android:background="#ff9424"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +75,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="회원정보를 입력해주세요! 감사합니다."
                 android:fontFamily="@font/jalnan"
-                android:textColor="@color/strong_dark_gray"
+                android:textColor="@color/medium_dark_gray"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/add_login_main_text"
@@ -89,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:text="프로필"
                 android:fontFamily="@font/jalnan"
                 android:textColor="@color/medium_dark_gray"
@@ -100,10 +97,11 @@
             <LinearLayout
                 android:id="@+id/add_login_img_set"
                 android:layout_width="match_parent"
-                android:layout_height="101dp"
+                android:layout_height="100dp"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteX="-20dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
                 tools:layout_editor_absoluteY="177dp"
                 app:layout_constraintTop_toBottomOf="@+id/add_login_profile"
                 tools:ignore="MissingConstraints">
@@ -127,17 +125,16 @@
 <!--                        android:fontFamily="@font/jalnan"-->
 <!--                        android:textSize="16dp"></EditText>-->
 
-                    <Button
-                        android:id="@+id/upload"
-                        android:layout_width="280dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="-2dp"
-                        android:background="@drawable/signiture_btn"
-                        android:fontFamily="@font/jalnan"
-                        android:layout_marginStart="10dp"
-                        android:text="photo upload"></Button>
+                <Button
+                    android:id="@+id/upload"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/signiture_btn"
+                    android:fontFamily="@font/jalnan"
+                    android:layout_marginStart="10dp"
+                    android:text="사진 업로드" />
 
             </LinearLayout>
 
@@ -146,7 +143,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="43dp"
+                android:layout_marginTop="30dp"
                 android:text="이름"
                 android:fontFamily="@font/jalnan"
                 android:textColor="@color/medium_dark_gray"
@@ -158,10 +155,10 @@
                 android:id="@+id/add_login_edit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:focusable="true"
-                android:hint="이름을 입력해주세요."
+                android:hint="소중한 당신의 이름을 입력해주세요."
                 android:fontFamily="@font/maru"
 
                 android:background="@null"
@@ -175,7 +172,7 @@
                 android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="30dp"
                 android:text="별명"
                 android:fontFamily="@font/jalnan"
                 android:textColor="@color/medium_dark_gray"
@@ -187,13 +184,13 @@
                 android:id="@+id/add_login_nickname_edit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:focusable="true"
-                android:hint="닉네임을 입력해주세요."
+                android:hint="평소에 뭐라고 불리우나요?"
                 android:fontFamily="@font/maru"
                 android:background="@null"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/add_login_nickname"
                 app:layout_constraintTop_toBottomOf="@id/add_login_nickname" />
@@ -203,7 +200,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="30dp"
                 android:text="성별"
                 android:fontFamily="@font/jalnan"
                 android:textColor="@color/medium_dark_gray"
@@ -213,24 +210,24 @@
 
             <RadioGroup
                 android:id="@+id/add_login_sex_input_set"
-                android:layout_width="170dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="@+id/add_login_sex_text"
                 app:layout_constraintTop_toBottomOf="@id/add_login_sex_text"
                 tools:ignore="MissingConstraints"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="10dp">
 
                 <RadioButton
                     android:id="@+id/add_login_male_btn"
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:text="남성" />
 
                 <RadioButton
                     android:id="@+id/add_login_female_btn"
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:value="여"
@@ -239,16 +236,14 @@
             </RadioGroup>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/upload_sign"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="350dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/signiture_btn"
                 android:text="가입 완료"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_login_sex_input_set" />

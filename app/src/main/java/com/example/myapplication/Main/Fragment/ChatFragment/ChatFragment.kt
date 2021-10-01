@@ -14,18 +14,18 @@ import kotlinx.android.synthetic.main.frag_chat.*
 
 class ChatFragment: Fragment(){
     companion object {
-        const val BoardTAG: String = "BoardList"
         fun newInstance(): ChatFragment {
             return ChatFragment()
         }
     }
-    private lateinit var adapter: ChatListAdapter
+    private lateinit var chatadapter :  ChatListAdapter
     private val viewModel by lazy{
         ViewModelProvider(this).get(ChatListViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        chatadapter = ChatListAdapter(requireContext())
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,10 +41,9 @@ class ChatFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         chat_list_recyclerview.apply {
-            val chatlistAdapter : ChatListAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            chatlistAdapter = ChatListAdapter()
-            adapter = chatlistAdapter
+            //val chatlistAdapter = ChatListAdapter()
+            adapter = chatadapter
             observeData()
         }
     }
@@ -52,8 +51,8 @@ class ChatFragment: Fragment(){
     @SuppressLint("NotifyDataSetChanged")
     private fun observeData(){
         viewModel.getChatListData().observe(viewLifecycleOwner, Observer {
-            adapter.setDataChatAapter(it)
-            adapter.notifyDataSetChanged()
+            chatadapter.setDataChatAapter(it)
+            chatadapter.notifyDataSetChanged()
         })
     }
 }

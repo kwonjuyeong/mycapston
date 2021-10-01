@@ -25,7 +25,8 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textSize="22sp" />
+                android:textSize="24sp"
+                android:textStyle="bold"/>
 
             <Button
                 android:id="@+id/recent_button"
@@ -128,10 +129,10 @@
                                 android:textColor="#000000"
                                 android:textSize="14sp" />
                             <TextView
-                                android:layout_width="85dp"
+                                android:layout_width="80dp"
                                 android:layout_height="20dp"
-                                android:layout_marginLeft="16dp"
-                                android:text="현재 위치 :   "
+                                android:layout_marginStart="16dp"
+                                android:text="현재 위치 :  "
                                 android:textColor="#000000"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -218,11 +219,24 @@
                                 android:text="갱신 전"
                                 android:textColor="#000000"
                                 android:textSize="14sp" />
+                            <TextView
+                                android:id="@+id/MapIntentUID"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:visibility="gone"/>
+                            <TextView
+                                android:id="@+id/ownerUID"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:visibility="gone"/>
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <Button
+                        android:id="@+id/board_move_button"
                         android:layout_width="80dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center|right"
