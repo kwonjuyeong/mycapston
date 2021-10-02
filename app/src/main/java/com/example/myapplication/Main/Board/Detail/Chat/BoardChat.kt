@@ -3,6 +3,10 @@ package com.example.myapplication.Main.Board.Detail.Chat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
@@ -26,6 +30,15 @@ class BoardChat : AppCompatActivity() {
     private var lastMessage = MessageDTO.lastMessage()
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
+    private var drawerLayout: DrawerLayout? = null
+    private var drawerView: View? = null
+    var listener: DrawerLayout.DrawerListener = object : DrawerLayout.DrawerListener {
+        override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+        override fun onDrawerOpened(drawerView: View) {}
+        override fun onDrawerClosed(drawerView: View) {}
+        override fun onDrawerStateChanged(newState: Int) {}
+    }
+
 
 
 
@@ -61,7 +74,18 @@ class BoardChat : AppCompatActivity() {
             setLastMessage()
             comment_text.setText("")
         }
+
+        drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+        drawerView = findViewById(R.id.drawer) as View
+        val btn_open = findViewById<View>(R.id.hamburger) as ImageView
+        btn_open.setOnClickListener { drawerLayout!!.openDrawer(drawerView!!) }
+        val btn_close = findViewById<View>(R.id.btn_close) as Button
+        btn_close.setOnClickListener { drawerLayout!!.closeDrawers() }
+        drawerLayout!!.setDrawerListener(listener)
+        drawerView!!.setOnTouchListener { v, event -> true }
+
     }
+
 
     private fun updateChat() {
         val commentUid = intent.getStringExtra("commentUid")!!
