@@ -6,8 +6,8 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:layout_width="280dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,12 +20,12 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/chat_profile"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="53dp"
                 android:src="@drawable/ic_baseline_account_circle_signiture"></de.hdodenhof.circleimageview.CircleImageView>
 
             <TextView
                 android:id="@+id/chat_nickname"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:gravity="center"
@@ -36,35 +36,36 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_toEndOf="@+id/left_chat_profile">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/left_chat_profile"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/chat_contents"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/yourchat"
                 android:backgroundTintMode="screen"
                 android:fontFamily="@font/maru"
+                android:gravity="bottom"
                 android:maxWidth="200dp"
                 android:maxLength="200"
                 android:maxLines="7"
                 android:padding="10dp"
-                android:backgroundTint="@color/little_yellow"
                 android:text=""
-                android:gravity="bottom"
                 android:textSize="11sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/chat_date"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:textSize="12sp"
-                android:text="날짜" />
+                android:gravity="left"
+                android:text="날짜"
+                android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>
 

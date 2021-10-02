@@ -167,8 +167,8 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="376dp"
-        android:layout_height="194dp"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -180,29 +180,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/main" />
-        <View
-            android:layout_width="3dp"
-            android:layout_height="200dp"
-            android:background="@color/main" />
+            android:layout_height="match_parent"
+            android:background="@drawable/roundgirl2"/>
 
-        <View
-            android:layout_width="3dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="373dp"
-            android:background="@color/main" />
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="3dp"
-            android:layout_marginTop="191dp"
-            android:background="@color/main"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 

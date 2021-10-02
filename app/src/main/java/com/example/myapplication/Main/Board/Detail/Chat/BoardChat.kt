@@ -1,9 +1,12 @@
 package com.example.myapplication.Main.Board.Detail.Chat
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
@@ -13,8 +16,7 @@ import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_board_comment.*
-import kotlinx.android.synthetic.main.activity_board_comment.sv_root
+import kotlinx.android.synthetic.main.activity_board_chat.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -28,9 +30,23 @@ class BoardChat : AppCompatActivity() {
     private var lastMessage = MessageDTO.lastMessage()
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
+    private var drawerLayout: DrawerLayout? = null
+    private var drawerView: View? = null
+    var listener: DrawerLayout.DrawerListener = object : DrawerLayout.DrawerListener {
+        override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+        override fun onDrawerOpened(drawerView: View) {}
+        override fun onDrawerClosed(drawerView: View) {}
+        override fun onDrawerStateChanged(newState: Int) {}
+    }
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_board_comment)
+        setContentView(R.layout.activity_board_chat)
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
                 sv_root.run {
@@ -54,15 +70,24 @@ class BoardChat : AppCompatActivity() {
         }
         btn_comment_send?.setOnClickListener {
             // 채팅내용 업로드
-            lifecycleScope.launch(Dispatchers.IO) {
-                updateChat()
-                setLastMessage()
-            }
+            updateChat()
+            setLastMessage()
             comment_text.setText("")
         }
+
+        drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+        drawerView = findViewById(R.id.drawer) as View
+        val btn_open = findViewById<View>(R.id.hamburger) as ImageView
+        btn_open.setOnClickListener { drawerLayout!!.openDrawer(drawerView!!) }
+        val btn_close = findViewById<View>(R.id.btn_close) as Button
+        btn_close.setOnClickListener { drawerLayout!!.closeDrawers() }
+        drawerLayout!!.setDrawerListener(listener)
+        drawerView!!.setOnTouchListener { v, event -> true }
+
     }
 
-    private suspend fun updateChat() {
+
+    private fun updateChat() {
         val commentUid = intent.getStringExtra("commentUid")!!
         Chats.UID = uid
         Chats.message = comment_text.text.toString()
@@ -72,10 +97,9 @@ class BoardChat : AppCompatActivity() {
         Chats.timestamp = System.currentTimeMillis()
         firestore.collection("Chat").document(commentUid).collection("Messages").document()
             .set(Chats)
-
     }
 
-    private suspend fun setLastMessage() {
+    private fun setLastMessage() {
         val time = SimpleDateFormat("MM월 dd일").format(Date())
         val lastchat = comment_text.text.toString()
         val commentUid = intent.getStringExtra("commentUid")!!

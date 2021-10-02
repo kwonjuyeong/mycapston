@@ -30,7 +30,6 @@ class MapRepo {
                     val item = snapshot.toObject(BoardDTO::class.java)
                     savedMapdata.add(item!!)
                     mapIntentUid.add(snapshot.id)
-                    Log.e("mapIntent확인", mapIntentUid.toString() ) // 왜 2번씩 받냐 씨발
                 }
 
                 /*getgender(savedLocation)*/

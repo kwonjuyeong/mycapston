@@ -3,6 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'com.google.gms.google-services' // Google Services plugin
+   // id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+/*
+    id 'dagger.hilt.android.plugin'
+    id "androidx.navigation.safeargs"
+ */
     id 'kotlin-kapt'
 }
 
@@ -105,6 +110,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 //    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.okhttp:okhttp-urlconnection:1.6.0'
+    implementation "io.coil-kt:coil:1.3.2"
+
     //okhttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
 
@@ -121,10 +128,15 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //crop image
+    implementation "com.theartofdev.edmodo:android-image-cropper:2.8.0"\
+
+
     implementation "com.theartofdev.edmodo:android-image-cropper:2.8.0"
 
 
     implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha01'//뷰페이저
+
+    implementation 'com.google.android.material:material:1.2.1' //사용 리솟스
 /*
     //여기 안되면 지우기
     implementation 'com.google.dagger:hilt-android:<VERSION>'
@@ -160,3 +172,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 */
 }
+
+apply plugin: 'com.google.gms.google-services'

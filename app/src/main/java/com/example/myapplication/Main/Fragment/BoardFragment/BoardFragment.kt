@@ -19,6 +19,7 @@ class BoardFragment : Fragment() {
             return BoardFragment()
         }
     }
+
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     override fun onCreateView(
@@ -31,14 +32,16 @@ class BoardFragment : Fragment() {
         tabLayout = view.findViewById(R.id.boardTabLayout)
         viewPager = view.findViewById(R.id.search_view_pager)
 
+
         val adapter = SearchFragViewPagerAdapter(this)
         viewPager.adapter = adapter
-
+        viewPager.requestDisallowInterceptTouchEvent(true)
         val tabName = arrayOf<String>("최근 게시물", "내가 쓴 글")
 
         //슬라이드로 이동했을 때, 탭이 같이 변경되도록
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = tabName[position].toString()
+
         }.attach()
 
         //탭이 선택되었을 때, 뷰페이저가 같이 변경되도록
@@ -61,4 +64,3 @@ class BoardFragment : Fragment() {
     }
 
 }
-

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/sv_root"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".Main.Board.Detail.Chat.BoardChat">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/commant_page_top"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/commant_back"
+                    android:layout_width="21dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="20.83dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_back_signiture" />
+
+                <TextView
+                    android:id="@+id/commant_page_title"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/jalnan"
+                    android:gravity="center"
+                    android:text="댓글"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/hamburger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/chat_drawer"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:layout_below="@+id/commant_page_top"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
+
+            <Button
+                android:id="@+id/btn_comment_send"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/comment_recyclerView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/signiture_btn"
+                android:text="SEND" />
+
+            <EditText
+                android:id="@+id/comment_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/comment_recyclerView"
+                android:layout_marginStart="10dp"
+                android:layout_toStartOf="@id/btn_comment_send"
+                android:background="@color/little_yellow"
+                android:drawableStart="@android:drawable/btn_star" />
+        </RelativeLayout>
+
+    </ScrollView>
+    <include layout="@layout/activity_chatadd" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
