@@ -26,6 +26,11 @@ class BoardChat : AppCompatActivity() {
     private var lastMessage = MessageDTO.lastMessage()
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_chat)

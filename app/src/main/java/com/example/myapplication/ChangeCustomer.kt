@@ -3,19 +3,20 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_infomation_law.*
+import kotlinx.android.synthetic.main.activity_customer_service.*
 
-class ChangeInformationLaw : AppCompatActivity() {
+class ChangeCustomer : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_infomation_law)
+        setContentView(R.layout.activity_customer_service)
 
-
-        back_button3.setOnClickListener({
+        back_button1.setOnClickListener({
             val intent = Intent(this, SettingFragment::class.java)
             startActivity(intent)
 
 
         })
+
+
     }
 }
