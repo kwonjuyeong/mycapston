@@ -15,10 +15,12 @@
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="right_chat_profile"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/chat_contents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_gravity="right"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/renewmychat"
                 android:fontFamily="@font/maru"

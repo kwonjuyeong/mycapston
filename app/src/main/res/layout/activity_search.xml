@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--tools:context=""-->
+
+    <RelativeLayout
+        android:id = "@id/serch_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/board_cancel"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_signiture" />
+        <TextView
+            android:id="@+id/search_text"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Search"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:layout_gravity = "center"
+            android:gravity="center"
+            android:singleLine="true"/>
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/signiture_btn_with_nostrike"
+            app:queryHint="검색어를 입력하시오"
+            app:layout_constraintTop_toBottomOf="@+id/search_text"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/search_what"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="~에 대한 검색결과"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:gravity=""
+        app:layout_constraintTop_toBottomOf="@+id/serch_layout"/>
+
+
+    <RelativeLayout
+        android:id="@+id/search_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_what">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/main" />
+        <View
+            android:layout_width="3dp"
+            android:layout_height="600dp"
+            android:background="@color/main" />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="389dp"
+            android:background="@color/main" />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:layout_marginTop="577dp"
+            android:background="@color/main"/>
+    </RelativeLayout>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

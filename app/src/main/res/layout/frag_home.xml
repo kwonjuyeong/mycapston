@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -62,6 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/main_page_cancel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <ImageView
         android:id="@+id/main_page_user_img"
         android:layout_width="56dp"
@@ -72,13 +74,13 @@
         app:layout_constraintEnd_toStartOf="@+id/search_view"
         app:layout_constraintTop_toBottomOf="@+id/main_text"
         tools:src="@tools:sample/avatars"
-        tools:ignore="MissingConstraints"></ImageView>
+        tools:ignore="MissingConstraints" />
 
     <SearchView
         android:id="@+id/search_view"
-        android:layout_width="300dp"
+        android:layout_width="280dp"
         android:layout_height="40dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:background="@drawable/signiture_btn_with_nostrike"
@@ -87,7 +89,7 @@
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_text"
-        app:queryHint="검색어를 입력하시오"></SearchView>
+        app:queryHint="검색어를 입력하시오" />
 
     <LinearLayout
         android:id="@+id/home_bottom"
@@ -144,6 +146,24 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout15"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/main_page_user_img">
+        <TextView
+            android:id="@+id/recommend_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:text="~님 오늘은 치킨각!"
+            android:fontFamily="@font/jalnan"
+            android:textColor="@color/main"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -180,32 +200,13 @@
             android:layout_height="3dp"
             android:layout_marginTop="191dp"
             android:background="@color/main"/>
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="380dp"
-            android:layout_marginTop="50dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout15"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="15dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/main_page_user_img">
-        <TextView
-            android:id="@+id/recommend_textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="15dp"
-            android:text="~님 오늘은 치킨각!"
-            android:fontFamily="@font/jalnan"
-            android:textColor="@color/main"
-            android:textSize="20sp" />
-    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_board"
