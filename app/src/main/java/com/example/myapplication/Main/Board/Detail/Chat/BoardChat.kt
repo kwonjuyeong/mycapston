@@ -3,6 +3,10 @@ package com.example.myapplication.Main.Board.Detail.Chat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
@@ -27,6 +31,14 @@ class BoardChat : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
     private var repo = Repo.StaticFunction.getInstance()
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
+    private var drawerLayout: DrawerLayout? = null
+    private var drawerView: View? = null
+    var listener: DrawerLayout.DrawerListener = object : DrawerLayout.DrawerListener {
+        override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+        override fun onDrawerOpened(drawerView: View) {}
+        override fun onDrawerClosed(drawerView: View) {}
+        override fun onDrawerStateChanged(newState: Int) {}
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_chat)
@@ -38,7 +50,6 @@ class BoardChat : AppCompatActivity() {
             })  //키보드 움직이기
         var context = this
         // 해당 게시글 uid를 intent로 받아옴
-        joinChat()
         val commentUid = intent.getStringExtra("commentUid")!!
         firestore.collection("userid").document(uid!!).get().addOnCompleteListener {
             if (it.isSuccessful) {
@@ -58,6 +69,16 @@ class BoardChat : AppCompatActivity() {
             setLastMessage()
             comment_text.setText("")
         }
+
+        drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+        drawerView = findViewById(R.id.drawer) as View
+        val btn_open = findViewById<View>(R.id.hamburger) as ImageView
+        btn_open.setOnClickListener { drawerLayout!!.openDrawer(drawerView!!) }
+        val btn_close = findViewById<View>(R.id.btn_close) as Button
+        btn_close.setOnClickListener { drawerLayout!!.closeDrawers() }
+        drawerLayout!!.setDrawerListener(listener)
+        drawerView!!.setOnTouchListener { v, event -> true }
+
     }
 
     private fun updateChat() {
@@ -104,21 +125,5 @@ class BoardChat : AppCompatActivity() {
         repo.upDateOnlineState("online")
 
     }
-    fun joinChat() { // 유저 체크
-        val chooseUid = intent.getStringExtra("commentUid")!!
-        //val ownerUid = intent.getStringExtra("owneruid")!!
-        val Ref = firestore.collection("Chat").document(chooseUid)
-        firestore.runTransaction { transition ->
-            val uid = FirebaseAuth.getInstance().currentUser!!.uid
-            val messageDTO = transition.get(Ref).toObject(MessageDTO::class.java)
-            // 취소 이벤트
-            if (messageDTO!!.UserCheck.containsKey(uid)) {
-                //messageDTO.UserCheck.remove(uid)
-            } else {    // 참여 이벤트
-                messageDTO.UserCheck[uid] = true
-            }
-            transition.set(Ref, messageDTO)
-        }
 
-    }
 }
