@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
-
-
-
-
-
     <LinearLayout
         android:id="@+id/linear_layout_see_all"
         android:layout_width="wrap_content"
@@ -91,7 +84,7 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-    <com.example.myapplication.NestedScrollableHost
+    <com.example.myapplication.Main.Fragment.BoardFragment.Recent.NestedScrollableHost
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/boradSwiprefresh"
@@ -104,5 +97,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </com.example.myapplication.NestedScrollableHost>
+    </com.example.myapplication.Main.Fragment.BoardFragment.Recent.NestedScrollableHost>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,18 +4,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.DTO.UserinfoDTO
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.frag_board.*
 
 class Repo {
     // 초기값 백업1
-    private var livedata: MutableLiveData<BoardDTO>? = null
-    private var liveboarduid: MutableLiveData<String>? = null
     private var firestore = FirebaseFirestore.getInstance()
     private var listdata = mutableListOf<BoardDTO>()
     private var contentsuid = arrayListOf<String>()
-    private var count = 0
 
     object StaticFunction {
         private var instance: Repo? = null
@@ -62,38 +61,30 @@ class Repo {
         return contentsuid
     }
 
-    fun getListdata(): LiveData<BoardDTO> {
-        //listdata.clear()
-        count = listdata.size
-
-        livedata = MutableLiveData<BoardDTO>()    // 객체 생
-        if (listdata != null)
-            listdata.clear()
-        firestore.collection("Board").orderBy("timestamp",Query.Direction.DESCENDING)
-            .addSnapshotListener() { querySnapshot, firebaseFirestoreException ->
-                if (querySnapshot == null) return@addSnapshotListener
-                for (snapshot in querySnapshot!!.documents) {
-                    var item = snapshot.toObject(BoardDTO::class.java)
-
-                    livedata!!.postValue(item!!)
-                }
-            }
-        return livedata!!
+    fun upDateOnlineState(status : String){
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val uidCollection = uid+"_status"
+        val onlineStatus = UserinfoDTO.OnlineStatus()
+        onlineStatus.status["Online"] = status
+        val firestoreRef = firestore.collection("userid").document(uid).collection("status").document(uidCollection)
+        firestoreRef.update(
+            mapOf(
+                "useruid" to uid,
+                "status" to onlineStatus.status
+            )
+        )
     }
-
-    fun getlistuid(): LiveData<String> {
-        //contentsuid.clear()
-        if(contentsuid == null)
-            contentsuid.clear()
-        liveboarduid = MutableLiveData<String>()
-        firestore.collection("Board").orderBy("timestamp",Query.Direction.DESCENDING)
-            .addSnapshotListener() { querySnapshot, firebaseFirestoreException ->
-                if (querySnapshot == null) return@addSnapshotListener
-                for (snapshot in querySnapshot!!.documents) {
-                    liveboarduid!!.postValue(snapshot.id)
-                }
+    fun createOnlinstatus(){
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val uidCollection = uid+"_status"
+        val onlineStatus = UserinfoDTO.OnlineStatus()
+        val firestoreRef = firestore.collection("userid").document(uid).collection("status").document(uidCollection)
+        firestoreRef.get().addOnSuccessListener {
+            if (it.exists()){}
+            else{
+                firestoreRef.set(onlineStatus)
             }
-        return liveboarduid!!
+        }
     }
 
 }

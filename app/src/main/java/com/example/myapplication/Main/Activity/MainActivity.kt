@@ -47,12 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
-        //권한 설
-//        ActivityCompat.requestPermissions(
-//            this,
-//            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-//            1
-//        )
+        repo.createOnlinstatus()
         Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업")
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
@@ -63,16 +58,19 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         Log.e("메인 엑티비티 실행 현황", "onPause: TODO : 데이터 확인할때 확인작업")
+        repo.upDateOnlineState("offline")
     }
 
     override fun onRestart() {
         super.onRestart()
         Log.e("메인 엑티비티 실행 현황", "onRestart: 데이터 확인할때 확인 작업")
+
     }
 
     override fun onResume() {
         super.onResume()
         Log.e("메인 엑티비티 실행 현황", "onResume: 데이터 확인할때 확인 작업")
+        repo.upDateOnlineState("online")
         lifecycleScope.launch(Dispatchers.IO) {
             repo.getboarddata()
             repo.getboardUid()

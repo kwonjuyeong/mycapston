@@ -12,6 +12,7 @@ import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
@@ -43,6 +44,7 @@ class BoardPost : AppCompatActivity() {
     private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
+    private var repo = Repo.StaticFunction.getInstance()
 
 
     @SuppressLint("MissingPermission")
@@ -168,5 +170,14 @@ class BoardPost : AppCompatActivity() {
 
         //startActivity(intent)
         finish()
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,7 +20,7 @@ class BoardFragment : Fragment() {
             return BoardFragment()
         }
     }
-
+    private val repo = Repo.StaticFunction.getInstance()
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     override fun onCreateView(
@@ -61,6 +62,17 @@ class BoardFragment : Fragment() {
         })
 
         return view
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
+
     }
 
 }

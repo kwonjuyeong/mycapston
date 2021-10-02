@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.frag_chat.*
 
@@ -18,6 +19,7 @@ class ChatFragment: Fragment(){
             return ChatFragment()
         }
     }
+    private var repo = Repo.StaticFunction.getInstance()
     private lateinit var chatadapter :  ChatListAdapter
     private val viewModel by lazy{
         ViewModelProvider(this).get(ChatListViewModel::class.java)
@@ -51,9 +53,21 @@ class ChatFragment: Fragment(){
     @SuppressLint("NotifyDataSetChanged")
     private fun observeData(){
         viewModel.getChatListData().observe(viewLifecycleOwner, Observer {
+
             chatadapter.setDataChatAapter(it)
             chatadapter.notifyDataSetChanged()
         })
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
+
     }
 }
 

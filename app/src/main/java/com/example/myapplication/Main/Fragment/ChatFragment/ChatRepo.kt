@@ -27,6 +27,7 @@ class ChatRepo {
     fun CheckChattingRoom() {
         firestore.collection("Chat").whereEqualTo("userCheck", mutableMapOf(userUid to true))
             .addSnapshotListener { value, error ->
+                messageDTO.clear()
                 if (value == null) return@addSnapshotListener
                 for (document in value.documents) {
                     val temp = document.toObject(MessageDTO::class.java)
@@ -51,6 +52,7 @@ class ChatRepo {
 //    }
 
     fun returnLastMessageDTO(): LiveData<MutableList<MessageDTO.lastMessage>> {
+        lastMessageDTO.clear()
         for (i in messageDTO) {
             val docName = i.boardUid + "_last"
             Log.e("returnLastme", docName)
@@ -58,7 +60,6 @@ class ChatRepo {
                 .document(docName).get().addOnCompleteListener {
                     if (it.isSuccessful) {
                         val item = it.result.toObject(MessageDTO.lastMessage::class.java)
-                        lastMessageDTO.clear()
                         Log.e("1번 returnLastMessageDTO", item.toString())
                         lastMessageDTO.add(item!!)
                        Log.e("1번 추가호returnLastMessageDTO", lastMessageDTO.toString())

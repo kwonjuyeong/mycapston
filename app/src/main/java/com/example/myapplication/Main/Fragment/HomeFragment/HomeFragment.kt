@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.Main.Board.BoardPost
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_home.view.*
@@ -27,7 +28,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
+    private val repo = Repo.StaticFunction.getInstance()
     private lateinit var photoAdapter: PhotoAdapter
     private var dataList = mutableListOf<DataModel>()
 
@@ -91,6 +92,17 @@ class HomeFragment : Fragment() {
         dataList.add(DataModel("일식", R.drawable.sushi))
 
         photoAdapter.setDataList(dataList)
+
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
 
     }
 }

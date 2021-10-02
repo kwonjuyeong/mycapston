@@ -9,6 +9,7 @@ import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.DTO.MessageDTO
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.KeyboardVisibilityUtils
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,14 +24,9 @@ class BoardChat : AppCompatActivity() {
     private var currentDTO = UserinfoDTO()
     private val uid = FirebaseAuth.getInstance().currentUser?.uid
     private var Chats = BoardDTO.Chat()
-    private var lastMessage = MessageDTO.lastMessage()
     private lateinit var chatAdapter: ChatAdapter
+    private var repo = Repo.StaticFunction.getInstance()
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_chat)
@@ -42,6 +38,7 @@ class BoardChat : AppCompatActivity() {
             })  //키보드 움직이기
         var context = this
         // 해당 게시글 uid를 intent로 받아옴
+        joinChat()
         val commentUid = intent.getStringExtra("commentUid")!!
         firestore.collection("userid").document(uid!!).get().addOnCompleteListener {
             if (it.isSuccessful) {
@@ -98,7 +95,30 @@ class BoardChat : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        repo.upDateOnlineState("offline")
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
+
+    }
+    fun joinChat() { // 유저 체크
+        val chooseUid = intent.getStringExtra("commentUid")!!
+        //val ownerUid = intent.getStringExtra("owneruid")!!
+        val Ref = firestore.collection("Chat").document(chooseUid)
+        firestore.runTransaction { transition ->
+            val uid = FirebaseAuth.getInstance().currentUser!!.uid
+            val messageDTO = transition.get(Ref).toObject(MessageDTO::class.java)
+            // 취소 이벤트
+            if (messageDTO!!.UserCheck.containsKey(uid)) {
+                //messageDTO.UserCheck.remove(uid)
+            } else {    // 참여 이벤트
+                messageDTO.UserCheck[uid] = true
+            }
+            transition.set(Ref, messageDTO)
+        }
+
+    }
 }
