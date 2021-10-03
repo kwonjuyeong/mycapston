@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:src="@drawable/chat_drawer" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -56,32 +56,28 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comment_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="600dp"
                 android:layout_below="@+id/commant_page_top"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="40dp" />
-
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
             <Button
                 android:id="@+id/btn_comment_send"
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_below="@+id/comment_recyclerView"
-                android:layout_alignParentRight="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/signiture_btn"
                 android:text="SEND" />
 
             <EditText
                 android:id="@+id/comment_text"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_below="@+id/comment_recyclerView"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_toStartOf="@id/btn_comment_send"
                 android:background="@color/little_yellow"
                 android:drawableStart="@android:drawable/btn_star" />
@@ -93,3 +89,4 @@
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
+
