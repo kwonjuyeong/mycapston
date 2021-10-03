@@ -51,6 +51,7 @@ class ChatListAdapter(val context: Context): RecyclerView.Adapter<ChatListAdapte
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BoardChat::class.java)
             intent.putExtra("commentUid",data.boardChatuid)
+            Log.e("chatadapter", data.boardChatuid.toString() )
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

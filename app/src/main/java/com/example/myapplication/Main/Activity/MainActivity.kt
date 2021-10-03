@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
@@ -34,8 +35,6 @@ class MainActivity : AppCompatActivity() {
     private var chatRepo = ChatRepo.StaticFunction.getInstance()
 
     init {
-        // board List initial For boardFragment
-
         Log.e("MAIM 엑티비티 실행", "init")
     }
 
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
-        repo.createOnlinstatus()
+        // repo.createOnlinstatus()
         Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업")
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
@@ -71,12 +70,19 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         Log.e("메인 엑티비티 실행 현황", "onResume: 데이터 확인할때 확인 작업")
         repo.upDateOnlineState("online")
-        lifecycleScope.launch(Dispatchers.IO) {
-            repo.getboarddata()
-            repo.getboardUid()
-            maprepo.LoadLocation()
-            chatRepo.CheckChattingRoom()
-        }
+        repo.getUserInfo()
+        repo.getboarddata()
+        repo.getboardUid()
+        maprepo.LoadLocation()
+        chatRepo.CheckChattingRoom()
+
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            repo.getUserInfo()
+//            repo.getboarddata()
+//            repo.getboardUid()
+//            maprepo.LoadLocation()
+//            chatRepo.CheckChattingRoom()
+//        }
     }
 
 

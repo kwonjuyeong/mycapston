@@ -5,6 +5,7 @@ data class MessageDTO (
     var UserCheck : MutableMap<String, Boolean> = HashMap(),
     var OwnerUid : String? = null,
     var currentUID : String? = null,
+    var timeStamp: Long? = null
 ) {
     data class lastMessage(
         var boardChatuid : String? = null,

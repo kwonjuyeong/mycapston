@@ -7,4 +7,5 @@ interface PostListener {
     fun getData(listener: PostListener, chooseUid : String)
     fun createChatting(listener: PostListener)
     fun joinChat()
+
 }

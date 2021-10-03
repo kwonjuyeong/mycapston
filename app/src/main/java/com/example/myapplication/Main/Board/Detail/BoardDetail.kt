@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.DTO.MessageDTO
+import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.Detail.Chat.BoardChat
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
@@ -30,13 +31,15 @@ class BoardDetail : AppCompatActivity(), PostListener {
     private var lastmessage = MessageDTO.lastMessage()
     private lateinit var chooseUid: String
     private val repo = Repo.StaticFunction.getInstance()
-    var uid: String? = null
+    private var uid: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_detail)
         val chooseUid = intent.getStringExtra("contentsUid")!!
         getData(this, chooseUid)
+        createChatting(this)
         BoardCheck_like.setOnClickListener {
             likeupdate()
 
@@ -48,55 +51,17 @@ class BoardDetail : AppCompatActivity(), PostListener {
 //        }
         //2번
         BoardCheck_commend.setOnClickListener {
-            createChatting(this)
             joinChat()
-            val intent = Intent(this, BoardChat::class.java)
-            intent.putExtra("commentUid", chooseUid)
-            ContextCompat.startActivity(this, intent, null)
+            var thread = Thread {
+                Thread.sleep(300)
+                val intent = Intent(this, BoardChat::class.java)
+                intent.putExtra("commentUid", chooseUid)
+                ContextCompat.startActivity(this, intent, null)
+            }.start()
         }
 
     }
 
-    override fun createChatting(listener: PostListener) {
-        val callback = listener
-        val chooseUid = intent.getStringExtra("contentsUid")!!
-        val owneruid = intent.getStringExtra("owneruid")!!
-        val DoRName = chooseUid + "_last"
-        val Ref = firestore.collection("Chat").document(chooseUid).collection("LastMessage")
-            .document(DoRName)
-        val Cef = firestore.collection("Chat").document(chooseUid)
-        messageDTO.boardUid = chooseUid
-        messageDTO.OwnerUid = owneruid
-        Cef.get().addOnSuccessListener {
-            if (!it.exists()) {
-                Cef.set(messageDTO)
-            }
-        }
-        Ref.get().addOnSuccessListener { it ->
-            if (!it.exists()) {
-                Ref.set(lastmessage)
-            }
-        }
-        callback.joinChat()
-    }
-
-    override fun joinChat() { // 유저 체크
-        val chooseUid = intent.getStringExtra("contentsUid")!!
-        val ownerUid = intent.getStringExtra("owneruid")!!
-        val Ref = firestore.collection("Chat").document(chooseUid)
-        firestore.runTransaction { transition ->
-            val uid = FirebaseAuth.getInstance().currentUser!!.uid
-            val messageDTO = transition.get(Ref).toObject(MessageDTO::class.java)
-            // 취소 이벤트
-            if (messageDTO!!.UserCheck.containsKey(uid)) {
-
-            } else {    // 참여 이벤트
-                messageDTO.UserCheck[uid] = true
-            }
-            transition.set(Ref, messageDTO)
-        }
-
-    }
     @SuppressLint("SetTextI18n")
     fun likeupdate() {
         val chooseUid = intent.getStringExtra("contentsUid")!!
@@ -192,5 +157,57 @@ class BoardDetail : AppCompatActivity(), PostListener {
         repo.upDateOnlineState("online")
     }
 
+    override fun createChatting(listener: PostListener) {
+        val callback = listener
+        val chooseUid = intent.getStringExtra("contentsUid")!!
+        val owneruid = intent.getStringExtra("owneruid")!!
+        var userinfoDTO = UserinfoDTO()
+        userinfoDTO = repo.returnUserInfo()
+        val DoRName = chooseUid + "_last"
+        val currentuid = FirebaseAuth.getInstance().currentUser!!.uid
+        val userStatus = currentuid + "_status"
+        val Ref = firestore.collection("Chat").document(chooseUid).collection("LastMessage")
+            .document(DoRName)
+        val Cef = firestore.collection("Chat").document(chooseUid)
+        val Uef = firestore.collection("Chat").document(chooseUid).collection("Userstatus")
+            .document(userStatus)
+        messageDTO.boardUid = chooseUid
+        messageDTO.OwnerUid = owneruid
+        messageDTO.timeStamp = System.currentTimeMillis()
+        Cef.get().addOnSuccessListener {
+            if (!it.exists()) {
+                Cef.set(messageDTO)
+            }
+        }
+        Ref.get().addOnSuccessListener { it ->
+            if (!it.exists()) {
+                lastmessage.boardChatuid = chooseUid
+                Ref.set(lastmessage)
+            }
+        }
+        Uef.get().addOnSuccessListener {
+            if (!it.exists()) {
+
+            }
+        }
+
+    }
+
+    override fun joinChat() { // 유저 체크
+        val chooseUid = intent.getStringExtra("contentsUid")!!
+        val ownerUid = intent.getStringExtra("owneruid")!!
+        val Ref = firestore.collection("Chat").document(chooseUid)
+        firestore.runTransaction { transition ->
+            val uid = FirebaseAuth.getInstance().currentUser!!.uid
+            val messageDTO = transition.get(Ref).toObject(MessageDTO::class.java)
+            // 취소 이벤트
+            if (messageDTO!!.UserCheck.containsKey(uid)) {
+
+            } else {    // 참여 이벤트
+                messageDTO.UserCheck[uid] = true
+            }
+            transition.set(Ref, messageDTO)
+        }
+    }
 
 }
