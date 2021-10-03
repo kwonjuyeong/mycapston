@@ -37,7 +37,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/main_page_title"
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text = "메인 페이지"
@@ -52,6 +52,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/main_page_cancel" />
 
+
+
         <View
             android:id="@+id/main_page_view_top"
             android:layout_width="300dp"
@@ -64,32 +66,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <ImageView
-        android:id="@+id/main_page_user_img"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/main_search_view"
-        app:layout_constraintTop_toBottomOf="@+id/main_text"
-        tools:src="@tools:sample/avatars"
-        tools:ignore="MissingConstraints" />
 
-    <SearchView
-        android:id="@+id/main_search_view"
-        android:layout_width="280dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:background="@drawable/signiture_btn_with_nostrike"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_text"
-        app:queryHint="검색어를 입력하시오" />
+
+
+
 
     <LinearLayout
         android:id="@+id/home_bottom"
@@ -146,23 +126,62 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout15"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_margin="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/main_page_user_img">
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/main_text">
+
+        <ImageView
+            android:id="@+id/main_page_user_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="@+id/home_bottom"
+            app:layout_constraintTop_toBottomOf="@+id/main_text"
+            android:background="@drawable/roundgirl2"
+            tools:src="@drawable/basic_profile" />
+
         <TextView
             android:id="@+id/recommend_textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="15dp"
-            android:text="~님 오늘은 치킨각!"
             android:fontFamily="@font/jalnan"
-            android:textColor="@color/main"
-            android:textSize="20sp" />
+            android:text="~님 오늘은 치킨각!"
+            android:textColor="@color/very_little_gray"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_search_view"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:background="@drawable/signiture_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout15"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout15"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="100dp"
+            android:fontFamily="@font/jalnan"
+            android:padding="5dp"
+            android:text="게시글 검색"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ic_baseline_search_24"
+            android:gravity="center" />
     </LinearLayout>
 
     <RelativeLayout
@@ -171,6 +190,7 @@
         android:layout_height="250dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +200,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/roundgirl2"/>
+            android:background="@drawable/roundgirl2" />
 
     </RelativeLayout>
 
