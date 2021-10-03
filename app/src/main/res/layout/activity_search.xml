@@ -4,16 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Main.Fragment.Search.SearchFragment">
     <!--tools:context=""-->
 
     <RelativeLayout
-        android:id = "@id/serch_layout"
+        android:id ="@id/serch_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/board_cancel"
+            android:id="@+id/search_cancel"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="15dp"
@@ -34,35 +35,58 @@
             android:layout_gravity = "center"
             android:gravity="center"
             android:singleLine="true"/>
-        <SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/signiture_btn_with_nostrike"
-            app:queryHint="검색어를 입력하시오"
-            app:layout_constraintTop_toBottomOf="@+id/search_text"/>
     </RelativeLayout>
 
     <TextView
         android:id="@+id/search_what"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:text="~에 대한 검색결과"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:gravity=""
-        app:layout_constraintTop_toBottomOf="@+id/serch_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/serch_layout">
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:entries="@array/option" />
+
+        <EditText
+            android:id="@+id/searchWord"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundgirl2"
+            android:hint="검색어를 입력해주세요."
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/signiture_btn"
+            android:text="검색" />
+
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/search_relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="580dp"
+        android:background="@drawable/roundgirl3"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
@@ -72,8 +96,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recyclerview"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/roundgirl2"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

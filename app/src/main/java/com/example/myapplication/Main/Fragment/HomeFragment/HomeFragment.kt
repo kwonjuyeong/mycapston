@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.Main.Board.BoardPost
+import com.example.myapplication.Main.Fragment.Search.SearchFragment
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_home.view.*
@@ -34,6 +36,7 @@ class HomeFragment : Fragment() {
     // 메모리에 적제 되었을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -71,10 +74,12 @@ class HomeFragment : Fragment() {
 
         fun startActivity(activity: Activity) {
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)//위 아래 애니메이션코드
-
         }
 
-
+        main_search_view.setOnClickListener{
+            val intent = Intent(requireContext(), SearchFragment::class.java)
+            ContextCompat.startActivity(requireContext(),intent,null)
+        }
 
 
         recyclerView.layoutManager = GridLayoutManager( requireContext(), 4)

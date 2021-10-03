@@ -66,18 +66,18 @@
 
     <ImageView
         android:id="@+id/main_page_user_img"
-        android:layout_width="56dp"
-        android:layout_height="52dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/search_view"
+        app:layout_constraintEnd_toStartOf="@+id/main_search_view"
         app:layout_constraintTop_toBottomOf="@+id/main_text"
         tools:src="@tools:sample/avatars"
         tools:ignore="MissingConstraints" />
 
     <SearchView
-        android:id="@+id/search_view"
+        android:id="@+id/main_search_view"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:layout_marginStart="70dp"
@@ -167,10 +167,9 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="400dp"
+        android:layout_width="380dp"
         android:layout_height="250dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,14 +184,11 @@
 
     </RelativeLayout>
 
-
-
-
     <Button
         android:id="@+id/btn_board"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/plus1"
         app:layout_constraintBottom_toBottomOf="parent"
