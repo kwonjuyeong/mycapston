@@ -2,6 +2,7 @@ package com.example.myapplication.Main.Activity
 
 
 //import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +15,12 @@ import com.example.myapplication.Main.Fragment.ChatFragment.ChatRepo
 import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapFragment
 import com.example.myapplication.Main.Fragment.MapFragment.MapRepo
+import com.example.myapplication.Main.Fragment.Search.SearchFragment
 import com.example.myapplication.R
 import com.example.myapplication.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -50,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업")
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
+        // searchview 클릭 리스너 넣기
+
 
     }
 

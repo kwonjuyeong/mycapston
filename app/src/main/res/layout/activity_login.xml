@@ -54,15 +54,15 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/login_viewPager" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@id/login_introduce_text"
-            >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/login_introduce_text"
+        >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,81 +91,114 @@
                 android:autofillHints="" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/login_btn_layout"
-            android:layout_width="330dp"
+
+
+<!--
+    <LinearLayout
+        android:id="@+id/login_btn_layout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/login_Pw"
+        tools:ignore="InvalidId">
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:fontFamily="@font/jalnan"
+            android:background="@drawable/signiture_btn"
+            android:text="@string/loginbtn"
+            android:textColor="@color/medium_dark_gray"
+            android:theme="@style/ButtonStyle" />
+
+        <Button
+            android:id="@+id/bt_signup"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/signiture_btn"
+            android:fontFamily="@font/jalnan"
+            android:text="회원가입"
+            android:textColor="@color/medium_dark_gray"
+            android:theme="@style/ButtonStyle" />
+    </LinearLayout> -->
+    <LinearLayout
+        android:id="@+id/login_btn_layout"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/login_Pw"
+        tools:ignore="InvalidId">
+
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="165dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:text="@string/loginbtn"
+            android:fontFamily="@font/jalnan"
+            android:background="@drawable/signiture_btn"
+            android:textColor="@color/medium_dark_gray"
+            android:theme="@style/ButtonStyle" />
 
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@id/login_Pw"
-            tools:ignore="InvalidId">
-
-            <Button
-                android:id="@+id/bt_login"
-                android:layout_width="165dp"
-                android:layout_height="wrap_content"
-                android:text="@string/loginbtn"
-                android:fontFamily="@font/jalnan"
-                android:background="@drawable/signiture_btn"
-                android:textColor="@color/medium_dark_gray"
-                android:theme="@style/ButtonStyle" />
-
-            <Button
-                android:id="@+id/bt_signup"
-                android:layout_width="165dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="@drawable/signiture_btn"
-                android:fontFamily="@font/jalnan"
-                android:text="회원가입"
-                android:textColor="@color/medium_dark_gray"
-                android:theme="@style/ButtonStyle" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="190dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/login_btn_layout"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/kakao_login_button"
-                android:layout_width="350dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/kakao_login_large_wide"
-                android:text="Kakao에서 로그인"
-                android:textColor="#3A1D1D" />
-            <Button
-                android:id="@+id/facebookSignInBtn"
-                android:layout_width="350dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/facebook_login"
-                android:text="Facebook에서 로그인"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/signin_googleButton"
-                android:layout_width="350dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/google_login"
-                android:text="Google 에서 로그인"
-                android:fontFamily="@font/jalnan"
-                android:textColor="#FFFFFF"
-                />
-
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/bt_signup"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/signiture_btn"
+            android:fontFamily="@font/jalnan"
+            android:text="회원가입"
+            android:textColor="@color/medium_dark_gray"
+            android:theme="@style/ButtonStyle" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/login_btn_layout"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/kakao_login_button"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/kakao_login_large_wide"
+            android:text="Kakao에서 로그인"
+            android:textColor="#3A1D1D" />
+        <Button
+            android:id="@+id/facebookSignInBtn"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/facebook_login"
+            android:text="Facebook에서 로그인"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/signin_googleButton"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/google_login"
+            android:text="Google 에서 로그인"
+            android:fontFamily="@font/jalnan"
+            android:textColor="#FFFFFF"
+             />
+
+
+    </LinearLayout>
+
+</LinearLayout>
 </ScrollView>
