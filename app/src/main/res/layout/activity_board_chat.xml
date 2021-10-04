@@ -57,6 +57,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comment_recyclerView"
                 android:layout_width="match_parent"
+                android:background="#FAF6D4"
                 android:layout_height="600dp"
                 android:layout_below="@+id/commant_page_top"
                 android:layout_marginTop="10dp"
@@ -83,7 +84,6 @@
                 android:background="@color/little_yellow"
                 android:drawableStart="@android:drawable/btn_star" />
         </RelativeLayout>
-
     </ScrollView>
     <include layout="@layout/activity_chatadd" />
 
