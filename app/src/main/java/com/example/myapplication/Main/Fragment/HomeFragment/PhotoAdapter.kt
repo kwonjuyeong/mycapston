@@ -46,6 +46,7 @@ class PhotoAdapter(var context: Context) : RecyclerView.Adapter<PhotoAdapter.Vie
         holder.title.text = data.title
         //holder.desc.text = data.desc
         holder.image.setImageResource(data.image)
+
     }
 
     //  total count of items in the list

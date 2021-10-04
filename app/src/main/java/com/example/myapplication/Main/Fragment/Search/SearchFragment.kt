@@ -1,5 +1,5 @@
 package com.example.myapplication.Main.Fragment.Search
-
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -65,6 +65,7 @@ class SearchFragment :AppCompatActivity() {
             startActivity(intent) }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         // Post 클래스 ArrayList 생성성
         var Post : ArrayList<BoardDTO> = arrayListOf()
@@ -120,8 +121,6 @@ class SearchFragment :AppCompatActivity() {
         }
     }
 }
-
-
 
 
 

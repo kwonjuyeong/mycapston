@@ -38,7 +38,7 @@ class BoardDetail : AppCompatActivity(), PostListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_detail)
         val chooseUid = intent.getStringExtra("contentsUid")!!
-        getData(this, chooseUid)
+         getData(this, chooseUid)
         createChatting(this)
         BoardCheck_like.setOnClickListener {
             likeupdate()

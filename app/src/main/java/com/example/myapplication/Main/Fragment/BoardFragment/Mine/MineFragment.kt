@@ -9,10 +9,15 @@ import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 
-class MineFragment : Fragment(){
-    val repo = Repo.StaticFunction.getInstance()
+class MineFragment : Fragment() {
+    private var repo: Repo
+
     companion object {
-        fun newInstance() : MineFragment = MineFragment()
+        fun newInstance(): MineFragment = MineFragment()
+    }
+
+    init {
+        repo = Repo.StaticFunction.getInstance()
     }
 
     override fun onCreateView(
@@ -21,13 +26,14 @@ class MineFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_mine,container,false)
+        val view = inflater.inflate(R.layout.fragment_mine, container, false)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
     override fun onPause() {
         super.onPause()
         repo.upDateOnlineState("offline")

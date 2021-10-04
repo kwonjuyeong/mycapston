@@ -311,7 +311,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
+                val myLocation = location?.let { LatLng(it.latitude, it.longitude) }
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation!!))
                 googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))

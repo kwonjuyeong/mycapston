@@ -1,15 +1,16 @@
 package com.example.myapplication.Main.Board.Detail.Chat
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
@@ -23,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_board_chat.*
 import kotlinx.android.synthetic.main.activity_chatadd.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.logging.Logger.global
 
 class BoardChat : AppCompatActivity() {
     private var firestore = FirebaseFirestore.getInstance()
@@ -94,8 +94,31 @@ class BoardChat : AppCompatActivity() {
         btn_close.setOnClickListener { drawerLayout!!.closeDrawers() }
         drawerLayout!!.setDrawerListener(listener)
         drawerView!!.setOnTouchListener { v, event -> true }
-
-
+        val ExitChat = findViewById<View>(R.id.ExitChat) as ImageButton
+        ExitChat.setOnClickListener(){
+            val builder = AlertDialog.Builder(this) //아래 builder.show 까지 명령어
+            builder.setTitle("채팅방 나가기")
+            builder.setMessage("채팅방에서 나가시겠습니까?\n나가기를 하면 대화내용이 모두 삭제되고\n채팅목록에서도 삭제됩니다.")
+            builder.setPositiveButton(
+                "확인"
+            ) { dialogInterface: DialogInterface?, i: Int ->
+                val BeR = firestore.collection("Chat").document(commentUid!!)
+                firestore.runTransaction { transition ->
+                    val chatDTO = transition.get(BeR).toObject(MessageDTO::class.java)
+                    if (chatDTO!!.UserCheck.containsKey(uid)) {
+                        chatDTO.UserCheck.remove(uid)
+                    }
+                    transition.set(BeR, chatDTO)
+                }
+                finish()
+            }
+            builder.setNegativeButton(
+                "취소"
+            ) { dialogInterface: DialogInterface?, i: Int ->
+                //원하는 명령어
+            }
+            builder.show()
+        }
     }
 
     private fun updateChat() {
@@ -143,33 +166,6 @@ class BoardChat : AppCompatActivity() {
 
 
     }
-
-
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun getChatInfo(): LiveData<MutableList<UserinfoDTO>> {
-//        val statusUser = MutableLiveData<MutableList<UserinfoDTO>>()
-//        val statusInfos = mutableListOf<UserinfoDTO>()
-//        val firestore = FirebaseFirestore.getInstance()
-//        val Uef = firestore.collection("userid")
-//        val Cef = firestore.collection("Chat").document(commentUid!!)
-//        Cef.addSnapshotListener { value, error ->
-//            val document = value?.toObject(MessageDTO::class.java)
-//            for (i in document?.UserCheck?.keys!!) {
-//                Uef.document(i).addSnapshotListener { value, error ->
-//                    val item = value?.toObject(UserinfoDTO::class.java)
-//                    Log.e("item 확", item.toString())
-//                    statusInfos.add(item!!)
-//                    statusUser.value = statusInfos
-//                    Log.e("statuslist", statusInfos.toString())
-//
-//                }
-//            }
-//
-//
-//        }
-//        return statusUser
-//    }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun observerData() {
         viewModel.getChatOnlineData().observe(this, androidx.lifecycle.Observer {
