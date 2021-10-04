@@ -72,6 +72,7 @@ class BoardListAdapter() : RecyclerView.Adapter<BoardListAdapter.CTViewholder>()
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, BoardDetail::class.java)
             intent.putExtra("contentsUid", currentUid)
+            Log.e("어댑터 ", currentUid )
             intent.putExtra("owneruid", currentitem.uid)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }

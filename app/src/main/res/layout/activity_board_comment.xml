@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main.Board.Detail.Chat.BoardChat">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/commant_page_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/commant_back"
+            android:layout_width="21dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="20.83dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_signiture" />
+
+        <TextView
+            android:id="@+id/commant_page_title"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:layout_gravity ="center"
+            android:text="댓글"
+            android:textColor="@color/black"
+            android:fontFamily="@font/jalnan"
+            android:textSize="24sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comment_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_below="@+id/commant_page_top"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp" >
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btn_comment_send"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/comment_recyclerView"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/signiture_btn"
+        android:text="SEND" />
+
+    <EditText
+        android:id="@+id/comment_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/comment_recyclerView"
+        android:layout_marginStart="10dp"
+        android:layout_toStartOf="@id/btn_comment_send"
+        android:background="@color/little_yellow"
+        android:drawableStart="@android:drawable/btn_star" />
+
+
+</RelativeLayout>
+
+</ScrollView>

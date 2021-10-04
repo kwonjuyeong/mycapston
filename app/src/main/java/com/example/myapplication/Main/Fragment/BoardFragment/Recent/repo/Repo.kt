@@ -4,18 +4,21 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.DTO.MessageDTO
+import com.example.myapplication.DTO.StatusDTO
+import com.example.myapplication.DTO.UserinfoDTO
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.frag_board.*
 
 class Repo {
     // 초기값 백업1
-    private var livedata: MutableLiveData<BoardDTO>? = null
-    private var liveboarduid: MutableLiveData<String>? = null
     private var firestore = FirebaseFirestore.getInstance()
     private var listdata = mutableListOf<BoardDTO>()
     private var contentsuid = arrayListOf<String>()
-    private var count = 0
+    private val uid = FirebaseAuth.getInstance().currentUser!!.uid
+    private var userinfoDTO = UserinfoDTO()
 
     object StaticFunction {
         private var instance: Repo? = null
@@ -25,6 +28,7 @@ class Repo {
             return instance!!
         }
     }
+
     init {
         listdata.clear()
         contentsuid.clear()
@@ -47,7 +51,7 @@ class Repo {
 //                for (snapshot in querySnapshot!!.documents) {
 //                    var item = snapshot.toObject(BoardDTO::class.java)
 //                    listdata.add(item!!)
-        Log.e("Repo listdata ", listdata.size.toString() )
+        Log.e("Repo listdata ", listdata.size.toString())
         return listdata
     }
 
@@ -61,42 +65,31 @@ class Repo {
 //            }
         return contentsuid
     }
-
-    fun getListdata(): LiveData<BoardDTO> {
-        //listdata.clear()
-        count = listdata.size
-
-        livedata = MutableLiveData<BoardDTO>()    // 객체 생
-        if (listdata != null)
-            listdata.clear()
-        firestore.collection("Board").orderBy("timestamp",Query.Direction.DESCENDING)
-            .addSnapshotListener() { querySnapshot, firebaseFirestoreException ->
-                if (querySnapshot == null) return@addSnapshotListener
-                for (snapshot in querySnapshot!!.documents) {
-                    var item = snapshot.toObject(BoardDTO::class.java)
-
-                    livedata!!.postValue(item!!)
-                }
-            }
-        return livedata!!
+    fun upDateOnlineState(status: String) {
+        val uidCollection = uid + "_status"
+        val statusDTO = StatusDTO()
+        statusDTO.status["Online"] = status
+        val firestoreRef = firestore.collection("Status").document(uid)
+        firestoreRef.update(
+            mapOf(
+                "status" to statusDTO.status
+            )
+        )
+    }
+    fun getUserInfo(){
+        var Uef = firestore.collection("userid").document(uid)
+        Uef.addSnapshotListener { value, error ->
+            userinfoDTO = value?.toObject(UserinfoDTO::class.java)!!
+        }
+    }
+    fun returnUserInfo() : UserinfoDTO{
+        return userinfoDTO
     }
 
-    fun getlistuid(): LiveData<String> {
-        //contentsuid.clear()
-        if(contentsuid == null)
-            contentsuid.clear()
-        liveboarduid = MutableLiveData<String>()
-        firestore.collection("Board").orderBy("timestamp",Query.Direction.DESCENDING)
-            .addSnapshotListener() { querySnapshot, firebaseFirestoreException ->
-                if (querySnapshot == null) return@addSnapshotListener
-                for (snapshot in querySnapshot!!.documents) {
-                    liveboarduid!!.postValue(snapshot.id)
-                }
-            }
-        return liveboarduid!!
-    }
+
 
 }
+
 
 
 

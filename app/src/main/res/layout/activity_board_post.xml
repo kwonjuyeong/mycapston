@@ -81,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:fontFamily="@font/maru"
@@ -89,11 +90,10 @@
 
             <View
                 android:id="@+id/boardCheck_center"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="3dp"
-                android:layout_centerHorizontal="true"
                 android:layout_marginStart="20dp"
-                android:background="#ff9424" />
+                android:background="@color/main" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -113,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:fontFamily="@font/maru"
@@ -123,7 +124,7 @@
                 android:id="@+id/post_image"
                 android:layout_width="130dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="225dp"
+                android:layout_marginStart="210dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/jalnan"
                 android:gravity="right"
@@ -135,7 +136,8 @@
                 android:id="@+id/upload_BoardImage"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="360dp"
+                android:layout_marginStart="345dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="-25dp"
                 android:src="@drawable/ic_baseline_photo_camera_24"
                 app:layout_constraintStart_toStartOf="@id/title_text"
@@ -179,7 +181,8 @@
                 android:id="@+id/btn_write"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="300dp"
+                android:layout_marginStart="280dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/signiture_btn_with_nostrike"
                 android:layout_gravity="right"
                 android:layout_marginBottom="5dp"

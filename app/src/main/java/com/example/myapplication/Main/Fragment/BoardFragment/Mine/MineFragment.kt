@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 
 class MineFragment : Fragment(){
+    val repo = Repo.StaticFunction.getInstance()
     companion object {
         fun newInstance() : MineFragment = MineFragment()
     }
@@ -25,5 +27,16 @@ class MineFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
+
     }
 }

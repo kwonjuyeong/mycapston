@@ -81,43 +81,24 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        val builder = AlertDialog.Builder(this) //아래 builder.show 까지 명령어
-
-        builder.setTitle("타이틀 입니다.")
-
-        builder.setMessage("함께 어플리케이션을 사용하기 위해서는 다음 권한을 얻어야합니다")
-
-        builder.setPositiveButton(
-
-            "선택 1",
-
-            { dialogInterface: DialogInterface?, i: Int ->
-
-
-
-            })
-
-        builder.setNegativeButton(
-
-            "선택 2",
-
-            { dialogInterface: DialogInterface?, i: Int ->
-
-                //원하는 명령어
-
-            })
-
-        builder.setNeutralButton(
-
-            "선택 3",
-
-            { dialogInterface: DialogInterface?, i: Int ->
-
-                //원하는 명령어
-
-            })
-
-        builder.show()
+//        val builder = AlertDialog.Builder(this) //아래 builder.show 까지 명령어
+//        builder.setTitle("타이틀 입니다.")
+//        builder.setMessage("함께 어플리케이션을 사용하기 위해서는 다음 권한을 얻어야합니다")
+//        builder.setPositiveButton(
+//            "선택 1",
+//            { dialogInterface: DialogInterface?, i: Int ->
+//            })
+//        builder.setNegativeButton(
+//            "선택 2",
+//            { dialogInterface: DialogInterface?, i: Int ->
+//                //원하는 명령어
+//            })
+//        builder.setNeutralButton(
+//            "선택 3",
+//            { dialogInterface: DialogInterface?, i: Int ->
+//                //원하는 명령어
+//            })
+//        builder.show()
 
 //키보드 움직이기
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
@@ -251,15 +232,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    자동 로그인
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-           startActivity(intent)
-        }
-    }
+////    자동 로그인
+//    override fun onStart() {
+//        super.onStart()
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//           startActivity(intent)
+//        }
+//    }
 
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {

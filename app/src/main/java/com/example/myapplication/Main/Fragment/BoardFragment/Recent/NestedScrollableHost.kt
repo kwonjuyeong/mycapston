@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Main.Fragment.BoardFragment.Recent
 
 import android.content.Context
 import android.util.AttributeSet

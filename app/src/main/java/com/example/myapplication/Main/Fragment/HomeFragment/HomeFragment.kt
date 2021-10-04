@@ -7,9 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.Main.Board.BoardPost
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
+import com.example.myapplication.Main.Fragment.Search.SearchFragment
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_home.view.*
@@ -27,13 +30,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-
+    private val repo = Repo.StaticFunction.getInstance()
     private lateinit var photoAdapter: PhotoAdapter
     private var dataList = mutableListOf<DataModel>()
 
     // 메모리에 적제 되었을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -71,10 +75,12 @@ class HomeFragment : Fragment() {
 
         fun startActivity(activity: Activity) {
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)//위 아래 애니메이션코드
-
         }
 
-
+        main_search_view.setOnClickListener{
+            val intent = Intent(requireContext(), SearchFragment::class.java)
+            ContextCompat.startActivity(requireContext(),intent,null)
+        }
 
 
         recyclerView.layoutManager = GridLayoutManager( requireContext(), 4)
@@ -91,6 +97,17 @@ class HomeFragment : Fragment() {
         dataList.add(DataModel("일식", R.drawable.sushi))
 
         photoAdapter.setDataList(dataList)
+
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
 
     }
 }

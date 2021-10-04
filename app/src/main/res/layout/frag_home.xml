@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -62,23 +63,24 @@
             app:layout_constraintTop_toBottomOf="@id/main_page_cancel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <ImageView
         android:id="@+id/main_page_user_img"
-        android:layout_width="56dp"
-        android:layout_height="52dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/search_view"
+        app:layout_constraintEnd_toStartOf="@+id/main_search_view"
         app:layout_constraintTop_toBottomOf="@+id/main_text"
         tools:src="@tools:sample/avatars"
-        tools:ignore="MissingConstraints"></ImageView>
+        tools:ignore="MissingConstraints" />
 
     <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="300dp"
+        android:id="@+id/main_search_view"
+        android:layout_width="280dp"
         android:layout_height="40dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:background="@drawable/signiture_btn_with_nostrike"
@@ -87,7 +89,7 @@
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_text"
-        app:queryHint="검색어를 입력하시오"></SearchView>
+        app:queryHint="검색어를 입력하시오" />
 
     <LinearLayout
         android:id="@+id/home_bottom"
@@ -144,50 +146,6 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="376dp"
-        android:layout_height="194dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/main" />
-        <View
-            android:layout_width="3dp"
-            android:layout_height="200dp"
-            android:background="@color/main" />
-
-        <View
-            android:layout_width="3dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="373dp"
-            android:background="@color/main" />
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="3dp"
-            android:layout_marginTop="191dp"
-            android:background="@color/main"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="380dp"
-            android:layout_marginTop="50dp" />
-    </RelativeLayout>
-
-
     <LinearLayout
         android:id="@+id/linearLayout15"
         android:layout_width="match_parent"
@@ -207,11 +165,30 @@
             android:textSize="20sp" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="380dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/roundgirl2"/>
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/btn_board"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/plus1"
         app:layout_constraintBottom_toBottomOf="parent"

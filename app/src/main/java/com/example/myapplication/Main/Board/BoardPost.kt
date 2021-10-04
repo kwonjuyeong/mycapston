@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.example.myapplication.ViewPagerAdapter
 import com.example.myapplication.ViewPagerAdapter2
@@ -49,6 +50,7 @@ class BoardPost : AppCompatActivity() {
     private fun getfoodlList2(): ArrayList<Int> {
         return arrayListOf<Int>(R.drawable.steak, R.drawable.coffee, R.drawable.sushi)
     }
+    private var repo = Repo.StaticFunction.getInstance()
 
 
     @SuppressLint("MissingPermission")
@@ -180,5 +182,14 @@ class BoardPost : AppCompatActivity() {
 
         //startActivity(intent)
         finish()
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
     }
 }
