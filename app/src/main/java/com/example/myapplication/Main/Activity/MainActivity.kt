@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.DTO.StatusDTO
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
@@ -19,6 +20,8 @@ import com.example.myapplication.Main.Fragment.Search.SearchFragment
 import com.example.myapplication.R
 import com.example.myapplication.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.coroutines.Dispatchers
@@ -55,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
         // searchview 클릭 리스너 넣기
 
-
     }
 
 
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         repo.getboardUid()
         maprepo.LoadLocation()
         chatRepo.CheckChattingRoom()
+        chatRepo.getUserStatus()
 
 //        lifecycleScope.launch(Dispatchers.IO) {
 //            repo.getUserInfo()

@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.MessageDTO
+import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.Detail.Chat.BoardChat
 import com.example.myapplication.R
+import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
 
 @SuppressLint("NotifyDataSetChanged")
@@ -21,7 +25,6 @@ class ChatListAdapter(val context: Context): RecyclerView.Adapter<ChatListAdapte
     private var lastMessageDTO = mutableListOf<MessageDTO.lastMessage>()
     fun setDataChatAapter(data:MutableList<MessageDTO.lastMessage>){
         lastMessageDTO = data
-        Log.e("chatadapter", lastMessageDTO.toString() )
     }
     init {
         notifyDataSetChanged()
@@ -34,7 +37,7 @@ class ChatListAdapter(val context: Context): RecyclerView.Adapter<ChatListAdapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListHolder {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.chat_layout_item,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.chat_layout_item,parent,false)
         return ChatListHolder(itemView)
     }
 
@@ -43,7 +46,7 @@ class ChatListAdapter(val context: Context): RecyclerView.Adapter<ChatListAdapte
         holder.lastChatNickname.text = data.nickname
         holder.lastChatContents.text = data.lastContent
         holder.lastChatTime.text = data.time
-
+        Log.e("chatadapter", data.boardChatuid.toString() )
         if(data.profileUrl.toString() != "null")
             Glide.with(holder.itemView.context).load(data.profileUrl).into(holder.lastChatProfile)
         else
@@ -51,13 +54,16 @@ class ChatListAdapter(val context: Context): RecyclerView.Adapter<ChatListAdapte
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, BoardChat::class.java)
             intent.putExtra("commentUid",data.boardChatuid)
-            Log.e("chatadapter", data.boardChatuid.toString() )
             ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
+        fun retrunuid() : String?{
+            return data.boardChatuid
         }
     }
 
     override fun getItemCount() : Int {
         return lastMessageDTO.size
     }
+
 
 }

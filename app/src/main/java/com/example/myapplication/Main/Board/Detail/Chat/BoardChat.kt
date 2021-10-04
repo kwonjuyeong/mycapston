@@ -8,11 +8,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.DTO.MessageDTO
 import com.example.myapplication.DTO.UserinfoDTO
-import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
@@ -21,20 +23,22 @@ import kotlinx.android.synthetic.main.activity_board_chat.*
 import kotlinx.android.synthetic.main.activity_chatadd.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.logging.Logger.global
 
-class BoardChat : AppCompatActivity(){
+class BoardChat : AppCompatActivity() {
     private var firestore = FirebaseFirestore.getInstance()
     private var currentDTO = UserinfoDTO()
     private val uid = FirebaseAuth.getInstance().currentUser?.uid
     private var Chats = BoardDTO.Chat()
     private lateinit var chatAdapter: ChatAdapter
     private var repo = Repo.StaticFunction.getInstance()
-    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils //키보드 움직이기
     private var drawerLayout: DrawerLayout? = null
     private var drawerView: View? = null
-    private var userList = arrayListOf<String>()
     private lateinit var chatOnlineAdapter: chatOnlineAdapter
-
+    var commentUid: String? = null
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(OnlinViewModel::class.java)
+    }
     var listener: DrawerLayout.DrawerListener = object : DrawerLayout.DrawerListener {
         override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
         override fun onDrawerOpened(drawerView: View) {}
@@ -42,32 +46,35 @@ class BoardChat : AppCompatActivity(){
         override fun onDrawerStateChanged(newState: Int) {}
     }
 
+    init {
+        Log.e("init", "init: ")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_chat)
-        keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
-            onShowKeyboard = { keyboardHeight ->
-                sv_root.run {
-                    smoothScrollTo(scrollX, scrollY + keyboardHeight)
-                }
-            })  //키보드 움직이기
-
+        commentUid = intent.getStringExtra("commentUid")!!
         val context = this
-        chatOnlineAdapter = chatOnlineAdapter(userList, context)
-        getChatInfo()
 
+
+        chatOnlineAdapter = chatOnlineAdapter(this, commentUid!!)
         // 해당 게시글 uid를 intent로 받아옴
-        val commentUid = intent.getStringExtra("commentUid")!!
         firestore.collection("userid").document(uid!!).get().addOnCompleteListener {
             if (it.isSuccessful) {
                 currentDTO = it.result?.toObject(UserinfoDTO::class.java)!!
             }
         }
-        chatAdapter = ChatAdapter(commentUid)
+        chatAdapter = ChatAdapter(commentUid!!)
         comment_recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = chatAdapter
         }
+        status_recyclerview.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = chatOnlineAdapter
+            observerData()}
+
+        //getChatInfo()
         btn_comment_send?.setOnClickListener {
             // 채팅내용 업로드
             updateChat()
@@ -75,20 +82,19 @@ class BoardChat : AppCompatActivity(){
             comment_text.setText("")
         }
 
-        status_recyclerview.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = chatOnlineAdapter
 
-        }
 
         drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         drawerView = findViewById(R.id.drawer) as View
         val btn_open = findViewById<View>(R.id.hamburger) as ImageView
-        btn_open.setOnClickListener { drawerLayout!!.openDrawer(drawerView!!) }
+        btn_open.setOnClickListener {
+                drawerLayout!!.openDrawer(drawerView!!)
+        }
         val btn_close = findViewById<View>(R.id.btn_close) as Button
         btn_close.setOnClickListener { drawerLayout!!.closeDrawers() }
         drawerLayout!!.setDrawerListener(listener)
         drawerView!!.setOnTouchListener { v, event -> true }
+
 
     }
 
@@ -135,26 +141,41 @@ class BoardChat : AppCompatActivity(){
         super.onResume()
         repo.upDateOnlineState("online")
 
+
     }
 
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun getChatInfo(): LiveData<MutableList<UserinfoDTO>> {
+//        val statusUser = MutableLiveData<MutableList<UserinfoDTO>>()
+//        val statusInfos = mutableListOf<UserinfoDTO>()
+//        val firestore = FirebaseFirestore.getInstance()
+//        val Uef = firestore.collection("userid")
+//        val Cef = firestore.collection("Chat").document(commentUid!!)
+//        Cef.addSnapshotListener { value, error ->
+//            val document = value?.toObject(MessageDTO::class.java)
+//            for (i in document?.UserCheck?.keys!!) {
+//                Uef.document(i).addSnapshotListener { value, error ->
+//                    val item = value?.toObject(UserinfoDTO::class.java)
+//                    Log.e("item 확", item.toString())
+//                    statusInfos.add(item!!)
+//                    statusUser.value = statusInfos
+//                    Log.e("statuslist", statusInfos.toString())
+//
+//                }
+//            }
+//
+//
+//        }
+//        return statusUser
+//    }
+
     @SuppressLint("NotifyDataSetChanged")
-    private fun getChatInfo(){
-        val callback = listener
-        val firestore = FirebaseFirestore.getInstance()
-        val commentUid = intent.getStringExtra("commentUid")!!
-        val uid = FirebaseAuth.getInstance().currentUser!!.uid
-        val Cef = firestore.collection("Chat").document(commentUid)
-        Cef.addSnapshotListener { value, error ->
-            userList.clear()
-            val document = value?.toObject(MessageDTO::class.java)
-            for (i in document?.UserCheck?.keys!!) {
-                userList.add(i)
-            }
+    private fun observerData() {
+        viewModel.getChatOnlineData().observe(this, androidx.lifecycle.Observer {
+            chatOnlineAdapter.setDataOnlineAdapter(it)
             chatOnlineAdapter.notifyDataSetChanged()
-            Log.e("함수안1", userList.toString())
-
-        }
-
+        })
     }
 
 }

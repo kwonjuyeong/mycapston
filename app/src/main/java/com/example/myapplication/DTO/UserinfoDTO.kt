@@ -12,6 +12,6 @@ data class UserinfoDTO(
     var gender: String? = null,         // 성별
     var nickname: String? = null,       // 닉네임
     var ProfileUrl: String? = null,       // 프로필 사진 url
-    var Profile_timestamp: Long? = null,     // 언제 컨텐츠를 올렸는 관리
-    var status : MutableMap<String, Any> = HashMap()
+    var Profile_timestamp: Long? = null     // 언제 컨텐츠를 올렸는 관리
+
 )

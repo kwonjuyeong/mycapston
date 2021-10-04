@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.DTO.MessageDTO
+import com.example.myapplication.DTO.StatusDTO
 import com.example.myapplication.DTO.UserinfoDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -64,15 +65,14 @@ class Repo {
 //            }
         return contentsuid
     }
-
     fun upDateOnlineState(status: String) {
         val uidCollection = uid + "_status"
-        val onlineStatus = UserinfoDTO()
-        onlineStatus.status["Online"] = status
-        val firestoreRef = firestore.collection("userid").document(uid)
+        val statusDTO = StatusDTO()
+        statusDTO.status["Online"] = status
+        val firestoreRef = firestore.collection("Status").document(uid)
         firestoreRef.update(
             mapOf(
-                "status" to onlineStatus.status
+                "status" to statusDTO.status
             )
         )
     }
@@ -86,47 +86,6 @@ class Repo {
         return userinfoDTO
     }
 
-//    fun createOnlinstatus() {
-//        val uid = FirebaseAuth.getInstance().currentUser!!.uid
-//        val uidCollection = uid + "_status"
-//        val onlineStatus = UserinfoDTO()
-//        val firestoreRef = firestore.collection("userid").document(uid).collection("status")
-//            .document(uidCollection)
-//        firestoreRef.get().addOnSuccessListener {
-//            if (it.exists()) {
-//            } else {
-//                firestoreRef.set(onlineStatus)
-//            }
-//        }
-//    }
-
-    //    fun test():ArrayList<UserinfoDTO.OnlineStatus> {
-//        val Uef = firestore.collection("Chat").document("FFPNIF72k8TxlicTV4DL")
-//        val Cef = firestore.collection("userid")
-//        val arrayList = arrayListOf<UserinfoDTO.OnlineStatus>()
-//        Uef.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-//            val document = documentSnapshot?.toObject(MessageDTO::class.java)
-//            for (t in document?.UserCheck?.keys!!) {
-//                Log.e("t확", t )
-//                val docName = t + "_status"
-//                Cef.document(t).collection("status").document(docName)
-//                    .addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-//                        val item = documentSnapshot?.toObject(UserinfoDTO.OnlineStatus::class.java)
-//                        arrayList.add(item!!)
-//
-//                    }
-//            }
-//
-//        }
-//        return arrayList
-//
-//    }
-//    fun test() {
-//        val uid = FirebaseAuth.getInstance().currentUser!!.uid
-//        val sts = uid +"_status"
-//        val Uef = FirebaseFirestore.getInstance().collection("userid").document().collection("status").document(sts)
-//        Uef.
-//    }
 
 
 }
