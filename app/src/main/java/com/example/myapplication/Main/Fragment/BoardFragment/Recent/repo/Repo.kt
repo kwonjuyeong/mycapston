@@ -1,5 +1,6 @@
 package com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo
 
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,8 @@ class Repo {
     private var contentsuid = arrayListOf<String>()
     private val uid = FirebaseAuth.getInstance().currentUser!!.uid
     private var userinfoDTO = UserinfoDTO()
+    private var photoString = UserinfoDTO()
+
 
     object StaticFunction {
         private var instance: Repo? = null

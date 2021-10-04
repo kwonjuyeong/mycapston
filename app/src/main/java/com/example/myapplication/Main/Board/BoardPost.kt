@@ -44,6 +44,10 @@ class BoardPost : AppCompatActivity() {
     private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
+
+    private fun gettextList(): ArrayList<String> {
+        return arrayListOf<String>("s","s","s")
+    }
     private var repo = Repo.StaticFunction.getInstance()
 
 
@@ -51,6 +55,10 @@ class BoardPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
+
+
+        //textview_food.adapter = ViewPagerAdapter2(this,  gettextList()) // 어댑터 생성
+
 
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
@@ -100,7 +108,7 @@ class BoardPost : AppCompatActivity() {
         }
     }
 
-////
+    ////
     private fun getCityName1(lat: Double, long: Double): String {
         var cityName: String = ""
         var doName: String = ""
