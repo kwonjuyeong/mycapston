@@ -82,7 +82,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        recyclerView.layoutManager = GridLayoutManager( requireContext(), 4)
+        recyclerView.layoutManager = GridLayoutManager( requireContext(), 5)
         photoAdapter = PhotoAdapter( requireContext())
         recyclerView.adapter = photoAdapter
 
