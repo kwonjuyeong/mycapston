@@ -1,10 +1,13 @@
 package com.example.myapplication.Main.Board.Detail.Chat
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
@@ -75,6 +78,10 @@ class BoardChat : AppCompatActivity() {
             comment_text.setText("")
         }
 
+
+
+
+
         drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         drawerView = findViewById(R.id.drawer) as View
         val btn_open = findViewById<View>(R.id.hamburger) as ImageView
@@ -83,6 +90,49 @@ class BoardChat : AppCompatActivity() {
         btn_close.setOnClickListener { drawerLayout!!.closeDrawers() }
         drawerLayout!!.setDrawerListener(listener)
         drawerView!!.setOnTouchListener { v, event -> true }
+
+        val ExitChat = findViewById<View>(R.id.ExitChat) as ImageButton
+        ExitChat.setOnClickListener(){
+
+
+            val builder = AlertDialog.Builder(this) //아래 builder.show 까지 명령어
+
+            builder.setTitle("타이틀 입니다.")
+
+            builder.setMessage("나가시겠습니까?")
+
+            builder.setPositiveButton(
+
+                "선택 1",
+
+                { dialogInterface: DialogInterface?, i: Int ->
+
+                    finish()
+
+                })
+
+            builder.setNegativeButton(
+
+                "선택 2",
+
+                { dialogInterface: DialogInterface?, i: Int ->
+
+                    //원하는 명령어
+
+                })
+
+            builder.setNeutralButton(
+
+                "선택 3",
+
+                { dialogInterface: DialogInterface?, i: Int ->
+
+                    //원하는 명령어
+
+                })
+
+            builder.show()
+        }
 
     }
 

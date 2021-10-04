@@ -10,9 +10,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.R
+import com.example.myapplication.ViewPagerAdapter
+import com.example.myapplication.ViewPagerAdapter2
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -43,12 +46,21 @@ class BoardPost : AppCompatActivity() {
     private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
+    private fun getfoodlList2(): ArrayList<Int> {
+        return arrayListOf<Int>(R.drawable.steak, R.drawable.coffee, R.drawable.sushi)
+    }
 
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
+
+        viewPager_food2.offscreenPageLimit = 1
+        viewPager_food2.adapter = ViewPagerAdapter2(this,  getfoodlList2()) // 어댑터 생성
+        viewPager_food2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+
 
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->

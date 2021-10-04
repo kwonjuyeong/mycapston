@@ -59,9 +59,11 @@
         <entry key="..\:/mycapston3/app/src/main/res/layout/board_list_item.xml" value="0.5" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/chat_drawitem.xml" value="0.16197916666666667" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/chat_layout.xml" value="0.33" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/chat_layout_item.xml" value="0.1983695652173913" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/chat_list.xml" value="0.302536231884058" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/custom_marker.xml" value="0.302536231884058" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/food_list_item.xml" value="0.34193840579710144" />
+        <entry key="..\:/mycapston3/app/src/main/res/layout/food_list_item2.xml" value="0.17806484295845998" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/frag_board.xml" value="0.22" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/frag_chat.xml" value="0.33" />
         <entry key="..\:/mycapston3/app/src/main/res/layout/frag_home.xml" value="0.5" />
