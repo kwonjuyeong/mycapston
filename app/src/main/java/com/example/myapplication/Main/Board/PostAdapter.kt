@@ -18,13 +18,13 @@ class PostAdapter(private val items : ArrayList<String>, private val context: Co
     override fun getItemCount(): Int {
         return items.size
     }
-    class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        val category_tags: TextView = view.findViewById(R.id.tags_value)
+    class ViewHolder (itemview: View) : RecyclerView.ViewHolder(itemview) {
+        val category_tags: TextView = itemview.findViewById(R.id.tags_value)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.itemView
+        holder.category_tags.text = item
     }
 }
 

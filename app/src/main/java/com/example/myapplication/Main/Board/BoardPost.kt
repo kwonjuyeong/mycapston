@@ -82,8 +82,6 @@ class BoardPost : AppCompatActivity() {
                 locationName = getCityName1(latitude!!,longitude!!)////
             }.addOnFailureListener {
             }
-        viewPager2.adapter = postAdapter
-        viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         lifecycleScope.launch(Dispatchers.IO) {
             firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
@@ -190,35 +188,5 @@ class BoardPost : AppCompatActivity() {
         repo.upDateOnlineState("online")
     }
 
-    private fun initializeSelectedMonth() {
-        if (postViewModel.selectedMonth.value == null) {
-            val now = postViewModel. .months[LocalDate.now().monthValue]
-            mainViewModel.setSelectedMonth(now)
-            scrollToMonth(now)
-        }
-    }
-    private fun scrollToMonth(month: LocalDate) {
-        var width = month_list.width
 
-        if (width > 0) {
-            val monthWidth = month_item.width
-            layoutManager.scrollToPositionWithOffset(mainViewModel.months.indexOf(month), width / 2 - monthWidth / 2)
-        } else {
-            val vto = month_list.viewTreeObserver
-            vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    month_list.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    width = month_list.width
-                    context?.resources?.getDimensionPixelSize(R.dimen.month_item_width)
-                        ?.let { monthWidth ->
-                            layoutManager.scrollToPositionWithOffset(
-                                mainViewModel.months.indexOf(
-                                    month
-                                ), width / 2 - monthWidth / 2
-                            )
-                        }
-                }
-            })
-        }
-    }
 }
