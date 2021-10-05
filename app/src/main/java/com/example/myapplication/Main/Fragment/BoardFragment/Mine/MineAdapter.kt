@@ -25,6 +25,10 @@ class MineAdapter(val context : Context) : RecyclerView.Adapter<MineAdapter.MVie
     private val uid = FirebaseAuth.getInstance().currentUser!!.uid
     private var myList = mutableListOf<BoardDTO>()
     private var contentsUid = mutableListOf<String>()
+
+    fun clear(){
+        contentsUid.clear()
+    }
     init {
         if (myList.size > 0 && contentsUid.size > 0) {
             myList.clear()
@@ -76,7 +80,5 @@ class MineAdapter(val context : Context) : RecyclerView.Adapter<MineAdapter.MVie
         }
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount() = myList.size
 }

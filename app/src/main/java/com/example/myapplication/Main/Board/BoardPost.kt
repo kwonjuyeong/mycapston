@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
@@ -44,9 +45,11 @@ class BoardPost : AppCompatActivity() {
     private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
+    private var postViewModel = PostViewModel()
+    private lateinit var postAdapter: PostAdapter
 
     private fun gettextList(): ArrayList<String> {
-        return arrayListOf<String>("s","s","s")
+        return arrayListOf<String>("치킨","피자","중식","한식","양식","커피","돈까스","일식")
     }
     private var repo = Repo.StaticFunction.getInstance()
 
@@ -55,9 +58,6 @@ class BoardPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
-
-
-        //textview_food.adapter = ViewPagerAdapter2(this,  gettextList()) // 어댑터 생성
 
 
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
@@ -75,7 +75,6 @@ class BoardPost : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser!!.uid
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 latitude = location!!.latitude
@@ -83,6 +82,8 @@ class BoardPost : AppCompatActivity() {
                 locationName = getCityName1(latitude!!,longitude!!)////
             }.addOnFailureListener {
             }
+        viewPager2.adapter = postAdapter
+        viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         lifecycleScope.launch(Dispatchers.IO) {
             firestore?.collection("userid")?.document(uid!!)?.get()?.addOnSuccessListener {
@@ -187,5 +188,37 @@ class BoardPost : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         repo.upDateOnlineState("online")
+    }
+
+    private fun initializeSelectedMonth() {
+        if (postViewModel.selectedMonth.value == null) {
+            val now = postViewModel. .months[LocalDate.now().monthValue]
+            mainViewModel.setSelectedMonth(now)
+            scrollToMonth(now)
+        }
+    }
+    private fun scrollToMonth(month: LocalDate) {
+        var width = month_list.width
+
+        if (width > 0) {
+            val monthWidth = month_item.width
+            layoutManager.scrollToPositionWithOffset(mainViewModel.months.indexOf(month), width / 2 - monthWidth / 2)
+        } else {
+            val vto = month_list.viewTreeObserver
+            vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    month_list.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    width = month_list.width
+                    context?.resources?.getDimensionPixelSize(R.dimen.month_item_width)
+                        ?.let { monthWidth ->
+                            layoutManager.scrollToPositionWithOffset(
+                                mainViewModel.months.indexOf(
+                                    month
+                                ), width / 2 - monthWidth / 2
+                            )
+                        }
+                }
+            })
+        }
     }
 }

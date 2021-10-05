@@ -42,9 +42,9 @@
                 android:id="@+id/boardCheck_top"
                 android:layout_width="300dp"
                 android:layout_height="5dp"
+                android:layout_below="@+id/board_text"
                 android:layout_centerHorizontal="true"
-                android:background="#ff9424"
-                android:layout_below="@+id/board_text"/>
+                android:background="#ff9424" />
 
         </RelativeLayout>
 
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/jalnan"
                 android:text="제목"
                 android:textColor="@color/black"
@@ -86,22 +86,63 @@
             <View
                 android:id="@+id/boardCheck_center"
                 android:layout_width="300dp"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginStart="20dp"
-                android:background="@color/main" />
+                android:background="#F3EFD2" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager_food2"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:padding="5dp" />
+                tools:context=".MainActivity">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/decrement_month"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/arrow_left"
+                    app:layout_constraintBottom_toBottomOf="@+id/tag_list"
+                    app:layout_constraintEnd_toStartOf="@+id/tag_list"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tag_list" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tag_list"
+                    app:layout_constraintEnd_toEndOf="@+id/tag_list"
+                    app:layout_constraintStart_toStartOf="@+id/tag_list"
+                    app:layout_constraintTop_toTopOf="@+id/tag_list"
+                    app:srcCompat="@drawable/tag_gradient" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tag_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toStartOf="@+id/increment_month"
+                    app:layout_constraintStart_toEndOf="@+id/decrement_month"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/tag_item"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/increment_month"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/arrow_left"
+                    android:rotation="180"
+                    app:layout_constraintBottom_toBottomOf="@+id/tag_list"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tag_list"
+                    app:layout_constraintTop_toTopOf="@+id/tag_list" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/board_contents_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/jalnan"
                 android:text="내용"
@@ -111,15 +152,17 @@
 
             <EditText
                 android:id="@+id/board_context"
+
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
-                android:background="@null"
+                android:background="@drawable/roundgirl2"
                 android:fontFamily="@font/maru"
                 android:gravity="top"
-                android:hint="내용을 입력해주세요.(500자 내)" />
+                android:hint="내용을 입력해주세요.(500자 내)"
+                android:padding="10dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/post_image"
@@ -147,26 +190,30 @@
             <LinearLayout
                 android:id="@+id/hide_layout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/layout_imageUrlWrite"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/roundgirl2" />
 
                 <EditText
                     android:id="@+id/imgaeExplain"
                     android:layout_width="260dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@null"
                     android:fontFamily="@font/maru"
                     android:gravity="top"
-                    android:hint="설명을 넣을 수 있어요"
-                    android:text="" />
+                    android:hint="사진 설명을 넣을 수 있어요"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textSize="14sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -197,3 +244,4 @@
 
     </RelativeLayout>
 </ScrollView>
+
