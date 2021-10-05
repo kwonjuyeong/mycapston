@@ -44,25 +44,27 @@
 
         <TextView
             android:id="@+id/login_introduce_text"
-            android:layout_width="370dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_gravity="center"
             android:fontFamily="@font/jalnan"
             android:text="'함께'와 같이 먹을 준비 되셨나요?\n로그인 해주세요!"
             android:textColor="@color/strong_dark_gray"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/login_viewPager" />
 
     <LinearLayout
+        android:id="@+id/edit_id_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@id/login_introduce_text"
-        >
+        app:layout_constraintBottom_toBottomOf="@id/login_introduce_text">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -125,46 +127,62 @@
     </LinearLayout> -->
     <LinearLayout
         android:id="@+id/login_btn_layout"
-        android:layout_width="330dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@id/login_Pw"
         tools:ignore="InvalidId">
 
         <Button
             android:id="@+id/bt_login"
-            android:layout_width="165dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/loginbtn"
             android:fontFamily="@font/jalnan"
             android:background="@drawable/signiture_btn"
-            android:textColor="@color/medium_dark_gray"
+            android:textColor="@color/black"
             android:theme="@style/ButtonStyle" />
 
         <Button
             android:id="@+id/bt_signup"
-            android:layout_width="165dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:background="@drawable/signiture_btn"
             android:fontFamily="@font/jalnan"
             android:text="회원가입"
-            android:textColor="@color/medium_dark_gray"
+            android:textColor="@color/black"
             android:theme="@style/ButtonStyle" />
 
     </LinearLayout>
+<LinearLayout
+    android:id="@+id/login_found"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="210dp"
+    app:layout_constraintEnd_toEndOf = "@id/edit_id_password"
+    app:layout_constraintTop_toBottomOf="@id/login_btn_layout">
 
+    <TextView
+        android:id="@+id/login_found_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호를 잊어버렸나요?"
+        android:textSize="12sp"
+        android:fontFamily="@font/jalnan"
+        android:textColor="@color/medium_dark_gray" />
+
+</LinearLayout>
     <LinearLayout
         android:layout_width="400dp"
         android:layout_height="190dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/login_btn_layout"
+        app:layout_constraintTop_toBottomOf="@id/login_found"
         android:orientation="vertical">
 
         <Button

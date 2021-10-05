@@ -85,7 +85,6 @@
                 android:background="@color/little_yellow"
                 android:drawableStart="@android:drawable/btn_star" />
         </RelativeLayout>
-
     </ScrollView>
     <include layout="@layout/activity_chatadd" />
 

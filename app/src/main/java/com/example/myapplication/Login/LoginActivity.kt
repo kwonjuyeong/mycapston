@@ -11,7 +11,9 @@ import android.content.pm.PackageManager
 import android.location.GnssAntennaInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.KeyboardVisibilityUtils
@@ -193,6 +195,18 @@ class LoginActivity : AppCompatActivity() {
                 UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
             }
         }
+
+        //비밀번호 찾기
+
+        login_found_password.setOnClickListener{
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+
+        }
+
+
+
+
+
 
     }
 
@@ -446,6 +460,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+
 
 }
 

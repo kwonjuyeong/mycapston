@@ -84,9 +84,9 @@ class HomeFragment : Fragment() {
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)//위 아래 애니메이션코드
         }
 
-        main_search_view.setOnClickListener {
+        main_search_view.setOnClickListener{
             val intent = Intent(requireContext(), SearchFragment::class.java)
-            ContextCompat.startActivity(requireContext(), intent, null)
+            ContextCompat.startActivity(requireContext(),intent,null)
         }
 
 
