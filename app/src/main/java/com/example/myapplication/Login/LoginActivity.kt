@@ -11,7 +11,9 @@ import android.content.pm.PackageManager
 import android.location.GnssAntennaInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.KeyboardVisibilityUtils
@@ -32,23 +34,13 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-//import com.gun0912.tedpermission.PermissionListener
-//import com.gun0912.tedpermission.TedPermission
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
-import android.view.LayoutInflater
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import kotlinx.coroutines.delay
 
 
 @Suppress("DEPRECATION")
@@ -81,43 +73,24 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        val builder = AlertDialog.Builder(this) //아래 builder.show 까지 명령어
-
-        builder.setTitle("타이틀 입니다.")
-
-        builder.setMessage("함께 어플리케이션을 사용하기 위해서는 다음 권한을 얻어야합니다")
-
-        builder.setPositiveButton(
-
-            "선택 1",
-
-            { dialogInterface: DialogInterface?, i: Int ->
-
-
-
-            })
-
-        builder.setNegativeButton(
-
-            "선택 2",
-
-            { dialogInterface: DialogInterface?, i: Int ->
-
-                //원하는 명령어
-
-            })
-
-        builder.setNeutralButton(
-
-            "선택 3",
-
-            { dialogInterface: DialogInterface?, i: Int ->
-
-                //원하는 명령어
-
-            })
-
-        builder.show()
+//        val builder = AlertDialog.Builder(this) //아래 builder.show 까지 명령어
+//        builder.setTitle("타이틀 입니다.")
+//        builder.setMessage("함께 어플리케이션을 사용하기 위해서는 다음 권한을 얻어야합니다")
+//        builder.setPositiveButton(
+//            "선택 1",
+//            { dialogInterface: DialogInterface?, i: Int ->
+//            })
+//        builder.setNegativeButton(
+//            "선택 2",
+//            { dialogInterface: DialogInterface?, i: Int ->
+//                //원하는 명령어
+//            })
+//        builder.setNeutralButton(
+//            "선택 3",
+//            { dialogInterface: DialogInterface?, i: Int ->
+//                //원하는 명령어
+//            })
+//        builder.show()
 
 //키보드 움직이기
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
@@ -223,6 +196,18 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        //비밀번호 찾기
+
+        login_found_password.setOnClickListener{
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+
+        }
+
+
+
+
+
+
     }
 
     // 구글 로그인
@@ -251,15 +236,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    자동 로그인
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-           startActivity(intent)
-        }
-    }
+////    자동 로그인
+//    override fun onStart() {
+//        super.onStart()
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//           startActivity(intent)
+//        }
+//    }
 
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
@@ -475,6 +460,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+
 
 }
 

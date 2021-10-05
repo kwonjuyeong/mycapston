@@ -15,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.myapplication.DTO.StatusDTO
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Activity.MainActivity
 import com.example.myapplication.R
@@ -127,6 +128,7 @@ class Add_LoginActivity : AppCompatActivity() {
     //좋은 코드는 아니지만 간소화 하는 방법을... 모색
     private suspend fun contentUpload() {
         //ProgressBar <<< 효과 넣을지 말지? 살짝 구시대적 ui
+        val statusDTO = StatusDTO()
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName = "JPEG_" + timeStamp + "_.png"
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -151,7 +153,11 @@ class Add_LoginActivity : AppCompatActivity() {
                         )
                     )
                     setResult(RESULT_OK)
-                    finish()
+                    statusDTO.uid = uid
+                    statusDTO.profileUrl = UR
+                    statusDTO.nickname = NM
+                    statusDTO.timestamp = profile_timestamp
+                    FirebaseFirestore.getInstance().collection("Status").document(uid).set(statusDTO)
                 }
             }
         } else {
@@ -165,8 +171,13 @@ class Add_LoginActivity : AppCompatActivity() {
                 )
             )
             setResult(RESULT_OK)
-            finish()
+            statusDTO.uid = uid
+            statusDTO.profileUrl = "null"
+            statusDTO.nickname = NM
+            statusDTO.timestamp = profile_timestamp
+            FirebaseFirestore.getInstance().collection("Status").document(uid).set(statusDTO)
         }
+        finish()
 
     }
 

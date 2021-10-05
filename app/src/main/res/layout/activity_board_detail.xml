@@ -22,16 +22,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/board_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Post"
-            android:textColor="@color/black"
             android:gravity="center"
             android:singleLine="true"
+            android:text="Post"
+            android:textColor="@color/black"
             android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

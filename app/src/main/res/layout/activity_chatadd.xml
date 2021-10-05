@@ -12,13 +12,9 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="함께 채팅방"
-        android:fontFamily="@font/jalnan"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,7 +80,7 @@
             android:layout_height="40dp"
             android:background="#FBE8AF"
             android:gravity="center"
-            android:text="돌아가기"
+            android:text="나가기"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -100,3 +96,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
-import com.example.myapplication.ViewPagerAdapter
 import kotlinx.android.synthetic.main.fragment_recent.*
 
 class RecentFragment : Fragment(){
@@ -20,12 +19,18 @@ class RecentFragment : Fragment(){
     private var boardListAdapter = BoardListAdapter()
     private var repo : Repo
     private lateinit var viewPager2: ViewPager2
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     init {
         repo = Repo.StaticFunction.getInstance()
     }
     private fun getfoodlList(): ArrayList<Int> {
         return arrayListOf<Int>(R.drawable.steak, R.drawable.coffee, R.drawable.sushi)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewPagerAdapter = ViewPagerAdapter(requireContext(),getfoodlList())
     }
 
     override fun onCreateView(
@@ -42,7 +47,7 @@ class RecentFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewPager2.adapter = ViewPagerAdapter(this, getfoodlList()) // 어댑터 생성
+        viewPager2.adapter = viewPagerAdapter
         viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
         viewPager2.requestDisallowInterceptTouchEvent(false)
 
@@ -61,5 +66,16 @@ class RecentFragment : Fragment(){
                 boradSwiprefresh.isRefreshing = false // 새로고침을 완료하면 아이콘을 없앤다.
             }
         }
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
+
     }
 }

@@ -1,13 +1,16 @@
-package com.example.myapplication
+package com.example.myapplication.Main.Fragment.BoardFragment.Recent
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 
-class ViewPagerAdapter(var fragment: Fragment,var tapList: ArrayList<Int>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
+class ViewPagerAdapter(val context: Context ,var tapList: ArrayList<Int>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
     var item = tapList
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
 
@@ -18,7 +21,7 @@ class ViewPagerAdapter(var fragment: Fragment,var tapList: ArrayList<Int>) : Rec
     }
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
-        (LayoutInflater.from(parent.context).inflate(R.layout.food_list_item, parent, false)){
+        (LayoutInflater.from(context).inflate(R.layout.food_list_item, parent, false)){
 
         val food = itemView.findViewById<ImageView>(R.id.imageView_food)!!
 

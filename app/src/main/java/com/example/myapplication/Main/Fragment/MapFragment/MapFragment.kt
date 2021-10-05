@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.Main.Board.Detail.BoardDetail
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -58,6 +59,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     var storage: FirebaseStorage? = null
     private var maprepo = MapRepo.StaticFunction.getInstance()
     private var count = 0
+    private var repo = Repo.StaticFunction.getInstance()
 
 
     companion object {
@@ -309,7 +311,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                var myLocation = location?.let { LatLng(it.latitude, it.longitude) }
+                val myLocation = location?.let { LatLng(it.latitude, it.longitude) }
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation!!))
                 googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
@@ -351,11 +353,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
+        repo.upDateOnlineState("online")
         mView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
+        repo.upDateOnlineState("offline")
         mView.onPause()
     }
 

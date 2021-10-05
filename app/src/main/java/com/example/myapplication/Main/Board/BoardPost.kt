@@ -12,6 +12,7 @@ import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
@@ -44,11 +45,20 @@ class BoardPost : AppCompatActivity() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
 
+    private fun gettextList(): ArrayList<String> {
+        return arrayListOf<String>("s","s","s")
+    }
+    private var repo = Repo.StaticFunction.getInstance()
+
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
+
+
+        //textview_food.adapter = ViewPagerAdapter2(this,  gettextList()) // 어댑터 생성
+
 
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
@@ -98,7 +108,7 @@ class BoardPost : AppCompatActivity() {
         }
     }
 
-////
+    ////
     private fun getCityName1(lat: Double, long: Double): String {
         var cityName: String = ""
         var doName: String = ""
@@ -168,5 +178,14 @@ class BoardPost : AppCompatActivity() {
 
         //startActivity(intent)
         finish()
+    }
+    override fun onPause() {
+        super.onPause()
+        repo.upDateOnlineState("offline")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repo.upDateOnlineState("online")
     }
 }

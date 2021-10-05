@@ -6,53 +6,55 @@
     android:layout_height="match_parent"
     android:background="#FAF6D4">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Login.LoginActivity">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Login.LoginActivity">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/login_viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            ></androidx.viewpager.widget.ViewPager>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/login_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                ></androidx.viewpager.widget.ViewPager>
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:background="@drawable/round_btn"
+                android:gravity="center"
+                android:text="함께"
+                android:fontFamily="@font/jalnan"
+                android:textColor="#ffffff"
+                android:textSize="80dp"
+                android:textStyle="bold"
+                />
+        </FrameLayout>
 
         <TextView
-            android:layout_width="250dp"
-            android:layout_height="160dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/login_introduce_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/round_btn"
-            android:gravity="center"
-            android:text="함께"
             android:fontFamily="@font/jalnan"
-            android:textColor="#ffffff"
-            android:textSize="80dp"
+            android:text="'함께'와 같이 먹을 준비 되셨나요?\n로그인 해주세요!"
+            android:textColor="@color/strong_dark_gray"
+            android:textSize="16sp"
             android:textStyle="bold"
-            />
-    </FrameLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/login_introduce_text"
-        android:layout_width="370dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:fontFamily="@font/jalnan"
-        android:text="'함께'와 같이 먹을 준비 되셨나요?\n로그인 해주세요!"
-        android:textColor="@color/strong_dark_gray"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/login_viewPager" />
+            app:layout_constraintBottom_toBottomOf="@id/login_viewPager" />
 
     <LinearLayout
         android:id="@+id/edit_id_password"
@@ -64,33 +66,32 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@id/login_introduce_text">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/maru"
-            android:text="ID" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maru"
+                android:text="ID" />
 
-        <EditText
-            android:id="@+id/login_Id"
-            android:layout_width="match_parent"
-            android:fontFamily="@font/maru"
-            android:singleLine="true"
-            android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/login_Id"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/maru"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/maru"
-            android:text="Password" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maru"
+                android:text="Password" />
 
-        <EditText
-            android:id="@+id/login_Pw"
-            android:layout_width="match_parent"
-            android:fontFamily="@font/maru"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:autofillHints="" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/login_Pw"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/maru"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:autofillHints="" />
+        </LinearLayout>
 
 
 
@@ -129,15 +130,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@id/login_Pw"
         tools:ignore="InvalidId">
 
         <Button
             android:id="@+id/bt_login"
-            android:layout_width="165dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/loginbtn"
             android:fontFamily="@font/jalnan"
@@ -147,7 +148,7 @@
 
         <Button
             android:id="@+id/bt_signup"
-            android:layout_width="165dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/signiture_btn"
             android:fontFamily="@font/jalnan"
@@ -158,24 +159,19 @@
     </LinearLayout>
 <LinearLayout
     android:id="@+id/login_found"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="5dp"
     android:layout_marginStart="210dp"
-    android:layout_marginEnd="30dp"
     app:layout_constraintEnd_toEndOf = "@id/edit_id_password"
     app:layout_constraintTop_toBottomOf="@id/login_btn_layout">
 
     <TextView
+        android:id="@+id/login_found_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/jalnan"
-        android:text="ID 찾기 / "
-        android:textColor="@color/medium_dark_gray" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 찾기"
+        android:text="비밀번호를 잊어버렸나요?"
+        android:textSize="12sp"
         android:fontFamily="@font/jalnan"
         android:textColor="@color/medium_dark_gray" />
 
