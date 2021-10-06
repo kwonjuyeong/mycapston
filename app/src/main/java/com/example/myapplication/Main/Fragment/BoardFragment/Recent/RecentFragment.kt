@@ -25,7 +25,7 @@ class RecentFragment : Fragment(){
         repo = Repo.StaticFunction.getInstance()
     }
     private fun getfoodlList(): ArrayList<Int> {
-        return arrayListOf<Int>(R.drawable.steak, R.drawable.coffee, R.drawable.sushi)
+        return arrayListOf<Int>(R.drawable.bannerpic,R.drawable.bannerpic1,R.drawable.bannerpic2,R.drawable.bannerpic3,R.drawable.bannerpic4,R.drawable.bannerpic5,R.drawable.bannerpic6)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

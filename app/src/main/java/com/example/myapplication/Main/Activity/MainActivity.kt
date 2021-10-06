@@ -10,6 +10,7 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.DTO.StatusDTO
@@ -51,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     private var longitude: Double? = null
     private var latitude: Double? = null
     private var locationName : String? = null
+    private var backKeyPressedTime = 0L
+
     init {
         Log.e("MAIM 엑티비티 실행", "init")
     }
@@ -176,5 +179,37 @@ class MainActivity : AppCompatActivity() {
 
         //Toast.makeText(context, cityName + " " + doName + " " + jibunName, Toast.LENGTH_LONG).show()
         return "$cityName, $doName"
+    }
+    interface OnBackPressedListener{
+        fun onBack()
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed() // 이걸 없애면 뒤로가기 눌러도 Activity가 finish()되지 않음
+
+        if(mBackListener != null) {
+            mBackListener?.onBack()
+            mBackListener = null
+        } else
+            backToFinish()
+
+        //main_toolbar_write_btn.visibility = View.VISIBLE
+        //main_toolbar_back_btn.visibility = View.GONE
+    }
+
+
+    fun backToFinish(){
+        if(System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis()
+            Toast.makeText(this, "종료하려면 한 번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
+        }else{
+            ActivityCompat.finishAffinity(this);
+            System.exit(0);
+        }
+    }
+    private var mBackListener: OnBackPressedListener? = null
+
+    fun setOnBackPressedListener(listener: OnBackPressedListener){
+        mBackListener = listener
     }
 }
