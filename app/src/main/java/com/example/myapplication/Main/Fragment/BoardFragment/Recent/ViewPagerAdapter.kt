@@ -17,7 +17,7 @@ class ViewPagerAdapter(val context: Context ,var tapList: ArrayList<Int>) : Recy
     override fun getItemCount(): Int = Int.MAX_VALUE
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.food.setImageResource(item[position%3])
+        holder.food.setImageResource(item[position%6])
     }
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
