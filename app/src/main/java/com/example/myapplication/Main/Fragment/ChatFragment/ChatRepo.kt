@@ -44,6 +44,7 @@ class ChatRepo {
     }
 
     fun returnLastMessageDTO(): LiveData<MutableList<MessageDTO.lastMessage>> {
+        lastMessageDTO.clear()
         for (i in messageDTO) {
             val docName = i.boardUid + "_last"
             firestore.collection("Chat").document(i.boardUid.toString()).collection("LastMessage")

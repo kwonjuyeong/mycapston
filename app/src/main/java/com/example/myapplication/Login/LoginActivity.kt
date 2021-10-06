@@ -11,7 +11,9 @@ import android.content.pm.PackageManager
 import android.location.GnssAntennaInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.KeyboardVisibilityUtils
@@ -32,23 +34,13 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-//import com.gun0912.tedpermission.PermissionListener
-//import com.gun0912.tedpermission.TedPermission
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
-import android.view.LayoutInflater
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import kotlinx.coroutines.delay
 
 
 @Suppress("DEPRECATION")
@@ -203,6 +195,18 @@ class LoginActivity : AppCompatActivity() {
                 UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
             }
         }
+
+        //비밀번호 찾기
+
+        login_found_password.setOnClickListener{
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+
+        }
+
+
+
+
+
 
     }
 
@@ -456,6 +460,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+
 
 }
 

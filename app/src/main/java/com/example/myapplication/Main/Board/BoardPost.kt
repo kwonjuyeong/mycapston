@@ -7,14 +7,18 @@ import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.DTO.ScreenUtils
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
@@ -50,29 +54,20 @@ class BoardPost : AppCompatActivity() {
     private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
+    private lateinit var taglist : RecyclerView
+    private lateinit var postAdapter: PostAdapter
+    private var tag = ""
+    private var category = arrayListOf<String>("null","치킨","피자","중식","한식","양식","커피","돈까스","일식")
     private var repo = Repo.StaticFunction.getInstance()
 
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_board_post) //61~70 스피너
+        setContentView(R.layout.activity_board_post)
 
-//        val spinner = findViewById<Spinner>(R.id.spinner)
-//        val title_tv =findViewById<TextView>(R.id.title_tv)
-//        val name_tv = findViewById<TextView>(R.id.name_tv)
-//        val content_tv = findViewById<TextView>(R.id.content_tv)
-//
-//
-//
-//       spinner.adapter =ArrayAdapter.createFromResource(this, R.array.itemList, android.R.layout.simple_spinner_item)
-
-
-
-
-//
-
-
+        setHorizontalPicker()
+        Log.e("tag값 확", tag )
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
                 sv_root.run {
@@ -88,7 +83,6 @@ class BoardPost : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser!!.uid
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 latitude = location!!.latitude
@@ -119,56 +113,9 @@ class BoardPost : AppCompatActivity() {
             }
 
         }
-
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//
-//            }
-//
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                view: View?,
-//                position: Int,
-//                id: Long
-//            ) {
-//                when (position) {
-//
-//                    0 -> {
-//                        title_tv.setText("선택안함")
-//
-//                    }
-//
-//                    1 -> {
-//                        title_tv.setText(spinner.selectedItem.toString())
-//
-//
-//                    }
-//
-//                    2 -> {
-//                        title_tv.setText(spinner.selectedItem.toString())
-//
-//
-//                    }
-//
-//                    3 -> {
-//                        title_tv.setText(spinner.selectedItem.toString())
-//
-//                    }
-//                    //일치하는게 없는 경우
-//                    else -> {
-//                        title_tv.setText("메뉴")
-//
-//
-//                    }
-//                }
-//            }
-//        }
     }
 
-
-
-
-////
+    ////
     private fun getCityName1(lat: Double, long: Double): String {
         var cityName: String = ""
         var doName: String = ""
@@ -215,6 +162,7 @@ class BoardPost : AppCompatActivity() {
         boardDTO.longitude = longitude
         boardDTO.latitude = latitude
         boardDTO.gender = gender
+        boardDTO.tag = tag
         boardDTO.locationName = locationName////
 
         if (photoUri != null) {
@@ -247,5 +195,35 @@ class BoardPost : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         repo.upDateOnlineState("online")
+
     }
+
+    private fun setHorizontalPicker() {
+        taglist = findViewById(R.id.tag_list)
+
+        // Setting the padding such that the items will appear in the middle of the screen
+        val padding: Int = ScreenUtils.getScreenWidth(this)/2 - ScreenUtils.dpToPx(this, 40)
+        taglist.setPadding(padding, 0, padding, 0)
+
+        // Setting layout manager
+        taglist.layoutManager = SliderLayoutManager(this).apply {
+            callback = object : SliderLayoutManager.OnItemSelectedListener {
+                override fun onItemSelected(layoutPosition: Int) {
+                    tag = category[layoutPosition]
+                }
+            }
+        }
+
+        // Setting Adapter
+        taglist.adapter = PostAdapter().apply {
+            setData(category)
+            callback = object : PostAdapter.Callback {
+                override fun onItemClicked(view: View) {
+                    taglist.smoothScrollToPosition(taglist.getChildLayoutPosition(view))
+                }
+            }
+        }
+    }
+
+
 }

@@ -1,7 +1,9 @@
 package com.example.myapplication.Main.Fragment.Search
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +24,7 @@ class SearchFragment :AppCompatActivity() {
 
     var firestore : FirebaseFirestore? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -56,6 +59,9 @@ class SearchFragment :AppCompatActivity() {
 
         // 검색 옵션에 따라 검색
         searchBtn.setOnClickListener {
+            search_what.visibility = View.VISIBLE
+            var search = searchWord.text.toString()
+            search_what.text = "'${search}'에 대한 검색 결과"
             (search_recyclerview.adapter as RecyclerViewAdapter).search(searchWord.text.toString(), searchOption)
         }
 
@@ -65,6 +71,7 @@ class SearchFragment :AppCompatActivity() {
             startActivity(intent) }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         // Post 클래스 ArrayList 생성성
         var Post : ArrayList<BoardDTO> = arrayListOf()

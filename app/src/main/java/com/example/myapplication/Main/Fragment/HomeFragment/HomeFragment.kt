@@ -10,20 +10,24 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
+import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.BoardPost
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.Main.Fragment.Search.SearchFragment
 import com.example.myapplication.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_home.view.*
-
-
 
 
 // 호출시 HomeFragment.newInstance() 를 이용해서 외부에서 호출
 class HomeFragment : Fragment() {
     companion object {
         const val TAG: String = "로그"
+
         // 외부 호출시 메모리에 적제된 HomeFragment를 불러올수 있게함
         fun newInstance(): HomeFragment {
             return HomeFragment()
@@ -33,24 +37,26 @@ class HomeFragment : Fragment() {
     private val repo = Repo.StaticFunction.getInstance()
     private lateinit var photoAdapter: PhotoAdapter
     private var dataList = mutableListOf<DataModel>()
+    private var userinfoDTO = UserinfoDTO()
 
     // 메모리에 적제 되었을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        userinfoDTO = repo.returnUserInfo()
 
     }
 
 
     // Activity 안에 Fragment가 들어가게 되는데, onAttach가 Fragment와 Activity에 붙게됨(의존)
-    // 프레그먼트를 안고 있는 액티비티에 붙었을 때
+// 프레그먼트를 안고 있는 액티비티에 붙었을 때
     override fun onAttach(context: Context) {
         super.onAttach(context)
     }
 
     // 뷰가 생성되었을때
-    // 프레그먼트와 레이아웃을 연결시켜주는 부분
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?
+// 프레그먼트와 레이아웃을 연결시켜주는 부분
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.frag_home, container, false)
@@ -63,7 +69,8 @@ class HomeFragment : Fragment() {
 
         return view
     }
-    fun GoBorad(){
+
+    fun GoBorad() {
         var intent = Intent(requireActivity(), BoardPost::class.java)
         startActivity(intent)
 
@@ -83,8 +90,8 @@ class HomeFragment : Fragment() {
         }
 
 
-        recyclerView.layoutManager = GridLayoutManager( requireContext(), 4)
-        photoAdapter = PhotoAdapter( requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
+        photoAdapter = PhotoAdapter(requireContext())
         recyclerView.adapter = photoAdapter
 
         dataList.add(DataModel("치킨", R.drawable.chiken))
@@ -99,6 +106,7 @@ class HomeFragment : Fragment() {
         photoAdapter.setDataList(dataList)
 
     }
+
     override fun onPause() {
         super.onPause()
         repo.upDateOnlineState("offline")
@@ -108,6 +116,11 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         repo.upDateOnlineState("online")
+        if (userinfoDTO.ProfileUrl != null) {
+            Glide.with(this).load(userinfoDTO.ProfileUrl).into(main_page_user_img)
+        } else {
+            main_page_user_img.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
+        }
 
     }
 }

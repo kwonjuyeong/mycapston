@@ -140,6 +140,7 @@ dependencies {
 
     implementation 'com.github.amarjain07:StickyScrollView:1.0.2'//스티키스크롤
 
+
 /*
     //여기 안되면 지우기
     implementation 'com.google.dagger:hilt-android:<VERSION>'

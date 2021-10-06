@@ -90,8 +90,6 @@ class BoardChat : AppCompatActivity() {
         btn_open.setOnClickListener {
             drawerLayout!!.openDrawer(drawerView!!)
         }
-        val btn_close = findViewById<View>(R.id.btn_close) as Button
-        btn_close.setOnClickListener { drawerLayout!!.closeDrawers() }
         drawerLayout!!.setDrawerListener(listener)
         drawerView!!.setOnTouchListener { v, event -> true }
         val ExitChat = findViewById<View>(R.id.ExitChat) as ImageButton
