@@ -11,12 +11,7 @@
         android:layout_weight="1"
         tools:context=".Main.Board.BoardPost">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager_food2"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:padding="5dp"
-            android:layout_marginTop="70dp" />
+
 
         <RelativeLayout
             android:id = "@id/board_layout"
@@ -68,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"
-                android:layout_marginTop="130dp"
+                android:layout_marginTop="50dp"
                 android:fontFamily="@font/jalnan"
                 android:text="제목"
                 android:textColor="@color/black"
@@ -95,6 +90,46 @@
                 android:layout_marginStart="20dp"
                 android:background="@color/main" />
 
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="100dp"-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                android:paddingVertical="10dp"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/title_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:textSize="20dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/content_tv"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                tools:text="메뉴" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/name_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/content_tv"-->
+<!--                app:layout_constraintRight_toRightOf="@id/content_tv"-->
+<!--                tools:text="이름" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/content_tv"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:textSize="15dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintHeight_percent="0.6"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:text="텍스트" />-->
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/board_contents_text"

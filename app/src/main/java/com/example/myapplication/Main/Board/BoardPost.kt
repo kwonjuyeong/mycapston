@@ -9,14 +9,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
-import com.example.myapplication.ViewPagerAdapter
-import com.example.myapplication.ViewPagerAdapter2
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,6 +28,8 @@ import com.google.android.gms.tasks.*
 import kotlinx.android.synthetic.main.activity_board_post.*
 import kotlinx.android.synthetic.main.activity_board_post.sv_root
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.food_list_item2.*
+import kotlinx.android.synthetic.main.fragment_recent.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -47,21 +50,27 @@ class BoardPost : AppCompatActivity() {
     private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
-    private fun getfoodlList2(): ArrayList<Int> {
-        return arrayListOf<Int>(R.drawable.steak, R.drawable.coffee, R.drawable.sushi)
-    }
     private var repo = Repo.StaticFunction.getInstance()
 
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_board_post)
+        setContentView(R.layout.activity_board_post) //61~70 스피너
 
-        viewPager_food2.offscreenPageLimit = 1
-        viewPager_food2.adapter = ViewPagerAdapter2(this,  getfoodlList2()) // 어댑터 생성
-        viewPager_food2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//        val spinner = findViewById<Spinner>(R.id.spinner)
+//        val title_tv =findViewById<TextView>(R.id.title_tv)
+//        val name_tv = findViewById<TextView>(R.id.name_tv)
+//        val content_tv = findViewById<TextView>(R.id.content_tv)
+//
+//
+//
+//       spinner.adapter =ArrayAdapter.createFromResource(this, R.array.itemList, android.R.layout.simple_spinner_item)
 
+
+
+
+//
 
 
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
@@ -110,7 +119,54 @@ class BoardPost : AppCompatActivity() {
             }
 
         }
+
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//            }
+//
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                when (position) {
+//
+//                    0 -> {
+//                        title_tv.setText("선택안함")
+//
+//                    }
+//
+//                    1 -> {
+//                        title_tv.setText(spinner.selectedItem.toString())
+//
+//
+//                    }
+//
+//                    2 -> {
+//                        title_tv.setText(spinner.selectedItem.toString())
+//
+//
+//                    }
+//
+//                    3 -> {
+//                        title_tv.setText(spinner.selectedItem.toString())
+//
+//                    }
+//                    //일치하는게 없는 경우
+//                    else -> {
+//                        title_tv.setText("메뉴")
+//
+//
+//                    }
+//                }
+//            }
+//        }
     }
+
+
+
 
 ////
     private fun getCityName1(lat: Double, long: Double): String {

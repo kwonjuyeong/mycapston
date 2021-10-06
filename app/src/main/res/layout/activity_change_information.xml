@@ -24,12 +24,12 @@
             android:id="@+id/board_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="정보 변경"
-            android:textColor="@color/black"
             android:gravity="center"
             android:singleLine="true"
+            android:text="정보 변경"
+            android:textColor="@color/black"
             android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/boardCheck_top"
