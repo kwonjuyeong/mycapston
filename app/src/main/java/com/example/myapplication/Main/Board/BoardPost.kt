@@ -7,11 +7,14 @@ import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.DTO.ScreenUtils
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
@@ -45,12 +48,10 @@ class BoardPost : AppCompatActivity() {
     private var locationName : String? = null////
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
-    private var postViewModel = PostViewModel()
+    private lateinit var taglist : RecyclerView
     private lateinit var postAdapter: PostAdapter
-
-    private fun gettextList(): ArrayList<String> {
-        return arrayListOf<String>("치킨","피자","중식","한식","양식","커피","돈까스","일식")
-    }
+    private var tag = ""
+    private var category = arrayListOf<String>("null","치킨","피자","중식","한식","양식","커피","돈까스","일식")
     private var repo = Repo.StaticFunction.getInstance()
 
 
@@ -59,7 +60,8 @@ class BoardPost : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
 
-
+        setHorizontalPicker()
+        Log.e("tag값 확", tag )
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
                 sv_root.run {
@@ -154,6 +156,7 @@ class BoardPost : AppCompatActivity() {
         boardDTO.longitude = longitude
         boardDTO.latitude = latitude
         boardDTO.gender = gender
+        boardDTO.tag = tag
         boardDTO.locationName = locationName////
 
         if (photoUri != null) {
@@ -186,6 +189,34 @@ class BoardPost : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         repo.upDateOnlineState("online")
+
+    }
+
+    private fun setHorizontalPicker() {
+        taglist = findViewById(R.id.tag_list)
+
+        // Setting the padding such that the items will appear in the middle of the screen
+        val padding: Int = ScreenUtils.getScreenWidth(this)/2 - ScreenUtils.dpToPx(this, 40)
+        taglist.setPadding(padding, 0, padding, 0)
+
+        // Setting layout manager
+        taglist.layoutManager = SliderLayoutManager(this).apply {
+            callback = object : SliderLayoutManager.OnItemSelectedListener {
+                override fun onItemSelected(layoutPosition: Int) {
+                    tag = category[layoutPosition]
+                }
+            }
+        }
+
+        // Setting Adapter
+        taglist.adapter = PostAdapter().apply {
+            setData(category)
+            callback = object : PostAdapter.Callback {
+                override fun onItemClicked(view: View) {
+                    taglist.smoothScrollToPosition(taglist.getChildLayoutPosition(view))
+                }
+            }
+        }
     }
 
 

@@ -1,12 +1,15 @@
 package com.example.myapplication.Main.Fragment.HomeFragment
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Main.Fragment.Search.SearchFragment
 import com.example.myapplication.R
 import java.util.Collections.emptyList
 
@@ -46,6 +49,11 @@ class PhotoAdapter(var context: Context) : RecyclerView.Adapter<PhotoAdapter.Vie
         holder.title.text = data.title
         //holder.desc.text = data.desc
         holder.image.setImageResource(data.image)
+        holder.itemView.setOnClickListener {
+            var intent = Intent(holder.itemView.context, SearchFragment::class.java)
+            intent.putExtra("tag",data.title)
+            ContextCompat.startActivity(holder.itemView.context,intent,null)
+        }
 
     }
 

@@ -21,7 +21,7 @@
         <entry key="app/src/main/res/layout/activity_board_chat.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_board_comment.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_board_post.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_board_post.xml" value="0.31230283911671924" />
         <entry key="app/src/main/res/layout/activity_change_information.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_chat_main.xml" value="0.20208333333333334" />
@@ -70,7 +70,7 @@
         <entry key="app/src/main/res/layout/practice.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/layout/right_chat_item.xml" value="0.5110801240998813" />
         <entry key="app/src/main/res/layout/search_item.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/tag_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/tag_item.xml" value="0.29533051186561143" />
         <entry key="app/src/main/res/layout/test.xml" value="0.1802536231884058" />
         <entry key="app/src/main/res/layout/view_item_layout.xml" value="0.75" />
         <entry key="app/src/main/res/layout/viewpager_tag.xml" value="0.375" />
