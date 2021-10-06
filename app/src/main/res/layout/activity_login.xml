@@ -162,7 +162,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:layout_marginStart="210dp"
+    android:layout_marginStart="195dp"
     app:layout_constraintEnd_toEndOf = "@id/edit_id_password"
     app:layout_constraintTop_toBottomOf="@id/login_btn_layout">
 

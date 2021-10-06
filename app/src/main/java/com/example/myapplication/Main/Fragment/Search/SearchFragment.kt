@@ -111,6 +111,7 @@ class SearchFragment :AppCompatActivity() {
         override fun getItemCount(): Int {
             return Post.size
         }
+
         fun search(searchWord : String, option : String) {
             firestore?.collection("Board")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 // ArrayList 비워줌
