@@ -61,7 +61,6 @@ class BoardPost : AppCompatActivity() {
         setContentView(R.layout.activity_board_post)
 
         setHorizontalPicker()
-        Log.e("tag값 확", tag )
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
             onShowKeyboard = { keyboardHeight ->
                 sv_root.run {

@@ -2,6 +2,7 @@ package com.example.myapplication.Main.Fragment.HomeFragment
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,8 +50,9 @@ class PhotoAdapter(var context: Context) : RecyclerView.Adapter<PhotoAdapter.Vie
         holder.title.text = data.title
         //holder.desc.text = data.desc
         holder.image.setImageResource(data.image)
+
         holder.itemView.setOnClickListener {
-            var intent = Intent(holder.itemView.context, SearchFragment::class.java)
+            val intent = Intent(holder.itemView.context, SearchFragment::class.java)
             intent.putExtra("tag",data.title)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
