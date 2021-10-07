@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Main.Fragment.HomeFragment.HomeFragment"
     android:layout_width="match_parent"
-    app:stickyHeader="@+id/textView10"
+    app:stickyHeader="@+id/Hotte_Hotte"
     android:layout_height="match_parent"
     app:stickyFooter="@+id/btn_board"
     >

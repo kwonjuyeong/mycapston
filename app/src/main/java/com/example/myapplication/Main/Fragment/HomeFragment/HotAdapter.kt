@@ -1,6 +1,7 @@
 package com.example.myapplication.Main.Fragment.HomeFragment
 
 import android.annotation.SuppressLint
+import android.location.Location
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.R
+import com.facebook.internal.Mutable
 import com.google.firebase.firestore.FirebaseFirestore
 
 @SuppressLint("NotifyDataSetChanged")
@@ -45,6 +47,13 @@ class HotAdapter :RecyclerView.Adapter<HotAdapter.HotViewHolder>(){
 
     override fun getItemCount(): Int {
         TODO("Not yet implemented")
+    }
+    fun distanceResult(mylong : Double, mylat : Double, boardDTOs : MutableList<BoardDTO>){
+        var mylocation : Location
+        var youlocation : Location
+        for(i in boardDTOs){
+            //mylocation.longitude =
+        }
     }
 
 }
