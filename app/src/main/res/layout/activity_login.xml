@@ -69,25 +69,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maru"
+                android:fontFamily="@font/tmoney"
                 android:text="ID" />
 
             <EditText
                 android:id="@+id/login_Id"
                 android:layout_width="match_parent"
-                android:fontFamily="@font/maru"
+                android:fontFamily="@font/tmoney"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maru"
+                android:fontFamily="@font/tmoney"
                 android:text="Password" />
 
             <EditText
                 android:id="@+id/login_Pw"
                 android:layout_width="match_parent"
-                android:fontFamily="@font/maru"
+                android:fontFamily="@font/tmoney"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:autofillHints="" />

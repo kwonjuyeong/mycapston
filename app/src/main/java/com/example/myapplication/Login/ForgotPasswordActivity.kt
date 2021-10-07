@@ -12,6 +12,7 @@ class ForgotPasswordActivity :AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgotpassword)
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
 
         reset_password_btn.setOnClickListener {
 

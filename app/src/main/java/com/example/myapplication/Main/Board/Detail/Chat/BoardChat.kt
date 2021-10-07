@@ -2,6 +2,7 @@ package com.example.myapplication.Main.Board.Detail.Chat
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,9 +19,11 @@ import com.example.myapplication.DTO.MessageDTO
 import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
+import com.example.myapplication.SettingFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_board_chat.*
+import kotlinx.android.synthetic.main.activity_change_information.*
 import kotlinx.android.synthetic.main.activity_chatadd.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -81,14 +84,18 @@ class BoardChat : AppCompatActivity() {
             setLastMessage()
             comment_text.setText("")
         }
+        commant_back.setOnClickListener({                  //화면전환
+            finish()
 
+
+        })
 
 
         drawerLayout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
         drawerView = findViewById(R.id.drawer) as View
         val btn_open = findViewById<View>(R.id.hamburger) as ImageView
         btn_open.setOnClickListener {
-                drawerLayout!!.openDrawer(drawerView!!)
+            drawerLayout!!.openDrawer(drawerView!!)
         }
         drawerLayout!!.setDrawerListener(listener)
         drawerView!!.setOnTouchListener { v, event -> true }

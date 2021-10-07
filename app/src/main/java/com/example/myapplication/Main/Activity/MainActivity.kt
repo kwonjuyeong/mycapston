@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)
         bottomNavi.setOnNavigationItemSelectedListener(onBottomNavItemSelectedListener)
         // repo.createOnlinstatus()
         Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업")
@@ -136,16 +137,19 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.action_home -> {
+                    overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
                     homeFragment = HomeFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, homeFragment).commit()
                 }
                 R.id.action_Map -> {
+                    overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
                     mapFragment = MapFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, mapFragment).commit()
                 }
                 R.id.action_board -> {
+                    overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
                     //repo.getboarddata()
                     //repo.getboardUid()
                     // 사진을 가져올 수 있는지 확인 하는 작업
@@ -154,11 +158,13 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.frame_container, boardFragment).commit()
                 }
                 R.id.action_chat -> {
+                    overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
                     chatFragment = ChatFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, chatFragment).commit()
                 }
                 R.id.action_setting -> {
+                    overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
                     settingFragment = SettingFragment.newInstance()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame_container, settingFragment).commit()

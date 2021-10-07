@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="함께 채팅방"
+        android:fontFamily="@font/tmoney"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,9 +47,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="120dp"
-            android:fontFamily="@font/maru"
             android:gravity="center"
             android:text="현재 접속중인 친구"
+            android:fontFamily="@font/tmoney"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -64,6 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

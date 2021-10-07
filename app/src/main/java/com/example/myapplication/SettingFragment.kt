@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.myapplication.Login.LoginActivity
+import kotlinx.android.synthetic.main.activity_customer_service.*
+import kotlinx.android.synthetic.main.activity_infomation_law.*
 import kotlinx.android.synthetic.main.frag_setting.*
 
 //import com.google.api.LogDescriptor
@@ -70,7 +72,7 @@ class SettingFragment : Fragment(){
             }
         }
 
-        button_personal.setOnClickListener {
+        button_changeInfo.setOnClickListener {
             activity?.let {
                 val intent = Intent(context, ChangeInformationLaw::class.java)
                 startActivity(intent)

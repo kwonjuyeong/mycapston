@@ -47,6 +47,10 @@ class Add_LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.myapplication.R.layout.activity_add_login)
+
+
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
+
         //fireStorage 초기화
         storage = FirebaseStorage.getInstance()
         //fireStore Database

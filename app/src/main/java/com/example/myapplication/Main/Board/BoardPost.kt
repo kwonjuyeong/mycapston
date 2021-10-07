@@ -11,13 +11,19 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DTO.BoardDTO
 import com.example.myapplication.DTO.ScreenUtils
 import com.example.myapplication.KeyboardVisibilityUtils
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
+import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import com.example.myapplication.R
+import com.example.myapplication.SettingFragment
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,7 +33,10 @@ import kotlinx.android.synthetic.main.activity_add_login.*
 import com.google.android.gms.tasks.*
 import kotlinx.android.synthetic.main.activity_board_post.*
 import kotlinx.android.synthetic.main.activity_board_post.sv_root
+import kotlinx.android.synthetic.main.activity_customer_service.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.food_list_item2.*
+import kotlinx.android.synthetic.main.fragment_recent.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -59,6 +68,20 @@ class BoardPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
+
+        board_cancel.setOnClickListener {
+           finish()
+
+        }
+//        board_cancel.setOnClickListener {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.test,HomeFragment())
+//                .commit()
+//        }
+
+
+
 
         setHorizontalPicker()
         keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
