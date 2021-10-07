@@ -37,6 +37,9 @@
         <activity
             android:name=".Main.Board.Detail.Chat.BoardChat"
             android:exported="true" />
+        <activity
+            android:name=".ChangeCustomer"
+            android:exported="true"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

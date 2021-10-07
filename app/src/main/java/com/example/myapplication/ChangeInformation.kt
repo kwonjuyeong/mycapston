@@ -9,13 +9,13 @@ class ChangeInformation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_information)
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
 
-        board_cancel.setOnClickListener({
-            val intent = Intent(this, SettingFragment::class.java)
-            startActivity(intent)
+        board_cancel.setOnClickListener {
+            finish()
 
 
-        })
+        }
 
 
     }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.UserinfoDTO
@@ -83,6 +84,9 @@ class HomeFragment : Fragment() {
         fun startActivity(activity: Activity) {
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)//위 아래 애니메이션코드
         }
+
+        val fragmentTransaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+        fragmentTransaction.setCustomAnimations(R.anim.horizon_enter, R.anim.none)//위아래 애니메이션(62~63)
 
         main_search_view.setOnClickListener{
             val intent = Intent(requireContext(), SearchFragment::class.java)

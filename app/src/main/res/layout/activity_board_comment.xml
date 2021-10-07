@@ -64,6 +64,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/comment_recyclerView"
         android:layout_marginStart="10dp"
+        android:fontFamily="@font/tmoney"
         android:layout_toStartOf="@id/btn_comment_send"
         android:background="@color/little_yellow"
         android:drawableStart="@android:drawable/btn_star" />

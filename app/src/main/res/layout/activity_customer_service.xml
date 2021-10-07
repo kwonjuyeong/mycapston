@@ -99,7 +99,7 @@
                     android:layout_width="251dp"
                     android:layout_height="match_parent"
                     android:gravity="left"
-                    android:fontFamily="@font/maru"
+                    android:fontFamily="@font/tmoney"
                     android:padding="3dip"
                     android:text="2" />
             </TableRow>
@@ -118,7 +118,7 @@
                     android:layout_width="216dp"
                     android:layout_height="match_parent"
                     android:gravity="left"
-                    android:fontFamily="@font/maru"
+                    android:fontFamily="@font/tmoney"
                     android:padding="3dip"
                     android:text="4" />
             </TableRow>
@@ -155,7 +155,7 @@
                     android:layout_width="251dp"
                     android:layout_height="match_parent"
                     android:gravity="left"
-                    android:fontFamily="@font/maru"
+                    android:fontFamily="@font/tmoney"
                     android:padding="3dip"
                     android:text="2" />
             </TableRow>
@@ -173,7 +173,7 @@
                 <TextView
                     android:layout_width="216dp"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/maru"
+                    android:fontFamily="@font/tmoney"
                     android:gravity="left"
                     android:padding="3dip"
                     android:text="4" />

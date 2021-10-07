@@ -17,9 +17,11 @@ import com.example.myapplication.DTO.UserinfoDTO
 import com.example.myapplication.Main.Board.Detail.Chat.BoardChat
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
+import com.example.myapplication.SettingFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_board_detail.*
+import kotlinx.android.synthetic.main.activity_customer_service.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -37,6 +39,8 @@ class BoardDetail : AppCompatActivity(), PostListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_detail)
+
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
         val chooseUid = intent.getStringExtra("contentsUid")!!
          getData(this, chooseUid)
         createChatting(this)
@@ -44,6 +48,10 @@ class BoardDetail : AppCompatActivity(), PostListener {
             likeupdate()
 
         }
+
+
+
+
         //1번
 //        BoardCheck_commend.setOnClickListener{
 //            intent.putExtra("chooseUid", chooseUid)
@@ -58,6 +66,11 @@ class BoardDetail : AppCompatActivity(), PostListener {
                 intent.putExtra("commentUid", chooseUid)
                 ContextCompat.startActivity(this, intent, null)
             }.start()
+        }
+
+        add_login_cancel.setOnClickListener {
+            finish()
+
         }
 
     }

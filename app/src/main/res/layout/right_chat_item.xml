@@ -24,7 +24,7 @@
                 android:layout_gravity="right"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/renewmychat"
-                android:fontFamily="@font/maru"
+                android:fontFamily="@font/tmoney"
                 android:maxWidth="200dp"
                 android:maxLength="200"
                 android:padding="10dp"

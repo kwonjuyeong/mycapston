@@ -72,7 +72,7 @@ class SettingFragment : Fragment(){
             }
         }
 
-        back_button3.setOnClickListener {
+        button_changeInfo.setOnClickListener {
             activity?.let {
                 val intent = Intent(context, ChangeInformationLaw::class.java)
                 startActivity(intent)
@@ -85,7 +85,7 @@ class SettingFragment : Fragment(){
             }
         }
 
-        back_button1.setOnClickListener {
+        button_service.setOnClickListener {
             activity?.let {
                 val intent = Intent(context, ChangeCustomer::class.java)
                 startActivity(intent)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
@@ -74,5 +75,13 @@ class BoardFragment : Fragment() {
         repo.upDateOnlineState("online")
 
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {  //79~84 추가 애니메이션코드
+        super.onViewCreated(view, savedInstanceState)
+
+        val fragmentTransaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+        fragmentTransaction.setCustomAnimations(R.anim.horizon_enter, R.anim.none)//위아래 애니메이션(62~63)
+    }
+
 
 }

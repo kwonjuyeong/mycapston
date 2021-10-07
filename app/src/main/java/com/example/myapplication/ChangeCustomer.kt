@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.myapplication.Main.Fragment.HomeFragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_customer_service.*
 
 class ChangeCustomer : AppCompatActivity() {
@@ -10,12 +11,14 @@ class ChangeCustomer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_service)
 
-        back_button1.setOnClickListener({
-            val intent = Intent(this, SettingFragment::class.java)
-            startActivity(intent)
+
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none)//애니메이션
+
+        back_button1.setOnClickListener {
+           finish()
 
 
-        })
+        }
 
 
     }
