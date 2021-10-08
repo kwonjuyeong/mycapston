@@ -23,7 +23,6 @@ import com.example.myapplication.SettingFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_board_chat.*
-import kotlinx.android.synthetic.main.activity_change_information.*
 import kotlinx.android.synthetic.main.activity_chatadd.*
 import java.text.SimpleDateFormat
 import java.util.*
