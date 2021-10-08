@@ -33,7 +33,8 @@
                 android:text="함께"
                 android:fontFamily="@font/jalnan"
                 android:textColor="#ffffff"
-                android:textSize="80dp"
+                android:textSize="80sp"
+                android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 />
         </FrameLayout>
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:fontFamily="@font/jalnan"
             android:text="'함께'와 같이 먹을 준비 되셨나요?\n로그인 해주세요!"
@@ -61,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@id/login_introduce_text">
@@ -152,6 +154,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/signiture_btn"
             android:fontFamily="@font/jalnan"
+            android:layout_marginStart="5dp"
             android:text="회원가입"
             android:textColor="@color/black"
             android:theme="@style/ButtonStyle" />

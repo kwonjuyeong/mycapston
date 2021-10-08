@@ -9,6 +9,8 @@
         />
     <padding
         />
+    <corners android:bottomRightRadius="10dp"
+        android:topRightRadius="10dp"/>
     <size
         android:width="100dp"
         android:height="30dp"
