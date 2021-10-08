@@ -103,18 +103,6 @@ class LoginActivity : AppCompatActivity() {
         // 파이어베이스 인증 객체 선언
         auth = FirebaseAuth.getInstance()
 
-        /*
-        //ViewPager 전용 List (메인 장식 화면)
-        val listImage = ArrayList<Int>()
-        listImage.add(R.drawable.이미지 파일 명)
-        listImage.add(R.drawable.ic_launcher_foreground)
-
-        //ViewPager Adapter 등록
-        val loginimagefragmentAdapter = LogInImageFragmentAdapter(supportFragmentManager)
-        login_viewPager.adapter = loginimagefragmentAdapter
-
-        (미완)
-        */
         // Google 로그인 환경설정
         // default_web_client Direct : "375254490249-d375254490249-dj1mu3rp7mstcts3gnlbs48ngco7g8m9.apps.googleusercontent.com"
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -236,15 +224,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-////    자동 로그인
-//    override fun onStart() {
-//        super.onStart()
-//        val currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            val intent = Intent(this, MainActivity::class.java)
-//           startActivity(intent)
-//        }
-//    }
+//    자동 로그인
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+           startActivity(intent)
+        }
+    }
 
     // 텍스트 객체에서 받아온 파라미터가 있는지 없는지 검사
     fun isValidId(): Boolean {
@@ -315,7 +303,7 @@ class LoginActivity : AppCompatActivity() {
                 userInfoDTO.UID = uid
                 userInfoDTO.signUpdate = SimpleDateFormat("yyyyMMdd").format(Date())
                 FirebaseFirestore.getInstance().collection("userid").document(uid)
-                        .set(userInfoDTO)
+                    .set(userInfoDTO)
                 facebook_sign()
             }
         }
@@ -463,5 +451,3 @@ class LoginActivity : AppCompatActivity() {
 
 
 }
-
-

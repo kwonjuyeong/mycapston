@@ -10,7 +10,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class ChatRepo {
     private var firestore = FirebaseFirestore.getInstance()
-    private var userUid = FirebaseAuth.getInstance().currentUser!!.uid
     private var messageDTO = mutableListOf<MessageDTO>()
     private var lastMessageDTO = mutableListOf<MessageDTO.lastMessage>()
     private var liveLastData = MutableLiveData<MutableList<MessageDTO.lastMessage>>()

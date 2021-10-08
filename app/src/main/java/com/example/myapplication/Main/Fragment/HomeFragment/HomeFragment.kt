@@ -1,5 +1,6 @@
 package com.example.myapplication.Main.Fragment.HomeFragment
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -10,9 +11,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.UserinfoDTO
+import com.example.myapplication.DTO.Util
 import com.example.myapplication.Main.Board.BoardPost
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.Main.Fragment.Search.SearchFragment
@@ -39,35 +44,25 @@ class HomeFragment : Fragment() {
     private lateinit var photoAdapter: PhotoAdapter
     private var dataList = mutableListOf<DataModel>()
     private var userinfoDTO = UserinfoDTO()
+    private var util = Util.StaticFunction.getInstance()
+    private lateinit var hotAdapter: HotAdapter
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(HotViewModel::class.java)
+    }
 
-    // 메모리에 적제 되었을때
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userinfoDTO = repo.returnUserInfo()
-
+        hotAdapter = HotAdapter(requireContext())
     }
 
-
-    // Activity 안에 Fragment가 들어가게 되는데, onAttach가 Fragment와 Activity에 붙게됨(의존)
-// 프레그먼트를 안고 있는 액티비티에 붙었을 때
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    // 뷰가 생성되었을때
-// 프레그먼트와 레이아웃을 연결시켜주는 부분
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.frag_home, container, false)
-        //  inflater 레이아웃과 frag를 연결해줌
-
         view.btn_board.setOnClickListener {
             GoBorad()
         }
-
-
         return view
     }
 
@@ -80,6 +75,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hot_recyclerview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = hotAdapter
+            observeData()
+        }
 
         fun startActivity(activity: Activity) {
             activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)//위 아래 애니메이션코드
@@ -132,6 +132,18 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun observeData() {
+        viewModel.getHotListData().observe(viewLifecycleOwner, Observer {
+            hotAdapter.setHotListDTO(it)
+            hotAdapter.notifyDataSetChanged()
+        })
+        viewModel.getUidlistData().observe(viewLifecycleOwner, Observer {
+            hotAdapter.setListUid(it)
+            hotAdapter.notifyDataSetChanged()
+        })
+    }
+
     override fun onPause() {
         super.onPause()
         repo.upDateOnlineState("offline")
@@ -148,4 +160,5 @@ class HomeFragment : Fragment() {
         }
 
     }
+
 }

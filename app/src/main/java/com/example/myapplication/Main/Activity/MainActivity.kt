@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.DTO.StatusDTO
 import com.example.myapplication.DTO.UserinfoDTO
+import com.example.myapplication.DTO.Util
 import com.example.myapplication.Main.Fragment.BoardFragment.BoardFragment
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.Main.Fragment.ChatFragment.ChatFragment
@@ -48,10 +49,6 @@ class MainActivity : AppCompatActivity() {
     private var repo = Repo.StaticFunction.getInstance()
     private var maprepo = MapRepo.StaticFunction.getInstance()
     private var chatRepo = ChatRepo.StaticFunction.getInstance()
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var longitude: Double? = null
-    private var latitude: Double? = null
-    private var locationName : String? = null
     private var backKeyPressedTime = 0L
 
     init {
@@ -72,27 +69,26 @@ class MainActivity : AppCompatActivity() {
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
         // searchview 클릭 리스너 넣기
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            fusedLocationProviderClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    latitude = location!!.latitude
-                    longitude = location!!.longitude
-                    locationName = getCityName1(latitude!!,longitude!!)////
-                    Log.e(TAG, latitude.toString())
-                    Log.e(TAG, longitude.toString())
-                    Log.e(TAG, locationName.toString())
-                }
-        }
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+//
+//        if (ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_COARSE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            fusedLocationProviderClient.lastLocation
+//                .addOnSuccessListener { location: Location? ->
+//                    latitude = location!!.latitude
+//                    longitude = location!!.longitude
+//                    locationName = getCityName1(latitude!!,longitude!!)////
+//                    Log.e(TAG, latitude.toString())
+//                    Log.e(TAG, longitude.toString())
+//                    Log.e(TAG, locationName.toString())
+//                }
+//        }
 
     }
 
