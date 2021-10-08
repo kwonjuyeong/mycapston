@@ -60,26 +60,26 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/roundgirl2"
             android:id="@+id/board_detail_profile">
-            <ImageView
-                android:id="@+id/boardCheck_profile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="5dp"
-                android:layout_gravity="center" />
+        <ImageView
+            android:id="@+id/boardCheck_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:layout_gravity="center" />
 
-            <TextView
-                android:id="@+id/boradCheck_nickname"
-                android:background="@drawable/post_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:layout_marginStart="5dp"
-                android:textColor="@color/medium_dark_gray"
-                android:textSize="18sp"
-                android:fontFamily="@font/tmoney"
-                android:hint=""
-                android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/boradCheck_nickname"
+            android:background="@drawable/post_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/medium_dark_gray"
+            android:textSize="18sp"
+            android:fontFamily="@font/tmoney"
+            android:hint=""
+            android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -91,17 +91,17 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:layout_below="@+id/board_detail_profile">
-            <TextView
-                android:id="@+id/boradCheck_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/tmoney"
-                android:hint=""
-                android:maxWidth="380dp"
-                android:maxLength="29"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/boradCheck_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tmoney"
+            android:hint=""
+            android:maxWidth="380dp"
+            android:maxLength="29"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
