@@ -150,6 +150,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
         repo.upDateOnlineState("online")
@@ -158,6 +159,7 @@ class HomeFragment : Fragment() {
         } else {
             main_page_user_img.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
         }
+        recommend_textView.text = "${userinfoDTO.nickname}님 오늘은 치킨 먹어요!"
 
     }
 
