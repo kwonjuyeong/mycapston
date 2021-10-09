@@ -78,6 +78,8 @@
                 android:id="@+id/login_Id"
                 android:layout_width="match_parent"
                 android:fontFamily="@font/tmoney"
+                android:singleLine="true"
+                android:lines="1"
                 android:layout_height="wrap_content" />
 
             <TextView
@@ -91,6 +93,8 @@
                 android:layout_width="match_parent"
                 android:fontFamily="@font/tmoney"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:lines="1"
                 android:inputType="textPassword"
                 android:autofillHints="" />
         </LinearLayout>

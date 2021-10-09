@@ -162,6 +162,8 @@
                 android:focusable="true"
                 android:fontFamily="@font/tmoney"
                 android:hint="소중한 당신의 이름을 입력해주세요."
+                android:singleLine="true"
+                android:lines="1"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/add_login_name_text"
                 app:layout_constraintTop_toBottomOf="@id/add_login_name_text" />
@@ -188,6 +190,8 @@
                 android:focusable="true"
                 android:hint="평소에 뭐라고 불리우나요?"
                 android:fontFamily="@font/tmoney"
+                android:singleLine="true"
+                android:lines="1"
                 android:background="@null"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/add_login_nickname"
