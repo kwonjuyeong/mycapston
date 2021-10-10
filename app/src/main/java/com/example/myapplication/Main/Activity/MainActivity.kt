@@ -68,27 +68,6 @@ class MainActivity : AppCompatActivity() {
         Log.e("메인 엑티비티 실행 현황", "onCreate:TODO : 데이터 확인할때 확인작업")
         homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().add(R.id.frame_container, homeFragment).commit()
-        // searchview 클릭 리스너 넣기
-//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-//
-//        if (ActivityCompat.checkSelfPermission(
-//                this,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                this,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED
-//        ) {
-//            fusedLocationProviderClient.lastLocation
-//                .addOnSuccessListener { location: Location? ->
-//                    latitude = location!!.latitude
-//                    longitude = location!!.longitude
-//                    locationName = getCityName1(latitude!!,longitude!!)////
-//                    Log.e(TAG, latitude.toString())
-//                    Log.e(TAG, longitude.toString())
-//                    Log.e(TAG, locationName.toString())
-//                }
-//        }
 
     }
 

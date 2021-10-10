@@ -131,7 +131,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="15dp"
                 android:fontFamily="@font/jalnan"
-                android:text="~님 오늘은 치킨 먹어요!"
+                android:text=""
                 android:textColor="@color/very_little_gray"
                 android:textSize="16sp" />
         </LinearLayout>

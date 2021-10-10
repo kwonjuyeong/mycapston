@@ -56,8 +56,9 @@ class Util() {
 
     fun getAroundHot(): LiveData<MutableList<BoardDTO>> {
         HotList.clear()
-        val hef = firestore.collection("Board").whereEqualTo("locationName", locationName).orderBy("likeCount",
-            Query.Direction.DESCENDING)
+        Log.e("확인인ㅇㄴㅇㄴ ", locationName.toString())
+        val hef = firestore.collection("Board").whereEqualTo("locationName", locationName)
+            //.orderBy("likeCount", Query.Direction.DESCENDING)
         hef.addSnapshotListener { value, error ->
             for (document in value!!.documents) {
                 val item = document.toObject(BoardDTO::class.java)
@@ -72,10 +73,8 @@ class Util() {
     }
     fun getAroundId():LiveData<MutableList<String>> {
         uidList.clear()
-        val hef = firestore.collection("Board").whereEqualTo("locationName", locationName).orderBy(
-            "likeCount",
-            Query.Direction.DESCENDING
-        )
+        val hef = firestore.collection("Board").whereEqualTo("locationName", locationName)
+            //.orderBy("likeCount", Query.Direction.DESCENDING)
         hef.addSnapshotListener { value, error ->
             for (document in value!!.documents) {
                 val item = document.toObject(BoardDTO::class.java)

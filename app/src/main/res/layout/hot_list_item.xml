@@ -85,15 +85,15 @@
 
         <TextView
             android:id="@+id/hot_like_count"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="pi"
+            android:layout_width="73dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/tmoney"
+            android:text="Likes: "
             android:textColor="#797979"
             android:textStyle="bold"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/hot_title"
             app:layout_constraintTop_toTopOf="@+id/hot_layout" />
 
