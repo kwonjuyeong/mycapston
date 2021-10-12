@@ -172,6 +172,7 @@ class MainActivity : AppCompatActivity() {
             mBackListener?.onBack()
             mBackListener = null
         } else
+            repo.upDateOnlineState("offline")
             backToFinish()
 
         //main_toolbar_write_btn.visibility = View.VISIBLE
