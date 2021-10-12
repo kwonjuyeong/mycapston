@@ -2,7 +2,6 @@ package com.example.myapplication.Main.Fragment.HomeFragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -22,11 +22,14 @@ import com.example.myapplication.Main.Board.BoardPost
 import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.Main.Fragment.Search.SearchFragment
 import com.example.myapplication.R
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_home.view.*
+import kotlinx.coroutines.*
 
 
 // 호출시 HomeFragment.newInstance() 를 이용해서 외부에서 호출
@@ -50,10 +53,34 @@ class HomeFragment : Fragment() {
         ViewModelProvider(this).get(HotViewModel::class.java)
     }
 
+    init {
+        val ft : FragmentTransaction? = fragmentManager?.beginTransaction()
+        lifecycleScope.launch(Dispatchers.IO) {
+            var a = async {
+                getUserData()
+            }.await()
+            lifecycleScope.launch(Dispatchers.Main) {
+                delay(1000)
+                if (userinfoDTO.ProfileUrl != null) {
+                    Glide.with(requireContext()).load(userinfoDTO.ProfileUrl)
+                        .into(main_page_user_img)
+                }
+                else {
+                main_page_user_img.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
+            }
+                recommend_textView.text = "${userinfoDTO.nickname}님 오늘은 치킨 먹어요!"
+
+                ft?.detach(HomeFragment())?.attach(HomeFragment())?.commit()
+            }
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userinfoDTO = repo.returnUserInfo()
         hotAdapter = HotAdapter(requireContext())
+
     }
 
     override fun onCreateView(
@@ -88,9 +115,9 @@ class HomeFragment : Fragment() {
         val fragmentTransaction: FragmentTransaction = requireFragmentManager().beginTransaction()
         fragmentTransaction.setCustomAnimations(R.anim.horizon_enter, R.anim.none)//위아래 애니메이션(62~63)
 
-        main_search_view.setOnClickListener{
+        main_search_view.setOnClickListener {
             val intent = Intent(requireContext(), SearchFragment::class.java)
-            ContextCompat.startActivity(requireContext(),intent,null)
+            ContextCompat.startActivity(requireContext(), intent, null)
         }
 
 
@@ -144,6 +171,17 @@ class HomeFragment : Fragment() {
         })
     }
 
+    suspend fun getUserData() {
+        val firestore = FirebaseFirestore.getInstance()
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val Uef = firestore.collection("userid").document(uid)
+        Uef.addSnapshotListener { value, error ->
+            userinfoDTO = value!!.toObject(UserinfoDTO::class.java)!!
+        }
+
+    }
+
+
     override fun onPause() {
         super.onPause()
         repo.upDateOnlineState("offline")
@@ -153,14 +191,11 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
+
         repo.upDateOnlineState("online")
-        if (userinfoDTO.ProfileUrl != null) {
-            Glide.with(this).load(userinfoDTO.ProfileUrl).into(main_page_user_img)
-        } else {
-            main_page_user_img.setImageResource(R.drawable.ic_baseline_account_circle_signiture)
-        }
-        recommend_textView.text = "${userinfoDTO.nickname}님 오늘은 치킨 먹어요!"
+
 
     }
+
 
 }

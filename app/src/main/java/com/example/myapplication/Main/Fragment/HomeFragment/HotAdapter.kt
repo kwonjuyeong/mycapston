@@ -14,10 +14,16 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DTO.BoardDTO
+import com.example.myapplication.DTO.UserinfoDTO
+import com.example.myapplication.Main.Board.Detail.BoardDetail
 import com.example.myapplication.Main.Board.Detail.Chat.BoardChat
+import com.example.myapplication.Main.Fragment.BoardFragment.Recent.repo.Repo
 import com.example.myapplication.R
 import com.facebook.internal.Mutable
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
+import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.frag_home.*
 
 @SuppressLint("NotifyDataSetChanged")
 class HotAdapter(val context : Context) :RecyclerView.Adapter<HotAdapter.HotViewHolder>(){
@@ -45,13 +51,15 @@ class HotAdapter(val context : Context) :RecyclerView.Adapter<HotAdapter.HotView
         return HotViewHolder(itemView)
 
     }
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: HotViewHolder, position: Int) {
         val data = hotListDTO[position]
         val BUid = hotListUid[position]
         holder.title.text = data.postTitle
         holder.contents.text = data.contents
         holder.boardImage
-        holder.likeCount.text = data.likeCount.toString()
+        holder.likeCount.text = "Likes : " + data.likeCount.toString()
+
 
         if (data.ProfileUrl.toString() != "null")
             Glide.with(holder.itemView.context).load(data.ProfileUrl).into(holder.profile)
@@ -60,7 +68,7 @@ class HotAdapter(val context : Context) :RecyclerView.Adapter<HotAdapter.HotView
         Glide.with(holder.itemView.context).load(data.imageUrlWrite).into(holder.boardImage)
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, BoardChat::class.java)
+            val intent = Intent(holder.itemView.context, BoardDetail::class.java)
             intent.putExtra("commentUid", BUid)
             intent.putExtra("owneruid", data.uid)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
