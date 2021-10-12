@@ -28,12 +28,7 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity
-            android:name=".ChangeInformationLaw"
-            android:exported="true" /> <!-- setting frag의 개인정보페이지 -->
-        <activity
-            android:name=".ChangeInformation"
-            android:exported="true" /> <!-- setting frag의 정보변경패아자 -->
+
         <activity
             android:name=".Main.Board.Detail.Chat.BoardChat"
             android:exported="true" />
