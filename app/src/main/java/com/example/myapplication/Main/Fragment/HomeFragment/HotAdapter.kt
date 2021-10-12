@@ -42,7 +42,7 @@ class HotAdapter(val context : Context) :RecyclerView.Adapter<HotAdapter.HotView
         val profile: ImageView = itemView.findViewById(R.id.hot_profile)
         val title: TextView = itemView.findViewById(R.id.hot_title)
         val contents: TextView = itemView.findViewById(R.id.hot_content)
-        val likeCount: TextView = itemView.findViewById(R.id.hot_like_count)
+        //val likeCount: TextView = itemView.findViewById(R.id.hot_like_count)
         val boardImage: ImageView = itemView.findViewById(R.id.hot_image)
     }
 
@@ -58,7 +58,7 @@ class HotAdapter(val context : Context) :RecyclerView.Adapter<HotAdapter.HotView
         holder.title.text = data.postTitle
         holder.contents.text = data.contents
         holder.boardImage
-        holder.likeCount.text = "Likes : " + data.likeCount.toString()
+        //holder.likeCount.text = "Likes : " + data.likeCount.toString()
 
 
         if (data.ProfileUrl.toString() != "null")

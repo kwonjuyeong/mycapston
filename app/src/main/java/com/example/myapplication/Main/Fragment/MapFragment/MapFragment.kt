@@ -314,11 +314,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 val myLocation = location?.let { LatLng(it.latitude, it.longitude) }
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation!!))
-                googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+                googleMap.moveCamera(CameraUpdateFactory.zoomTo(17f))
                 //현재위치 최신화 버튼을 누르면 현재 위치가 뜸
                 recent_button.setOnClickListener {
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation))
-                    googleMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+                    googleMap.moveCamera(CameraUpdateFactory.zoomTo(17f))
                     val marker = MarkerOptions()
                         .position(myLocation)
                         .title("현재 위치 :")

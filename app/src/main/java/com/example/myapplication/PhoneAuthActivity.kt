@@ -1,7 +1,6 @@
-/*package com.example.myapplication
+package com.example.myapplication
 
 import android.content.Intent
-import android.icu.util.TimeUnit
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -9,11 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_phone_auth.*
-import javax.xml.datatype.DatatypeConstants.SECONDS
-import com.example.myapplication.DTO.UserinfoDTO
 
 class PhoneAuthActivity: AppCompatActivity() {
 
@@ -49,7 +44,7 @@ class PhoneAuthActivity: AppCompatActivity() {
         object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
             override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
                 super.onCodeSent(p0, p1)
-                val intent = Intent(this@PhoneAuthActivity, CodeVerificationActivity::class.java)
+                //val intent = Intent(this@PhoneAuthActivity, CodeVerificationActivity::class.java)
                 intent.putExtra("code", p0)
                 intent.putExtra("phoneNumber", phoneNumberInput.text.toString())
                 startActivity(intent)
@@ -62,7 +57,5 @@ class PhoneAuthActivity: AppCompatActivity() {
         }
 
 }
-
-*/
 
 

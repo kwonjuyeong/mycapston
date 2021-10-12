@@ -83,19 +83,19 @@
             app:layout_constraintStart_toEndOf="@+id/hot_layout"
             app:layout_constraintTop_toBottomOf="@+id/hot_title" />
 
-        <TextView
-            android:id="@+id/hot_like_count"
-            android:layout_width="73dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/tmoney"
-            android:text="Likes: "
-            android:textColor="#797979"
-            android:textStyle="bold"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/hot_title"
-            app:layout_constraintTop_toTopOf="@+id/hot_layout" />
+<!--        <TextView-->
+<!--            android:id="@+id/hot_like_count"-->
+<!--            android:layout_width="73dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_marginStart="100dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:fontFamily="@font/tmoney"-->
+<!--            android:text="Likes: "-->
+<!--            android:textColor="#797979"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/hot_title"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/hot_layout" />-->
 
         <ImageView
             android:id="@+id/hot_image"
