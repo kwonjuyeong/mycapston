@@ -205,16 +205,8 @@ class LoginActivity : AppCompatActivity() {
 //            val result = GoogleSignIn.getSignedInAccountFromIntent(data)
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try { // 구글 로그인 성공
-                // result.isSuccessful이 문제
-
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account.idToken!!)
-
-//                if (result.isSuccessful) {
-////                    val account = result.getResult(ApiException::class.java)
-//                    val account = task.getResult(ApiException::class.java)!!
-//                    firebaseAuthWithGoogle(account.idToken!!)
-//                }
             } catch (e: ApiException) {
                 // 구글 로그인 실패
                 Log.w("googleloginfail", "Google sign in failed", e)

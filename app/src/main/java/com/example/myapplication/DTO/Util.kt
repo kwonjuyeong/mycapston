@@ -56,25 +56,30 @@ class Util() {
 
     fun getAroundHot(): LiveData<MutableList<BoardDTO>> {
         HotList.clear()
-        Log.e("확인인ㅇㄴㅇㄴ ", locationName.toString())
         val hef = firestore.collection("Board").whereEqualTo("locationName", locationName)
-            //.orderBy("likeCount", Query.Direction.DESCENDING)
+            .orderBy("likeCount", Query.Direction.DESCENDING)
         hef.addSnapshotListener { value, error ->
             for (document in value!!.documents) {
                 val item = document.toObject(BoardDTO::class.java)
-                val result = DistanceObject.getDistance(latitude!!, longitude!!, item!!.latitude!!, item.longitude!!)
+                val result = DistanceObject.getDistance(
+                    latitude!!,
+                    longitude!!,
+                    item!!.latitude!!,
+                    item.longitude!!
+                )
                 if (result < 2000) {
                     HotList.add(item)
                     liveHotData.value = HotList
                 }
             }
         }
-        return  liveHotData
+        return liveHotData
     }
-    fun getAroundId():LiveData<MutableList<String>> {
+
+    fun getAroundId(): LiveData<MutableList<String>> {
         uidList.clear()
         val hef = firestore.collection("Board").whereEqualTo("locationName", locationName)
-            //.orderBy("likeCount", Query.Direction.DESCENDING)
+        //.orderBy("likeCount", Query.Direction.DESCENDING)
         hef.addSnapshotListener { value, error ->
             for (document in value!!.documents) {
                 val item = document.toObject(BoardDTO::class.java)
@@ -93,41 +98,41 @@ class Util() {
         return liveUidList
     }
 }
-/*
-    fun qsort(array: MutableList<Int>, left: Int = 0, right: Int = array.size - 1) {
-        val index = partition(array, left, right)
-        if (left < index - 1) {
-            qsort(array, left, index - 1)
+
+fun qsort(array: MutableList<Int>, left: Int = 0, right: Int = array.size - 1) {
+    val index = partition(array, left, right)
+    if (left < index - 1) {
+        qsort(array, left, index - 1)
+    }
+    if (index < right) {
+        qsort(array, index, right)
+    }
+}
+
+fun partition(array: MutableList<Int>, start: Int, end: Int): Int {
+    var left = start
+    var right = end
+    val pivot = array[(left + right) / 2]
+
+    while (left <= right) {
+        while (array[left] < pivot) {
+            left++
         }
-        if (index < right) {
-            qsort(array, index, right)
+
+        while (array[right] > pivot) {
+            right--
+        }
+
+        if (left <= right) {
+            val temp = array[left]
+            array[left] = array[right]
+            array[right] = temp
+            left++
+            right--
         }
     }
-
-    fun partition(array: MutableList<Int>, start: Int, end: Int): Int {
-        var left = start
-        var right = end
-        val pivot = array[(left + right) / 2]
-
-        while (left <= right) {
-            while (array[left] < pivot) {
-                left++
-            }
-
-            while (array[right] > pivot) {
-                right--
-            }
-
-            if (left <= right) {
-                val temp = array[left]
-                array[left] = array[right]
-                array[right] = temp
-                left++
-                right--
-            }
-        }
-        return left
-    }*/
+    return left
+}
 
 
 

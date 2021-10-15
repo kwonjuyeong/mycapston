@@ -20,3 +20,4 @@ class OnlinViewModel : ViewModel(){
         return userInfos
     }
 }
+
