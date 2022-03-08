@@ -4,4 +4,5 @@
 
 #Kotlin #Courutine#API
 #FIREBASE #FIRESTORE
-#JIRA #ANDROID STUDIO 
+#JIRA #ANDROID 
+#MVVM, Jetpack(AAC, ViewModle, LiveData), Coroutine
