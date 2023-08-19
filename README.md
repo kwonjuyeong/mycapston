@@ -1,7 +1,6 @@
 # Capstone Design
 
 "함께" 앱 제작 프로젝트
-# Bulletin Board System
 `함께` 안드로이드 애플리케이션 프로젝트 입니다. <br/><br/>
  `2021.08 ~ 2022.12` 동안 `Android Studio` 와 `Kotlin` 을 사용해 구현했습니다.
  
