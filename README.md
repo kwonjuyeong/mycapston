@@ -14,16 +14,32 @@
 <img width="1409" alt="137475735-20c585a5-52d7-48d7-825c-8c61544475b5" src="https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/a75df379-c11f-428e-928c-9d65daa10cb6"></br></br>
 # 구동화면
 
+### 인트로
+![22](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/16120a75-bc82-438f-8c71-50740bddf621)</br></br>
+### 권한 기능
+![23](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/1f24f94d-e2c0-41f4-a9fd-96255df3a7c1)</br></br>
+### 로그인
+![33](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/30d34232-d167-472b-8a98-96fbe8033f65)</br></br>
+### 휴대폰 인증
+![44](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/26e6c060-1af5-4b17-bf7a-bc6b18d366d5)
+![555](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/1444ee05-ee8e-4adf-8179-3e3a4fe89c83)</br></br>
+### 회원가입
+![66](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/99852a79-aa99-435e-bdb6-f68850237cd2)
+![7](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/3ed35eaf-3892-4364-91b0-5115bfc05472)</br></br>
+### 게시글 찾기
+![10](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/0bf0af4e-25cf-458e-a06e-83a288c88811)
+![11](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/349e596d-faff-4107-a267-a39face8a5fb)</br></br>
+
 ### 메인페이지
 ![137477380-a54f4b8d-885d-4d98-846a-efc804387238](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/9ad8e062-6268-4d0b-b438-56c71404f31f)</br></br>
 ### 게시글
-![137477413-2bf8a6ae-d1ab-4cb2-9b74-6dca4d327cd2](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/c80c3c53-f254-42b1-bb65-56ccbd9e6d7a)</br></br>
+![13](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/975ffdf1-e92d-40ad-b734-99a785d53a3a)</br></br>
 ### 게시글 리스트 
 ![137477444-cf4c0b04-5428-4d6e-99d6-fb4c66381574](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/3ddcb36d-c16a-455c-9257-adc964fcc37b)</br></br>
 ### 주변 친구 찾기(맵)
-![137477481-361c6722-220b-4a1a-9a31-c930d16f72b9](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/19bbe9ed-844e-4be4-b0e8-c07c130f973f)</br></br>
+![12](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/93b6453c-350d-42a7-95eb-3f6ec64570c9)</br></br>
 ### 채팅
-![137477510-b2e39a63-cf69-487a-a466-7f2380b0e941](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/b76936db-9986-4c19-8ccc-55d758f6f55e)
+![14](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/2ff0f098-1b39-444e-9264-15d04b207023)
 ![137477549-419efa8d-7df5-426c-99a9-db07a7de096e](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/33fedda2-c5fe-49bb-8f57-9615ea2f2684)</br></br>
 ### 채팅 목록
 ![137477523-507db2bd-de4d-46fb-8376-7f59f2ed32e4](https://github.com/kwonjuyeong/Kotlin_Capstone_Team/assets/57522230/2f201d74-442a-4040-8459-e849061ef90a)</br></br>
@@ -37,10 +53,11 @@ MVVM모델 , Kotlin, Jetpack(AAC, ViewModel, LiveData), Coroutine, Google Map</b
 🍃 협업</br></br>
 Jira</br></br>
 
-# 느낀점 
-첫 번째로는 시간이 아쉬웠다. 8월부터 10월까지 설계부터 디자인, 개발까지 다 하려고 하니 퀄리티가 낮아보이는 것이 아쉬웠다.
-두 번째로 아쉬웠던 점은 다른 팀은 5명 많게는 6명까지 있었는데, 우리 팀은 2명이 처음부터 빠지게 되서 인원이 부족했다.
-첫 안드로이드 프로젝트였다보니 밤새면서 공부하고 개발했는데, 이 과정에서 더 흥미가 생겨 이후 개발자의 삶의 원동력이 되어줬다.
+# 느낀점
+첫 번째로는 시간이 아쉬웠다. 8월부터 10월까지 설계부터 디자인, 개발까지 다 하려고 하니 UI 퀄리티가 낮아보이게 할 수 밖에 없었다.</br></br>
+두 번째로 아쉬웠던 점은 다른 팀은 5명 많게는 6명까지 있었는데, 우리 팀은 2명이 처음부터 빠지게 되서 인원이 부족했다. </br></br>
+더군나나 나머지 한명은 개인사정으로 시간이 많이 없어 거의 2명이서 진행한 점이 조금 아쉬웠다.</br></br>
+첫 안드로이드 프로젝트였다보니 밤새면서 공부하고 개발했는데, 이 과정에서 더 흥미가 생겨 이후 개발자의 삶의 원동력이 되었다.
 
 
 
